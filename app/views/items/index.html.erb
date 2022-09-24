@@ -4,10 +4,10 @@
   <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
       <h1 class="title">Items</h1>
-      <p class="paragraph">A list of all the users in your account including their name, title, email and role.</p>
+      <p class="paragraph">A list of all the Items.</p>
     </div>
     <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-      <button type="button" class="btn-primary">Add user</button>
+      <button type="button" class="btn-primary">Add Item</button>
     </div>
   </div>
   <div class="mt-8 flex flex-col">
@@ -38,7 +38,7 @@
             <tfoot>
               <tr>
                 <td colspan="3">
-                  <% link_to 'New Item', new_item_path %>
+                  <button type="button" class="btn-primary"><%= link_to 'New Item', new_item_path %></button>
                 </td>
               </tr>
             </tfoot>

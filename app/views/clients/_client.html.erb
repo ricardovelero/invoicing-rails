@@ -1,0 +1,62 @@
+<div id="<%= dom_id client %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= client.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Lastname:</strong>
+    <%= client.lastname %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Nif:</strong>
+    <%= client.nif %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Street:</strong>
+    <%= client.street %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">City:</strong>
+    <%= client.city %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Region:</strong>
+    <%= client.region %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Postal code:</strong>
+    <%= client.postal_code %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Country:</strong>
+    <%= client.country %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Email:</strong>
+    <%= client.email %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Telephone:</strong>
+    <%= client.telephone %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Active:</strong>
+    <%= client.active %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this client", client, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this client', edit_client_path(client), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
