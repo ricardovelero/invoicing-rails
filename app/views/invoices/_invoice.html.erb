@@ -1,0 +1,52 @@
+<div id="<%= dom_id invoice %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Number:</strong>
+    <%= invoice.number %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Date:</strong>
+    <%= invoice.date %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Due date:</strong>
+    <%= invoice.due_date %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Subtotal:</strong>
+    <%= invoice.subtotal %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Iva:</strong>
+    <%= invoice.iva %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Irpf:</strong>
+    <%= invoice.irpf %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Total:</strong>
+    <%= invoice.total %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Notes:</strong>
+    <%= invoice.notes %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Status:</strong>
+    <%= invoice.status %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this invoice", invoice, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this invoice', edit_invoice_path(invoice), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

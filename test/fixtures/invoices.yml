@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  date: 2022-09-25 00:01:44
+  due_date: 2022-09-25 00:01:44
+  subtotal: 9.99
+  iva: 9.99
+  irpf: 9.99
+  total: 9.99
+  notes: MyText
+  status: false
+
+two:
+  number: MyString
+  date: 2022-09-25 00:01:44
+  due_date: 2022-09-25 00:01:44
+  subtotal: 9.99
+  iva: 9.99
+  irpf: 9.99
+  total: 9.99
+  notes: MyText
+  status: false
