@@ -1,0 +1,50 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="title">Items</h1>
+      <p class="paragraph">A list of all the users in your account including their name, title, email and role.</p>
+    </div>
+    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+      <button type="button" class="btn-primary">Add user</button>
+    </div>
+  </div>
+  <div class="mt-8 flex flex-col">
+    <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-300">
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <% @items.each do |item| %>
+                <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+                  <td class="description">
+                    <h1><%= item.title %></h1>
+                    <p>
+                      <%= truncate(strip_tags(item.description), length: 80) %>
+                    </p>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <ul>
+                      <li><%= link_to 'Show', item %></li>
+                      <li><%= link_to 'Edit', edit_item_path(item) %></li>
+                      <li>
+                        <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?'} %>
+                    </ul>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3">
+                  <% link_to 'New Item', new_item_path %>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -194,6 +194,8 @@ GEM
     strscan (3.0.4)
     syntax_tree (3.6.0)
       prettier_print
+    tailwindcss-rails (2.0.14-arm64-darwin)
+      railties (>= 6.0.0)
     thor (1.2.1)
     timeout (0.3.0)
     turbo-rails (1.1.1)
@@ -235,6 +237,7 @@ DEPENDENCIES
   selenium-webdriver
   sprockets-rails
   stimulus-rails
+  tailwindcss-rails (~> 2.0)
   turbo-rails
   tzinfo-data
   web-console
