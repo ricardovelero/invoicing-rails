@@ -15,7 +15,7 @@ two:
   tax2: 9.99
 
 item:
-  title: Item para tests
+  title: Test Item
   description: Es una item para probar los fictures en Rails
   price: 999
   tax1: 21

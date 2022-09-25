@@ -3,6 +3,7 @@ require "test_helper"
 class ItemsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @item = items(:one)
+    @title = "Item test #{rand(100)}"
   end
 
   test "should get index" do
@@ -17,7 +18,16 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create item" do
     assert_difference("Item.count") do
-      post items_url, params: { item: { description: @item.description, price: @item.price, tax1: @item.tax1, tax2: @item.tax2, title: @item.title } }
+      post items_url,
+           params: {
+             item: {
+               description: @item.description,
+               price: @item.price,
+               tax1: @item.tax1,
+               tax2: @item.tax2,
+               title: @title
+             }
+           }
     end
 
     assert_redirected_to item_url(Item.last)
@@ -34,14 +44,21 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update item" do
-    patch item_url(@item), params: { item: { description: @item.description, price: @item.price, tax1: @item.tax1, tax2: @item.tax2, title: @item.title } }
+    patch item_url(@item),
+          params: {
+            item: {
+              description: @item.description,
+              price: @item.price,
+              tax1: @item.tax1,
+              tax2: @item.tax2,
+              title: @title
+            }
+          }
     assert_redirected_to item_url(@item)
   end
 
   test "should destroy item" do
-    assert_difference("Item.count", -1) do
-      delete item_url(@item)
-    end
+    assert_difference("Item.count", -1) { delete item_url(@item) }
 
     assert_redirected_to items_url
   end

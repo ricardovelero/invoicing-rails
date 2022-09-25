@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: %i[ show edit update destroy ]
+  before_action :set_item, only: %i[show edit update destroy]
 
   # GET /items or /items.json
   def index
@@ -25,9 +25,12 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to item_url(@item), notice: "Item was successfully created." }
+        format.html do
+          redirect_to item_url(@item), notice: "Item was successfully created."
+        end
         format.json { render :show, status: :created, location: @item }
       else
+        puts @item.errors.full_messages
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
@@ -38,7 +41,9 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to item_url(@item), notice: "Item was successfully updated." }
+        format.html do
+          redirect_to item_url(@item), notice: "Item was successfully updated."
+        end
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +57,22 @@ class ItemsController < ApplicationController
     @item.destroy
 
     respond_to do |format|
-      format.html { redirect_to items_url, notice: "Item was successfully destroyed." }
+      format.html do
+        redirect_to items_url, notice: "Item was successfully destroyed."
+      end
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_item
-      @item = Item.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def item_params
-      params.require(:item).permit(:title, :description, :price, :tax1, :tax2)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def item_params
+    params.require(:item).permit(:title, :description, :price, :tax1, :tax2)
+  end
 end
