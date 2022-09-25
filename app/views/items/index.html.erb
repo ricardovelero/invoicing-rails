@@ -7,7 +7,7 @@
       <p class="paragraph">A list of all the Items.</p>
     </div>
     <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-      <button type="button" class="btn-primary">Add Item</button>
+      <button type="button" class="btn-primary"><%= link_to 'Add Item', new_item_path %></button>
     </div>
   </div>
   <div class="mt-8 flex flex-col">
@@ -19,7 +19,7 @@
               <% @items.each do |item| %>
                 <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
                   <td class="description">
-                    <h1><%= item.title %></h1>
+                    <h3 class="text-lg font-bold"><%= item.title %></h1>
                     <p>
                       <%= truncate(strip_tags(item.description), length: 80) %>
                     </p>
@@ -35,13 +35,6 @@
                 </tr>
               <% end %>
             </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="3">
-                  <button type="button" class="btn-primary"><%= link_to 'New Item', new_item_path %></button>
-                </td>
-              </tr>
-            </tfoot>
           </table>
         </div>
       </div>
