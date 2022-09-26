@@ -57,6 +57,13 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to item_url(@item)
   end
 
+  test "can't delete product in invoice" do
+    assert_difference('Item.count', 0) do
+      delete item_url(items(:two))
+    end
+    assert_redirected_to item_url
+  end
+
   test "should destroy item" do
     assert_difference("Item.count", -1) { delete item_url(@item) }
 
