@@ -1,4 +1,6 @@
 class LineItemsController < ApplicationController
+  include CurrentInvoice
+  before_action :set_invoice, only: [:create]
   before_action :set_line_item, only: %i[ show edit update destroy ]
 
   # GET /line_items or /line_items.json

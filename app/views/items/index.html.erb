@@ -27,6 +27,7 @@
                         </p>
                         <div class="">
                           <%= number_to_currency(item.price) %>
+                          <%= button_to "Facturar", line_items_path(item_id: item),{:class => "btn-primary" } %>
                         </div>
                       </td>
                       <td class="table-td">
