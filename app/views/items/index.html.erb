@@ -19,7 +19,7 @@
               <% cache @items do %>
                 <% @items.each do |item| %>
                   <% cache item do %>
-                    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+                    <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
                       <td class="description">
                         <h3 class="text-lg font-bold"><%= item.title %></h1>
                         <p>
@@ -29,11 +29,11 @@
                           <%= number_to_currency(item.price) %>
                         </div>
                       </td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      <td class="table-td">
                         <ul>
-                          <li><%= link_to 'Show', item %></li>
-                          <li><%= link_to 'Edit', edit_item_path(item) %></li>
-                          <li>
+                          <li class="link"><%= link_to 'Show', item %></li>
+                          <li class="link"><%= link_to 'Edit', edit_item_path(item) %></li>
+                          <li class="link">
                             <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?'} %>
                         </ul>
                       </td>

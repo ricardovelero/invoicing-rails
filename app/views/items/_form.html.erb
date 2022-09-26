@@ -11,32 +11,32 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="my-5">
+    <%= form.label :title, class: "inpute-label" %>
+    <%= form.text_field :title, class: "input" %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description, rows: 10, cols: 60 %>
+  <div class="my-5">
+    <%= form.label :description, class: "inpute-label" %>
+    <%= form.text_area :description, rows: 10, cols: 60, class: "input" %>
   </div>
 
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price %>
+  <div class="my-5">
+    <%= form.label :price, class: "inpute-label" %>
+    <%= form.text_field :price, class: "input" %>
   </div>
 
-  <div>
-    <%= form.label :tax1, style: "display: block" %>
-    <%= form.text_field :tax1 %>
+  <div class="my-5">
+    <%= form.label :tax1, class: "inpute-label" %>
+    <%= form.text_field :tax1, class: "input" %>
   </div>
 
-  <div>
-    <%= form.label :tax2, style: "display: block" %>
-    <%= form.text_field :tax2 %>
+  <div class="my-5">
+    <%= form.label :tax2, class: "inpute-label" %>
+    <%= form.text_field :tax2, class: "input" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-indigo-600 text-white inline-block font-medium cursor-pointer"%>
   </div>
 <% end %>

@@ -8,11 +8,35 @@
   .btn-primary {
     @apply inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto;
   }
+  .btn-secondary {
+    @apply inline-flex justify-center bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-lg font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+  }
   .paragraph {
     @apply mt-2 text-sm text-gray-700;
   }
   .title {
     @apply text-xl font-semibold text-gray-900;
+  }
+  .link {
+    @apply text-indigo-600 hover:text-indigo-900;
+  }
+  .table-td-highlight {
+    @apply px-4 py-3.5 text-base font-medium text-gray-900;
+  }
+  .table-td {
+    @apply whitespace-nowrap px-3 py-4 text-sm text-gray-500;
+  }
+  .list-line-even {
+    @apply bg-gray-50
+  }
+  .list-line-odd {
+    @apply bg-white
+  }
+  .input {
+    @apply block appearance-none w-full mb-1 text-base leading-normal sm:text-sm shadow-sm mt-1 bg-white focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md;
+  }
+  .input-label {
+    @apply block text-sm font-medium text-gray-700;
   }
 }
 
