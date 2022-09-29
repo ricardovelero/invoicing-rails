@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
          :registerable,
          :recoverable,
@@ -10,4 +8,8 @@ class User < ApplicationRecord
          :lockable,
          :timeoutable,
          :trackable
+
+  validates_uniqueness_of :email
+  validates_format_of :email, with: URI::MailTo::EMAIL_REGEXP,
+    message: "must be a valid email address"
 end

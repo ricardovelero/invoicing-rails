@@ -3,6 +3,15 @@
 @tailwind utilities;
 
 @layer components {
+  a {
+    @apply no-underline text-indigo-500;
+  }
+  a:hover {
+    @apply text-indigo-700;
+  }
+  .alert {
+    @apply text-white text-sm text-center font-medium px-4 py-3;
+  }
   .btn-primary {
     @apply inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto;
   }
@@ -36,4 +45,154 @@
   .input-label {
     @apply block text-sm font-medium text-gray-700;
   }
+
+
+  .home
+  header {
+    @apply w-full p-2 flex items-center justify-between flex-wrap;
+  }
+
+  .home
+  header .title {
+    @apply font-extrabold text-2xl;
+  }
+
+  .home
+  .heading {
+    @apply font-semibold text-gray-900 text-4xl pt-8;
+  }
+
+  .home
+  .actions {
+    @apply w-auto flex items-center justify-end;
+  }
+
+  .home
+  .action {
+    @apply flex flex-row rounded-full py-2 pl-6 pr-2;
+    @apply bg-indigo-700 text-white shadow;
+    @apply items-center justify-center text-base;
+  }
+
+  .home
+  .action .arrow {
+    @apply flex items-center justify-center;
+    @apply bg-black rounded-full w-6 h-6 text-xs;
+  }
+
+  .home
+  .theatre {
+    @apply m-auto pt-8 pb-16;
+  }
+
+  .home
+  .theatre .center {
+    @apply flex flex-col justify-center items-center text-center px-4;
+  }
+
+  @screen md {
+    .home
+    .header {
+      @apply px-0;
+    }
+
+    .home
+    header .title {
+      @apply text-4xl;
+    }
+
+    .home
+    .heading {
+      @apply pt-16 pb-2;
+    }
+
+    .home
+    .theatre {
+      @apply  pt-32 pb-32;
+    }
+  }
+
+
+
+  .body-session {
+    @apply bg-gray-100 font-sans h-screen w-screen;
+  }
+
+  .body-session
+  h1.title {
+    @apply font-extralight text-center text-4xl;
+  }
+
+  .body-session
+  .container {
+    @apply mx-auto flex h-full items-center;
+  }
+
+  .body-session
+  .form-group {
+    @apply border-2 border-t-8 bg-white rounded-lg shadow-lg;
+    @apply p-8 mb-6;
+  }
+
+  .body-session
+  .form-group label {
+    @apply font-normal text-gray-600 block mb-2;
+  }
+
+  .body-session
+  .form-group input[type="text"],
+  .body-session
+  .form-group input[type="email"],
+  .body-session
+  .form-group input[type="password"] {
+    @apply block appearance-none w-full bg-white;
+    @apply border border-gray-200;
+    @apply rounded shadow;
+    @apply px-2 py-2;
+  }
+
+  .body-session
+  .form-group input[type="text"]:hover,
+  .body-session
+  .form-group input[type="email"]:hover,
+  .body-session
+  .form-group input[type="password"]:hover {
+    @apply border-gray-300;
+  }
+
+  .body-session
+  a {
+    @apply no-underline font-bold text-sm text-indigo-600;
+  }
+
+  .body-session
+  a:hover {
+    @apply text-indigo-500;
+  }
+
+  .body-session
+  .cta-btn {
+    @apply select-none bg-indigo-600 text-white font-medium font-bold;
+    @apply rounded-md shadow-sm border border-transparent;
+    @apply py-2 px-4;
+    @apply hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+  }
+
+  .body-session
+  .alert {
+    @apply mb-4;
+  }
+
+  .body-session
+  .error-box {
+    @apply bg-red-100 border-t-4 border-red-500
+      rounded-b text-red-900 px-4 py-3 mb-3 shadow-md;
+  }
+
+  .body-session
+  .error-box ul {
+    @apply pl-4;
+    list-style: disc;
+  }
+
 }

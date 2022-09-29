@@ -19,5 +19,9 @@ module Fz
     config.time_zone = "Madrid"
     # config.eager_load_paths << Rails.root.join("extras"
     config.i18n.default_locale = :es
+
+    config.to_prepare do
+      Devise::Mailer.layout "mailer"
+    end
   end
 end

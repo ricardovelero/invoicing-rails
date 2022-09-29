@@ -71,8 +71,12 @@ group :test do
   gem "webdrivers"
 end
 
-gem "ruby-lsp", "~> 0.3.2", group: :development
-
 gem "tailwindcss-rails", "~> 2.0"
 
 gem "devise"
+
+gem "letter_opener_web"
+
+gem "evil_icons"
+
+gem "premailer-rails"
