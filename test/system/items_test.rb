@@ -16,8 +16,8 @@ class ItemsTest < ApplicationSystemTestCase
 
     fill_in "Description", with: @item.description
     fill_in "Price", with: @item.price
-    fill_in "Tax1", with: @item.tax1
-    fill_in "Tax2", with: @item.tax2
+    fill_in "IVA", with: @item.iva
+    fill_in "IRPF", with: @item.irpf
     fill_in "Title", with: @item.title
     click_on "Create Item"
 
@@ -31,8 +31,8 @@ class ItemsTest < ApplicationSystemTestCase
 
     fill_in "Description", with: @item.description
     fill_in "Price", with: @item.price
-    fill_in "Tax1", with: @item.tax1
-    fill_in "Tax2", with: @item.tax2
+    fill_in "IVA", with: @item.iva
+    fill_in "IRPF", with: @item.irpf
     fill_in "Title", with: @item.title
     click_on "Update Item"
 

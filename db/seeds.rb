@@ -22,8 +22,8 @@ Item.create!(
       as Docker transforms the massive leap of deploying your app in the cloud
       into a baby step.
       </p>",
-  tax1: 21,
-  tax2: 0,
+  iva: 21,
+  irpf: 0,
   price: 38.00
 )
 # . . .
@@ -42,8 +42,8 @@ Item.create!(
       can participate. Exercise your creativity by creating chatbot
       skills for communicating, information, and fun.
       </p>",
-  tax1: 21,
-  tax2: 2,
+  iva: 21,
+  irpf: 2,
   price: 20.00
 )
 # . . .
@@ -61,7 +61,7 @@ Item.create!(
       tooling. Now you can write beautiful code that runs faster, scales better,
       and is a breeze to deploy.
       </p>",
-  tax1: 21,
-  tax2: 7,
+  iva: 21,
+  irpf: 7,
   price: 40.00
 )

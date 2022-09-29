@@ -3,11 +3,11 @@ class Item < ApplicationRecord
 
   before_destroy :ensure_not_referenced_by_any_line_item
 
-  validates :item_name, :price, :tax1, presence: true
+  validates :item_name, :price, :iva, presence: true
   validates :item_name, uniqueness: true, length: { maximum: 100 }
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
-  validates :tax1, numericality: { greater_than_or_equal_to: 0.01 }
-  validates :tax2, numericality: { greater_than_or_equal_to: 0.01 }
+  validates :iva, numericality: { greater_than_or_equal_to: 0.01 }
+  validates :irpf, numericality: { greater_than_or_equal_to: 0.01 }
 
   private
     #ensure that there are no line items referencing this item

@@ -4,19 +4,19 @@ one:
   title: MyString
   description: MyText
   price: 9.99
-  tax1: 9.99
-  tax2: 9.99
+  iva: 9.99
+  irpf: 9.99
 
 two:
   title: MyString
   description: MyText
   price: 9.99
-  tax1: 9.99
-  tax2: 9.99
+  iva: 9.99
+  irpf: 9.99
 
 item:
   title: Test Item
   description: Es una item para probar los fictures en Rails
   price: 999
-  tax1: 21
-  tax2: 4
+  iva: 21
+  irpf: 4

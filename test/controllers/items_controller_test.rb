@@ -23,8 +23,8 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
              item: {
                description: @item.description,
                price: @item.price,
-               tax1: @item.tax1,
-               tax2: @item.tax2,
+               iva: @item.iva,
+               irpf: @item.irpf,
                title: @title
              }
            }
@@ -49,8 +49,8 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
             item: {
               description: @item.description,
               price: @item.price,
-              tax1: @item.tax1,
-              tax2: @item.tax2,
+              iva: @item.iva,
+              irpf: @item.irpf,
               title: @title
             }
           }

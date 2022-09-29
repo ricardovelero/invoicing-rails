@@ -30,8 +30,8 @@ class ItemTest < ActiveSupport::TestCase
         title: items(:item).title,
         description: "yyy",
         price: 1,
-        tax1: 21,
-        tax2: 4
+        iva: 21,
+        irpf: 4
       )
     assert item.invalid?
     assert_equal [I18n.translate("errors.messages.taken")], item.errors[:title]
