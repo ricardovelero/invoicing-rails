@@ -7,6 +7,6 @@ class Client < ApplicationRecord
 		:country, presence: true
 
 	def full_name
-		[firs_name, last_name].reject(&:blank?).collect(&:capitalize).join(' ')
+		[first_name, last_name].reject(&:blank?).collect(&:capitalize).join(' ')
 	end
 end
