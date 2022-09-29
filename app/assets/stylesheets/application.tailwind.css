@@ -61,17 +61,18 @@
     @apply w-auto flex items-center justify-end;
   }
 
-  .home
+ .home
   .action {
-    @apply flex flex-row rounded-full py-2 pl-6 pr-2;
-    @apply bg-indigo-700 text-white shadow;
-    @apply items-center justify-center text-base;
+    @apply inline-flex items-center justify-center rounded-md border border-transparent;
+      @apply bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm;
+      @apply hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500;
+      @apply focus:ring-offset-2 sm:w-auto;
   }
 
   .home
   .action .arrow {
     @apply flex items-center justify-center;
-    @apply bg-black rounded-full w-6 h-6 text-xs;
+    @apply w-6 h-6;
   }
 
   .home
@@ -166,7 +167,7 @@
 
   .body-session
   .cta-btn {
-    @apply select-none bg-indigo-600 text-white font-medium font-bold;
+    @apply select-none bg-indigo-600 text-white font-bold;
     @apply rounded-md shadow-sm border border-transparent;
     @apply py-2 px-4;
     @apply hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;

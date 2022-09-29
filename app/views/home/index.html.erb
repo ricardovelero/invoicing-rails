@@ -10,7 +10,7 @@
           <% if current_user %>
             <%= render "action_button",
               caption: "Salir",
-              icon: "ei-chevron-right",
+              icon: "ei-close",
               link: destroy_user_session_path,
               method: :delete %>
           <% else %>
@@ -32,9 +32,8 @@
         </h1>
         <p class="text-gray-700 text-xl md:pb-4">
           <% unless current_user %>
-            <%= link_to "Empezar", new_user_registration_path %>
+            <%= link_to "Empezar", new_user_registration_path, class: "btn-primary" %>
           <% end %>
-            descubre las posibilidades
         </p>
       </div>
     </div>
