@@ -21,7 +21,7 @@
                   <% cache item do %>
                     <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
                       <td class="description">
-                        <h3 class="text-lg font-bold"><%= item.title %></h1>
+                        <h3 class="text-lg font-bold"><%= item.item_name %></h1>
                         <p>
                           <%= truncate(strip_tags(item.description), length: 80) %>
                         </p>
