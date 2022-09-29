@@ -1,51 +1,14 @@
-<p style="color: green"><%= notice %></p>
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
 
-<div class="px-4 sm:px-6 lg:px-8">
-  <div class="sm:flex sm:items-center">
-    <div class="sm:flex-auto">
-      <h1 class="title">Items</h1>
-      <p class="paragraph">A list of all the Items.</p>
-    </div>
-    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-      <button type="button" class="btn-primary"><%= link_to 'Add Item', new_item_path %></button>
-    </div>
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Items</h1>
+    <%= link_to 'New item', new_item_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
-  <div class="mt-8 flex flex-col">
-    <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-300">
-            <tbody class="divide-y divide-gray-200 bg-white">
-              <% cache @items do %>
-                <% @items.each do |item| %>
-                  <% cache item do %>
-                    <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
-                      <td class="description">
-                        <h3 class="text-lg font-bold"><%= item.item_name %></h1>
-                        <p>
-                          <%= truncate(strip_tags(item.description), length: 80) %>
-                        </p>
-                        <div class="">
-                          <%= number_to_currency(item.price) %>
-                          <%= button_to "Facturar", line_items_path(item_id: item),{:class => "btn-primary" } %>
-                        </div>
-                      </td>
-                      <td class="table-td">
-                        <ul>
-                          <li class="link"><%= link_to 'Show', item %></li>
-                          <li class="link"><%= link_to 'Edit', edit_item_path(item) %></li>
-                          <li class="link">
-                            <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?'} %>
-                        </ul>
-                      </td>
-                    </tr>
-                  <% end %>
-                <% end %>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+
+  <div id="items" class="min-w-full">
+    <%= render @items %>
   </div>
 </div>

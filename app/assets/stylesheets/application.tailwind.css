@@ -3,12 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-  a {
-    @apply no-underline text-indigo-500;
-  }
-  a:hover {
-    @apply text-indigo-700;
-  }
   .alert {
     @apply text-white text-sm text-center font-medium px-4 py-3;
   }

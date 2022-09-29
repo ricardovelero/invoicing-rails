@@ -1,4 +1,4 @@
-<%= form_with(model: item) do |form| %>
+<%= form_with(model: item, class: "contents") do |form| %>
   <% if item.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -12,31 +12,31 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :item_name, class: "inpute-label" %>
+    <%= form.label :item_name, class: "input-label" %>
     <%= form.text_field :item_name, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :description, class: "inpute-label" %>
+    <%= form.label :description, class: "input-label" %>
     <%= form.text_area :description, rows: 10, cols: 60, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :price, class: "inpute-label" %>
+    <%= form.label :price, class: "input-label" %>
     <%= form.text_field :price, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :iva, class: "inpute-label" %>
+    <%= form.label :iva, class: "input-label" %>
     <%= form.text_field :iva, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :irpf, class: "inpute-label" %>
+    <%= form.label :irpf, class: "input-label" %>
     <%= form.text_field :irpf, class: "input" %>
   </div>
 
   <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-indigo-600 text-white inline-block font-medium cursor-pointer"%>
+    <%= form.submit class: "btn-primary"%>
   </div>
 <% end %>
