@@ -5,9 +5,9 @@ class Item < ApplicationRecord
 
   validates :item_name, :price, :iva, presence: true
   validates :item_name, uniqueness: true, length: { maximum: 100 }
-  validates :price, numericality: { greater_than_or_equal_to: 0.01 }
-  validates :iva, numericality: { greater_than_or_equal_to: 0.01 }
-  validates :irpf, numericality: { greater_than_or_equal_to: 0.01 }
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
+  validates :iva, numericality: { greater_than_or_equal_to: 0 }
+  validates :irpf, numericality: { greater_than_or_equal_to: 0 }
 
   private
     #ensure that there are no line items referencing this item
