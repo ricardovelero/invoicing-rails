@@ -15,4 +15,6 @@ class User < ApplicationRecord
     message: "must be a valid email address"
 
   has_many :invoices
+  has_many :clients
+  has_many :items
 end

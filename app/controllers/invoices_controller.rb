@@ -22,6 +22,7 @@ class InvoicesController < ApplicationController
   # POST /invoices or /invoices.json
   def create
     @invoice = Invoice.new(invoice_params)
+    @invoice.user = current_user
 
     respond_to do |format|
       if @invoice.save
@@ -65,6 +66,6 @@ class InvoicesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def invoice_params
-      params.require(:invoice).permit(:number, :date, :due_date, :subtotal, :iva, :irpf, :total, :notes, :status)
+      params.require(:invoice).permit(:client_id, :invoice_number, :date, :due_date, :subtotal, :iva, :irpf, :total, :notes, :status)
     end
 end
