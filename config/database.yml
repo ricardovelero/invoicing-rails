@@ -84,7 +84,7 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
+  url: postgresql://db:AVNS_inP4-w1IUuENNXbJdN1@app-4162e19a-90fb-4c08-ac79-ce45c7340b9f-do-user-4902940-0.b.db.ondigitalocean.com:25060/db?sslmode=require
   # database: <%= ENV["DATABASE"] %>
   # username: <%= ENV["DATABASE_USER"] %>
   # password: <%= ENV["DATABASE_PASSWORD"] %>
