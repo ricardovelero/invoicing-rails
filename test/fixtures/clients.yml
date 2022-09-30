@@ -1,8 +1,8 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  lastname: MyString
+  first_name: MyString
+  last_name: MyString
   nif: MyString
   street: MyString
   city: MyString
@@ -14,8 +14,8 @@ one:
   active: false
 
 two:
-  name: MyString
-  lastname: MyString
+  first_name: MyString
+  last_name: MyString
   nif: MyString
   street: MyString
   city: MyString
