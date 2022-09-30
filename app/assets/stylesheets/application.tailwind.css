@@ -7,10 +7,12 @@
     @apply text-white text-sm text-center font-medium px-4 py-3;
   }
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto;
+    @apply inline-flex items-center justify-center sm:w-auto py-2 text-sm font-medium rounded-md border border-transparent px-4 text-white shadow-sm bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
   }
   .btn-secondary {
-    @apply inline-flex justify-center bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-lg font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+    @apply inline-flex justify-center rounded-md shadow-sm text-lg font-medium;
+      @apply text-gray-700 bg-white py-2 px-4 border border-gray-300 hover:bg-gray-50;
+      @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
   }
   .paragraph {
     @apply mt-2 text-sm text-gray-700;
