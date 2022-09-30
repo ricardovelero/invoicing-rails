@@ -18,8 +18,8 @@ class ClientsTest < ApplicationSystemTestCase
     fill_in "City", with: @client.city
     fill_in "Country", with: @client.country
     fill_in "Email", with: @client.email
-    fill_in "Lastname", with: @client.lastname
-    fill_in "Name", with: @client.name
+    fill_in "Last name", with: @client.last_name
+    fill_in "First name", with: @client.first_name
     fill_in "Nif", with: @client.nif
     fill_in "Postal code", with: @client.postal_code
     fill_in "Region", with: @client.region
@@ -39,8 +39,8 @@ class ClientsTest < ApplicationSystemTestCase
     fill_in "City", with: @client.city
     fill_in "Country", with: @client.country
     fill_in "Email", with: @client.email
-    fill_in "Lastname", with: @client.lastname
-    fill_in "Name", with: @client.name
+    fill_in "Last name", with: @client.last_name
+    fill_in "First name", with: @client.first_name
     fill_in "Nif", with: @client.nif
     fill_in "Postal code", with: @client.postal_code
     fill_in "Region", with: @client.region

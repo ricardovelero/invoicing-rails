@@ -17,7 +17,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create client" do
     assert_difference("Client.count") do
-      post clients_url, params: { client: { active: @client.active, city: @client.city, country: @client.country, email: @client.email, lastname: @client.lastname, name: @client.name, nif: @client.nif, postal_code: @client.postal_code, region: @client.region, street: @client.street, telephone: @client.telephone } }
+      post clients_url, params: { client: { active: @client.active, city: @client.city, country: @client.country, email: @client.email, last_name: @client.last_name, first_name: @client.first_name, nif: @client.nif, postal_code: @client.postal_code, region: @client.region, street: @client.street, telephone: @client.telephone } }
     end
 
     assert_redirected_to client_url(Client.last)
@@ -34,7 +34,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update client" do
-    patch client_url(@client), params: { client: { active: @client.active, city: @client.city, country: @client.country, email: @client.email, lastname: @client.lastname, name: @client.name, nif: @client.nif, postal_code: @client.postal_code, region: @client.region, street: @client.street, telephone: @client.telephone } }
+    patch client_url(@client), params: { client: { active: @client.active, city: @client.city, country: @client.country, email: @client.email, last_name: @client.last_name, first_name: @client.first_name, nif: @client.nif, postal_code: @client.postal_code, region: @client.region, street: @client.street, telephone: @client.telephone } }
     assert_redirected_to client_url(@client)
   end
 

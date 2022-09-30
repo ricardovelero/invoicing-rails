@@ -12,47 +12,52 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :invoice_number %>
-    <%= form.text_field :invoice_number, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label "Client", class: "input-label"  %>
+    <%= form.collection_select :client, Client.all, :id, :full_name, {prompt: "Selecciona un cliente"}, {class: "input"} %>
   </div>
 
   <div class="my-5">
-    <%= form.label :date %>
-    <%= form.datetime_field :date, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :invoice_number, class: "input-label"  %>
+    <%= form.text_field :invoice_number, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :due_date %>
-    <%= form.datetime_field :due_date, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :date, class: "input-label"  %>
+    <%= form.datetime_field :date, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :subtotal %>
-    <%= form.text_field :subtotal, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :due_date, class: "input-label"  %>
+    <%= form.datetime_field :due_date, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :iva %>
-    <%= form.text_field :iva, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :subtotal, class: "input-label"  %>
+    <%= form.text_field :subtotal, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :irpf %>
-    <%= form.text_field :irpf, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :iva, class: "input-label"  %>
+    <%= form.text_field :iva, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :total %>
-    <%= form.text_field :total, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :irpf, class: "input-label"  %>
+    <%= form.text_field :irpf, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :notes %>
-    <%= form.text_area :notes, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :total, class: "input-label"  %>
+    <%= form.text_field :total, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :status %>
+    <%= form.label :notes, class: "input-label"  %>
+    <%= form.text_area :notes, rows: 4, class: "input" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :status, class: "input-label"  %>
     <%= form.check_box :status, class: "block mt-2 h-5 w-5" %>
   </div>
 
