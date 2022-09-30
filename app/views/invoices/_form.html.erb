@@ -13,7 +13,7 @@
 
   <div class="my-5">
     <%= form.label "Client", class: "input-label"  %>
-    <%= form.collection_select :client, Client.all, :id, :full_name, {prompt: "Selecciona un cliente"}, {class: "input"} %>
+    <%= form.collection_select :client_id, Client.all, :id, :full_name, {prompt: "Selecciona un cliente"}, {class: "input"} %>
   </div>
 
   <div class="my-5">
