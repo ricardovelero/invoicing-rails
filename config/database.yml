@@ -88,4 +88,4 @@ production:
   username: <%= ENV["DATABASE_USER"] %>
   password: <%= ENV["DATABASE_PASSWORD"] %>
   port: <%= ENV["DATABASE_PORT"] %>
-  url: <%= ENV["DATABASE_URL"] %>
+  hostname: <%= ENV["DATABASE_HOSTNAME"] %>
