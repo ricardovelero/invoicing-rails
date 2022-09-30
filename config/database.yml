@@ -84,6 +84,8 @@ test:
 #
 production:
   <<: *default
-  database: fz_production
-  username: trek
-  password: <%= ENV["FZ_DATABASE_PASSWORD"] %>
+  database: <%= ENV["DATABASE"] %>
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  port: <%= ENV["DATABASE_PORT"] %>
+  url: <%= ENV["DATABASE_URL"] %>
