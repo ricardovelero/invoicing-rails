@@ -18,17 +18,23 @@
 
   <div class="my-5">
     <%= form.label :invoice_number, class: "input-label"  %>
-    <%= form.text_field :invoice_number, class: "input" %>
+    <%= form.text_field :invoice_number, class: "input", value: invoice.set_invoice_number %>
   </div>
 
   <div class="my-5">
     <%= form.label :date, class: "input-label"  %>
-    <%= form.datetime_field :date, class: "input" %>
+    <%= form.date_field :date, class: "input", value: Date.today %>
   </div>
 
   <div class="my-5">
     <%= form.label :due_date, class: "input-label"  %>
-    <%= form.datetime_field :due_date, class: "input" %>
+    <%= form.date_field :due_date, class: "input", value: Date.today + 30.days %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label "Items", class: "input-label"  %>
+    <%= form.collection_select :item_ids, Item.all, :id, :item_name,
+    {prompt: "Selecciona un item"}, { multiple: true, class: "input"} %>
   </div>
 
   <div class="my-5">

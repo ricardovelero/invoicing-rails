@@ -2,9 +2,22 @@ class Invoice < ApplicationRecord
   has_one :client
   belongs_to :user
 
+  has_many :line_items
   has_many :items, through: :line_items, dependent: :destroy
 
   validates :client_id, presence: true
 
   attribute :status, :string, default: "Pendiente"
+
+  before_create :set_invoice_number
+
+  def set_invoice_number
+   if Invoice.last.invoice_number.to_i
+    self.invoice_number = Invoice.last.invoice_number.to_i + 1
+   else
+    self.invoice_number = Invoice.last.invoice_number
+   end
+
+  end
+
 end
