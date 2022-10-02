@@ -5,4 +5,6 @@ class Invoice < ApplicationRecord
   has_many :items, through: :line_items, dependent: :destroy
 
   validates :client_id, presence: true
+
+  attribute :status, :string, default: "Pendiente"
 end
