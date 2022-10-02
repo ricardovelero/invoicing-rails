@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_30_125142) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_02_090253) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_125142) do
     t.string "country"
     t.string "email"
     t.string "telephone"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_125142) do
     t.decimal "irpf"
     t.decimal "total"
     t.text "notes"
-    t.boolean "status"
+    t.boolean "status", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
