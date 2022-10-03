@@ -1,0 +1,6 @@
+<div class="flex gap-2">
+
+  <%= f.collection_select :item_ids, Item.all, :id, :item_name,
+  {prompt: "Selecciona un item"}, { multiple: true, class: "input"} %>
+
+</div>
