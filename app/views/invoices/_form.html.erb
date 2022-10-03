@@ -1,4 +1,4 @@
-<%= form_with(model: invoice, class: "contents") do |form| %>
+<%= form_with(model: invoice, class: "contents") do |f| %>
   <% if invoice.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
@@ -12,56 +12,68 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label "Client", class: "input-label"  %>
-    <%= form.collection_select :client_id, Client.all, :id, :full_name, {prompt: "Selecciona un cliente"}, {class: "input"} %>
+    <%= f.label "Client", class: "input-label"  %>
+    <%= f.collection_select :client_id, Client.all, :id, :full_name, {prompt: "Selecciona un cliente"}, {class: "input"} %>
   </div>
 
   <div class="my-5">
-    <%= form.label :invoice_number, class: "input-label"  %>
-    <%= form.text_field :invoice_number, class: "input" %>
+    <%= f.label :invoice_number, class: "input-label"  %>
+    <%= f.text_field :invoice_number, class: "input", value: invoice.set_invoice_number %>
   </div>
 
   <div class="my-5">
-    <%= form.label :date, class: "input-label"  %>
-    <%= form.datetime_field :date, class: "input" %>
+    <%= f.label :date, class: "input-label"  %>
+    <%= f.date_field :date, class: "input", value: Date.today %>
   </div>
 
   <div class="my-5">
-    <%= form.label :due_date, class: "input-label"  %>
-    <%= form.datetime_field :due_date, class: "input" %>
+    <%= f.label :due_date, class: "input-label"  %>
+    <%= f.date_field :due_date, class: "input", value: Date.today + 30.days %>
+  </div>
+
+  <hr/>
+
+  <h2 class="text-center text-lg mt-5">Ítems a Facturar</h2>
+
+  <div id="line_items">
+    <% f.object.line_items.each do |i| %>
+      <%= render "item_fields", f: f, line_item: i %>
+    <% end %>
+  </div>
+
+  <%= link_to "Agregar Ítem",
+    add_item_invoices_path(id: f.object),
+    class: "text-indigo-600 hover:underline",
+    data: { turbo_method: :post } %>
+
+  <hr class="mt-5"/>
+
+  <div class="my-5">
+    <%= f.label :subtotal, class: "input-label"  %>
+    <%= f.text_field :subtotal, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :subtotal, class: "input-label"  %>
-    <%= form.text_field :subtotal, class: "input" %>
+    <%= f.label :iva, class: "input-label"  %>
+    <%= f.text_field :iva, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :iva, class: "input-label"  %>
-    <%= form.text_field :iva, class: "input" %>
+    <%= f.label :irpf, class: "input-label"  %>
+    <%= f.text_field :irpf, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :irpf, class: "input-label"  %>
-    <%= form.text_field :irpf, class: "input" %>
+    <%= f.label :total, class: "input-label"  %>
+    <%= f.text_field :total, class: "input" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :total, class: "input-label"  %>
-    <%= form.text_field :total, class: "input" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :notes, class: "input-label"  %>
-    <%= form.text_area :notes, rows: 4, class: "input" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :status, class: "input-label"  %>
-    <%= form.check_box :status, class: "block mt-2 h-5 w-5" %>
+    <%= f.label :notes, class: "input-label"  %>
+    <%= f.text_area :notes, rows: 4, class: "input" %>
   </div>
 
   <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= f.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
