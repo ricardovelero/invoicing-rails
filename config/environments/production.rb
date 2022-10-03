@@ -101,5 +101,5 @@ Rails.application.configure do
     :password => 'ksjrewd8vdfqpf',
     :authentication => 'plain'
   }
-  config.action_mailer.default_url_options = { :host => "https://rutalia.club", :protocol => 'https' }
+  config.action_mailer.default_url_options = { :host => "https://monkfish-app-x5lnq.ondigitalocean.app", :protocol => 'https' }
 end
