@@ -10,15 +10,15 @@ class Invoice < ApplicationRecord
 
   attribute :status, :string, default: "Pendiente"
 
-  before_create :set_invoice_number
+  # before_create :set_invoice_number
 
-  def set_invoice_number
-    if Invoice.last.try.(:invoice_number).present?
-      if Invoice.last.invoice_number.to_i
-        self.invoice_number = Invoice.last.invoice_number.to_i + 1
-      else
-        self.invoice_number = Invoice.last.invoice_number
-      end
-    end
-  end
+  # def set_invoice_number
+  #   if Invoice.last.try.(:invoice_number).present?
+  #     if Invoice.last.invoice_number.to_i
+  #       self.invoice_number = Invoice.last.invoice_number.to_i + 1
+  #     else
+  #       self.invoice_number = Invoice.last.invoice_number
+  #     end
+  #   end
+  # end
 end
