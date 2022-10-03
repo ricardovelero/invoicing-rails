@@ -18,7 +18,7 @@ class Invoice < ApplicationRecord
    else
     self.invoice_number = Invoice.last.invoice_number
    end
-
+  ensure
   end
 
 end
