@@ -13,14 +13,15 @@ class Invoice < ApplicationRecord
   before_create :set_invoice_number
 
   def set_invoice_number
-    if Invoice.last.try.(:invoice_number).present?
+    last_invoice = Invoice.last
+    if last_invoice.nil?
+      self.invoice_number = 1
+    else
       if Invoice.last.invoice_number.to_i
         self.invoice_number = Invoice.last.invoice_number.to_i + 1
       else
         self.invoice_number = Invoice.last.invoice_number
       end
-    else
-      self.invoice_number = 1
     end
   end
 end
