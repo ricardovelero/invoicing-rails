@@ -13,7 +13,7 @@ class Invoice < ApplicationRecord
   before_create :set_invoice_number
 
   def set_invoice_number
-   if Invoice.last.invoice_number.to_i
+   if Invoice.last.invoice_number.present?
     self.invoice_number = Invoice.last.invoice_number.to_i + 1
    else
     self.invoice_number = Invoice.last.invoice_number
