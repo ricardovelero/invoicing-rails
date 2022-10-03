@@ -13,10 +13,21 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   def new
     @invoice = Invoice.new
+    @invoice.line_items.build
   end
 
   # GET /invoices/1/edit
   def edit
+  end
+
+  def add_item
+    helpers.fields model: Invoice.new do |f|
+      render turbo_stream: turbo_stream.append(
+        "line_items",
+        partial: "item_fields",
+        locals: { f: f, line_item: LineItem.new }
+      )
+    end
   end
 
   # POST /invoices or /invoices.json
@@ -66,6 +77,6 @@ class InvoicesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def invoice_params
-      params.require(:invoice).permit(:client_id, :invoice_number, :date, :due_date, :subtotal, :iva, :irpf, :total, :notes, :status, item_ids: [])
+      params.require(:invoice).permit(:client_id, :invoice_number, :date, :due_date, :subtotal, :iva, :irpf, :total, :notes, :status, item_ids: [] )
     end
 end
