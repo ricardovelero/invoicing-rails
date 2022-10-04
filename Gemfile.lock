@@ -98,9 +98,10 @@ GEM
       warden (~> 1.2.3)
     digest (3.1.0)
     erubi (1.11.0)
-    evil_icons (1.10.1)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    heroicon (1.0.0)
+      rails (>= 5.2)
     htmlentities (4.3.4)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
@@ -258,7 +259,7 @@ DEPENDENCIES
   capybara
   debug
   devise
-  evil_icons
+  heroicon
   importmap-rails
   jbuilder
   letter_opener_web
