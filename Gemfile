@@ -77,6 +77,4 @@ gem "devise"
 
 gem "letter_opener_web"
 
-gem "evil_icons"
-
 gem "premailer-rails"
