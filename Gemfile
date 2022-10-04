@@ -82,3 +82,5 @@ gem "premailer-rails"
 gem "heroicon"
 
 gem 'wicked'
+
+gem 'route_translator'

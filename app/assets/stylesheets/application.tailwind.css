@@ -72,12 +72,6 @@
   }
 
   .home
-  .action .arrow {
-    @apply flex items-center justify-center;
-    @apply w-6 h-6;
-  }
-
-  .home
   .theatre {
     @apply m-auto pt-8 pb-16;
   }
