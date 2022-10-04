@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :dashboard
     resources :invoices
     resources :clients
+    resources :privacy
   end
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener"
