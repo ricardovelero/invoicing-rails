@@ -80,3 +80,5 @@ gem "letter_opener_web"
 gem "premailer-rails"
 
 gem "heroicon"
+
+gem 'wicked'
