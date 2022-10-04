@@ -1,0 +1,5 @@
+es:
+  routes:
+    dashboard: tablero
+    invoices: facturas
+    clients: clientes
