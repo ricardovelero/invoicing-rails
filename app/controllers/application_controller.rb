@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :config_devise_params, if: :devise_controller?
   around_action :switch_locale
 
-  protect_from_forgery with: :exception
+  protect_from_forgery except: :sign_in
 
   private
 
