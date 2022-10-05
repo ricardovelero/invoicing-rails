@@ -1,0 +1,20 @@
+<% content_for(:page_title, "¡Gracias por Registrarte!") %>
+<p>Por favor indicanos si eres Autónomo (Freelance) o Empresa:</p>
+
+<%= form_for(@user_profile, url: wizard_path, method: 'put' ) do |f| %>
+    <% if f.object.errors.any? %>
+        <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+            <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+
+            <ul>
+            <% f.object.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+            <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <%= f.hidden_field :user_id, value: @user.id %>
+    <%= f.radio_button :is_freelance, "true" %> Soy Autonomo<br />
+    <%= f.radio_button :is_freelance, "false" %> Facturo como Empresa<br />
+    <%= f.submit 'Siguiente', class: 'btn-primary' %>
+<% end %>

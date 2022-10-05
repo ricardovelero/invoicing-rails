@@ -8,36 +8,22 @@
     <%= render "devise/shared/error_messages",
       resource: resource %>
 
-    <div class="flex flex-wrap -mx-3 mb-0 md:mb-4">
-      <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
-        <%= f.label :first_name %>
-        <%= f.text_field :first_name,
-          autofocus: true,
-          required: true %>
-      </div>
-
-      <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
-        <%= f.label :last_name %>
-        <%= f.text_field :last_name %>
-      </div>
+    <div class="mb-4">
+      <%= f.label :email, class: "input-label" %>
+      <%= f.email_field :email, required: true, class: "input" %>
     </div>
 
     <div class="mb-4">
-      <%= f.label :email %>
-      <%= f.email_field :email, required: true %>
+      <%= f.label :password, class: "input-label" %>
+      <%= f.password_field :password, required: true, class: "input" %>
     </div>
 
     <div class="mb-4">
-      <%= f.label :password %>
-      <%= f.password_field :password, required: true %>
+      <%= f.label :password_confirmation, class: "input-label" %>
+      <%= f.password_field :password_confirmation, required: true, class: "input" %>
     </div>
 
-    <div class="mb-4">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, required: true %>
-    </div>
-
-    <%= f.submit "Registrarse", class: "cta-btn" %>
+    <%= f.submit "Registrarse", class: "btn-primary" %>
   </div>
 <% end %>
 

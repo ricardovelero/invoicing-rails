@@ -1,10 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  layout :layout_by_resource
+  #layout :layout_by_resource
   before_action :config_devise_params, if: :devise_controller?
-  around_action :switch_locale
-
-
+  #around_action :switch_locale
 
   private
 
@@ -37,7 +35,8 @@ class ApplicationController < ActionController::Base
         :last_name,
         :email,
         :password,
-        :password_confirmation
+        :password_confirmation,
+        :user_profile_attributes
       ])
     end
 
