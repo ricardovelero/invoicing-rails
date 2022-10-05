@@ -1,43 +1,43 @@
-<% content_for(:page_title, "Entrar") %>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-group">
-    <div class="mb-4">
-      <%= f.label :email, "Correo Electrónico", class: "input-label" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input" %>
-    </div>
-
-    <div class="mb-4">
-      <%= f.label :password, "Contraseña", class: "input-label" %>
-      <%= f.password_field :password, autocomplete: "current-password", class: "input" %>
-    </div>
-
-    <% if devise_mapping.rememberable? %>
-      <div class="flex items-center mb-4">
-        <%= f.check_box :remember_me, class: "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" %>
-        <%= f.label :remember_me, "Recuérdame", class: "ml-2 mt-2 block text-sm text-gray-900" %>
+<div class="m-auto w-84 md:w-96 session">
+  <% content_for(:page_title, "Entrar") %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-group">
+      <div class="mb-4">
+        <%= f.label :email, "Correo Electrónico", class: "input-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input" %>
       </div>
-    <% end %>
 
-    <div class="flex items-center justify-between">
-      <%= f.submit "Entrar", class: "cta-btn" %>
-      <%= link_to "¿Olvidaste tu contraseña?",
-          new_password_path(resource_name),
-          class: "inline-block" %>
+      <div class="mb-4">
+        <%= f.label :password, "Contraseña", class: "input-label" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "input" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="flex items-center mb-4">
+          <%= f.check_box :remember_me, class: "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" %>
+          <%= f.label :remember_me, "Recuérdame", class: "ml-2 mt-2 block text-sm text-gray-900" %>
+        </div>
+      <% end %>
+
+      <div class="flex items-center justify-between">
+        <%= f.submit "Entrar", class: "cta-btn" %>
+        <%= link_to "¿Olvidaste tu contraseña?",
+            new_password_path(resource_name),
+            class: "inline-block" %>
+      </div>
     </div>
-  </div>
-<% end %>
-<div class="text-center">
-  <p class="text-grey-500 text-sm">
-    ¿No tienes una cuenta?
-    <%= link_to "Crear una Cuenta",
-      new_user_registration_path %>.
-  </p>
-  <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-    <p class="text-grey-500 text-sm">
-      ¿No has recibido las instrucciones para confirmar tu cuenta?
-      <%= link_to "Confirmar Cuenta", new_confirmation_path(resource_name) %>.
-    </p>
   <% end %>
+  <div class="text-center">
+    <p class="text-grey-500 text-sm">
+      ¿No tienes una cuenta?
+      <%= link_to "Crear una Cuenta",
+        new_user_registration_path %>.
+    </p>
+    <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+      <p class="text-grey-500 text-sm">
+        ¿No has recibido las instrucciones para confirmar tu cuenta?
+        <%= link_to "Confirmar Cuenta", new_confirmation_path(resource_name) %>.
+      </p>
+    <% end %>
+  </div>
 </div>
-

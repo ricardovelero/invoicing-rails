@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
 
-  devise_for :users, :controllers => {:registrations => "registrations"}
+  devise_for :users, :controllers => {:registrations => "registrations"} do
+    resources :user_profile
+  end
+  resources :users
   resources :invoices
   resources :clients
   resources :items
   resources :invoices do
     post :add_item, on: :collection
   end
+  resources :after_register
 
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'

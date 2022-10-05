@@ -14,11 +14,14 @@
       @apply text-gray-700 bg-white py-2 px-4 border border-gray-300 hover:bg-gray-50;
       @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
   }
+  .btn-danger {
+    @apply px-3 py-2 shadow-sm rounded-md border border-transparent text-red-500 hover:text-red-900 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
+  }
   .paragraph {
     @apply mt-2 text-sm text-gray-700;
   }
   .title {
-    @apply text-xl font-semibold text-gray-900;
+    @apply font-extralight text-center text-4xl text-gray-900;
   }
   .link {
     @apply text-indigo-600 hover:text-indigo-900;
@@ -105,36 +108,31 @@
 
 
 
-  .body-session {
-    @apply bg-gray-100 font-sans h-screen w-screen;
+  .session {
+    @apply font-sans h-screen w-screen;
   }
 
-  .body-session
-  h1.title {
-    @apply font-extralight text-center text-4xl;
-  }
-
-  .body-session
+  .session
   .container {
     @apply mx-auto flex h-full items-center;
   }
 
-  .body-session
+    .session
   .form-group {
     @apply border-2 border-t-8 bg-white rounded-lg shadow-lg;
     @apply p-8 mb-6;
   }
 
-  .body-session
+    .session
   .form-group label {
     @apply font-normal text-gray-600 block mb-2;
   }
 
-  .body-session
+    .session
   .form-group input[type="text"],
-  .body-session
+    .session
   .form-group input[type="email"],
-  .body-session
+    .session
   .form-group input[type="password"] {
     @apply block appearance-none w-full bg-white;
     @apply border border-gray-200;
@@ -142,26 +140,26 @@
     @apply px-2 py-2;
   }
 
-  .body-session
+    .session
   .form-group input[type="text"]:hover,
-  .body-session
+    .session
   .form-group input[type="email"]:hover,
-  .body-session
+    .session
   .form-group input[type="password"]:hover {
     @apply border-gray-300;
   }
 
-  .body-session
+    .session
   a {
     @apply no-underline font-bold text-sm text-indigo-600;
   }
 
-  .body-session
+    .session
   a:hover {
     @apply text-indigo-500;
   }
 
-  .body-session
+    .session
   .cta-btn {
     @apply select-none bg-indigo-600 text-white font-bold;
     @apply rounded-md shadow-sm border border-transparent;
@@ -169,18 +167,18 @@
     @apply hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
   }
 
-  .body-session
+    .session
   .alert {
     @apply mb-4;
   }
 
-  .body-session
+    .session
   .error-box {
     @apply bg-red-100 border-t-4 border-red-500
       rounded-b text-red-900 px-4 py-3 mb-3 shadow-md;
   }
 
-  .body-session
+    .session
   .error-box ul {
     @apply pl-4;
     list-style: disc;
