@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_02_091118) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_05_084737) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_02_091118) do
     t.index ["item_id"], name: "index_line_items_on_item_id"
   end
 
+  create_table "user_profiles", force: :cascade do |t|
+    t.string "gov_id"
+    t.string "street_address_1"
+    t.string "street_address_2"
+    t.string "city"
+    t.string "region"
+    t.string "postal_code"
+    t.string "country"
+    t.string "phone"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_profiles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -104,4 +119,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_02_091118) do
   add_foreign_key "items", "users"
   add_foreign_key "line_items", "invoices"
   add_foreign_key "line_items", "items"
+  add_foreign_key "user_profiles", "users"
 end
