@@ -12,6 +12,10 @@
             </ul>
         </div>
     <% end %>
+        <div class="my-5">
+        <%= f.label "CIF/NIF/NIE", class: "input-label" %>
+        <%= f.text_field :gov_id, class: "input", required: true %>
+    </div>
     <div class="my-5">
         <%= f.label "Calle", class: "input-label" %>
         <%= f.text_field :street_address_1, class: "input", required: true %>
