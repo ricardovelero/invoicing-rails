@@ -1,13 +1,13 @@
 class User < ApplicationRecord
   devise :database_authenticatable,
-         :registerable,
-         :recoverable,
-         :rememberable,
-         :validatable,
-         :confirmable,
-         :lockable,
-         :timeoutable,
-         :trackable
+    :registerable,
+    :recoverable,
+    :rememberable,
+    :validatable,
+    :confirmable,
+    :lockable,
+    :timeoutable,
+    :trackable
 
   validates_uniqueness_of :email
   validates :email, :encrypted_password, presence: true
@@ -17,7 +17,6 @@ class User < ApplicationRecord
   has_many :invoices, dependent: :destroy
   has_many :clients, dependent: :destroy
   has_many :items, dependent: :destroy
-  #attr_accessible :email, :password, :password_confirmation, :remember_me, :user_profile_attributes
   has_one  :user_profile, dependent: :destroy, inverse_of: :user
 
   mattr_accessor :form_steps do
@@ -54,6 +53,6 @@ class User < ApplicationRecord
   end
 
   def full_name
-		[first_name, last_name].reject(&:blank?).collect(&:capitalize).join(' ')
-	end
+    [first_name, last_name].reject(&:blank?).collect(&:capitalize).join(' ')
+  end
 end
