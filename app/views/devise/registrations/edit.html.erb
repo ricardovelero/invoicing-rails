@@ -57,7 +57,7 @@
 
 <p class="mt-5">¿Ya no quiere su cuenta?
   <%= button_to "Eliminar cuenta", registration_path(resource_name),
-  data: { confirm: "¿Estás seguro?" }, method: :delete,
+  data: { turbo_confirm: "¿Estás seguro?" }, method: :delete,
   class: "btn-danger" %>
 </p>
 
