@@ -7,7 +7,7 @@
 
     <div class="mb-4">
       <%= f.label :email, class: "input-label" %>
-      <%= f.email_field :email, class: "input", autofocus: true, autocomplete: "email" %>
+      <%= f.email_field :email, class: "input", autofocus: true, autocomplete: "email", disabled: true %>
     </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -33,7 +33,7 @@
     </div>
 
     <div id="user_profile">
-      <%= f.fields_for :user_profile. resource.user_profile do |upf| %>
+      <%= f.fields_for :user_profile, resource.user_profile do |upf| %>
           <%= upf.hidden_field :id %>
           <div class="mb-4">
             <%= upf.label "Identificación Fiscal", class: "input-label" %>
@@ -54,7 +54,6 @@
       <%= f.submit "Actualizar", class: "btn-primary" %>
     </div>
 <% end %>
-<%= link_to "Regresar", :back, class: "btn-secondary" %>
 
 <p class="mt-5">¿Ya no quiere su cuenta?
   <%= button_to "Eliminar cuenta", registration_path(resource_name),

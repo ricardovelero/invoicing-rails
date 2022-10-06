@@ -20,7 +20,7 @@ class User < ApplicationRecord
   #attr_accessible :email, :password, :password_confirmation, :remember_me, :user_profile_attributes
   has_one  :user_profile, dependent: :destroy, inverse_of: :user
 
-  cattr_accessor :form_steps do
+  mattr_accessor :form_steps do
     %w[sign_up freelance_or_company set_name set_address]
   end
 
@@ -36,6 +36,7 @@ class User < ApplicationRecord
   end
 
   validates_associated :user_profile, if: -> { required_for_step?('set_address') }
+  validates_associated :user_profile, if: -> { required_for_step?('freelance_or_company') }
 
   accepts_nested_attributes_for :user_profile, allow_destroy: true
 
@@ -43,7 +44,7 @@ class User < ApplicationRecord
     #All fields are required if no form is present
     form_step.nil?
 
-    # All fileds from previous steps are required if the
+    # All fields from previous steps are required if the
     # step parameter appears before or we are on the current step
     form_steps.index(step.to_s) <= form_steps.index(form_step.to_s)
   end
