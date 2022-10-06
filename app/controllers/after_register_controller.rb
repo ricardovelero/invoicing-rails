@@ -3,7 +3,7 @@ class AfterRegisterController < ApplicationController
 
     before_action :authenticate_user!
 
-    steps(*User.form_steps)
+    steps(*User.new.form_steps)
 
     def show
         @user = current_user
@@ -26,7 +26,7 @@ class AfterRegisterController < ApplicationController
         case step
         when 'freelance_or_company'
             if @user.create_user_profile(onboarding_params(step).except(:form_step))
-                render_wizard @user
+                render_wizard @user_profile = get_user_profile
             else
                 @user_profile.destroy
                 render_wizard @user, status: :unprocessable_entity
@@ -39,7 +39,7 @@ class AfterRegisterController < ApplicationController
             end
         when 'set_address'
             if @user.create_user_profile(onboarding_params(step).except(:form_step))
-                render_wizard @user
+                render_wizard @user_profile = get_user_profile
             else
                 @user_profile.destroy
                 render_wizard @user, status: :unprocessable_entity
@@ -65,7 +65,7 @@ class AfterRegisterController < ApplicationController
             permitted_attributes = case step
                 when 'freelance_or_company'
                     required_parameters = :user_profile
-                    %i[is_freelance]
+                    %i[is_freelance user_id]
                 when 'set_name'
                     required_parameters = :user
                     %i[first_name last_name]

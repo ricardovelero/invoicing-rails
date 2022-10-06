@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users, :controllers => {:registrations => "registrations"} do
+  devise_for :users, controllers: { registrations: "registrations"} do
     resources :user_profile
   end
   resources :users
