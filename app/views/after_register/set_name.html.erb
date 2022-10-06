@@ -1,25 +1,23 @@
 <% content_for(:page_title, "Tu Nombre Completo") %>
-
 <%= form_for(@user, url: wizard_path, method: 'put' ) do |f| %>
-    <% if f.object.errors.any? %>
-        <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-            <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this invoice from being saved:</h2>
-
-            <ul>
-            <% f.object.errors.each do |error| %>
-                <li><%= error.full_message %></li>
-            <% end %>
-            </ul>
-        </div>
-    <% end %>
-    <div class="my-5">
-        <%= f.label "Nombres", class: "input-label" %>
-        <%= f.text_field :first_name, class: "input", required: true %>
+  <% if f.object.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+      <ul>
+        <% f.object.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
     </div>
-    <div class="my-5">
-        <%= f.label "Apellidos", class: "input-label" %>
-        <%= f.text_field :last_name, class: "input", required: true %>
-    </div>
-    <%= f.submit 'Siguiente', class: 'btn-primary' %>
+  <% end %>
+  <div class="my-5">
+    <%= f.label "Nombres", class: "input-label" %>
+    <%= f.text_field :first_name, class: "input", required: true %>
+  </div>
+  <div class="my-5">
+    <%= f.label "Apellidos", class: "input-label" %>
+    <%= f.text_field :last_name, class: "input", required: true %>
+  </div>
+  <%= f.submit 'Siguiente', class: 'btn-primary' %>
 <% end %>
 <%= render "after_register/links" %>
