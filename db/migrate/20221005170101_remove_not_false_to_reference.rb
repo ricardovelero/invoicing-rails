@@ -1,5 +1,5 @@
 class RemoveNotFalseToReference < ActiveRecord::Migration[7.0]
-    change_column :user_profiles, :user_id, :bigint, null: true
   def change
+    change_column :user_profiles, :user_id, :bigint, null: true
   end
 end
