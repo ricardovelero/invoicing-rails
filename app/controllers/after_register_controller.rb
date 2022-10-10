@@ -68,10 +68,10 @@ class AfterRegisterController < ApplicationController
       %i[is_freelance user_id]
     when 'set_name'
       required_parameters = :user_profile
-      %i[first_name last_name]
+      %i[first_name last_name gov_id ]
     when 'set_address'
       required_parameters = :user_profile
-      %i[company gov_id street_address_1 street_address_2 city region postal_code country phone]
+      %i[company street_address_1 street_address_2 city region postal_code country phone]
     end
     params.require(required_parameters).permit(:id, permitted_attributes).merge(form_step: step)
   end
