@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   #layout :layout_by_resource
   before_action :config_devise_params, if: :devise_controller?
   #around_action :switch_locale
+  after_action :store_action
 
   private
 
@@ -21,12 +22,25 @@ class ApplicationController < ActionController::Base
 
   protected
 
-    def after_sign_in_path_for(resource)
-      "/dashboard"
+    def after_sign_in_path_for(resource_or_scope)
+      stored_location_for(resource_or_scope) || super
     end
 
     def after_sign_out_path_for(resource_or_scope)
       "/"
+    end
+
+    def store_action
+      return unless request.get? 
+      if (request.path != "/users/sign_in" &&
+          request.path != "/users/sign_up" &&
+          request.path != "/users/password/new" &&
+          request.path != "/users/password/edit" &&
+          request.path != "/users/confirmation" &&
+          request.path != "/users/sign_out" &&
+          !request.xhr?) # don't store ajax calls
+        store_location_for(:user, request.fullpath)
+      end
     end
 
     def config_devise_params
