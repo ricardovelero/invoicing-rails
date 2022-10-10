@@ -17,10 +17,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def configure_account_update_params
-      devise_parameter_sanitizer.permit(:account_update, keys: [:email, :first_name, :last_name,
-        :password, :password_confirmation, :current_password, :user_id,
-        { user_profile: %i[street_address_1 street_address_2 city region postal_code country
-          phone gov_id user_id is_freelance company_name] } ] )
+      devise_parameter_sanitizer.permit(:account_update, keys: [:attribute] )
     end
 
     def after_inactive_sign_up_path_for(resource)
