@@ -19,6 +19,8 @@ class User < ApplicationRecord
   has_many :items, dependent: :destroy
   has_one  :user_profile, dependent: :destroy, inverse_of: :user
 
+  #accepts_nested_attributes_for :user_profile, allow_destroy: true
+
   mattr_accessor :form_steps do
     %w[sign_up freelance_or_company set_name set_address]
   end
@@ -36,8 +38,6 @@ class User < ApplicationRecord
 
   validates_associated :user_profile, if: -> { required_for_step?('set_address') }
   validates_associated :user_profile, if: -> { required_for_step?('freelance_or_company') }
-
-  accepts_nested_attributes_for :user_profile, allow_destroy: true
 
   def required_for_step?(step)
     #All fields are required if no form is present
