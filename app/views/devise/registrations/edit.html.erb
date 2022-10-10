@@ -37,15 +37,18 @@
           <%= upf.hidden_field :id %>
           <div class="mb-4">
             <%= upf.label "Identificación Fiscal", class: "input-label" %>
-            <%= upf.text_field :gov_id, class: "input", placeholder: "NIF/CIF/NIE" %>
+            <input placeholder="NIF/CIF/NIE" class="input"
+              type="text" name="[user_profile][gov_id]" value="<%= @user.user_profile.gov_id %>" id="user_profile_gov_id">
           </div>
           <div class="mb-4">
             <%= upf.label "Calle", class: "input-label" %>
-            <%= upf.text_field :street_address_1, class: "input" %>
+            <input class="input" type="text" name="[user_profile][street_address_1]" value="<%= @user.user_profile.street_address_1 %>" 
+              id="user_profile_street_address_1">
           </div>
           <div class="mb-4">
             <%= upf.label "Urbanización", class: "input-label" %>
-            <%= upf.text_field :street_address_2, class: "input" %>
+            <input class="input" type="text" name="[user_profile][street_address_2]" value="<%= @user.user_profile.street_address_2 %>" 
+              id="user_profile_street_address_2">
           </div>
       <% end %>
     </div>
