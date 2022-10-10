@@ -13,7 +13,7 @@ class AfterRegisterController < ApplicationController
     when 'freelance_or_company'
       @user_profile = get_user_profile
     when 'set_name'
-      @user = current_user
+      @user_profile = get_user_profile
     when 'set_address'
       @user_profile = get_user_profile
     end
@@ -32,13 +32,13 @@ class AfterRegisterController < ApplicationController
         render_wizard @user, status: :unprocessable_entity
       end
     when 'set_name'
-      if @user.update(onboarding_params(step))
-        render_wizard @user
+      if @user.user_profile.update(onboarding_params(step).except(:form_step))
+        render_wizard @user_profile = get_user_profile
       else
         render_wizard @user, status: :unprocessable_entity
       end
     when 'set_address'
-      if @user.create_user_profile(onboarding_params(step).except(:form_step))
+      if @user.user_profile.update(onboarding_params(step).except(:form_step))
         render_wizard @user_profile = get_user_profile
       else
         @user_profile.destroy
@@ -67,7 +67,7 @@ class AfterRegisterController < ApplicationController
       required_parameters = :user_profile
       %i[is_freelance user_id]
     when 'set_name'
-      required_parameters = :user
+      required_parameters = :user_profile
       %i[first_name last_name]
     when 'set_address'
       required_parameters = :user_profile
