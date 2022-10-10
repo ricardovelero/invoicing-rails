@@ -20,6 +20,10 @@ class RegistrationsController < Devise::RegistrationsController
       devise_parameter_sanitizer.permit(:account_update, keys: [:attribute] )
     end
 
+    def after_update_path_for(resource)
+      "/users/#{resource.id}"
+    end
+
     def after_inactive_sign_up_path_for(resource)
       '/' # Or :prefix_to_your_route
     end
