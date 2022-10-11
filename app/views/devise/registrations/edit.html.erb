@@ -50,6 +50,11 @@
             <input class="input" type="text" name="[user_profile][street_address_2]" value="<%= @user.user_profile.street_address_2 %>" 
               id="user_profile_street_address_2">
           </div>
+          <div class="mb-4">
+            <%= upf.label "País", class: "input-label" %>
+            <%= upf.collection_select :country, Country.all.sort, :alpha_2_code, :name,
+              {prompt: true, selected: "ES"}, {class: "input"} %>
+          </div>
       <% end %>
     </div>
 
