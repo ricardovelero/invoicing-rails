@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
 
     def layout_by_resource
       case
-      when devise_controller? then "session"
-      else "application"
+        when devise_controller? then "session"
+        else "application"
       end
     end
 

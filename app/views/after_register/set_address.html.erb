@@ -1,41 +1,46 @@
-<% content_for(:page_title, "Dirección Fiscal") %>
+<div class="max-w-md mx-auto">
 
-<%= form_for(@user_profile, url: wizard_path, method: 'put' ) do |f| %>
-    <% if f.object.errors.any? %>
-        <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-            <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+    <h1 class="text-3xl text-slate-800 font-bold mb-6">Dirección Fiscal ✨</h1>
 
-            <ul>
-            <% f.object.errors.each do |error| %>
-                <li><%= error.full_message %></li>
-            <% end %>
-            </ul>
+    <%= form_for(@user_profile, url: wizard_path, method: 'put' ) do |f| %>
+        <% if f.object.errors.any? %>
+            <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+                <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+
+                <ul>
+                <% f.object.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+        <div class="my-5">
+            <label class="input-label" for="street_address_2">Calle <span class="text-rose-500">*</span></label>
+            <%= f.text_field :street_address_1, class: "input", required: true %>
+        </div>
+        <div class="my-5">
+            <label class="input-label" for="street_address_2">Urbanización <span class="text-rose-500">*</span></label>
+            <%= f.text_field :street_address_2, class: "input" %>
+        </div>
+        <div class="my-5">
+            <label class="input-label" for="city">Ciudad <span class="text-rose-500">*</span></label>
+            <%= f.text_field :city, class: "input", required: true %>
+        </div>
+        <div class="my-5">
+            <label class="input-label" for="region">Provincia <span class="text-rose-500">*</span></label>
+            <%= f.text_field :region, class: "input", required: true %>
+        </div>
+        <div class="my-5">
+            <label class="input-label" for="postal_code">Código Postal <span class="text-rose-500">*</span></label>
+            <%= f.text_field :postal_code, class: "input", required: true %>
+        </div>
+        <div class="my-5">
+            <label class="input-label" for="country">País <span class="text-rose-500">*</span></label>
+            <%= f.text_field :country, class: "input", required: true %>
+        </div>
+        <div class="flex items-center justify-between">
+            <%= render "after_register/links" %>
+            <%= f.submit 'Siguiente ->', class: 'btn-primary' %>
         </div>
     <% end %>
-    <div class="my-5">
-        <%= f.label "Calle", class: "input-label" %>
-        <%= f.text_field :street_address_1, class: "input", required: true %>
-    </div>
-    <div class="my-5">
-        <%= f.label "Urbanización", class: "input-label" %>
-        <%= f.text_field :street_address_2, class: "input" %>
-    </div>
-    <div class="my-5">
-        <%= f.label "Ciudad", class: "input-label" %>
-        <%= f.text_field :city, class: "input", required: true %>
-    </div>
-    <div class="my-5">
-        <%= f.label "Provincia", class: "input-label" %>
-        <%= f.text_field :region, class: "input", required: true %>
-    </div>
-    <div class="my-5">
-        <%= f.label "Código Postal", class: "input-label" %>
-        <%= f.text_field :postal_code, class: "input", required: true %>
-    </div>
-    <div class="my-5">
-        <%= f.label "País", class: "input-label" %>
-        <%= f.text_field :country, class: "input", required: true %>
-    </div>
-    <%= f.submit 'Siguiente', class: 'btn-primary' %>
-<% end %>
-<%= render "after_register/links" %>
+</div>

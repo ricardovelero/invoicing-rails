@@ -3,19 +3,127 @@
 @tailwind utilities;
 
 @layer components {
+  /* Typography */
+  .h1 {
+    @apply text-4xl font-extrabold tracking-tighter;
+  }
+
+  .h2 {
+    @apply text-3xl font-extrabold tracking-tighter;
+  }
+
+  .h3 {
+    @apply text-3xl font-extrabold;
+  }
+
+  .h4 {
+    @apply text-2xl font-extrabold tracking-tight;
+  }
+
+  @screen md {
+    .h1 {
+        @apply text-5xl;
+    }
+
+    .h2 {
+        @apply text-4xl;
+    }
+  }
+
+  /* Buttons */
+  .btn,
+  .btn-lg,
+  .btn-sm,
+  .btn-xs {
+      @apply font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out cursor-pointer;
+  }
+
+  .btn {
+      @apply px-3 py-2;
+  }
+
+  .btn-lg {
+      @apply px-4 py-3;
+  }
+
+  .btn-sm {
+      @apply px-2 py-1;
+  }
+
+  .btn-xs {
+      @apply px-2 py-0.5;
+  }
+
+  /* Forms */
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+
+  .form-input,
+  .form-textarea,
+  .form-multiselect,
+  .form-select,
+  .form-checkbox,
+  .form-radio {
+      @apply text-sm text-slate-800 bg-white border;
+  }
+
+  .form-input,
+  .form-textarea,
+  .form-multiselect,
+  .form-select,
+  .form-checkbox {
+      @apply rounded;
+  }
+
+  .form-input,
+  .form-textarea,
+  .form-multiselect,
+  .form-select {
+      @apply leading-5 py-2 px-3 border-slate-200 hover:border-slate-300 focus:border-indigo-300 shadow-sm;
+  }
+
+  .form-input,
+  .form-textarea {
+      @apply placeholder-slate-400;
+  }
+
+  .form-select {
+      @apply pr-10;
+  }
+
+  .form-checkbox,
+  .form-radio {
+      @apply text-indigo-500 border border-slate-300;
+  }
+
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  /* Misc */
   .alert {
     @apply text-white text-sm text-center font-medium px-4 py-3;
   }
   .btn-primary {
-    @apply inline-flex items-center justify-center sm:w-auto py-2 text-sm font-medium rounded-md border border-transparent px-4 text-white shadow-sm bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+    @apply inline-flex items-center justify-center sm:w-auto py-2 text-sm font-medium rounded-md border border-transparent px-4 text-white shadow-sm bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer;
   }
   .btn-secondary {
     @apply inline-flex justify-center rounded-md shadow-sm text-lg font-medium;
       @apply text-gray-700 bg-white py-2 px-4 border border-gray-300 hover:bg-gray-50;
-      @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+      @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer;
   }
   .btn-danger {
-    @apply px-3 py-2 shadow-sm rounded-md border border-transparent text-red-500 hover:text-red-900 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
+    @apply px-3 py-2 shadow-sm rounded-md border border-transparent text-red-500 hover:text-red-900 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 cursor-pointer;
   }
   .paragraph {
     @apply mt-2 text-sm text-gray-700;
@@ -45,7 +153,7 @@
     @apply block text-sm font-medium text-gray-700;
   }
 
-
+  /* Temp */
   .home
   header {
     @apply w-full p-2 flex items-center justify-between flex-wrap;
@@ -106,7 +214,7 @@
     }
   }
 
-
+  /* Session Devise */
 
   .session {
     @apply font-sans h-screen w-screen;
