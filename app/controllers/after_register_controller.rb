@@ -1,6 +1,8 @@
 class AfterRegisterController < ApplicationController
   include Wicked::Wizard
 
+  layout "onboarding"
+
   before_action :authenticate_user!
 
   steps(*User.new.form_steps)

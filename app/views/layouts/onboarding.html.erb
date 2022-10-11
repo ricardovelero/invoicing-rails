@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html class="h-full bg-gray-100">
+  <head>
+    <%= render 'shared/head' %>
+  </head>
+
+    <body class="font-inter antialiased bg-slate-100 text-slate-600">
+        <%= render "layouts/alert" %>
+
+        <main class="bg-white">
+
+            <div class="relative flex">
+
+                <!-- Content -->
+                <div class="w-full md:w-1/2">
+
+                    <div class="min-h-screen h-full flex flex-col after:flex-1">
+
+                        <div class="flex-1">
+
+                            <!-- Header -->
+                            <div class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+
+                                <!-- Logo -->
+                                <div class="block">
+                                    <%= image_tag "oso-zen.png", class: "block h-10 w-10", alt: "Factura Zen" %>
+                                </div>
+                                <div class="text-sm">
+                                    ¿Ya tienes cuenta? <%= link_to "Entrar", new_session_path(@user), class: "font-medium text-indigo-500 hover:text-indigo-600" %>
+                                </div>
+                            </div>
+
+                            <!-- Barra de progreso aquí -->
+                        </div>
+
+                        <div class="px-4 py-8">
+
+                            <!-- Los steps irían aquí dentro -->
+                            <%= yield %>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image -->
+                <div class="hidden md:block absolute top-0 bottom-0 right-0 md:w-1/2" aria-hidden="true">
+                    <%= image_tag "onboarding-image.jpg", class: "object-cover object-center w-full h-full", width: "760", height: "1024", alt: "Onboarding" %>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
