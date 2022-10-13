@@ -4,19 +4,28 @@
     <%= render 'shared/head' %>
   </head>
 
-  <body class="flex flex-col h-full">
+  <body     
+    class="font-inter antialiased bg-slate-100 text-slate-600">
+    <script>
+      if (localStorage.getItem('sidebar-expanded') == 'true') {
+          document.querySelector('body').classList.add('sidebar-expanded');
+      } else {
+          document.querySelector('body').classList.remove('sidebar-expanded');
+      }
+    </script>
     <%= render "layouts/alert" %>
-    <div class="min-h-full">
-      <%= render 'shared/navbar' %>
-      <main class="-mt-32">
-       <div class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-          <div class="rounded-lg bg-white px-5 py-6 shadow sm:px-6">
-              <h1 class="title mb-6 text-center"><%= content_for(:page_title) %></h1>
+    <!-- Page wrapper -->
+    <div class="flex h-screen overflow-hidden">
+      <%= render 'shared/sidebar' %>
+      <!-- Content area -->
+      <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        <%= render 'shared/navbar' %>
+        <main>
+          <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
               <%= yield %>
           </div>
-        </div>
-      <main>
+        <main>
+      </div>
     </div>
-    <!-- <%= render 'shared/footer' %> -->
   </body>
 </html>
