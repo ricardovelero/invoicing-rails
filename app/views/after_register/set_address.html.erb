@@ -14,6 +14,25 @@
                 </ul>
             </div>
         <% end %>
+        <div data-controller="select" data-select-url-value="<%= regions_path %>" data-select-param-value="country">
+            <div class="my-5">
+                <%= upf.label "País", class: "input-label" %>
+                <%= upf.collection_select :country, Country.all.sort, :alpha_2_code, :name,
+                { prompt: "Selecciona País"}, { data: {action: "change->select#change"}, class: "input"} %>
+            </div>
+            <div class="my-5">
+                <%= upf.label "Provincia", class: "input-label" %>
+                <%= upf.select :region, [], {}, { data: { select_target: "select" }, class: "input"} %>
+            </div>
+        </div>        
+        <div class="my-5">
+            <label class="input-label" for="city">Ciudad <span class="text-rose-500">*</span></label>
+            <%= f.text_field :city, class: "input", required: true %>
+        </div>
+        <div class="my-5">
+            <label class="input-label" for="postal_code">Código Postal <span class="text-rose-500">*</span></label>
+            <%= f.text_field :postal_code, class: "input", required: true %>
+        </div>
         <div class="my-5">
             <label class="input-label" for="street_address_2">Calle <span class="text-rose-500">*</span></label>
             <%= f.text_field :street_address_1, class: "input", required: true %>
@@ -21,22 +40,6 @@
         <div class="my-5">
             <label class="input-label" for="street_address_2">Urbanización <span class="text-rose-500">*</span></label>
             <%= f.text_field :street_address_2, class: "input" %>
-        </div>
-        <div class="my-5">
-            <label class="input-label" for="city">Ciudad <span class="text-rose-500">*</span></label>
-            <%= f.text_field :city, class: "input", required: true %>
-        </div>
-        <div class="my-5">
-            <label class="input-label" for="region">Provincia <span class="text-rose-500">*</span></label>
-            <%= f.text_field :region, class: "input", required: true %>
-        </div>
-        <div class="my-5">
-            <label class="input-label" for="postal_code">Código Postal <span class="text-rose-500">*</span></label>
-            <%= f.text_field :postal_code, class: "input", required: true %>
-        </div>
-        <div class="my-5">
-            <label class="input-label" for="country">País <span class="text-rose-500">*</span></label>
-            <%= f.text_field :country, class: "input", required: true %>
         </div>
         <div class="flex items-center justify-between">
             <%= render "after_register/links" %>
