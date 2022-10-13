@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
-
+  get '/regions', to: 'countries#regions'
   get '/dashboard', to: 'dashboard#index'
 
   scope "(:locale)", locale: /es|en/ do
