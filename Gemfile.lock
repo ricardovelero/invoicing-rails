@@ -201,6 +201,8 @@ GEM
     regexp_parser (2.5.0)
     reline (0.3.1)
       io-console (~> 0.5)
+    requestjs-rails (0.0.9)
+      rails (>= 6.0.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -275,6 +277,7 @@ DEPENDENCIES
   premailer-rails
   puma (~> 5.0)
   rails (~> 7.0.4)
+  requestjs-rails
   route_translator
   selenium-webdriver
   sprockets-rails

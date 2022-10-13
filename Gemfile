@@ -86,3 +86,5 @@ gem 'wicked'
 gem 'route_translator'
 
 gem 'carmen'
+
+gem 'requestjs-rails'
