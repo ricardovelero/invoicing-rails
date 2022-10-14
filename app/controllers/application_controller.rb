@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  #layout :layout_by_resource
+  layout :layout_by_resource
   before_action :config_devise_params, if: :devise_controller?
   #around_action :switch_locale
   after_action :store_action
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
     def layout_by_resource
       case
-        when devise_controller? then "session"
+        when devise_controller? && resource_name == :user && action_name == 'new' then "session"
         else "application"
       end
     end
@@ -23,7 +23,8 @@ class ApplicationController < ActionController::Base
   protected
 
     def after_sign_in_path_for(resource_or_scope)
-      stored_location_for(resource_or_scope) || super
+      "/dashboard"
+      #stored_location_for(resource_or_scope) || super
     end
 
     def after_sign_out_path_for(resource_or_scope)
