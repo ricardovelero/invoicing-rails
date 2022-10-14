@@ -1,9 +1,7 @@
 require "application_system_test_case"
 
 class InvoicesTest < ApplicationSystemTestCase
-  setup do
-    @invoice = invoices(:one)
-  end
+  setup { @invoice = invoices(:one) }
 
   test "visiting the index" do
     visit invoices_url

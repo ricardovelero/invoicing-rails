@@ -1,12 +1,12 @@
-import { Application } from "@hotwired/stimulus"
-import { Dropdown } from "tailwindcss-stimulus-components"
+import { Application } from "@hotwired/stimulus";
+import { Dropdown } from "tailwindcss-stimulus-components";
 
-const application = Application.start()
+const application = Application.start();
 
-application.register('dropdown', Dropdown);
+application.register("dropdown", Dropdown);
 
 // Configure Stimulus development experience
-application.debug = false
-window.Stimulus   = application
+application.debug = false;
+window.Stimulus = application;
 
-export { application }
+export { application };

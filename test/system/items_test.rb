@@ -1,9 +1,7 @@
 require "application_system_test_case"
 
 class ItemsTest < ApplicationSystemTestCase
-  setup do
-    @item = items(:one)
-  end
+  setup { @item = items(:one) }
 
   test "visiting the index" do
     visit items_url

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-
-  devise_for :users, controllers: { registrations: "registrations"} 
+  devise_for :users, controllers: { registrations: "registrations" }
   resources :invoices
   resources :clients
   resources :items
@@ -9,10 +8,10 @@ Rails.application.routes.draw do
   end
   resources :after_register
 
-  get '/privacy', to: 'home#privacy'
-  get '/terms', to: 'home#terms'
-  get '/regions', to: 'countries#regions'
-  get '/dashboard', to: 'dashboard#index'
+  get "/privacy", to: "home#privacy"
+  get "/terms", to: "home#terms"
+  get "/regions", to: "countries#regions"
+  get "/dashboard", to: "dashboard#index"
 
   scope "(:locale)", locale: /es|en/ do
     resources :dashboard

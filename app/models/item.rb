@@ -13,11 +13,12 @@ class Item < ApplicationRecord
   validates :irpf, numericality: { greater_than_or_equal_to: 0 }
 
   private
-    #ensure that there are no line items referencing this item
-    def ensure_not_referenced_by_any_line_item
-      unless line_items.empty?
-        errors.add(:base, 'Ítem presente en una Factura')
-        throw :abort
-      end
+
+  #ensure that there are no line items referencing this item
+  def ensure_not_referenced_by_any_line_item
+    unless line_items.empty?
+      errors.add(:base, "Ítem presente en una Factura")
+      throw :abort
     end
+  end
 end
