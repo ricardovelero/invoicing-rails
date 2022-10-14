@@ -1,0 +1,87 @@
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <div class="form-group">
+        <%= render "devise/shared/error_messages",
+          resource: resource %>
+
+        <div class="mb-4">
+          <%= f.label :email, class: "input-label" %>
+          <%= f.email_field :email, class: "input", autofocus: true, autocomplete: "email", disabled: true %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Esperando confirmación de: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="mb-4">
+          <%= f.label :password, class: "input-label" %> <i class="text-xs">(deja en blanco si no la quieres cambiar)</i>
+          <%= f.password_field :password, class: "input", autocomplete: "new-password" %>
+          <% if @minimum_password_length %>
+            <em class="text-xs"><%= @minimum_password_length %> mínimo caracteres</em>
+          <% end %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :password_confirmation, class: "input-label" %>
+          <%= f.password_field :password_confirmation, class: "input", autocomplete: "new-password" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :current_password, class: "input-label" %> <i class="text-xs">(es necesaria tu contraseña actual para confirmar los cambios)</i>
+          <%= f.password_field :current_password, class: "input", autocomplete: "current-password" %>
+        </div>
+
+        <div id="user_profile">
+          <%= f.fields_for :user_profile, resource.user_profile do |upf| %>
+              <%= upf.hidden_field :id %>
+              <% unless @user.user_profile.is_freelance %>
+              <div class="mb-4">
+                <%= upf.label "Empresa", class: "input-label" %>
+                <input class="input"
+                  type="text" name="[user_profile][company_name]" value="<%= @user.user_profile.company_name %>" id="user_profile_company_name">
+              </div>
+              <% end %>
+              <div class="mb-4">
+                <%= upf.label "Identificación Fiscal", class: "input-label" %>
+                <input placeholder="NIF/CIF/NIE" class="input"
+                  type="text" name="[user_profile][gov_id]" value="<%= @user.user_profile.gov_id %>" id="user_profile_gov_id">
+              </div>
+              <div data-controller="select" data-select-url-value="<%= regions_path %>" data-select-param-value="country">
+                <div class="mb-4">
+                  <%= upf.label "País", class: "input-label" %>
+                  <%= upf.collection_select :country, Country.all.sort, :alpha_2_code, :name,
+                    { prompt: "Seleccionar país"}, { name: "[user_profile][country]", 
+                      data: {action: "change->select#change"}, class: "input"} %>
+                </div>
+                <div class="mb-4">
+                  <%= upf.label "Provincia", class: "input-label" %>
+                  <%= upf.select :region, [], {}, { name: "[user_profile][region]", 
+                    data: { select_target: "select" }, class: "input"} %>
+                </div>
+              </div>
+              <div class="mb-4">
+                <%= upf.label "Ciudad", class: "input-label" %>
+                <input class="input" type="text" name="[user_profile][city]" value="<%= @user.user_profile.city %>" 
+                  id="user_profile_city">
+              </div>
+              <div class="mb-4">
+                <%= upf.label "Código Postal", class: "input-label" %>
+                <input class="input" type="text" name="[user_profile][postal_code]" value="<%= @user.user_profile.postal_code %>" 
+                  id="user_profile_postal_code">
+              </div>
+              <div class="mb-4">
+                <%= upf.label "Calle", class: "input-label" %>
+                <input class="input" type="text" name="[user_profile][street_address_1]" value="<%= @user.user_profile.street_address_1 %>" 
+                  id="user_profile_street_address_1">
+              </div>
+              <div class="mb-4">
+                <%= upf.label "Urbanización", class: "input-label" %>
+                <input class="input" type="text" name="[user_profile][street_address_2]" value="<%= @user.user_profile.street_address_2 %>" 
+                  id="user_profile_street_address_2">
+              </div>
+          <% end %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Actualizar", class: "btn-primary" %>
+        </div>
+    <% end %>
