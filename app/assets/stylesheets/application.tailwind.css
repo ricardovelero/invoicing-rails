@@ -22,11 +22,11 @@
 
   @screen md {
     .h1 {
-        @apply text-5xl;
+      @apply text-5xl;
     }
 
     .h2 {
-        @apply text-4xl;
+      @apply text-4xl;
     }
   }
 
@@ -35,23 +35,23 @@
   .btn-lg,
   .btn-sm,
   .btn-xs {
-      @apply font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out cursor-pointer;
+    @apply font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out cursor-pointer;
   }
 
   .btn {
-      @apply px-3 py-2;
+    @apply px-3 py-2;
   }
 
   .btn-lg {
-      @apply px-4 py-3;
+    @apply px-4 py-3;
   }
 
   .btn-sm {
-      @apply px-2 py-1;
+    @apply px-2 py-1;
   }
 
   .btn-xs {
-      @apply px-2 py-0.5;
+    @apply px-2 py-0.5;
   }
 
   /* Forms */
@@ -68,7 +68,7 @@
   .form-select,
   .form-checkbox,
   .form-radio {
-      @apply text-sm text-slate-800 bg-white border;
+    @apply text-sm text-slate-800 bg-white border;
   }
 
   .form-input,
@@ -76,28 +76,28 @@
   .form-multiselect,
   .form-select,
   .form-checkbox {
-      @apply rounded;
+    @apply rounded;
   }
 
   .form-input,
   .form-textarea,
   .form-multiselect,
   .form-select {
-      @apply leading-5 py-2 px-3 border-slate-200 hover:border-slate-300 focus:border-indigo-300 shadow-sm;
+    @apply leading-5 py-2 px-3 border-slate-200 hover:border-slate-300 focus:border-indigo-300 shadow-sm;
   }
 
   .form-input,
   .form-textarea {
-      @apply placeholder-slate-400;
+    @apply placeholder-slate-400;
   }
 
   .form-select {
-      @apply pr-10;
+    @apply pr-10;
   }
 
   .form-checkbox,
   .form-radio {
-      @apply text-indigo-500 border border-slate-300;
+    @apply text-indigo-500 border border-slate-300;
   }
 
   /* Chrome, Safari and Opera */
@@ -106,8 +106,8 @@
   }
 
   .no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 
   /* Misc */
@@ -119,8 +119,8 @@
   }
   .btn-secondary {
     @apply inline-flex justify-center rounded-md shadow-sm text-lg font-medium;
-      @apply text-gray-700 bg-white py-2 px-4 border border-gray-300 hover:bg-gray-50;
-      @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer;
+    @apply text-gray-700 bg-white py-2 px-4 border border-gray-300 hover:bg-gray-50;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer;
   }
   .btn-danger {
     @apply px-3 py-2 shadow-sm rounded-md border border-transparent text-red-500 hover:text-red-900 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 cursor-pointer;
@@ -154,63 +154,52 @@
   }
 
   /* Temp */
-  .home
-  header {
+  .home header {
     @apply w-full p-2 flex items-center justify-between flex-wrap;
   }
 
-  .home
-  header .title {
+  .home header .title {
     @apply font-extrabold text-2xl;
   }
 
-  .home
-  .heading {
+  .home .heading {
     @apply font-semibold text-gray-900 text-4xl pt-8;
   }
 
-  .home
-  .actions {
+  .home .actions {
     @apply w-auto flex items-center justify-end;
   }
 
- .home
-  .action {
+  .home .action {
     @apply inline-flex items-center justify-center rounded-md border border-transparent;
-      @apply bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm;
-      @apply hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500;
-      @apply focus:ring-offset-2 sm:w-auto;
+    @apply bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm;
+    @apply hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500;
+    @apply focus:ring-offset-2 sm:w-auto;
   }
 
-  .home
-  .theatre {
+  .home .theatre {
     @apply m-auto pt-8 pb-16;
   }
 
-  .home
-  .theatre .center {
+  .home .theatre .center {
     @apply flex flex-col justify-center items-center text-center px-4;
   }
 
   @screen md {
-    .home
-    .header {
+    .home .header {
       @apply px-0;
     }
 
-    .home
-    header .title {
+    .home header .title {
       @apply text-4xl;
     }
 
-    .home
-    .heading {
+    .home .heading {
       @apply pt-16 pb-2;
     }
 
-    .home
-    .theatre {
-      @apply  pt-32 pb-32;
+    .home .theatre {
+      @apply pt-32 pb-32;
     }
   }
 
@@ -220,76 +209,60 @@
     @apply font-sans h-screen w-screen;
   }
 
-  .session
-  .container {
+  .session .container {
     @apply mx-auto flex h-full items-center;
   }
 
-    .session
-  .form-group {
+  .session .form-group {
     @apply border-2 border-t-8 bg-white rounded-lg shadow-lg;
     @apply p-8 mb-6;
   }
 
-    .session
-  .form-group label {
+  .session .form-group label {
     @apply font-normal text-gray-600 block mb-2;
   }
 
-    .session
-  .form-group input[type="text"],
-    .session
-  .form-group input[type="email"],
-    .session
-  .form-group input[type="password"] {
+  .session .form-group input[type="text"],
+  .session .form-group input[type="email"],
+  .session .form-group input[type="password"] {
     @apply block appearance-none w-full bg-white;
     @apply border border-gray-200;
     @apply rounded shadow;
     @apply px-2 py-2;
   }
 
-    .session
-  .form-group input[type="text"]:hover,
-    .session
-  .form-group input[type="email"]:hover,
-    .session
-  .form-group input[type="password"]:hover {
+  .session .form-group input[type="text"]:hover,
+  .session .form-group input[type="email"]:hover,
+  .session .form-group input[type="password"]:hover {
     @apply border-gray-300;
   }
 
-    .session
-  a {
+  .session a {
     @apply no-underline font-bold text-sm text-indigo-600;
   }
 
-    .session
-  a:hover {
+  .session a:hover {
     @apply text-indigo-500;
   }
 
-    .session
-  .cta-btn {
+  .session .cta-btn {
     @apply select-none bg-indigo-600 text-white font-bold;
     @apply rounded-md shadow-sm border border-transparent;
     @apply py-2 px-4;
     @apply hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
   }
 
-    .session
-  .alert {
+  .session .alert {
     @apply mb-4;
   }
 
-    .session
-  .error-box {
+  .session .error-box {
     @apply bg-red-100 border-t-4 border-red-500
       rounded-b text-red-900 px-4 py-3 mb-3 shadow-md;
   }
 
-    .session
-  .error-box ul {
+  .session .error-box ul {
     @apply pl-4;
     list-style: disc;
   }
-
 }

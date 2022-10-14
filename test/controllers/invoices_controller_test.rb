@@ -1,9 +1,7 @@
 require "test_helper"
 
 class InvoicesControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @invoice = invoices(:one)
-  end
+  setup { @invoice = invoices(:one) }
 
   test "should get index" do
     get invoices_url
@@ -17,7 +15,20 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create invoice" do
     assert_difference("Invoice.count") do
-      post invoices_url, params: { invoice: { date: @invoice.date, due_date: @invoice.due_date, irpf: @invoice.irpf, iva: @invoice.iva, notes: @invoice.notes, number: @invoice.number, status: @invoice.status, subtotal: @invoice.subtotal, total: @invoice.total } }
+      post invoices_url,
+           params: {
+             invoice: {
+               date: @invoice.date,
+               due_date: @invoice.due_date,
+               irpf: @invoice.irpf,
+               iva: @invoice.iva,
+               notes: @invoice.notes,
+               number: @invoice.number,
+               status: @invoice.status,
+               subtotal: @invoice.subtotal,
+               total: @invoice.total
+             }
+           }
     end
 
     assert_redirected_to invoice_url(Invoice.last)
@@ -34,14 +45,25 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update invoice" do
-    patch invoice_url(@invoice), params: { invoice: { date: @invoice.date, due_date: @invoice.due_date, irpf: @invoice.irpf, iva: @invoice.iva, notes: @invoice.notes, number: @invoice.number, status: @invoice.status, subtotal: @invoice.subtotal, total: @invoice.total } }
+    patch invoice_url(@invoice),
+          params: {
+            invoice: {
+              date: @invoice.date,
+              due_date: @invoice.due_date,
+              irpf: @invoice.irpf,
+              iva: @invoice.iva,
+              notes: @invoice.notes,
+              number: @invoice.number,
+              status: @invoice.status,
+              subtotal: @invoice.subtotal,
+              total: @invoice.total
+            }
+          }
     assert_redirected_to invoice_url(@invoice)
   end
 
   test "should destroy invoice" do
-    assert_difference("Invoice.count", -1) do
-      delete invoice_url(@invoice)
-    end
+    assert_difference("Invoice.count", -1) { delete invoice_url(@invoice) }
 
     assert_redirected_to invoices_url
   end

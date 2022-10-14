@@ -20,10 +20,9 @@ module Fz
     # config.eager_load_paths << Rails.root.join("extras"
     # config.i18n.default_locale = :es
 
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.i18n.load_path +=
+      Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
 
-    config.to_prepare do
-      Devise::Mailer.layout "mailer"
-    end
+    config.to_prepare { Devise::Mailer.layout "mailer" }
   end
 end
