@@ -77,19 +77,19 @@
                     </div>
                 </section>
               </div>
-              <div class="flex justify-between px-6 py-5 border-t border-slate-200 mt-10">
-                  <div class="order-last">
+              <div class="flex flex-col px-6 py-5 border-t border-slate-200 mt-10">
+                  <div class="flex self-end">
                     <%= f.submit "Guardar Cambios", class: "btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3" %>
-                  </div>
-                  <div class="">
-                    <%= button_to "Eliminar cuenta", registration_path(resource_name),
-                    data: { turbo_confirm: "¿Estás seguro?" }, method: :delete,
-                    class: "btn-danger text-xs" %>
                   </div>
               </div>
             <% end %>
+            <div class="mt-10">
+              <p class="text-sm text-red-500 ml-1"><i>Zona de Peligro</i></p>
+              <%= button_to "Eliminar cuenta", registration_path(resource_name),
+              form: { data: { turbo_confirm: "¿Estás seguro?" } }, method: :delete,
+              class: "btn-danger text-xs" %>
+            </div>
         </div>
-
     </div>
 
     <!-- Panel Fiscal Data -->
