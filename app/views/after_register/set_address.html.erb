@@ -16,13 +16,13 @@
         <% end %>
         <div data-controller="select" data-select-url-value="<%= regions_path %>" data-select-param-value="country">
             <div class="my-5">
-                <%= upf.label "País", class: "input-label" %>
-                <%= upf.collection_select :country, Country.all.sort, :alpha_2_code, :name,
+                <%= f.label "País", class: "input-label" %>
+                <%= f.collection_select :country, Country.all.sort, :alpha_2_code, :name,
                 { prompt: "Selecciona País"}, { data: {action: "change->select#change"}, class: "input"} %>
             </div>
             <div class="my-5">
-                <%= upf.label "Provincia", class: "input-label" %>
-                <%= upf.select :region, [], {}, { data: { select_target: "select" }, class: "input"} %>
+                <%= f.label "Provincia", class: "input-label" %>
+                <%= f.select :region, [], {}, { data: { select_target: "select" }, class: "input"} %>
             </div>
         </div>        
         <div class="my-5">
