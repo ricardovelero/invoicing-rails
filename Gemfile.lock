@@ -108,6 +108,7 @@ GEM
       tilt
     heroicon (1.0.0)
       rails (>= 5.2)
+    htmlbeautifier (1.4.2)
     htmlentities (4.3.4)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
@@ -292,6 +293,7 @@ DEPENDENCIES
   debug
   devise
   heroicon
+  htmlbeautifier
   importmap-rails
   jbuilder
   letter_opener_web

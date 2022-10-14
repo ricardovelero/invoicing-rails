@@ -34,3 +34,5 @@
 !/app/assets/builds/.keep
 
 .DS_store
+
+.rubocop.yml
