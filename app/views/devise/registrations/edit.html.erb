@@ -2,7 +2,7 @@
 <div class="mb-8">
 
   <!-- Title -->
-  <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Ajustes de tu Cuenta ✨</h1>
+  <h1 class="text-2xl text-center md:text-3xl text-slate-800 font-bold">Ajustes de tu Cuenta ✨</h1>
 
 </div>
 
@@ -15,116 +15,16 @@
     </div>
 
     <!-- Panel Account -->
-    <div class="hidden grow" data-tabs-target="panel">
-
-        <!-- Panel body -->
-        <div class="p-6 space-y-6">
-            <h2 class="text-2xl text-slate-800 font-bold mb-5"><%= t("mi_cuenta")%></h2>
-
-            <!-- Picture -->
-            <section>
-                <div class="flex items-center">
-                    <div class="mr-4">
-                      <%= image_tag "user-avatar-80.png", class: "w-20 h-20 rounded-full", alt: "", width: "80", height: "80" %>
-                    </div>
-                    <button class="btn-sm bg-indigo-500 hover:bg-indigo-600 text-white"><%= t("cambiar")%></button>
-                </div>
-            </section>
-
-            <!-- Form -->
-            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-              <div class="form-group">
-                <%= render "devise/shared/error_messages", resource: resource %>
-
-                <!-- Email -->
-                <section>
-                    <h3 class="text-xl leading-snug text-slate-800 font-bold mb-1">Email</h3>
-                    <div class="text-sm">Al cambiar de correo electrónico, tendrá que confirmar su cuenta de nuevo.</div>
-                    <div class="flex flex-wrap mt-5 w-1/2">
-                        <div class="mr-2 w-1/3">
-                          <%= f.label :email, class: "sr-only" %>
-                          <%= f.email_field :email, class: "form-input w-full", autofocus: true, autocomplete: "email" %>
-                        </div>
-                        <%= f.submit "Cambiar", class: "btn border-slate-200 hover:border-slate-300 shadow-sm text-indigo-500" %>
-                    </div>
-                    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                      <div>Esperando confirmación de: <%= resource.unconfirmed_email %></div>
-                    <% end %>
-                </section>
-
-                <!-- Password -->
-                <section class="mt-10">
-                    <h3 class="text-xl leading-snug text-slate-800 font-bold mb-1">Contraseña</h3>
-                    <div class="text-sm">Deja estos campos vacíos si no quieres cambiar la contraseña</div>
-                    <div class="sm:flex sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-5">
-                        <div class="sm:w-1/3">
-                            <label class="block text-sm font-medium mb-1" for="password">Nueva contraseña</label>
-                            <%= f.password_field :password, class: "form-input w-full", autocomplete: "new-password" %>
-                            <% if @minimum_password_length %>
-                              <em class="text-xs">mínimo <%= @minimum_password_length %> caracteres</em>
-                            <% end %>
-                        </div>
-                        <div class="sm:w-1/3">
-                            <label class="block text-sm font-medium mb-1" for="password_confirmation">Confirmar contraseña</label>
-                            <%= f.password_field :password_confirmation, class: "form-input w-full", autocomplete: "new-password" %>
-                            <i class="text-xs">por favor, repite la nueva contraseña</i>
-                        </div>
-                        <div class="sm:w-1/3">
-                          <label class="block text-sm font-medium mb-1" for="location">Contraseña Actual</label>
-                          <%= f.password_field :current_password, class: "form-input w-full", autocomplete: "current-password" %>
-                          <i class="text-xs">es necesaria tu contraseña actual para confirmar los cambios</i>
-                        </div>
-                    </div>
-                </section>
-              </div>
-              <div class="flex flex-col px-6 py-5 border-t border-slate-200 mt-10">
-                  <div class="flex self-end">
-                    <%= f.submit "Guardar Cambios", class: "btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3" %>
-                  </div>
-              </div>
-            <% end %>
-            <div class="mt-10">
-              <p class="text-sm text-red-500 ml-1"><i>Zona de Peligro</i></p>
-              <%= button_to "Eliminar cuenta", registration_path(resource_name),
-              form: { data: { turbo_confirm: "¿Estás seguro?" } }, method: :delete,
-              class: "btn-danger text-xs" %>
-            </div>
-        </div>
-    </div>
+    <%= render "account" %>
 
     <!-- Panel Fiscal Data -->
-    <div class="hidden grow" data-tabs-target="panel">
-
-        <!-- Panel body -->
-        <div class="p-6 space-y-6">
-            <h2 class="text-2xl text-slate-800 font-bold mb-5"><%= t("datos_fiscales")%></h2>
-
-
-        </div>
-
-    </div>      
+    <%= render "personal" %>
 
     <!-- Panel Address -->
-    <div class="hidden grow" data-tabs-target="panel">
-
-        <!-- Panel body -->
-        <div class="p-6 space-y-6">
-            <h2 class="text-2xl text-slate-800 font-bold mb-5"><%= t("direccion")%></h2>
-
-        </div>
-
-    </div>   
+    <%= render "address" %>
 
     <!-- Panel Contact -->
-    <div class="hidden grow" data-tabs-target="panel">
-
-        <!-- Panel body -->
-        <div class="p-6 space-y-6">
-            <h2 class="text-2xl text-slate-800 font-bold mb-5"><%= t("ayuda")%></h2>
-
-        </div>
-
-    </div>  
+    <%= render "contact" %>
 
   </div>
 </div>
