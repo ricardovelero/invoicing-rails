@@ -39,6 +39,8 @@ class RegistrationsController < Devise::RegistrationsController
   def user_profile_params
     params.require(:user_profile).permit(
       :id,
+      :first_name,
+      :last_name,
       :street_address_1,
       :street_address_2,
       :city,

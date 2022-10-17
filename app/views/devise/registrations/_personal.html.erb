@@ -1,0 +1,58 @@
+    <div class="hidden grow" data-tabs-target="panel">
+
+        <!-- Panel body -->
+        <div class="p-6 space-y-6">
+            <h2 class="text-2xl text-slate-800 font-bold mb-5"><%= t("datos_personaless")%></h2>
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                <% if f.object.errors.any? %>
+                    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+                    <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+                    <ul>
+                        <% f.object.errors.each do |error| %>
+                        <li><%= error.full_message %></li>
+                        <% end %>
+                    </ul>
+                    </div>
+                <% end %>
+                <div class="space-y-4 mb-8">
+                    <%= f.fields_for :user_profile, resource.user_profile do |upf| %>
+                        <% if resource.user_profile.is_freelance %>
+                            <div class="my-5">
+                                <label class="input-label" for="first_name">Nombres <span class="text-rose-500">*</span></label>
+                                <%= upf.text_field :first_name, class: "input", name: "[user_profile][first_name]",  required: true %>
+                            </div>
+                            <div class="my-5">
+                                <label class="input-label" for="last_name">Apellidos <span class="text-rose-500">*</span></label>
+                                <%= upf.text_field :last_name, class: "input", name: "[user_profile][last_name]", required: true %>
+                            </div>
+                            <div class="my-5">
+                                <label class="input-label" for="gov_id">NIF/NIE <span class="text-rose-500">*</span></label>
+                                <%= upf.text_field :gov_id, class: "input", name: "[user_profile][gov_id]", required: true %>
+                            </div>
+                        <% else %>
+                            <div class="my-5">
+                                <label class="input-label" for="company_name">Nombre Empresa <span class="text-rose-500">*</span></label>
+                                <%= upf.text_field :company_name, class: "input", name: "[user_profile][company_name]", required: true %>
+                            </div>
+                            <div class="my-5">
+                                <label class="input-label" for="gov_id">CIF <span class="text-rose-500">*</span></label>
+                                <%= upf.text_field :gov_id, class: "input", name: "[user_profile][gov_id]", required: true %>
+                            </div>
+                            <div class="my-5">
+                                <label class="input-label" for="company_name">Datos Representante Legal <span class="text-rose-500">*</span></label>
+                                <%= upf.text_field :first_name, class: "input", placeholder: "Nombres", name: "[user_profile][first_name]", required: true %>
+                            </div>
+                            <div class="my-5">
+                                <%= upf.text_field :last_name, class: "input", placeholder: "Apellidos", name: "[user_profile][last_name]", required: true %>
+                            </div>
+                        <% end %>
+                    <% end %>
+                    <div class="flex flex-col px-6 py-5 border-t border-slate-200 mt-10">
+                        <div class="flex self-end">
+                            <%= f.submit "Guardar Cambios", class: "btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3" %>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>  
