@@ -21,22 +21,9 @@ class InvoicesController < ApplicationController
   def edit
   end
 
-  def add_item
-    helpers.fields model: Invoice.new do |f|
-      render turbo_stream:
-               turbo_stream.append(
-                 "line_items",
-                 partial: "item_fields",
-                 locals: {
-                   f: f,
-                   line_item: LineItem.new
-                 }
-               )
-    end
-  end
-
   # POST /invoices or /invoices.json
   def create
+
     @invoice = Invoice.new(invoice_params)
     @invoice.user = current_user
 
@@ -85,6 +72,20 @@ class InvoicesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def add_item
+    helpers.fields model: Invoice.new do |f|
+      render turbo_stream:
+               turbo_stream.append(
+                 "line_items",
+                 partial: "item_fields",
+                 locals: {
+                   f: f,
+                   line_item: LineItem.new
+                 }
+               )
+    end
+  end
 
   private
 
@@ -106,7 +107,7 @@ class InvoicesController < ApplicationController
       :total,
       :notes,
       :status,
-      item_ids: []
+      :line_items_attributes
     )
   end
 end
