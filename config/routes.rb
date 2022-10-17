@@ -7,7 +7,8 @@ Rails.application.routes.draw do
     post :add_item, on: :collection
   end
   resources :after_register
-
+  resources :contact, only: [:create]
+  
   get "/privacy", to: "home#privacy"
   get "/terms", to: "home#terms"
   get "/regions", to: "countries#regions"
