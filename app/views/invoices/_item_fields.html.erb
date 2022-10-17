@@ -1,6 +1,12 @@
 <div class="flex gap-2">
 
-  <%= f.collection_select :item_ids, Item.all, :id, :item_name,
-  {prompt: "Selecciona un item"}, { multiple: true, class: "input"} %>
-
+  <div class="w-2/3">
+    <%= f.label "Ítem", class: "input-label"  %>
+    <%= f.collection_select :item_ids, current_user.items, :id, :item_name,
+    {prompt: "Selecciona un item"}, { multiple: false, class: "input"} %>
+  </div>
+  <div class="w-1/3">
+    <%= f.label "Cantidad", class: "input-label"  %>
+    <%= f.number_field :quantity, value: '1', min: 0, class: "input" %>
+  </div>
 </div>
