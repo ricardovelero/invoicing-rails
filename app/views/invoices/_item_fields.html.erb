@@ -3,10 +3,10 @@
   <div class="w-2/3">
     <%= f.label "Ítem", class: "input-label"  %>
     <%= f.collection_select :item_ids, current_user.items, :id, :item_name,
-    {prompt: "Selecciona un item"}, { multiple: false, class: "input"} %>
+    {prompt: "Selecciona un item"}, { multiple: false, class: "input", name: "[line_items_attributes][item_ids]"} %>
   </div>
   <div class="w-1/3">
     <%= f.label "Cantidad", class: "input-label"  %>
-    <%= f.number_field :quantity, value: '1', min: 0, class: "input" %>
+    <%= f.number_field :quantity, value: '1', min: 0, class: "input", name: "[line_items_attributes][quantity]" %>
   </div>
 </div>
