@@ -55,7 +55,4 @@ class User < ApplicationRecord
     super || build_user_profile
   end
 
-  def full_name
-    [first_name, last_name].reject(&:blank?).collect(&:capitalize).join(" ")
-  end
 end
