@@ -1,27 +1,38 @@
-<div class="mt-2" id="<%= dom_id item %>">
-  <p>
-    <strong>Title:</strong>
-    <%= item.item_name %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= item.description %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= item.price %>
-  </p>
-
-  <p>
-    <strong>IVA:</strong>
-    <%= item.iva %>
-  </p>
-
-  <p>
-    <strong>IRPF:</strong>
-    <%= item.irpf %>
-  </p>
-
-</div>
+<!-- Row -->
+<tr id="<%= dom_id item %>">
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
+        <div class="flex items-center">
+            <label class="inline-flex">
+                <span class="sr-only">Select</span>
+                <input class="table-item form-checkbox" type="checkbox" @click="uncheckParent" />
+            </label>
+        </div>
+    </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+        <div class="flex items-center">
+          <div class="font-medium text-slate-800"><%= item.item_name %></div>
+        </div>
+    </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+        <div class="text-left"><%= item.description %></div>
+    </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+        <div class="text-left"><%= number_to_currency(item.price, locale: :es) %></div>
+    </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+        <div class="text-center"><%= item.iva %></div>
+    </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+        <div class="text-center"><%= item.irpf %></div>
+    </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
+        <button class="text-slate-400 hover:text-slate-500 rounded-full">
+            <span class="sr-only">Menu</span>
+            <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
+                <circle cx="16" cy="16" r="2" />
+                <circle cx="10" cy="16" r="2" />
+                <circle cx="22" cy="16" r="2" />
+            </svg>
+        </button>
+    </td>
+</tr>
