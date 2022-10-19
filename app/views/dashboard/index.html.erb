@@ -1,1 +1,111 @@
 <% content_for(:html_title) { t('.tablero') } %>
+<!-- Welcome banner -->
+<div class="relative bg-indigo-200 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+
+    <!-- Background illustration -->
+    <div class="absolute right-0 top-0 -mt-4 mr-16 pointer-events-none hidden xl:block" aria-hidden="true">
+        <svg width="319" height="198" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+                <path id="welcome-a" d="M64 0l64 128-64-20-64 20z" />
+                <path id="welcome-e" d="M40 0l40 80-40-12.5L0 80z" />
+                <path id="welcome-g" d="M40 0l40 80-40-12.5L0 80z" />
+                <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="welcome-b">
+                    <stop stop-color="#A5B4FC" offset="0%" />
+                    <stop stop-color="#818CF8" offset="100%" />
+                </linearGradient>
+                <linearGradient x1="50%" y1="24.537%" x2="50%" y2="100%" id="welcome-c">
+                    <stop stop-color="#4338CA" offset="0%" />
+                    <stop stop-color="#6366F1" stop-opacity="0" offset="100%" />
+                </linearGradient>
+            </defs>
+            <g fill="none" fill-rule="evenodd">
+                <g transform="rotate(64 36.592 105.604)">
+                    <mask id="welcome-d" fill="#fff">
+                        <use xlink:href="#welcome-a" />
+                    </mask>
+                    <use fill="url(#welcome-b)" xlink:href="#welcome-a" />
+                    <path fill="url(#welcome-c)" mask="url(#welcome-d)" d="M64-24h80v152H64z" />
+                </g>
+                <g transform="rotate(-51 91.324 -105.372)">
+                    <mask id="welcome-f" fill="#fff">
+                        <use xlink:href="#welcome-e" />
+                    </mask>
+                    <use fill="url(#welcome-b)" xlink:href="#welcome-e" />
+                    <path fill="url(#welcome-c)" mask="url(#welcome-f)" d="M40.333-15.147h50v95h-50z" />
+                </g>
+                <g transform="rotate(44 61.546 392.623)">
+                    <mask id="welcome-h" fill="#fff">
+                        <use xlink:href="#welcome-g" />
+                    </mask>
+                    <use fill="url(#welcome-b)" xlink:href="#welcome-g" />
+                    <path fill="url(#welcome-c)" mask="url(#welcome-h)" d="M40.333-15.147h50v95h-50z" />
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <!-- Content -->
+    <div class="relative">
+        <h1 class="text-2xl md:text-3xl text-slate-800 font-bold mb-1"><%= greet %>, <%= current_user.user_profile.full_name.titleize %> 👋</h1>
+        <p>Here is what’s happening with your projects today:</p>
+    </div>
+
+</div>
+
+<!-- Cards -->
+<div class="grid grid-cols-12 gap-6">
+    <!-- Line chart (Sales Over Time) -->
+    <div class="flex flex-col col-span-full sm:col-span-6 bg-white shadow-lg rounded-sm border border-slate-200">
+        <header class="px-5 py-4 border-b border-slate-100 flex items-center">
+            <h2 class="font-semibold text-slate-800">Sales Over Time (all stores)</h2>
+        </header>
+        <div class="px-5 py-3">
+            <div class="flex flex-wrap justify-between items-end">
+                <div class="flex items-start">
+                    <div class="text-3xl font-bold text-slate-800 mr-2">$1,482</div>
+                    <div class="text-sm font-semibold text-white px-1.5 bg-amber-500 rounded-full">-22%</div>
+                </div>
+                <div id="dashboard-card-08-legend" class="grow ml-2 mb-1">
+                    <ul class="flex flex-wrap justify-end"></ul>
+                </div>
+            </div>
+        </div>
+        <!-- Chart built with Chart.js 3 -->
+        <!-- Check out src/js/components/dashboard-card-08.js for config -->
+        <div class="grow">
+            <!-- Change the height attribute to adjust the chart height -->
+            <canvas id="dashboard-card-08" width="595" height="248"></canvas>
+        </div>
+    </div>
+
+    <!-- Stacked bar chart (Sales VS Refunds) -->
+    <div class="flex flex-col col-span-full sm:col-span-6 bg-white shadow-lg rounded-sm border border-slate-200">
+        <header class="px-5 py-4 border-b border-slate-100 flex items-center">
+            <h2 class="font-semibold text-slate-800">Sales VS Refunds</h2>
+            <div class="relative ml-2" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                <button class="block" href="#0" aria-haspopup="true" :aria-expanded="open" @focus="open = true" @focusout="open = false" @click.prevent>
+                    <svg class="w-4 h-4 fill-current text-slate-400" viewBox="0 0 16 16">
+                        <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 12c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm1-3H7V4h2v5z" />
+                    </svg>
+                </button>
+                <div class="z-10 absolute bottom-full left-1/2 -translate-x-1/2">
+                    <div class="min-w-72 bg-white border border-slate-200 p-3 rounded shadow-lg overflow-hidden mb-2" x-show="open" x-transition:enter="transition ease-out duration-200 transform" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-out duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak>
+                        <div class="text-sm">Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="px-5 py-3">
+            <div class="flex items-start">
+                <div class="text-3xl font-bold text-slate-800 mr-2">+$6,796</div>
+                <div class="text-sm font-semibold text-white px-1.5 bg-amber-500 rounded-full">-34%</div>
+            </div>
+        </div>
+        <!-- Chart built with Chart.js 3 -->
+        <!-- Check out src/js/components/dashboard-card-09.js for config -->
+        <div class="grow">
+            <!-- Change the height attribute to adjust the chart height -->
+            <canvas id="dashboard-card-09" width="595" height="248"></canvas>
+        </div>
+    </div>
+</div>
