@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_06_171614) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_19_090253) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,10 +36,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_06_171614) do
     t.string "invoice_number"
     t.datetime "date"
     t.datetime "due_date"
-    t.decimal "subtotal"
-    t.decimal "iva"
-    t.decimal "irpf"
-    t.decimal "total"
+    t.decimal "subtotal", default: "0.0"
+    t.decimal "iva", default: "0.0"
+    t.decimal "irpf", default: "0.0"
+    t.decimal "total", default: "0.0"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -112,13 +112,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_06_171614) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_profile_id"
-    t.index ["confirmation_token"],
-            name: "index_users_on_confirmation_token",
-            unique: true
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"],
-            name: "index_users_on_reset_password_token",
-            unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
     t.index ["user_profile_id"], name: "index_users_on_user_profile_id"
   end
