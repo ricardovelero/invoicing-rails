@@ -91,5 +91,3 @@ gem "carmen"
 gem "requestjs-rails"
 
 gem 'mail_form'
-
-gem 'receipts'
