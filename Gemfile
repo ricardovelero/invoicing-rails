@@ -89,5 +89,3 @@ gem "route_translator"
 gem "carmen"
 
 gem "requestjs-rails"
-
-gem 'mail_form'
