@@ -23,10 +23,10 @@
                 <section>
                     <h3 class="text-xl leading-snug text-slate-800 font-bold mb-1">Email</h3>
                     <div class="text-sm">Al cambiar de correo electrónico, tendrá que confirmar su cuenta de nuevo.</div>
-                    <div class="flex flex-wrap mt-5 w-1/2">
-                        <div class="mr-2 w-1/3">
+                    <div class="flex flex-wrap mt-5">
+                        <div class="mr-2">
                           <%= f.label :email, class: "sr-only" %>
-                          <%= f.email_field :email, class: "form-input w-full", autofocus: true, autocomplete: "email" %>
+                          <%= f.email_field :email, class: "form-input", autofocus: true, autocomplete: "email" %>
                         </div>
                         <%= f.submit "Cambiar", class: "btn border-slate-200 hover:border-slate-300 shadow-sm text-indigo-500" %>
                     </div>
