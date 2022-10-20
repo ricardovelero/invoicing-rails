@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
+  resources :users
   resources :invoices
   resources :clients
   resources :items
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   get "/dashboard", to: "dashboard#index"
 
   scope "(:locale)", locale: /es|en/ do
+    resources :users
     resources :dashboard
     resources :invoices
     resources :clients
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
   end
 
   localized do
+    resources :users
     resources :dashboard
     resources :invoices
     resources :clients
