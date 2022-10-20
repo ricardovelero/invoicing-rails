@@ -32,7 +32,7 @@
         <div class="text-center"><%= client.invoices.count %></div>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-        <div class="text-center font-medium text-sky-500">#<%= client.invoices.last.invoice_number %></div>
+        <div class="text-center font-medium text-sky-500"><% if client.invoices.count > 0 %>#<%=client.invoices.last.invoice_number %><%end%></div>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
         <div class="text-left font-medium text-emerald-500"><%= client.invoices.sum(:total) %></div>

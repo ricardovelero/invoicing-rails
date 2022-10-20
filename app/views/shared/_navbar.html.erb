@@ -26,7 +26,7 @@
             <div class="flex items-center space-x-3">
 
                 <!-- Search button -->
-                <div x-data="{ searchOpen: false }">
+                <div class="hidden" x-data="{ searchOpen: false }">
                     <!-- Button -->
                     <button
                         class="w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition duration-150 rounded-full"
@@ -169,7 +169,7 @@
                 </div>
 
                 <!-- Notifications button -->
-                <div class="relative inline-flex" x-data="{ open: false }">
+                <div class="hidden relative inline-flex" x-data="{ open: false }">
                     <button
                         class="w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition duration-150 rounded-full"
                         :class="{ 'bg-slate-200': open }"
@@ -222,7 +222,7 @@
                 </div>
 
                 <!-- Info button -->
-                <div class="relative inline-flex" x-data="{ open: false }">
+                <div class="hidden relative inline-flex" x-data="{ open: false }">
                     <button
                         class="w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition duration-150 rounded-full"
                         :class="{ 'bg-slate-200': open }"
