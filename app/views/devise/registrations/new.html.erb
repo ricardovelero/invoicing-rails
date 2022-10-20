@@ -1,35 +1,33 @@
-<% content_for(:page_title, "Registrarse") %>
+  <% content_for(:page_title, "Registrarse") %>
+  
+  <%= form_for(resource,
+    as: resource_name,
+    url: registration_path(resource_name)) do |f| %>
+    
+    <div class="form-group">
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="mb-4">
+        <%= f.label :email, "Correo Electrónico", class: "input-label" %>
+        <%= f.email_field :email, required: true, class: "input" %>
+      </div>
 
-<%= form_for(resource,
-  as: resource_name,
-  url: registration_path(resource_name)) do |f| %>
+      <div class="mb-4">
+        <%= f.label :password, "Contraseña", class: "input-label" %>
+        <%= f.password_field :password, required: true, class: "input" %>
+      </div>
 
-  <div class="form-group">
-    <%= render "devise/shared/error_messages",
-      resource: resource %>
+      <div class="mb-4">
+        <%= f.label :password_confirmation, "Confirmar contraseña", class: "input-label" %>
+        <%= f.password_field :password_confirmation, required: true, class: "input" %>
+      </div>
 
-    <div class="mb-4">
-      <%= f.label :email, class: "input-label" %>
-      <%= f.email_field :email, required: true, class: "input" %>
+      <%= f.submit "Registrarse", class: "btn-primary" %>
     </div>
+  <% end %>
 
-    <div class="mb-4">
-      <%= f.label :password, class: "input-label" %>
-      <%= f.password_field :password, required: true, class: "input" %>
-    </div>
-
-    <div class="mb-4">
-      <%= f.label :password_confirmation, class: "input-label" %>
-      <%= f.password_field :password_confirmation, required: true, class: "input" %>
-    </div>
-
-    <%= f.submit "Registrarse", class: "btn-primary" %>
+  <div class="text-center">
+    <p class="text-grey-500 text-sm">
+      ¿Ya estás registrado?
+      <%= link_to "Entrar", new_user_session_path, class: "link" %>.
+    </p>
   </div>
-<% end %>
-
-<div class="text-center">
-  <p class="text-grey-500 text-sm">
-    ¿Ya estás registrado?
-    <%= link_to "Entrar", new_user_session_path, class: "link" %>.
-  </p>
-</div>
