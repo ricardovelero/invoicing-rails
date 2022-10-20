@@ -46,7 +46,7 @@ Devise.setup do |config|
   config.mailer_sender = "info@facturazen.es"
 
   # Configure the class responsible to send e-mails.
-  config.mailer = 'MailForm::Base'
+  # config.mailer = 'Devise::Base'
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
