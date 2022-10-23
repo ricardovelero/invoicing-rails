@@ -28,16 +28,12 @@
                 </svg>
             </button>
             <!-- Logo -->
-            <div class="hidden lg:inline-flex 2xl:hidden mx-auto w-12 ">
-                <a class="block" href="/dashboard">
-                    <%= image_tag "oso-zen.png", class: "block", alt: "FacturaZen" %>
-                </a>
-            </div>
-            <div class="hidden 2xl:inline-flex justify-end mt-auto">
-                <a class="block" href="/dashboard">
-                    <%= image_tag "facturazen-oso-blanco.png", class: "block", alt: "FacturaZen" %>
-                </a>
-            </div>
+            <a class="block sidebar-expanded:hidden w-9" href="/dashboard">
+                <%= image_tag "oso-zen.png", class: "block", alt: "FacturaZen" %>
+            </a>
+            <a class="hidden sidebar-expanded:block" href="/dashboard">
+                <%= image_tag "facturazen-oso-blanco.png", class: "block", alt: "FacturaZen" %>
+            </a>
         </div>
 
         <!-- Links -->
