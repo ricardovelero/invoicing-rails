@@ -1,7 +1,8 @@
 <div class="mx-auto md:w-2/3 w-full flex">
+<%= link_to sanitize("&larr; Regresar a items"), quotes_path %>
   <div class="mx-auto">
     <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+      <p class="notice" id="notice"><%= notice %></p>
     <% end %>
 
     <%= render @item %>
