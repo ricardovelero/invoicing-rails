@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   def layout_by_resource
     case
-    when devise_controller? && resource_name == :user && action_name == "new" || action_name == "create"
+    when devise_controller? && resource_name == :user && (action_name == "new" || action_name == "create")
       "session"
     else
       "application"
