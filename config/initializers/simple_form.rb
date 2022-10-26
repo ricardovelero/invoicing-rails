@@ -64,8 +64,25 @@ SimpleForm.setup do |config|
     # b.use :full_error, wrap_with: { tag: :span, class: :error }
   end
 
+  config.wrappers :fz, class: "contents" do |b|
+    b.use :html5
+    b.use :placeholder
+    b.use :label, class: "hidden"
+    b.use :input, class: "input", error_class: "form__input--invalid"
+  end
+
+  config.generate_additional_classes_for = []
+  config.default_wrapper                 = :fz
+  config.button_class                    = "btn"
+  config.label_text                      = lambda { |label, _, _| label }
+  config.error_notification_tag          = :div
+  config.error_notification_class        = "error_notification"
+  config.browser_validations             = false
+  config.boolean_style                   = :nested
+  config.boolean_label_class             = "form__checkbox-label"
+
   # The default wrapper to be used by the FormBuilder.
-  config.default_wrapper = :default
+  #config.default_wrapper = :default
 
   # Define the way to render check boxes / radio buttons with labels.
   # Defaults to :nested for bootstrap config.
@@ -74,7 +91,7 @@ SimpleForm.setup do |config|
   config.boolean_style = :nested
 
   # Default class for buttons
-  config.button_class = 'btn'
+  #config.button_class = 'btn'
 
   # Method used to tidy up errors. Specify any Rails Array method.
   # :first lists the first message for each field.
@@ -108,7 +125,7 @@ SimpleForm.setup do |config|
 
   # How the label text should be generated altogether with the required text.
   # config.label_text = lambda { |label, required, explicit_label| "#{required} #{label}" }
-  config.label_text = lambda { |label, _, _| label }
+
   # You can define the class to use on all labels. Default is nil.
   # config.label_class = nil
 
@@ -118,7 +135,7 @@ SimpleForm.setup do |config|
 
   # You can define which elements should obtain additional classes
   # config.generate_additional_classes_for = [:wrapper, :label, :input]
-  config.generate_additional_classes_for = []
+
   # Whether attributes are required by default (or not). Default is true.
   # config.required_by_default = true
 
@@ -161,8 +178,7 @@ SimpleForm.setup do |config|
   # config.input_class = nil
 
   # Define the default class of the input wrapper of the boolean input.
-  # config.boolean_label_class = 'checkbox'
-  config.boolean_label_class = "form__checkbox-label"
+  #config.boolean_label_class = 'checkbox'
 
   # Defines if the default input wrapper class should be included in radio
   # collection wrappers.
