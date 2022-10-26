@@ -10,7 +10,7 @@
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
         <div class="flex items-center">
-          <div class="font-medium text-slate-800"><%= item.item_name %></div>
+          <div class="font-medium text-slate-800"><%= link_to item.item_name, item_path(item) %></div>
         </div>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
@@ -26,13 +26,8 @@
         <div class="text-center"><%= item.irpf %></div>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
-        <button class="text-slate-400 hover:text-slate-500 rounded-full">
-            <span class="sr-only">Menu</span>
-            <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
-                <circle cx="16" cy="16" r="2" />
-                <circle cx="10" cy="16" r="2" />
-                <circle cx="22" cy="16" r="2" />
-            </svg>
-        </button>
+        <%= link_to "Editar",
+                    edit_item_path(item),
+                    class: "link" %>
     </td>
 </tr>
