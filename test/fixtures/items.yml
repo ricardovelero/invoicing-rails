@@ -1,22 +1,25 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyText
-  price: 9.99
-  iva: 9.99
-  irpf: 9.99
+first:
+  item_name: Item 1
+  description: Praesent vel purus interdum, tempor nulla at, venenatis nisl. Proin condimentum feugiat libero, et vestibulum enim pretium ac. Fusce congue nulla mi. Nullam suscipit quam.
+  price: 19.99
+  iva: 21
+  irpf: 0
+  user_id: "83"
 
-two:
-  title: MyString
-  description: MyText
-  price: 9.99
-  iva: 9.99
-  irpf: 9.99
+second:
+  item_name: Item 2
+  description: Donec aliquam tincidunt leo, et molestie purus posuere volutpat. Cras.
+  price: 99.99
+  iva: 21
+  irpf: 2
+  user_id: "83"
 
-item:
-  title: Test Item
-  description: Es una item para probar los fictures en Rails
+third:
+  item_name: Item 3
+  description: Es una item para probar los fixtures en Rails
   price: 999
   iva: 21
   irpf: 4
+  user_id: "83"
