@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.save
         format.html do
-          redirect_to item_url(@item), notice: "Item was successfully created."
+          redirect_to items_path, notice: "Item was successfully created."
         end
         format.json { render :show, status: :created, location: @item }
       else
@@ -43,7 +43,6 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       respond_to do |format|
         format.html { redirect_to items_path, notice: "Item was successfully updated." }
-        #format.turbo_stream { flash.now[:notice] = "Item was successfully updated." }
         format.json { render :show, status: :ok, location: @item }
       end
     else
