@@ -1,5 +1,5 @@
 <!-- Row -->
-<tr id="<%= dom_id item %>">
+<tr>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
         <div class="flex items-center">
             <label class="inline-flex">
@@ -28,6 +28,10 @@
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
         <%= link_to "Editar",
                     edit_item_path(item),
+                    class: "link" %>
+        <%= button_to "Borrar",
+                    item_path(item),
+                    method: :delete,
                     class: "link" %>
     </td>
 </tr>
