@@ -26,12 +26,12 @@
                     <div class="flex flex-wrap mt-5">
                         <div class="mr-2">
                           <%= f.label :email, class: "sr-only" %>
-                          <%= f.email_field :email, class: "form-input", autocomplete: "email" %>
+                          <%= f.email_field :email, class: "form-input w-64", autocomplete: "email" %>
                         </div>
                         <%= f.submit "Cambiar", class: "btn border-slate-200 hover:border-slate-300 shadow-sm text-indigo-500" %>
                     </div>
                     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                      <div>Esperando confirmación de: <%= resource.unconfirmed_email %></div>
+                      <div class="mt-4 font-semibold text-sm text-red-500">Esperando confirmación de: <%= resource.unconfirmed_email %></div>
                     <% end %>
                 </section>
 
@@ -59,6 +59,9 @@
                         </div>
                     </div>
                 </section>
+                <%= f.fields_for :user_profile, resource.user_profile do |upf| %>
+                  <%= upf.hidden_field :gov_id, name: "[user_profile][gov_id]" %>
+                <% end %>
               </div>
               <div class="flex flex-col px-6 py-5 border-t border-slate-200 mt-10">
                   <div class="flex self-end">
