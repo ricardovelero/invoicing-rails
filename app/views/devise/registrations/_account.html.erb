@@ -60,7 +60,7 @@
                     </div>
                 </section>
                 <%= f.fields_for :user_profile, resource.user_profile do |upf| %>
-                  <%= upf.hidden_field :gov_id, name: "[user_profile][gov_id]" %>
+                  <%= upf.hidden_field :gov_id, name: "[user_profile][gov_id]", id: "user_profile_gov_id" %>
                 <% end %>
               </div>
               <div class="flex flex-col px-6 py-5 border-t border-slate-200 mt-10">
