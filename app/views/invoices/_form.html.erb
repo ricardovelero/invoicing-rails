@@ -13,7 +13,7 @@
 
   <div class="my-5">
     <%= f.label "Client", class: "input-label"  %>
-    <%= f.collection_select :client_id, Client.all, :id, :full_name, {prompt: "Selecciona un cliente"}, {class: "input"} %>
+    <%= f.collection_select :client_id, current_user.clients, :id, :full_name, {prompt: "Selecciona un cliente"}, {class: "input"} %>
   </div>
 
   <div class="my-5">
