@@ -9,6 +9,7 @@ class InvoicesController < ApplicationController
 
   # GET /invoices/1 or /invoices/1.json
   def show
+    @client = Client.find(@invoice.client_id).full_name
   end
 
   # GET /invoices/new
