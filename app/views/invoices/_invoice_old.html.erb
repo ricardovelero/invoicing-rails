@@ -1,52 +1,57 @@
-<div id="<%= dom_id invoice %>">
+<div id="<%= dom_id @invoice %>">
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Client:</strong>
+    <% @invoice.client_id %>
+  </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Number:</strong>
-    <%= invoice.invoice_number %>
+    <%= @invoice.invoice_number %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Date:</strong>
-    <%= invoice.date %>
+    <%= @invoice.date %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Due date:</strong>
-    <%= invoice.due_date %>
+    <%= @invoice.due_date %>
   </p>
 
-  <% if invoice.items.any? %>
-    <%= render invoice.items %>
+  <% if @invoice.items.any? %>
+    <%= render @invoice.items %>
   <% end %>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Subtotal:</strong>
-    <%= invoice.subtotal %>
+    <%= @invoice.subtotal %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Iva:</strong>
-    <%= invoice.iva %>
+    <%= @invoice.iva %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Irpf:</strong>
-    <%= invoice.irpf %>
+    <%= @invoice.irpf %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Total:</strong>
-    <%= invoice.total %>
+    <%= @invoice.total %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Notes:</strong>
-    <%= invoice.notes %>
+    <%= @invoice.notes %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Status:</strong>
-    <%= invoice.status %>
+    <%= @invoice.status %>
   </p>
 
   <% if action_name != "show" %>
