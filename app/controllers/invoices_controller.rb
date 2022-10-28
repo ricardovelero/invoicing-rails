@@ -48,7 +48,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       if @invoice.update(invoice_params)
         format.html do
-          redirect_to invoice_url(@invoice),
+          redirect_to invoices_url,
                       notice: "Invoice was successfully updated."
         end
         format.json { render :show, status: :ok, location: @invoice }
@@ -107,7 +107,7 @@ class InvoicesController < ApplicationController
       :total,
       :notes,
       :status,
-      line_items_attributes: [:item_ids, :quantity]
+      line_items_attributes: [:id, :item_id, :invoice_id, :quantity]
     )
   end
 end

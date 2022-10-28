@@ -1,12 +1,10 @@
 <div class="flex gap-2">
-
   <div class="w-2/3">
-    <%= f.label "Ítem", class: "input-label"  %>
-    <%= f.collection_select :item_ids, current_user.items, :id, :item_name,
-    {prompt: "Selecciona un item"}, { multiple: false, class: "input", name: "[line_items_attributes][item_ids]"} %>
+    <%= items_form.label "Ítem", class: "input-label"  %>
+    <%= items_form.select :item_id, current_user.items.all.map { |i| [i.item_name, i.id] }, include_blank: "Seleccionar Ítem" %>
   </div>
   <div class="w-1/3">
-    <%= f.label "Cantidad", class: "input-label"  %>
-    <%= f.number_field :quantity, value: '1', min: 0, class: "input", name: "[line_items_attributes][quantity]" %>
+    <%= items_form.label "Cantidad", class: "input-label"  %>
+    <%= items_form.number_field :quantity, value: '1', min: 0, class: "input" %>
   </div>
 </div>
