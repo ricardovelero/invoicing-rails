@@ -37,8 +37,8 @@ class User < ApplicationRecord
   #   step.validates :last_name, presence: true
   # end
 
-  #validates_associated :user_profile,
-  #                      if: -> { required_for_step?("set_name") }
+  validates_associated :user_profile,
+                        if: -> { required_for_step?("set_name") }
 
   validates_associated :user_profile,
                        if: -> { required_for_step?("set_address") }
