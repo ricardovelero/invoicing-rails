@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!, unless: :devise_controller?
   protect_from_forgery with: :exception
   layout :layout_by_resource
   before_action :config_devise_params, if: :devise_controller?
@@ -15,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def layout_by_resource
     case
-    when devise_controller? && resource_name == :user && (action_name == "new" || action_name == "create")
+    when devise_controller? && resource_name == :user && (action_name == "new" || action_name == "create" || action_name == "password")
       "session"
     else
       "application"
