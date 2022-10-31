@@ -51,9 +51,20 @@ class UserProfileController < ApplicationController
 
   def user_profile_params
     params.require(:user_profile).permit(
-      :gov_id,
+      :id,
+      :first_name,
+      :last_name,
       :street_address_1,
-      :street_address_2
+      :street_address_2,
+      :city,
+      :region,
+      :postal_code,
+      :country,
+      :phone,
+      :gov_id,
+      :user_id,
+      :is_freelance,
+      :company_name
     )
   end
 end

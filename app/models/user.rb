@@ -32,10 +32,13 @@ class User < ApplicationRecord
     @form_step ||= "sign_up"
   end
 
-  with_options if: -> { required_for_step?("set_name") } do |step|
-    step.validates :first_name, presence: true
-    step.validates :last_name, presence: true
-  end
+  # with_options if: -> { required_for_step?("set_name") } do |step|
+  #   step.validates :first_name, presence: true
+  #   step.validates :last_name, presence: true
+  # end
+
+  #validates_associated :user_profile,
+  #                      if: -> { required_for_step?("set_name") }
 
   validates_associated :user_profile,
                        if: -> { required_for_step?("set_address") }
