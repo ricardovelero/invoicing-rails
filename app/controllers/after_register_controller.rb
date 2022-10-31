@@ -71,7 +71,7 @@ class AfterRegisterController < ApplicationController
       when "set_address"
         required_parameters = :user_profile
         %i[
-          company
+          company_name
           street_address_1
           street_address_2
           city
