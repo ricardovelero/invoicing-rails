@@ -34,6 +34,12 @@ class RegistrationsController < Devise::RegistrationsController
     after_register_path(:freelance_or_company)
   end
 
+  protected
+
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
+
   private
 
   def user_profile_params
