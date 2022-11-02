@@ -1,10 +1,10 @@
 class UserProfileController < ApplicationController
   def index
-    @user_profile = UserProfile.all
+    @user_profile = current_user.UserProfile.all
   end
 
   def show
-    @user_profile = UserProfile.find(params[:id])
+    @user_profile = current_user.UserProfile.find(params[:id])
   end
 
   def new
@@ -27,11 +27,11 @@ class UserProfileController < ApplicationController
   end
 
   def edit
-    @user_profile = UserProfile.find(params[:id])
+    @user_profile = current_user.UserProfile.find(params[:id])
   end
 
   def update
-    @user_profile = UserProfile.find(params[:id])
+    @user_profile = current_user.UserProfile.find(params[:id])
 
     if @user_profile.update(user_profile_params)
       redirect_to @user_profile
@@ -41,7 +41,7 @@ class UserProfileController < ApplicationController
   end
 
   def destroy
-    @user_profile = UserProfile.find(params[:id])
+    @user_profile = current_user.UserProfile.find(params[:id])
     @user_profile.destroy
 
     redirect_to home_path, status: :see_other
