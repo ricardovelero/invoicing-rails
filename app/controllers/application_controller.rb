@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
   before_action :authenticate_user!, unless: :devise_controller?
   protect_from_forgery with: :exception
   layout :layout_by_resource

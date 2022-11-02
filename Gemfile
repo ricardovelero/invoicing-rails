@@ -91,3 +91,5 @@ gem "carmen"
 gem "requestjs-rails"
 
 gem "simple_form"
+
+gem 'pagy'
