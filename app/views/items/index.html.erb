@@ -18,7 +18,7 @@
                 <button class="btn bg-white border-slate-200 hover:border-slate-300 text-rose-500 hover:text-rose-600"><%= t("Borrar") %></button>
             </div>
         </div>
-
+        <% unless @items.none? %>
         <!-- Dropdown -->
         <div class="relative" x-data="{ open: false, selected: 2 }">
             <button
@@ -129,7 +129,7 @@
                 </svg>
             </button>
         </div>
-
+        <% end %>
         <!-- Add item button -->
         <a href="<%= new_item_path %>" class="btn bg-indigo-500 hover:bg-indigo-600 text-white">
             <svg class="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
@@ -148,44 +148,48 @@
 
         <!-- Table -->
         <div class="overflow-x-auto">
-            <table class="table-auto w-full">
-                <!-- Table header -->
-                <thead class="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200">
-                    <tr>
-                        <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
-                            <div class="flex items-center">
-                                <label class="inline-flex">
-                                    <span class="sr-only"><%= t("seleccionar_todo") %></span>
-                                    <input id="parent-checkbox" class="form-checkbox" type="checkbox" @click="toggleAll" />
-                                </label>
-                            </div>
-                        </th>
-                        <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div class="font-semibold text-left"><%= t("nombre") %></div>
-                        </th>
-                        <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div class="font-semibold text-left"><%= t("descripcion") %></div>
-                        </th>
-                        <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div class="font-semibold text-left"><%= t("precio") %></div>
-                        </th>
-                        <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div class="font-semibold"><%= t("iva") %></div>
-                        </th>
-                        <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div class="font-semibold"><%= t("irpf") %></div>
-                        </th>
-                        <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <span class="sr-only">Menu</span>
-                        </th>
-                    </tr>
-                </thead>
-                <!-- Table body -->
-                <tbody class="text-sm divide-y divide-slate-200">
-                  <!-- Rows -->
-                  <%= render @items %>
-                </tbody>
-            </table>
+            <% if @items.none? %>
+                <%= render "empty_state" %>
+            <% else %>
+                <table class="table-auto w-full">
+                    <!-- Table header -->
+                    <thead class="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200">
+                        <tr>
+                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
+                                <div class="flex items-center">
+                                    <label class="inline-flex">
+                                        <span class="sr-only"><%= t("seleccionar_todo") %></span>
+                                        <input id="parent-checkbox" class="form-checkbox" type="checkbox" @click="toggleAll" />
+                                    </label>
+                                </div>
+                            </th>
+                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                <div class="font-semibold text-left"><%= t("nombre") %></div>
+                            </th>
+                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                <div class="font-semibold text-left"><%= t("descripcion") %></div>
+                            </th>
+                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                <div class="font-semibold text-left"><%= t("precio") %></div>
+                            </th>
+                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                <div class="font-semibold"><%= t("iva") %></div>
+                            </th>
+                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                <div class="font-semibold"><%= t("irpf") %></div>
+                            </th>
+                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                <span class="sr-only">Menu</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <!-- Table body -->
+                    <tbody class="text-sm divide-y divide-slate-200">
+                    <!-- Rows -->
+                    <%= render @items %>
+                    </tbody>
+                </table>
+            <% end %>
         </div>
     </div>
 </div>
@@ -222,7 +226,7 @@
         }))
     })    
 </script>
-
+<% unless @items.none? %>
 <!-- Pagination -->
 <div class="mt-8">
   <!-- Pagination -->
@@ -242,5 +246,5 @@
       </div>
   </div>
 </div>
-
+<% end %>
 
