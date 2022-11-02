@@ -315,4 +315,11 @@
     @apply pl-4;
     list-style: disc;
   }
+  
+  /* Pagy */
+
+  .pagy-nav .pagination {
+    @apply mb-4 sm:mb-0 sm:order-1 bg-slate-600;
+  }
+
 }
