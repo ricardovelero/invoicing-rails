@@ -4,7 +4,7 @@ class ClientsController < ApplicationController
 
   # GET /clients or /clients.json
   def index
-    @clients = current_user.clients
+    @pagy, @clients = pagy(current_user.clients)
   end
 
   # GET /clients/1 or /clients/1.json

@@ -1,11 +1,12 @@
 class ApplicationController < ActionController::Base
-  include Pagy::Backend
   before_action :authenticate_user!, unless: :devise_controller?
   protect_from_forgery with: :exception
   layout :layout_by_resource
   before_action :config_devise_params, if: :devise_controller?
   #around_action :switch_locale
   after_action :store_action
+
+  include Pagy::Backend
 
   private
 
