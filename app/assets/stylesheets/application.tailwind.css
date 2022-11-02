@@ -155,7 +155,9 @@
   .input-label {
     @apply block text-sm font-medium text-gray-700;
   }
-
+  .gravatar {
+    @apply w-20 h-20 rounded-full;
+  }
   /* Temp */
   .home header {
     @apply w-full p-2 flex items-center justify-between flex-wrap;

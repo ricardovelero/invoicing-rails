@@ -8,7 +8,7 @@
             <section>
                 <div class="flex items-center">
                     <div class="mr-4">
-                      <%= image_tag "user-avatar-80.png", class: "w-20 h-20 rounded-full", alt: "", width: "80", height: "80" %>
+                      <%= gravatar_for current_user %>
                     </div>
                     <button class="btn-sm bg-indigo-500 hover:bg-indigo-600 text-white"><%= t("cambiar")%></button>
                 </div>
