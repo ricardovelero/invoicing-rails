@@ -2,14 +2,13 @@ Rails.application.routes.draw do
   root "home#index"
   devise_for :users, controllers: { registrations: "registrations" }
   resources :users
-  resources :invoices
   resources :clients
   resources :items
   resources :invoices do
+    resources :line_items, except: [:index, :show]
     post :add_item, on: :collection
   end
   resources :after_register
-  resources :contact, only: [:create]
   
   get "/privacy", to: "home#privacy"
   get "/terms", to: "home#terms"
