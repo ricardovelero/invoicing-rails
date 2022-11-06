@@ -1,0 +1,37 @@
+<!-- Row -->
+<tr>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
+        <div class="flex items-center">
+            <label class="inline-flex">
+                <span class="sr-only">Select</span>
+                <input class="table-item form-checkbox" type="checkbox" @click="uncheckParent" />
+            </label>
+        </div>
+    </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 break-words">
+        <div class="flex items-center">
+          <div class="font-medium text-slate-800"><%= item.item_name %></div>
+        </div>
+    </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 break-words">
+        <div class="text-left"><%= item.description %></div>
+    </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+        <div class="text-left"><%= number_to_currency(item.price, locale: :es) %></div>
+    </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+        <div class="text-center"><%= item.iva %></div>
+    </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+        <div class="text-center"><%= item.irpf %></div>
+    </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
+        <%= link_to "Editar",
+                    edit_item_path(item),
+                    class: "link" %>
+        <%= button_to "Borrar",
+                    item_path(item),
+                    method: :delete,
+                    class: "link" %>
+    </td>
+</tr>

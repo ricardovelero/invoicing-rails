@@ -44,6 +44,12 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def add_item
+    @invoice = Invoice.new(invoice_params.merge({id: params[:id]}))
+    @invoice.line_items.build
+    render :new
+  end
+
   # PATCH/PUT /invoices/1 or /invoices/1.json
   def update
     respond_to do |format|
@@ -71,20 +77,6 @@ class InvoicesController < ApplicationController
         redirect_to invoices_url, notice: "Invoice was successfully destroyed."
       end
       format.json { head :no_content }
-    end
-  end
-  
-  def add_item
-    helpers.fields model: Invoice.new do |f|
-      render turbo_stream:
-               turbo_stream.append(
-                 "line_items",
-                 partial: "item_fields",
-                 locals: {
-                   f: f,
-                   line_item: LineItem.new
-                 }
-               )
     end
   end
 
