@@ -45,9 +45,13 @@ class InvoicesController < ApplicationController
   end
 
   def add_item
-    @invoice = Invoice.new(invoice_params.merge({id: params[:id]}))
-    @invoice.line_items.build
-    render :new
+    helpers.fields model: Invoice.new do |f|
+      render turbo_stream: turbo_stream.append(
+        "line_items",
+        partial: "item_fields",
+        locals: { f: f, line_item: LineItem.new }
+      )
+    end
   end
 
   # PATCH/PUT /invoices/1 or /invoices/1.json

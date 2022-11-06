@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :clients
   resources :items
   resources :invoices do
-    resources :line_items, except: [:index, :show]
+    resources :line_items, except: [:index]
     post :add_item, on: :collection
   end
   resources :after_register

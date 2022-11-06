@@ -39,29 +39,16 @@
 
   <h2 class="text-center text-lg my-5">Ítems a Facturar</h2>
 
-  <%= turbo_frame_tag f.field_id(:items) do %>
-    <%= f.fields_for :line_items do |ff| %>
-      <div class="flex gap-2">
-        <div class="w-2/3">
-          <%= ff.label "Ítem", class: "input-label"  %>
-          <%= ff.collection_select :item_id, current_user.items, :id, :item_name,
-            {prompt: "Selecciona un item"}, { multiple: false, class: "input"} %>
-        </div>
-        <div class="w-1/3">
-          <%= ff.label "Cantidad", class: "input-label"  %>
-          <%= ff.number_field :quantity, value: '1', min: 0, max: 10000000, class: "input" %>
-        </div>
-        <%= f.submit "Borrar item", formmethod: "delete", 
-          data: { turbo_frame: f.field_id(:items)},
-          class: "text-red-600 hover:underline mt-5" %>
-      </div>
+  <div id="line_items">
+    <% f.object.line_items.each do |i| %>
+      <%= render "item_fields", f: f, line_item: i %>
     <% end %>
-  <% end %>
+  </div>
 
-  <%= f.submit "Agregar item", formmethod: "post", 
-    formaction: add_item_invoices_path(id: f.object),
-    data: { turbo_frame: f.field_id(:items)},
-    class: "text-indigo-600 hover:underline" %>
+  <%= link_to "Agregar Ítem",
+    add_item_invoices_path(id: f.object),
+    class: "text-indigo-600 hover:underline",
+    data: { turbo_method: :post } %>
 
   <hr class="mt-5"/>
 
