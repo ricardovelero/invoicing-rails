@@ -1,11 +1,14 @@
 <div class="flex gap-2">
-  <div class="w-2/3">
-    <%= f.label "Ítem", class: "input-label"  %>
-    <%= f.collection_select :item_id, current_user.items, :id, :item_name,
-      {prompt: "Selecciona un item"}, { multiple: false, class: "input"} %>
-  </div>
-  <div class="w-1/3">
-    <%= f.label "Cantidad", class: "input-label"  %>
-    <%= f.number_field :quantity, value: '1', min: 0, max: 10000000, class: "input" %>
-  </div>
+  <%= f.fields_for :line_items, line_item, 
+    child_index: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) do |ff| %>
+    <div class="w-2/3">
+      <%= ff.label "Ítem", class: "input-label"  %>
+      <%= ff.collection_select :item_id, current_user.items, :id, :item_name,
+        {prompt: "Selecciona un item"}, { multiple: false, class: "input"} %>
+    </div>
+    <div class="w-1/3">
+      <%= ff.label "Cantidad", class: "input-label"  %>
+      <%= ff.number_field :quantity, value: '1', min: 0, max: 10000000, class: "input" %>
+    </div>
+  <% end %>
 </div>

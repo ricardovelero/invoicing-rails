@@ -14,7 +14,7 @@
         </div>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 break-words">
-        <div class="text-left"><%= item.description %></div>
+        <div class="text-left"><%= simple_format item.description %></div>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
         <div class="text-left"><%= number_to_currency(item.price, locale: :es) %></div>
