@@ -37,7 +37,7 @@
 
   <hr/>
 
-  <h2 class="text-center text-lg my-5">Ítems a Facturar</h2>
+  <h2 class="text-center text-lg my-5 underline">Ítems a Facturar</h2>
 
   <div id="line_items">
     <% f.object.line_items.each do |i| %>
@@ -53,28 +53,28 @@
   <hr class="mt-5"/>
 
   <div class="my-5">
-    <%= f.label :subtotal, class: "input-label"  %>
-    <%= f.text_field :subtotal, class: "input" %>
-  </div>
-
-  <div class="my-5">
-    <%= f.label :iva, class: "input-label"  %>
-    <%= f.text_field :iva, class: "input" %>
-  </div>
-
-  <div class="my-5">
-    <%= f.label :irpf, class: "input-label"  %>
-    <%= f.text_field :irpf, class: "input" %>
-  </div>
-
-  <div class="my-5">
-    <%= f.label :total, class: "input-label"  %>
-    <%= f.text_field :total, class: "input" %>
-  </div>
-
-  <div class="my-5">
     <%= f.label :notes, class: "input-label"  %>
     <%= f.text_area :notes, rows: 4, class: "input" %>
+  </div>
+
+  <div class="my-5">
+    <%= f.label :subtotal, class: "input-label text-right"  %>
+    <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.subtotal %></div>
+  </div>
+
+  <div class="my-5">
+    <%= f.label :iva, class: "input-label text-right" %>
+    <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.iva %></div>
+  </div>
+
+  <div class="my-5">
+    <%= f.label :irpf, class: "input-label text-right" %>
+    <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.irpf %></div>
+  </div>
+
+  <div class="my-5">
+    <%= f.label :total, class: "input-label text-right" %>
+    <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.total %></div>
   </div>
 
   <div class="inline">
