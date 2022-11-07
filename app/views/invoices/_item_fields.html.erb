@@ -1,3 +1,4 @@
+<%= turbo_frame_tag Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) do %>
 <div class="flex gap-2">
   <%= f.fields_for :line_items, line_item, 
     child_index: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) do |ff| %>
@@ -10,5 +11,9 @@
       <%= ff.label "Cantidad", class: "input-label"  %>
       <%= ff.number_field :quantity, value: '1', min: 0, max: 10000000, class: "input" %>
     </div>
+    <%= f.submit "Borrar item", formmethod: "delete", 
+      data: { turbo_frame: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond)},
+      class: "text-red-600 hover:underline mt-5" %>
   <% end %>
 </div>
+<% end %>
