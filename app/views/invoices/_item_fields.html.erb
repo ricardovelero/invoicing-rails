@@ -1,4 +1,4 @@
-<%= turbo_frame_tag Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) do %>
+<div id="<%= Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) %>">
 <div class="flex gap-2">
   <%= f.fields_for :line_items, line_item, 
     child_index: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) do |ff| %>
@@ -16,11 +16,11 @@
       <div class="p-2 text-left border input h-10"><%= number_to_currency line_item.item&.price %></div>
     </div>
     <div class="w-1/12">
-      <%= ff.label "IVA", class: "input-label uppercase"  %>
+      <%= ff.label "IVA", class: "input-label uppercase text-center"  %>
       <div class="p-2 text-left border input h-10 w-12"><%= line_item.item&.iva %></div>
     </div>
     <div class="w-1/3">
-      <%= ff.label "Total Ítem", class: "input-label"  %>
+      <%= ff.label "Total Ítem", class: "input-label text-right"  %>
       <div class="p-2 text-right border input h-10"><%= number_to_currency line_item.total_price %></div>
     </div>
     <%= f.submit "Borrar item", formmethod: "delete", 
@@ -28,4 +28,4 @@
       class: "text-red-600 hover:underline mt-5 cursor-pointer" %>
   <% end %>
 </div>
-<% end %>
+</div>
