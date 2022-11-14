@@ -1,4 +1,4 @@
-<%= form_with(model: invoice, class: "contents") do |f| %>
+<%= form_with(model: invoice, class: "contents", html: { data: {controller: "recalculate"} } ) do |f| %>
   <% if invoice.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
@@ -59,7 +59,9 @@
 
   <div class="my-5">
     <%= f.label :subtotal, class: "input-label text-right"  %>
-    <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.subtotal %></div>
+    <div class="p-2 text-right text-lg border input h-10" data-recalculate-target="subtotal">
+      <%= number_to_currency invoice.subtotal %>
+    </div>
   </div>
 
   <div class="my-5">
@@ -74,7 +76,9 @@
 
   <div class="my-5">
     <%= f.label :total, class: "input-label text-right" %>
-    <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.total %></div>
+    <div class="p-2 text-right text-xl font-bold border input h-10" data-recalculate-target="grandtotal">
+      <%= number_to_currency invoice.total %>
+    </div>
   </div>
 
   <div class="inline">
