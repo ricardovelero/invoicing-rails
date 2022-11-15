@@ -11,28 +11,38 @@
     </div>
   <% end %>
 
-  <div class="my-5">
-    <%= f.label "Client", class: "input-label"  %>
-    <%= f.collection_select :client_id, current_user.clients, :id, :full_name, {prompt: "Selecciona un cliente"}, {class: "input"} %>
-  </div>
+  <div class="grid grid-cols-3 gap-2">
+    <div class="my-5 col-span-2">
+      <%= f.label "Client", class: "input-label"  %>
+      <%= f.collection_select :client_id, current_user.clients, :id, :full_name, {prompt: "Selecciona un cliente"}, {class: "input"} %>
+    </div>
 
-  <div class="my-5">
-    <%= f.label :invoice_number, class: "input-label"  %>
-    <% if invoice.new_record? %>
-      <%= f.text_field :invoice_number, class: "input", value: invoice.set_invoice_number %>
-    <% else %>
-      <%= f.text_field :invoice_number, class: "input", value: invoice.invoice_number %>
-    <% end %>
-  </div>
+    <div class="my-5">
+      <%= f.label :invoice_number, class: "input-label"  %>
+      <% if invoice.new_record? %>
+        <%= f.text_field :invoice_number, class: "input", value: invoice.set_invoice_number %>
+      <% else %>
+        <%= f.text_field :invoice_number, class: "input", value: invoice.invoice_number %>
+      <% end %>
+    </div>
 
-  <div class="my-5">
-    <%= f.label :date, class: "input-label"  %>
-    <%= f.date_field :date, class: "input", value: Date.today %>
-  </div>
+    <div class="col-span-2">
+      Selected client details
+    </div>
 
-  <div class="my-5">
-    <%= f.label :due_date, class: "input-label"  %>
-    <%= f.date_field :due_date, class: "input", value: Date.today + 30.days %>
+    <div class="">
+      <%= f.label :date, class: "input-label"  %>
+      <%= f.date_field :date, class: "input", value: Date.today %>
+    </div>
+
+    <div class="col-span-2">
+      
+    </div>
+
+    <div class="">
+      <%= f.label :due_date, class: "input-label"  %>
+      <%= f.date_field :due_date, class: "input", value: Date.today + 30.days %>
+    </div>
   </div>
 
   <hr/>
