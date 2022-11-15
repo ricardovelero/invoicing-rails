@@ -80,3 +80,13 @@ input[type=range]::-ms-thumb {
 input[type=range]::-moz-focus-outer {
   border: 0;
 }
+
+/* Line Items Labels, display only first child */
+
+div#line_items > div:not(:first-child) label.input-label {
+  display:none;
+}
+
+div#line_items > div:not(:first-child) button {
+  margin-top: 0;
+}
