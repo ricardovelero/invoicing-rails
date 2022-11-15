@@ -87,6 +87,6 @@ div#line_items > div:not(:first-child) label.input-label {
   display:none;
 }
 
-div#line_items > div:not(:first-child) button {
+div#line_items > div:not(:first-child) input {
   margin-top: 0;
 }
