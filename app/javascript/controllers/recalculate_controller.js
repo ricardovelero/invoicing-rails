@@ -31,8 +31,11 @@ export default class extends Controller {
     let subTotal = 0
     let itemTotal = 0
     let sum = 0
-    let pricesArray = []
     let taxesArray = []
+
+    this.taxTargets.forEach((tax, index) => {
+      taxesArray[index] = this.convertNum(tax.textContent)
+    })
 
     this.totalTargets.forEach((element, index) => {
       if (element.id == eventId) {
@@ -40,22 +43,19 @@ export default class extends Controller {
           if (price.id == eventId) {
             itemPrice = this.convertNum(price.textContent)
           }
-          pricesArray[index] = this.convertNum(price.textContent)
         })
         this.taxTargets.forEach((tax, index) => {
           if (tax.id == eventId) {
             itemTax = this.convertNum(tax.textContent)
           }
-          taxesArray[index] = this.convertNum(tax.textContent)
         })
         itemTotal = itemPrice * (1 + itemTax/100) * event.target.value
-
+        
         element.textContent = formatter.format(itemTotal)
       }
       sum += this.convertNum(element.textContent)
 
       subTotal += this.convertNum(element.textContent) / (1 + taxesArray[index]/100) 
-
     })
 
     this.subtotalTarget.textContent = formatter.format(subTotal)
