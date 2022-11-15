@@ -26,29 +26,41 @@ export default class extends Controller {
     });
 
     let eventId = event.target.id.match(/\d/g).join("")
-    let itemPrice, itemTax = ""
-    let itemTotal, sum = 0
+    let itemPrice = ""
+    let itemTax = ""
+    let subTotal = 0
+    let itemTotal = 0
+    let sum = 0
+    let pricesArray = []
+    let taxesArray = []
 
-    this.totalTargets.forEach((element) => {
+    this.totalTargets.forEach((element, index) => {
       if (element.id == eventId) {
-        this.priceTargets.forEach((element) => {
-          if (element.id == eventId) {
-            itemPrice = this.convertNum(element.textContent)
+        this.priceTargets.forEach((price, index) => {
+          if (price.id == eventId) {
+            itemPrice = this.convertNum(price.textContent)
           }
+          pricesArray[index] = this.convertNum(price.textContent)
         })
-        this.taxTargets.forEach((element) => {
-          if (element.id == eventId) {
-            itemTax = this.convertNum(element.textContent)
+        this.taxTargets.forEach((tax, index) => {
+          if (tax.id == eventId) {
+            itemTax = this.convertNum(tax.textContent)
           }
+          taxesArray[index] = this.convertNum(tax.textContent)
         })
         itemTotal = itemPrice * (1 + itemTax/100) * event.target.value
 
         element.textContent = formatter.format(itemTotal)
       }
       sum += this.convertNum(element.textContent)
-    })
-    this.grandtotalTarget.textContent = formatter.format(sum)
 
+      subTotal += this.convertNum(element.textContent) / (1 + taxesArray[index]/100) 
+
+    })
+
+    this.subtotalTarget.textContent = formatter.format(subTotal)
+    this.taxtotalTarget.textContent = formatter.format(sum - subTotal)
+    this.grandtotalTarget.textContent = formatter.format(sum)
   }
 
   convertNum(element) {

@@ -67,7 +67,9 @@
         <%= number_to_currency invoice.subtotal %>
       </div>
       <%= f.label :iva, class: "input-label text-right my-1" %>
-      <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.iva %></div>
+      <div class="p-2 text-right border input h-10" data-recalculate-target="taxtotal">
+        <%= number_to_currency invoice.iva %>
+      </div>
 
       <%= f.label :irpf, class: "input-label text-right my-1" %>
       <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.irpf %></div>
