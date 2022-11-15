@@ -52,32 +52,31 @@
 
   <hr class="mt-5"/>
 
-  <div class="my-5">
-    <%= f.label :notes, class: "input-label"  %>
-    <%= f.text_area :notes, rows: 4, class: "input" %>
-  </div>
+  <div class="flex space-x-2">
+    <div class="w-3/4 my-5">
 
-  <div class="my-5">
-    <%= f.label :subtotal, class: "input-label text-right"  %>
-    <div class="p-2 text-right text-lg border input h-10" data-recalculate-target="subtotal">
-      <%= number_to_currency invoice.subtotal %>
+      <%= f.label :notes, class: "input-label"  %>
+      <%= f.text_area :notes, rows: 11, class: "input" %>
+    
     </div>
-  </div>
 
-  <div class="my-5">
-    <%= f.label :iva, class: "input-label text-right" %>
-    <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.iva %></div>
-  </div>
+    <div class="w-1/4 my-5">
 
-  <div class="my-5">
-    <%= f.label :irpf, class: "input-label text-right" %>
-    <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.irpf %></div>
-  </div>
+      <%= f.label :subtotal, class: "input-label text-right"  %>
+      <div class="p-2 text-right text-lg border input h-10" data-recalculate-target="subtotal">
+        <%= number_to_currency invoice.subtotal %>
+      </div>
+      <%= f.label :iva, class: "input-label text-right my-1" %>
+      <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.iva %></div>
 
-  <div class="my-5">
-    <%= f.label :total, class: "input-label text-right" %>
-    <div class="p-2 text-right text-xl font-bold border input h-10" data-recalculate-target="grandtotal">
-      <%= number_to_currency invoice.total %>
+      <%= f.label :irpf, class: "input-label text-right my-1" %>
+      <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.irpf %></div>
+
+      <%= f.label :total, class: "input-label text-right my-2" %>
+      <div class="p-2 text-right text-xl font-bold border input h-10" data-recalculate-target="grandtotal">
+        <%= number_to_currency invoice.total %>
+      </div>
+
     </div>
   </div>
 
