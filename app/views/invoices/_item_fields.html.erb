@@ -1,4 +1,6 @@
-<div id="<%= Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) %>" data-recalculate-target="theid">
+<div id="<%= Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) %>" 
+  data-recalculate-target="theid" data-removeitem-target="item"
+>
   <div class="flex gap-2">
     <%= f.fields_for :line_items, line_item, 
       child_index: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) do |ff| %>
@@ -30,11 +32,10 @@
           <%= number_to_currency line_item.total_price %>
         </div>
       </div>
-      <%= button_to "X",
-              line_items_path(id: f.object),
-              method: :delete,
-              data: { turbo_frame: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) },
-              class: "text-red-600 hover:underline mt-5 cursor-pointer" %>
+      <a class="text-red-600 hover:underline mt-5 cursor-pointer"
+        data-action="click->removeitem#click"
+      >
+        <%= heroicon "x-mark" %></a>
     <% end %>
   </div>
 </div>
