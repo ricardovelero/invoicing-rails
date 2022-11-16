@@ -49,7 +49,7 @@
 
   <h2 class="text-center text-lg my-5 underline">Ítems a Facturar</h2>
 
-  <div id="line_items">
+  <div id="line_items" data-controller="removeitem">
     <% f.object.line_items.each do |i| %>
       <%= render "item_fields", f: f, line_item: i %>
     <% end %>
