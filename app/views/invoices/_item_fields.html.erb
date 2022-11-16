@@ -30,12 +30,11 @@
           <%= number_to_currency line_item.total_price %>
         </div>
       </div>
-      <%= link_to "X",
-          add_item_invoices_path(id: f.object),
-          class: "text-red-600 hover:underline mt-5 cursor-pointer",
-          data: { turbo_method: :delete },
-          data: { turbo_frame: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond)}
-      %>
+      <%= button_to "X",
+              line_items_path(id: f.object),
+              method: :delete,
+              data: { turbo_frame: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) },
+              class: "text-red-600 hover:underline mt-5 cursor-pointer" %>
     <% end %>
   </div>
 </div>
