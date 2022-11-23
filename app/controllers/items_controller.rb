@@ -9,6 +9,11 @@ class ItemsController < ApplicationController
 
   # GET /items/1 or /items/1.json
   def show
+    @target = params[:target]
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   # GET /items/new

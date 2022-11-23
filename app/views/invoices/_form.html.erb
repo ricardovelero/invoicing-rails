@@ -51,7 +51,7 @@
 
   <div id="line_items" data-controller="removeitem">
     <% f.object.line_items.each do |i| %>
-      <%= render "item_fields", f: f, line_item: i %>
+      <%= render "item_fields", f: f, line_item: i, turboid: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) %>
     <% end %>
   </div>
 

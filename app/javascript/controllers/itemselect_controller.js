@@ -18,7 +18,7 @@ export default class extends Controller {
     let query = { target: this.selectTarget.id };
     query[this.paramValue] = event.target.selectedOptions[0].value;
 
-    get(this.urlValue, {
+    get(this.urlValue+"/"+query[this.paramValue], {
       query: query,
       responseKind: "turbo-stream",
     });

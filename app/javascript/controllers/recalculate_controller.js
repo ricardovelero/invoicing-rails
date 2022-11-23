@@ -1,22 +1,22 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["total", "price", "tax", "subtotal", "taxtotal", "grandtotal", "theid"];
+  static targets = ["total", "price", "tax", "subtotal", "taxtotal", "grandtotal"];
 
   initialize() {
-    let theids = []
-    this.theidTargets.forEach((element, index) => {
-      theids[index] = element.id.match(/\d/g).join("")
-    })
-    this.totalTargets.forEach((element, index) => {
-      element.id = theids[index]
-    })
-    this.priceTargets.forEach((element, index) => {
-      element.id = theids[index]
-    })
-    this.taxTargets.forEach((element, index) => {
-      element.id = theids[index]
-    })
+    // let theids = []
+    // this.theidTargets.forEach((element, index) => {
+    //   theids[index] = element.id.match(/\d/g).join("")
+    // })
+    // this.totalTargets.forEach((element, index) => {
+    //   element.id = theids[index]
+    // })
+    // this.priceTargets.forEach((element, index) => {
+    //   element.id = theids[index]
+    // })
+    // this.taxTargets.forEach((element, index) => {
+    //   element.id = theids[index]
+    // })
   }
 
   recalculate(event) {
@@ -38,14 +38,14 @@ export default class extends Controller {
     })
 
     this.totalTargets.forEach((element, index) => {
-      if (element.id == eventId) {
+      if (element.id.match(/\d/g).join("") == eventId) {
         this.priceTargets.forEach((price, index) => {
-          if (price.id == eventId) {
+          if (price.id.match(/\d/g).join("") == eventId) {
             itemPrice = this.convertNum(price.textContent)
           }
         })
         this.taxTargets.forEach((tax, index) => {
-          if (tax.id == eventId) {
+          if (tax.id.match(/\d/g).join("") == eventId) {
             itemTax = this.convertNum(tax.textContent)
           }
         })
