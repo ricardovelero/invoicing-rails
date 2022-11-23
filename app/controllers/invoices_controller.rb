@@ -49,7 +49,7 @@ class InvoicesController < ApplicationController
       render turbo_stream: turbo_stream.append(
         "line_items",
         partial: "item_fields",
-        locals: { f: f, line_item: LineItem.new }
+        locals: { f: f, line_item: LineItem.new, turboid: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) }
       )
     end
   end

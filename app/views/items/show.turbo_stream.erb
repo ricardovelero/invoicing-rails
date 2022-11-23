@@ -1,0 +1,6 @@
+<%= turbo_stream.update @target do %>
+    <label class="input-label">Importe</label>
+    <div class="p-2 text-left border input h-10" data-recalculate-target="price">
+        <%= number_to_currency @item&.price %>
+    </div>
+<% end %>
