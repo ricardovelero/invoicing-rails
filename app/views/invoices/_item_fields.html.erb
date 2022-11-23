@@ -1,14 +1,14 @@
 <div id="<%= Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) %>" 
   data-recalculate-target="theid" data-removeitem-target="item"
 >
-  <div class="flex gap-2">
+  <div class="flex gap-2" data-controller="itemselect" data-itemselect-url-value="<%= items_path %>" data-itemselect-param-value="item">
     <%= f.fields_for :line_items, line_item, 
       child_index: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) do |ff| %>
       <%= ff.hidden_field :_destroy, "data-removeitem-target" => "theHidden" %>
       <div class="w-2/3">
         <%= ff.label "Ítem", class: "input-label"  %>
         <%= ff.collection_select :item_id, current_user.items, :id, :item_name,
-          {prompt: "Selecciona un item"}, { multiple: false, class: "input"} %>
+          {prompt: "Selecciona un item"}, { multiple: false, data: {action: "change->itemselect#change"}, class: "input"} %>
       </div>
       <div class="w-1/6">
         <%= ff.label "Cantidad", class: "input-label"  %>
@@ -17,7 +17,8 @@
       </div>
       <div class="w-1/6">
         <%= ff.label "Importe", class: "input-label"  %>
-        <div class="p-2 text-left border input h-10" data-recalculate-target="price">
+        <div class="p-2 text-left border input h-10" data-recalculate-target="price"
+          data-itemselect-target="select">
           <%= number_to_currency line_item.item&.price %>
         </div>
       </div>
