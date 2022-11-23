@@ -104,7 +104,7 @@ class InvoicesController < ApplicationController
       :total,
       :notes,
       :status,
-      line_items_attributes: [:id, :item_id, :invoice_id, :quantity]
+      line_items_attributes: [:id, :item_id, :invoice_id, :quantity, :_destroy]
     )
   end
 end
