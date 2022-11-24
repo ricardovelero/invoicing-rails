@@ -15,7 +15,7 @@ export default class extends Controller {
   }
 
   change(event) {
-    let query = { target: this.selectTarget.id };
+    let query = { target: this.selectTarget.id.match(/\d/g).join("") };
     query[this.paramValue] = event.target.selectedOptions[0].value;
 
     get(this.urlValue+"/"+query[this.paramValue], {
