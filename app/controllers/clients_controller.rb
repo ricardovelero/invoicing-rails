@@ -9,6 +9,10 @@ class ClientsController < ApplicationController
 
   # GET /clients/1 or /clients/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   # GET /clients/new
