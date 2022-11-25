@@ -1,0 +1,10 @@
+<%= turbo_stream.replace target="client_details" do %>
+    <div class="col-span-2 ">
+    <label class="input-label" for="client_details">Client's Details</label>
+    <div id="client_details" class="p-2 border input" data-clientselect-target="select">
+        <p>NIF/CIF: <%= @client.nif %></p>
+        <p><%= @client.address_line_1 %></p>
+        <p><%= @client.address_line_2 %></p>
+    </div>
+    </div>
+<% end %>

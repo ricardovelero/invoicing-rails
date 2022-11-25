@@ -11,10 +11,10 @@
     </div>
   <% end %>
 
-  <div class="grid grid-cols-3 gap-2">
+  <div class="grid grid-cols-3 gap-2" data-controller="clientselect" data-clientselect-url-value="<%= clients_path %>" data-clientselect-param-value="client">
     <div class="my-5 col-span-2">
       <%= f.label "Client", class: "input-label"  %>
-      <%= f.collection_select :client_id, current_user.clients, :id, :full_name, {prompt: "Selecciona un cliente"}, {class: "input"} %>
+      <%= f.collection_select :client_id, current_user.clients, :id, :full_name, {prompt: "Selecciona un cliente"}, {data: {action: "change->clientselect#change"}, class: "input"} %>
     </div>
 
     <div class="my-5">
@@ -26,9 +26,7 @@
       <% end %>
     </div>
 
-    <div class="col-span-2">
-      Selected client details
-    </div>
+    <div id="client_details" class="col-span-2" data-clientselect-target="select"></div>
 
     <div class="">
       <%= f.label :date, class: "input-label"  %>
