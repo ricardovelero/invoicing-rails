@@ -2,8 +2,10 @@
     <%= number_to_currency @item&.price %>
 <% end %>
 
-
-
 <%= turbo_stream.update target="invoice_line_items_attributes_#{@target}_tax" do %>
     <%= @item&.iva %>
+<% end %>
+
+<%= turbo_stream.replace target="invoice_line_items_attributes_#{@target}_quantity" do %>
+    <input min="0" max="10000000" class="input" data-action="change->recalculate#recalculate" type="number" name="invoice[line_items_attributes][<%=@target%>][quantity]" id="invoice_line_items_attributes_<%=@target%>_quantity" value="0">
 <% end %>
