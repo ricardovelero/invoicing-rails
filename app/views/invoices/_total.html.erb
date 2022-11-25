@@ -1,6 +1,16 @@
-<div class="quote-total">
-  <div class="quote-total__inner container">
-    <div>Total:</div>
-    <div><%= number_to_currency invoice.total %></div>
-  </div>
-</div>
+      <label class="input-label text-right" for="invoice_subtotal">Subtotal</label>
+      <div class="p-2 text-right text-lg border input h-10" data-recalculate-target="subtotal">
+        <%= number_to_currency invoice.subtotal %>
+      </div>
+      <label class="input-label text-right my-1" for="invoice_iva">Iva</label>
+      <div class="p-2 text-right border input h-10" data-recalculate-target="taxtotal">
+        <%= number_to_currency invoice.iva %>
+      </div>
+
+      <label class="input-label text-right my-1" for="invoice_irpf">Irpf</label>
+      <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.irpf %></div>
+
+      <label class="input-label text-right my-2" for="invoice_total">Total</label>
+      <div class="p-2 text-right text-xl font-bold border input h-10" data-recalculate-target="grandtotal">
+        <%= number_to_currency invoice.total %>
+      </div>
