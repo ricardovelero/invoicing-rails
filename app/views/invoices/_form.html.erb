@@ -68,24 +68,9 @@
     
     </div>
 
-    <div class="w-1/4 my-5">
+    <div id="<%= dom_id(@invoice, :total) %>" class="w-1/4 my-5">
 
-      <%= f.label :subtotal, class: "input-label text-right"  %>
-      <div class="p-2 text-right text-lg border input h-10" data-recalculate-target="subtotal">
-        <%= number_to_currency invoice.subtotal %>
-      </div>
-      <%= f.label :iva, class: "input-label text-right my-1" %>
-      <div class="p-2 text-right border input h-10" data-recalculate-target="taxtotal">
-        <%= number_to_currency invoice.iva %>
-      </div>
-
-      <%= f.label :irpf, class: "input-label text-right my-1" %>
-      <div class="p-2 text-right border input h-10"><%= number_to_currency invoice.irpf %></div>
-
-      <%= f.label :total, class: "input-label text-right my-2" %>
-      <div class="p-2 text-right text-xl font-bold border input h-10" data-recalculate-target="grandtotal">
-        <%= number_to_currency invoice.total %>
-      </div>
+      <%= render "total", invoice: @invoice%>
 
     </div>
   </div>
