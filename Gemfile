@@ -93,3 +93,7 @@ gem "requestjs-rails"
 gem "simple_form"
 
 gem 'pagy'
+
+gem "matrix", "~> 0.4"
+
+gem 'receipts'
