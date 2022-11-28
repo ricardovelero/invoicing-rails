@@ -10,6 +10,11 @@ class InvoicesController < ApplicationController
   # GET /invoices/1 or /invoices/1.json
   def show
     @client = Client.find(@invoice.client_id).full_name
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf { send_pdf }
+    end
   end
 
   # GET /invoices/new
@@ -106,5 +111,13 @@ class InvoicesController < ApplicationController
       :status,
       line_items_attributes: [:id, :item_id, :invoice_id, :quantity, :_destroy]
     )
+  end
+
+  def send_pdf
+    # Render the PDF in memory and send as the response
+    send_data @invoice.pdf.render,
+      filename: "#{@invoice.created_at.strftime("%Y-%m-%d")}-invoice.pdf",
+      type: "application/pdf",
+      disposition: :inline # or :attachment to download
   end
 end
