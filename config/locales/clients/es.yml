@@ -4,13 +4,24 @@ es:
   clientes: Clientes
   cliente: Cliente
   nuevo_cliente: Nuevo cliente
+  editar_cliente: Editar cliente
   clientes_selecionados: clientes selecionados
   borrar: Borrar
   cantidad_por_pagina: Cantidad por pagina
   seleccionar todo: Seleccionar todo
   nombre: Nombre
+  apellido: Apellido
+  nombres: Nombres
+  apellidos: Apellidos
   email: Correo Electrónico
-  NIF: NIF
+  nif: NIF
+  calle: Calle
+  ciudad: Ciudad
+  provincia: Provincia
+  codigo_postal: Código Postal
+  pais: País
+  telefono: Teléfono
+  activo: Activo?
   ultima_factura: Última Factura
   total_facturado: Total Facturado
   acciones: Acciones

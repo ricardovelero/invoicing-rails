@@ -1,6 +1,6 @@
 <div class="mx-auto md:w-2/3 w-full">
   <%= link_to sanitize("&larr; Regresar a items"), items_path %>
-  <h1 class="font-bold text-4xl mt-8">Nuevo ítem</h1>
+  <h1 class="font-bold text-4xl mt-8"><%= t("nuevo_item") %></h1>
 
   <%= render "form", item: @item %>
 
