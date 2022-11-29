@@ -1,4 +1,7 @@
 class Item < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :search, against: [:item_name, :description, :price, :iva, :irpf],
+    using: { tsearch: { prefix: true } }
   belongs_to :user
   has_many :line_items
   has_many :invoices, through: :line_items

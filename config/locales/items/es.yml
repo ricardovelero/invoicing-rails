@@ -1,0 +1,32 @@
+es:
+  a: a
+  de: de
+  items: Ítems
+  item: Ítem
+  nuevo_item: Nuevo ítem
+  items_selecionados: ítems selecionados
+  borrar: Borrar
+  cantidad_por_pagina: Cantidad por pagina
+  seleccionar todo: Seleccionar todo
+  nombre: Nombre
+  descripcion: Descripcion
+  precio: Precio
+  iva: IVA
+  irpf: IRPF
+  acciones: Acciones
+  resultados: resultados
+  mostrando: Mostrando
+  hoy: Hoy
+  ultimo_mes: Último Mes
+  ultimos_7_dias: Últimos 7 días
+  ultimos_12_meses: Últimos 12 meses
+  todos: Todos
+  todas: Todas
+  siguiente: Siguiente
+  anterior: Anterior
+  pagadas: Pagadas
+  por_vencer: Por vencer
+  vencidas: Vencidas
+  buscar_items: Buscar ítems...
+  eliminar: Eliminiar
+  estas_seguro: ¿Estás seguro?
