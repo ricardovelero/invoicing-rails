@@ -100,6 +100,8 @@ GEM
       warden (~> 1.2.3)
     digest (3.1.0)
     erubi (1.11.0)
+    faker (3.0.0)
+      i18n (>= 1.8.11, < 2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     haml (6.0.7)
@@ -165,6 +167,9 @@ GEM
       activesupport
     pdf-core (0.9.0)
     pg (1.4.3)
+    pg_search (2.3.6)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
     prawn (2.4.0)
       pdf-core (~> 0.9.0)
       ttfunk (~> 1.7)
@@ -307,6 +312,7 @@ DEPENDENCIES
   carmen
   debug
   devise
+  faker
   heroicon
   htmlbeautifier
   importmap-rails
@@ -315,6 +321,7 @@ DEPENDENCIES
   matrix (~> 0.4)
   pagy
   pg (~> 1.1)
+  pg_search
   premailer-rails
   prettier
   puma (~> 5.0)
