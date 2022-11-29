@@ -4,7 +4,9 @@ class ClientsController < ApplicationController
 
   # GET /clients or /clients.json
   def index
-    @pagy, @clients = pagy(current_user.clients)
+    @clients = current_user.clients.all
+    @clients = current_user.clients.search(params[:query]) if params[:query].present?
+    @pagy, @clients = pagy @clients
   end
 
   # GET /clients/1 or /clients/1.json
