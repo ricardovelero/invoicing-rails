@@ -12,59 +12,61 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :first_name %>
+    <%= form.label t("nombres") %>
     <%= form.text_field :first_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :last_name %>
+    <%= form.label t("apellidos") %>
     <%= form.text_field :last_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :nif %>
+    <%= form.label t("nif") %>
     <%= form.text_field :nif, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :street %>
+    <%= form.label t("calle") %>
     <%= form.text_field :street, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :city %>
+    <%= form.label t("ciudad") %>
     <%= form.text_field :city, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :region %>
+    <%= form.label t("provincia") %>
     <%= form.text_field :region, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :postal_code %>
+    <%= form.label t("codigo_postal") %>
     <%= form.text_field :postal_code, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :country %>
+    <%= form.label t("pais") %>
     <%= form.text_field :country, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :email %>
+    <%= form.label t("email") %>
     <%= form.text_field :email, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
-    <%= form.label :telephone %>
+    <%= form.label t("telefono") %>
     <%= form.text_field :telephone, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :active %>
-    <%= form.check_box :active, checked: true, class: "block mt-2 h-5 w-5 z-10" %>
-  </div>
+  <% unless client.new_record? %>
+    <div class="my-5">
+      <%= form.label t("activo") %>
+      <%= form.check_box :active, checked: true, class: "block mt-2 h-5 w-5 z-10" %>
+    </div>
+  <% end %>
 
   <div class="inline">
     <%= form.submit class: "btn-primary" %>
