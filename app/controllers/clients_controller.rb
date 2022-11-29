@@ -6,7 +6,15 @@ class ClientsController < ApplicationController
   def index
     @clients = current_user.clients.all
     @clients = current_user.clients.search(params[:query]) if params[:query].present?
-    @pagy, @clients = pagy @clients
+    @pagy, @clients = pagy @clients.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+  end
+
+  def sort_column
+    %w{ first_name email nif }.include?(params[:sort]) ? params[:sort] : "first_name"
+  end
+
+  def sort_direction
+    %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   # GET /clients/1 or /clients/1.json
