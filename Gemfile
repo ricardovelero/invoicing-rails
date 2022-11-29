@@ -63,6 +63,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem "faker"
 end
 
 group :test do
@@ -97,3 +98,5 @@ gem 'pagy'
 gem "matrix", "~> 0.4"
 
 gem 'receipts'
+
+gem "pg_search"
