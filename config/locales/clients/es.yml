@@ -1,7 +1,19 @@
 es:
   a: a
   de: de
-  nuevo_cliente: Nuevao Cliente
+  clientes: Clientes
+  cliente: Cliente
+  nuevo_cliente: Nuevo cliente
+  clientes_selecionados: clientes selecionados
+  borrar: Borrar
+  cantidad_por_pagina: Cantidad por pagina
+  seleccionar todo: Seleccionar todo
+  nombre: Nombre
+  email: Correo Electrónico
+  NIF: NIF
+  ultima_factura: Última Factura
+  total_facturado: Total Facturado
+  acciones: Acciones
   resultados: resultados
   mostrando: Mostrando
   hoy: Hoy
@@ -15,3 +27,4 @@ es:
   pagadas: Pagadas
   por_vencer: Por vencer
   vencidas: Vencidas
+  buscar_clientes: Buscar clientes...

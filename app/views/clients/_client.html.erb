@@ -17,10 +17,7 @@
         <div class="text-left"><%= client.email %></div>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-        <div class="text-left"><%= client.city %>, <%= client.country %></div>
-    </td>
-    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-        <div class="text-center"><%= client.invoices.count %></div>
+        <div class="text-left"><%= client.nif %></div>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
         <div class="text-center font-medium text-sky-500">
@@ -32,7 +29,7 @@
         </div>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-        <div class="text-left font-medium text-emerald-500"><%= client.invoices.sum(:total) %></div>
+        <div class="text-center font-medium text-emerald-500"><%= client.invoices.sum(:total) %></div>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
         <div class="space-x-1 inline-flex">
