@@ -4,7 +4,17 @@ class ItemsController < ApplicationController
 
   # GET /items or /items.json
   def index
-    @pagy, @items = pagy(current_user.items)
+    @items = current_user.items.all
+    @items = current_user.items.search(params[:query]) if params[:query].present?
+    @pagy, @items = pagy @items.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+  end
+
+  def sort_column
+    %w{ item_name description price iva irpf }.include?(params[:sort]) ? params[:sort] : "item_name"
+  end
+
+  def sort_direction
+    %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   # GET /items/1 or /items/1.json
