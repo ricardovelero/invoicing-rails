@@ -3,8 +3,6 @@ dean =
     email: "dean@example.com",
     password: "password",
     password_confirmation: "password",
-    first_name: "Dean",
-    last_name: "DeHart"
   )
 
 john =
@@ -12,8 +10,6 @@ john =
     email: "john@example.com",
     password: "password",
     password_confirmation: "password",
-    first_name: "John",
-    last_name: "Smith"
   )
 
 UserProfile.first_or_create!(
@@ -24,7 +20,8 @@ UserProfile.first_or_create!(
   region: "Malaga",
   postal_code: "29680",
   country: "España",
-  user: dean
+  first_name: "Dean",
+  last_name: "DeHart"
 )
 
 UserProfile.first_or_create!(
@@ -35,5 +32,6 @@ UserProfile.first_or_create!(
   region: "Malaga",
   postal_code: "29680",
   country: "España",
-  user: john
+  first_name: "John",
+  last_name: "Smith"
 )
