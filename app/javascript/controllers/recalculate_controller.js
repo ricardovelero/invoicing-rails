@@ -62,7 +62,7 @@ export default class extends Controller {
   }
 
   convertNum(element) {
-    return element.replace('€', '').replace('&euro', '').replace(',', '.').trim() * 1
+    return element.replace('€', '').replace('&euro', '').replace('.', '').replace(',', '.').trim() * 1
   }
 
 }
