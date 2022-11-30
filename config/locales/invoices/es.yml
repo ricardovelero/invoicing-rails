@@ -5,6 +5,8 @@ es:
   nueva_factura: Nueva Factura
   resultados: resultados
   mostrando: Mostrando
+  fecha: Fecha
+  fecha_vencimiento: Fecha vencimiento
   hoy: Hoy
   ultimo_mes: Último Mes
   ultimos_7_dias: Últimos 7 días
@@ -29,4 +31,12 @@ es:
   emitida: Emitida
   vencimiento: Vencimiento
   acciones: Acciones
+  numero_factura: Número de Factura
+  selecciona_cliente: Selecciona un cliente
+  direccion: Dirección
+  detalle_cliente: Información del Cliente
+  notas: Notas
+  agregar_linea_item: Agregar Línea Ítem
+  items_facturar: Ítems a Facturar
+  guardar_factura: Guardar Factura
   

@@ -35,6 +35,7 @@ class InvoicesController < ApplicationController
 
   # GET /invoices/1/edit
   def edit
+    @client = Client.find(@invoice.client_id)
   end
 
   # POST /invoices or /invoices.json
