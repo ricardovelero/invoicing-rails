@@ -111,16 +111,7 @@
     </div>
     <!-- Pagination -->
     <% unless @items.none? %>
-        <% if @pagy.pages > 1 %>
-            <div class="mt-8">
-                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                    <div class="text-sm text-slate-500 text-center sm:text-left">
-                        <%== pagy_info(@pagy, item_name: t('item').pluralize(@pagy.count)) %>
-                    </div>
-                    <%== pagy_nav(@pagy) %>
-                </div>
-            </div>
-        <% end %>
+        <%= render "shared/pagination", item_name: t('item') %>
     <% end %>
 <% end %>
 <script>
