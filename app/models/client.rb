@@ -1,7 +1,4 @@
 class Client < ApplicationRecord
-  
-  pg_search_scope :search, against: [:first_name, :last_name, :nif, :city, :region, :country],
-    using: { tsearch: { prefix: true } }
   belongs_to :user
   has_many :invoices
 
@@ -14,6 +11,9 @@ class Client < ApplicationRecord
             :postal_code,
             :country,
             presence: true
+    
+  pg_search_scope :search, against: [:first_name, :last_name, :nif, :city, :region, :country],
+  using: { tsearch: { prefix: true } }          
 
   def full_name
     [first_name, last_name].reject(&:blank?).collect(&:capitalize).join(" ")

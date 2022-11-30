@@ -1,8 +1,4 @@
 class Invoice < ApplicationRecord
-  
-  pg_search_scope :search, against: [:invoice_number, :status, :date, :due_date],
-    using: { tsearch: { prefix: true } }
-
   has_one :client
   belongs_to :user
 
@@ -15,6 +11,9 @@ class Invoice < ApplicationRecord
   attribute :status, :string, default: "Pendiente"
 
   before_create :set_invoice_number
+
+  pg_search_scope :search, against: [:invoice_number, :status, :date, :due_date],
+  using: { tsearch: { prefix: true } }
 
   def set_invoice_number
     last_invoice = Invoice.last
