@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
   before_action :config_devise_params, if: :devise_controller?
   #around_action :switch_locale
+  before_action { @pagy_locale = params[:locale] }
   after_action :store_action
 
   include Pagy::Backend
