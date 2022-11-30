@@ -50,12 +50,10 @@ export default class extends Controller {
           }
         })
         itemTotal = itemPrice * (1 + itemTax/100) * event.target.value
-        
-        element.textContent = formatter.format(itemTotal)
       }
-      sum += this.convertNum(element.textContent)
+      sum += itemTotal
 
-      subTotal += this.convertNum(element.textContent) / (1 + taxesArray[index]/100) 
+      subTotal += itemTotal / (1 + taxesArray[index]/100) 
     })
 
     this.subtotalTarget.textContent = formatter.format(subTotal)
