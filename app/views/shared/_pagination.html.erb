@@ -1,0 +1,10 @@
+    <% if @pagy.pages > 1 %>
+        <div class="mt-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div class="text-sm text-slate-500 text-center sm:text-left">
+                    <%== pagy_info(@pagy, item_name: item_name.pluralize(@pagy.count)) %>
+                </div>
+                <%== pagy_nav(@pagy) %>
+            </div>
+        </div>
+    <% end %>
