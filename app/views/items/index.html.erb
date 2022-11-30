@@ -34,11 +34,8 @@
                     <!-- Sort --> 
                     <label for="action-search" class="sr-only"><%= t("cantidad_por_pagina") %></label>
                     <%= form.select :count, options_for_select([10, 25, 50, 100], selected: params[:count]), {}, {class: "form-input pr-7 focus:border-slate-300 text-slate-500", onchange: "this.form.requestSubmit()"} %>
-
                 <% end %>
-
             </div>
-
         <% end %>
         <!-- Add item button -->
         <a href="<%= new_item_path %>" class="btn bg-indigo-500 hover:bg-indigo-600 text-white">
