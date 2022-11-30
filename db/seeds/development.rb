@@ -67,7 +67,7 @@ end
   Item.create(
     item_name: Faker::Lorem.sentence(word_count: 3, supplemental: false, random_words_to_add: 4),
     description: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4),
-    price: Faker::Number.within(range: 1.0..1000.0),
+    price: Faker::Number.within(range: 1.0..2000.0),
     iva: %w[0 4 10 21].sample,
     irpf: %w[0 7 15].sample,
     user_id: rand(1..2)
