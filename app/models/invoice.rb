@@ -44,7 +44,7 @@ class Invoice < ApplicationRecord
     the_line_items = Array.new
     the_line_items << ["<b>Ítem</b>", "<b>Cantidad</b>", "<b>Importe</b>", "IVA", "<b>Monto</b>"]
     line_items.map do |l|
-      line = [l.item.item_name, l.item.price, l.quantity, l.item.iva, (l.item.price * l.quantity * (1 + l.item.iva/100))]
+      line = [l.item.item_name, l.quantity, l.item.price, l.item.iva, (l.item.price * l.quantity * (1 + l.item.iva/100))]
       the_line_items << line
     end
     the_line_items << [nil, nil, nil, "Base Imponible", ActionController::Base.helpers.number_to_currency(subtotal, locale: :es)]
