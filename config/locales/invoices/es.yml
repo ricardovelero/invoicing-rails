@@ -43,4 +43,6 @@ es:
   iva: IVA
   irpf: IRPF
   total: TOTAL
-  
+  total_item: Total ítem
+  cantidad: Cantidad
+  importe: Importe  

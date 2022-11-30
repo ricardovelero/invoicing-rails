@@ -10,24 +10,24 @@
           {prompt: "Selecciona un item"}, { multiple: false, data: {action: "change->itemselect#change"}, class: "input"} %>
       </div>
       <div class="w-1/6">
-        <%= ff.label "Cantidad", class: "input-label"  %>
+        <%= ff.label t("cantidad"), class: "input-label"  %>
         <%= ff.number_field :quantity, min: 0, max: 10000000, class: "input", 
           data: {action: "change->recalculate#recalculate"} %>
       </div>
       <div class="w-1/6">
-        <%= ff.label "Importe", class: "input-label"  %>
+        <%= ff.label t("importe"), class: "input-label"  %>
         <div id="invoice_line_items_attributes_<%= turboid %>_price" class="p-2 text-left border input h-10" data-recalculate-target="price" data-itemselect-target="select">
           <%= number_to_currency line_item.item&.price %>
         </div>
       </div>
       <div class="w-1/12">
-        <%= ff.label "IVA", class: "input-label uppercase text-center"  %>
+        <%= ff.label t("iva"), class: "input-label uppercase text-center"  %>
         <div id="invoice_line_items_attributes_<%= turboid %>_tax" class="p-2 text-left border input h-10 w-12" data-recalculate-target="tax">
           <%= line_item.item&.iva %>
         </div>
       </div>
       <div class="w-1/3">
-        <%= ff.label "Total Ítem", class: "input-label text-right"  %>
+        <%= ff.label t("total_item"), class: "input-label text-right"  %>
         <div id="invoice_line_items_attributes_<%= turboid %>_total" class="p-2 text-right border input h-10" data-recalculate-target="total" >
           <%= number_to_currency line_item.total_price %>
         </div>
