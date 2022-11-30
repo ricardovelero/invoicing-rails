@@ -5,6 +5,16 @@ class InvoicesController < ApplicationController
   # GET /invoices or /invoices.json
   def index
     @invoices = current_user.invoices
+    @invoices = current_user.invoices.search(params[:query]) if params[:query].present?
+    @pagy, @invoices = pagy @invoices.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+  end
+
+  def sort_column
+    %w{ invoice_number estatus date due_date }.include?(params[:sort]) ? params[:sort] : "invoice_number"
+  end
+
+  def sort_direction
+    %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   # GET /invoices/1 or /invoices/1.json

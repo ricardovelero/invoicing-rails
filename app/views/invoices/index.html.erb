@@ -10,18 +10,24 @@
     <!-- Right: Actions -->
     <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
 
+        <!-- Sort and Search -->
         <% unless @invoices.none? %>
-            <!-- Search form -->
-            <form class="relative">
-                <label for="action-search" class="sr-only"><%= t("buscar") %></label>
-                <input id="action-search" class="form-input pl-9 focus:border-slate-300" type="search" placeholder="Buscar factura" />
-                <button class="absolute inset-0 right-auto group" type="submit" aria-label="Buscar">
-                    <svg class="w-4 h-4 shrink-0 fill-current text-slate-400 group-hover:text-slate-500 ml-3 mr-2" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" />
-                        <path d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z" />
-                    </svg>
-                </button>
-            </form>
+            <div class="relative">
+                <%= form_with url: "", method: :get, data: { turbo_frame: "invoices", turbo_action: "advance" } do |form| %>
+                    <!-- Search form -->
+                    <label for="action-search" class="sr-only"><%= t("buscar") %></label>
+                    <%= form.search_field :query, value: params[:query], oninput: "this.form.requestSubmit()", class: "form-input pl-9 focus:border-slate-300", placeholder: t("buscar_factura") %>
+                    <button class="absolute inset-0 right-auto group" type="submit" aria-label="Search">
+                        <svg class="w-4 h-4 shrink-0 fill-current text-slate-500 group-hover:text-slate-500 ml-3 mr-2" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" />
+                            <path d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z" />
+                        </svg>
+                    </button>
+                    <!-- Sort --> 
+                    <label for="action-search" class="sr-only"><%= t("cantidad_por_pagina") %></label>
+                    <%= form.select :count, options_for_select([10, 25, 50, 100], selected: params[:count]), {}, {class: "form-input pr-7 focus:border-slate-300 text-slate-500", onchange: "this.form.requestSubmit()"} %>
+                <% end %>
+            </div>
         <% end %>
         <!-- Create invoice button -->
         <button class="btn bg-indigo-500 hover:bg-indigo-600 text-white">
@@ -62,180 +68,87 @@
             <!-- Delete button -->
             <div class="table-items-action hidden">
                 <div class="flex items-center">
-                    <div class="hidden xl:block text-sm italic mr-2 whitespace-nowrap"><span class="table-items-count"></span> <%= t("items_seleccionados") %></div>
+                    <div class="hidden xl:block text-sm italic mr-2 whitespace-nowrap"><span class="table-items-count"></span> <%= t("facturas_seleccionadas") %></div>
                     <button class="btn bg-white border-slate-200 hover:border-slate-300 text-rose-500 hover:text-rose-600"><%= t("borrar") %></button>
                 </div>
-            </div>
-
-            <!-- Dropdown -->
-            <div class="relative" x-data="{ open: false, selected: 2 }">
-                <button
-                    class="btn justify-between w-52 bg-white border-slate-200 hover:border-slate-300 text-slate-500 hover:text-slate-600"                                           aria-label="Select date range"
-                    aria-haspopup="true"
-                    @click.prevent="open = !open"
-                    :aria-expanded="open" >
-                    <span class="flex items-center">
-                        <svg class="w-4 h-4 fill-current text-slate-500 shrink-0 mr-2" viewBox="0 0 16 16">
-                            <path d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
-                        </svg>
-                        <span x-text="$refs.options.children[selected].children[1].innerHTML"></span>
-                    </span>
-                    <svg class="shrink-0 ml-1 fill-current text-slate-400" width="11" height="7" viewBox="0 0 11 7">
-                        <path d="M5.4 6.8L0 1.4 1.4 0l4 4 4-4 1.4 1.4z" />
-                    </svg>
-                </button>
-                <div
-                    class="z-10 absolute top-full right-0 w-full bg-white border border-slate-200 py-1.5 rounded shadow-lg overflow-hidden mt-1"
-                        @click.outside="open = false"
-                        @keydown.escape.window="open = false"
-                        x-show="open"
-                        x-transition:enter="transition ease-out duration-100 transform"
-                        x-transition:enter-start="opacity-0 -translate-y-2"
-                        x-transition:enter-end="opacity-100 translate-y-0"
-                        x-transition:leave="transition ease-out duration-100"
-                        x-transition:leave-start="opacity-100"
-                        x-transition:leave-end="opacity-0"
-                        x-cloak
-                    >
-                    <div class="font-medium text-sm text-slate-600" x-ref="options">
-                        <button
-                            tabindex="0"
-                            class="flex items-center w-full hover:bg-slate-50 py-1 px-3 cursor-pointer"
-                            :class="selected === 0 && 'text-indigo-500'"
-                            @click="selected = 0;open = false"
-                            @focus="open = true"
-                            @focusout="open = false"
-                        >
-                            <svg class="shrink-0 mr-2 fill-current text-indigo-500" :class="selected !== 0 && 'invisible'" width="12" height="9" viewBox="0 0 12 9">
-                                <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z" />
-                            </svg>
-                            <span><%= t("hoy") %></span>
-                        </button>
-                        <button
-                            tabindex="0"
-                            class="flex items-center w-full hover:bg-slate-50 py-1 px-3 cursor-pointer"
-                            :class="selected === 1 && 'text-indigo-500'"
-                            @click="selected = 1;open = false"
-                            @focus="open = true"
-                            @focusout="open = false"
-                        >
-                            <svg class="shrink-0 mr-2 fill-current text-indigo-500" :class="selected !== 1 && 'invisible'" width="12" height="9" viewBox="0 0 12 9">
-                                <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z" />
-                            </svg>
-                            <span><%= t("ultimos_7_dias") %></span>
-                        </button>
-                        <button
-                            tabindex="0"
-                            class="flex items-center w-full hover:bg-slate-50 py-1 px-3 cursor-pointer"
-                            :class="selected === 2 && 'text-indigo-500'"
-                            @click="selected = 2;open = false"
-                            @focus="open = true"
-                            @focusout="open = false"                                        
-                        >
-                            <svg class="shrink-0 mr-2 fill-current text-indigo-500" :class="selected !== 2 && 'invisible'" width="12" height="9" viewBox="0 0 12 9">
-                                <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z" />
-                            </svg>
-                            <span><%= t("ultimo_mes") %></span>
-                        </button>
-                        <button
-                            tabindex="0"
-                            class="flex items-center w-full hover:bg-slate-50 py-1 px-3 cursor-pointer"
-                            :class="selected === 3 && 'text-indigo-500'"
-                            @click="selected = 3;open = false"
-                            @focus="open = true"
-                            @focusout="open = false"                                        
-                        >
-                            <svg class="shrink-0 mr-2 fill-current text-indigo-500" :class="selected !== 3 && 'invisible'" width="12" height="9" viewBox="0 0 12 9">
-                                <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z" />
-                            </svg>
-                            <span><%= t("ultimos_12_meses") %></span>
-                        </button>
-                        <button
-                            tabindex="0"
-                            class="flex items-center w-full hover:bg-slate-50 py-1 px-3 cursor-pointer"
-                            :class="selected === 4 && 'text-indigo-500'"
-                            @click="selected = 4;open = false"
-                            @focus="open = true"
-                            @focusout="open = false"                                        
-                        >
-                            <svg class="shrink-0 mr-2 fill-current text-indigo-500" :class="selected !== 4 && 'invisible'" width="12" height="9" viewBox="0 0 12 9">
-                                <path d="M10.28.28L3.989 6.575 1.695 4.28A1 1 0 00.28 5.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28.28z" />
-                            </svg>
-                            <span><%= t("todos") %></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Filter button -->
-            <div class="relative inline-flex">
-                <button
-                    class="btn bg-white border-slate-200 hover:border-slate-300 text-slate-500 hover:text-slate-600">
-                    <span class="sr-only"><%= t("filtrar") %></span><wbr>
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16">
-                        <path d="M9 15H7a1 1 0 010-2h2a1 1 0 010 2zM11 11H5a1 1 0 010-2h6a1 1 0 010 2zM13 7H3a1 1 0 010-2h10a1 1 0 010 2zM15 3H1a1 1 0 010-2h14a1 1 0 010 2z" />
-                    </svg>
-                </button>
-            </div>                            
+            </div>                     
         </div>
     <% end %>
 </div>
 
 <!-- Table -->
-<div class="bg-white shadow-lg rounded-sm border border-slate-200 mb-8">
-    <div x-data="handleSelect">
+<%= turbo_frame_tag "invoices" do %>
+    <div class="bg-white shadow-lg rounded-sm border border-slate-200 mb-8">
+        <div x-data="handleSelect">
 
-        <!-- Table -->
-        <div class="overflow-x-auto">
+            <!-- Table -->
+            <div class="overflow-x-auto">
 
-            <% if @invoices.none? %>
-                <%= render "empty_state" %>
-            <% else %>
-                <table class="table-auto w-full">
-                    <!-- Table header -->
-                    <thead class="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200">
-                        <tr>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
-                                <div class="flex items-center">
-                                    <label class="inline-flex">
-                                        <span class="sr-only"><%= t("seleccionar_todos") %></span>
-                                        <input id="parent-checkbox" class="form-checkbox" type="checkbox" @click="toggleAll" />
-                                    </label>
-                                </div>
-                            </th>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                <div class="font-semibold text-left"><%= t("numero") %></div>
-                            </th>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                <div class="font-semibold text-left">Total</div>
-                            </th>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                <div class="font-semibold text-left"><%= t("estatus") %></div>
-                            </th>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                <div class="font-semibold text-left"><%= t("cliente") %></div>
-                            </th>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                <div class="font-semibold text-left"><%= t("emitida") %></div>
-                            </th>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                <div class="font-semibold text-left"><%= t("vencimiento") %></div>
-                            </th>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                <div class="font-semibold text-left"><%= t("acciones") %></div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <!-- Table body -->
-                    <tbody class="text-sm divide-y divide-slate-200">
-                        <!-- Row -->
-                    <%= render @invoices %>
-                    </tbody>
-                </table>
-            <% end %>
+                <% if @invoices.none? %>
+                    <%= render "empty_state" %>
+                <% else %>
+                    <table class="table-auto w-full">
+                        <!-- Table header -->
+                        <thead class="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200">
+                            <tr>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
+                                    <div class="flex items-center">
+                                        <label class="inline-flex">
+                                            <span class="sr-only"><%= t("seleccionar_todos") %></span>
+                                            <input id="parent-checkbox" class="form-checkbox" type="checkbox" @click="toggleAll" />
+                                        </label>
+                                    </div>
+                                </th>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                    <div class="font-semibold text-left">
+                                        <%= sort_link_to t("numero"), :invoice_number, data: { turbo_action: "advance" } %>
+                                    </div>
+                                </th>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                    <div class="font-semibold text-left">
+                                        <%= sort_link_to t("total"), :total, data: { turbo_action: "advance" } %>
+                                    </div>
+                                </th>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                    <div class="font-semibold text-left">
+                                        <%= sort_link_to t("estatus"), :status, data: { turbo_action: "advance" } %>
+                                    </div>
+                                </th>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                    <div class="font-semibold text-left"><%= t("cliente") %>
+                                        <%= sort_link_to t("cliente"), :client_id, data: { turbo_action: "advance" } %>
+                                    </div>
+                                </th>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                    <div class="font-semibold text-left">
+                                        <%= sort_link_to t("emitida"), :date, data: { turbo_action: "advance" } %>
+                                    </div>
+                                </th>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                    <div class="font-semibold text-left">
+                                        <%= sort_link_to t("vencimiento"), :due_date, data: { turbo_action: "advance" } %>
+                                    </div>
+                                </th>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                    <div class="font-semibold text-left"><%= t("acciones") %></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!-- Table body -->
+                        <tbody class="text-sm divide-y divide-slate-200">
+                            <!-- Row -->
+                        <%= render @invoices %>
+                        </tbody>
+                    </table>
+                <% end %>
+            </div>
         </div>
     </div>
-</div>
+<% end %>
+<!-- Pagination -->
+<% unless @invoices.none? %>
+    <%= render "shared/pagination", item_name: t('factura') %>
+<% end %>
 <script>
     // A basic demo function to handle "select all" functionality
     document.addEventListener('alpine:init', () => {
@@ -268,21 +181,3 @@
         }))
     })    
 </script>
-<!-- Pagination -->
-<% unless @invoices.none? %>
-<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-    <nav class="mb-4 sm:mb-0 sm:order-1" role="navigation" aria-label="Navigation">
-        <ul class="flex justify-center">
-            <li class="ml-3 first:ml-0">
-                <a class="btn bg-white border-slate-200 text-slate-300 cursor-not-allowed" href="#0" disabled><%= heroicon "arrow-small-left" %> <%= t("anterior") %></a>
-            </li>
-            <li class="ml-3 first:ml-0">
-                <a class="btn bg-white border-slate-200 hover:border-slate-300 text-indigo-500" href="#0"><%= t("siguiente") %> <%= heroicon "arrow-small-right" %></a>
-            </li>
-        </ul>
-    </nav>
-    <div class="text-sm text-slate-500 text-center sm:text-left">
-        <%= t("mostrando") %> <span class="font-medium text-slate-600">1</span> <%= t("a") %> <span class="font-medium text-slate-600">10</span> <%= t("de") %> <span class="font-medium text-slate-600"><%= @invoices.count %></span> <%= t("resultados") %>
-    </div>
-</div>
-<% end %>
