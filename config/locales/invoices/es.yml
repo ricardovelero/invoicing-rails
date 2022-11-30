@@ -1,6 +1,7 @@
 es:
   a: a
   de: de
+  facturas: Facturas
   nueva_factura: Nueva Factura
   resultados: resultados
   mostrando: Mostrando
@@ -10,8 +11,22 @@ es:
   ultimos_12_meses: Últimos 12 meses
   todos: Todos
   todas: Todas
+  seleccionar_todos: Seleccionar todos
   siguiente: Siguiente
   anterior: Anterior
   pagadas: Pagadas
   por_vencer: Por vencer
   vencidas: Vencidas
+  buscar_factura: Buscar factura...
+  buscar: Buscar
+  cantidad_por_pagina: Cantidad por página
+  facturas_seleccionadas: facturas seleccionadas
+  borrar: Borrar
+  numero: Número
+  total: Total
+  estatus: Estatus
+  cliente: Cliente
+  emitida: Emitida
+  vencimiento: Vencimiento
+  acciones: Acciones
+  

@@ -1,4 +1,8 @@
 class Invoice < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :search, against: [:invoice_number, :status, :date, :due_date],
+    using: { tsearch: { prefix: true } }
+
   has_one :client
   belongs_to :user
 
