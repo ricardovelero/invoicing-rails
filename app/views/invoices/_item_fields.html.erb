@@ -14,7 +14,7 @@
         <%= ff.number_field :quantity, min: 0, max: 10000000, class: "input", 
           data: {action: "change->recalculate#recalculate"} %>
       </div>
-      <div class="w-1/6">
+      <div class="w-1/3">
         <%= ff.label t("importe"), class: "input-label"  %>
         <div id="invoice_line_items_attributes_<%= turboid %>_price" class="p-2 text-left border input h-10" data-recalculate-target="price" data-itemselect-target="select">
           <%= number_to_currency line_item.item&.price %>
