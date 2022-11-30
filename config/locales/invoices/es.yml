@@ -39,4 +39,8 @@ es:
   agregar_linea_item: Agregar Línea Ítem
   items_facturar: Ítems a Facturar
   guardar_factura: Guardar Factura
+  subtotal: Base imponible
+  iva: IVA
+  irpf: IRPF
+  total: TOTAL
   
