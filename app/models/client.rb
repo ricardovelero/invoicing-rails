@@ -1,5 +1,5 @@
 class Client < ApplicationRecord
-  include PgSearch::Model
+  
   pg_search_scope :search, against: [:first_name, :last_name, :nif, :city, :region, :country],
     using: { tsearch: { prefix: true } }
   belongs_to :user
