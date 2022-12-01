@@ -34,7 +34,7 @@ export default class extends Controller {
     let taxesArray = []
 
     this.taxTargets.forEach((tax, index) => {
-      taxesArray[index] = this.convertNum(tax.textContent)
+      taxesArray[index] = tax.textContent
     })
 
     this.totalTargets.forEach((element, index) => {
