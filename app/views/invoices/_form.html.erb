@@ -57,7 +57,7 @@
 
   <h2 class="text-center text-lg my-5 underline"><%= t("items_facturar") %></h2>
 
-  <div id="line_items" data-controller="removeitem">
+  <div id="line_items">
     <% f.object.line_items.each do |i| %>
       <%= render "item_fields", f: f, line_item: i, turboid: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) %>
     <% end %>
