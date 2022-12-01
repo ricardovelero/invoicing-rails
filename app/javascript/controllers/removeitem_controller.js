@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["item", "theHidden"];
+  static targets = ["item", "theHidden", "qty"];
 
   click(event) {
     let eventId = event.path[3].id
@@ -15,6 +15,12 @@ export default class extends Controller {
       let hiddenId = element.id.match(/\d+/g)
       if (hiddenId == eventId) {
         element.value = true
+      }
+    })
+    this.qtyTargets.forEach((element) => {
+      let qtyId = element.id.match(/\d+/g)
+      if (qtyId == eventId) {
+        element.value = 0
       }
     })
   }
