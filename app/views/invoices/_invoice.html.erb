@@ -15,7 +15,7 @@
                             <div class="font-medium text-rose-500"><%= number_to_currency(invoice.total, locale: :es) %></div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div class="inline-flex font-medium bg-rose-100 text-rose-500 rounded-full text-center px-2.5 py-0.5"><%= invoice.status %></div>
+                            <div class="<%= invoice.status? %>"><%= invoice.status %></div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
                             <div class="font-medium text-slate-800"><%= Client.find(invoice.client_id).full_name %></div>
@@ -24,7 +24,7 @@
                             <div><%= invoice.date.strftime("%d %b %Y") %></div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div><%= invoice.due_date.strftime("%d %b %Y") %></div>
+                            <div class="<%= invoice.past_due? %>"><%= invoice.due_date.strftime("%d %b %Y") %></div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
                             <div class="space-x-1 inline-flex">

@@ -40,6 +40,16 @@ class Invoice < ApplicationRecord
     line_items.sum(&:total_iva)
   end
 
+  def past_due?
+    return "past-due" if due_date.past?
+    "on-time"
+  end
+
+  def status?
+    return "paid" if status == "Pagada"
+    "not-paid" if status == "Pendiente"
+  end
+
   def pdf_line_items
     the_line_items = Array.new
     the_line_items << ["<b>Ítem</b>", "<b>Cantidad</b>", "<b>Importe</b>", "IVA", "<b>Monto</b>"]
