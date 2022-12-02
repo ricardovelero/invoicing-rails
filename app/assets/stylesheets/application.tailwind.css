@@ -317,16 +317,22 @@
   }
 }
 
-  /* Invoice view */
-  .past-due, .not-paid {
-    @apply inline-flex font-medium bg-rose-100 text-rose-500 rounded-full text-center px-2.5 py-0.5;
-  }
-  .on-time {
-    @apply inline-flex font-medium bg-slate-100 text-slate-500 rounded-full text-center px-2.5 py-1;
-  }
-  .paid {
-    @apply inline-flex font-medium bg-green-100 text-green-500 rounded-full text-center px-2.5 py-0.5;
-  }
+/* Invoice view */
+.past-due, .not-paid {
+  @apply inline-flex font-medium bg-rose-100 text-rose-500 rounded-full text-center px-2.5 py-0.5;
+}
+.on-time {
+  @apply inline-flex font-medium bg-slate-100 text-slate-500 rounded-full text-center px-2.5 py-1;
+}
+.paid {
+  @apply inline-flex font-medium bg-green-100 text-green-500 rounded-full text-center px-2.5 py-0.5;
+}
+.filter-buttons-active {
+  @apply inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-transparent shadow-sm bg-indigo-500 text-white duration-150 ease-in-out;
+}
+.filter-buttons-inactive {
+  @apply inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out;
+}
 
 /* Pagy */
 .pagy-nav,
