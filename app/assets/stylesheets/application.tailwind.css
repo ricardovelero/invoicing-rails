@@ -315,11 +315,20 @@
     @apply pl-4;
     list-style: disc;
   }
-
 }
 
-/* Pagy */
+  /* Invoice view */
+  .past-due, .not-paid {
+    @apply inline-flex font-medium bg-rose-100 text-rose-500 rounded-full text-center px-2.5 py-0.5;
+  }
+  .on-time {
+    @apply inline-flex font-medium bg-slate-100 text-slate-500 rounded-full text-center px-2.5 py-1;
+  }
+  .paid {
+    @apply inline-flex font-medium bg-green-100 text-green-500 rounded-full text-center px-2.5 py-0.5;
+  }
 
+/* Pagy */
 .pagy-nav,
 .pagy-nav-js {
   @apply flex space-x-2;
