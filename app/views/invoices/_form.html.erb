@@ -70,6 +70,16 @@
 
     <hr class="mt-5"/>
 
+    <div class="flex justify-between items-center">
+      <h2 class="flex text-lg my-5 underline"><%= t("mas_opciones") %></h2>
+      <%= link_to "#", class: "text-indigo-600 hover:underline", data: { turbo_method: :post } do %>
+        <%= (heroicon "chevron-up-down", options: { class: "inline"} ) %>
+        Mostrar
+      <% end %>
+    </div>
+
+    <hr class="mt-5"/>
+
     <div class="flex space-x-16">
       <div class="w-2/3 my-5">
 
