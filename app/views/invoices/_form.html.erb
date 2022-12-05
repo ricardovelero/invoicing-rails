@@ -57,13 +57,13 @@
 
     <h2 class="text-lg my-5 underline"><%= t("items_facturar") %></h2>
 
-    <div id="line_items">
+    <div id="line_items" class=" mb-6">
       <% f.object.line_items.each do |i| %>
         <%= render "item_fields", f: f, line_item: i, turboid: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) %>
       <% end %>
     </div>
 
-    <%= link_to  add_item_invoices_path(id: f.object), class: "text-indigo-600 hover:underline",
+    <%= link_to add_item_invoices_path(id: f.object), class: "text-indigo-600 hover:underline",
       data: { turbo_method: :post } do %>
       <%= (heroicon "plus", options: { class: "inline -mt-1"} ) + t("agregar_linea_item") %>
     <% end %>
