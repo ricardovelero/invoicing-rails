@@ -22,7 +22,7 @@
       </div>
       <div class="w-1/12">
         <%= ff.label t("iva"), class: "input-label uppercase text-center"  %>
-        <div id="invoice_line_items_attributes_<%= turboid %>_tax" class="p-2 text-left border input h-10 w-12" data-recalculate-target="tax">
+        <div id="invoice_line_items_attributes_<%= turboid %>_tax" class="p-2 text-left border input h-10 w-full" data-recalculate-target="tax">
           <%= number_with_precision(line_item.item&.iva, precision: 0) %>
         </div>
       </div>
