@@ -63,10 +63,10 @@
       <% end %>
     </div>
 
-    <%= link_to t("agregar_linea_item"),
-      add_item_invoices_path(id: f.object),
-      class: "text-indigo-600 hover:underline",
-      data: { turbo_method: :post } %>
+    <%= link_to  add_item_invoices_path(id: f.object), class: "text-indigo-600 hover:underline",
+      data: { turbo_method: :post } do %>
+      <%= (heroicon "plus", options: { class: "inline -mt-1"} ) + t("agregar_linea_item") %>
+    <% end %>
 
     <hr class="mt-5"/>
 
