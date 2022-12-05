@@ -1,4 +1,4 @@
-<div class="mb-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200" >
+<div class="my-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200" >
   <%= form_with(model: invoice, class: "contents", html: { data: {controller: "recalculate"} } ) do |f| %>
     <% if invoice.errors.any? %>
       <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
@@ -70,15 +70,15 @@
 
     <hr class="mt-5"/>
 
-    <div class="flex space-x-2">
-      <div class="w-3/4 my-5">
+    <div class="flex space-x-16">
+      <div class="w-2/3 my-5">
 
         <%= f.label t("notas"), class: "input-label"  %>
-        <%= f.text_area :notes, rows: 11, maxlength: 890, class: "form-input w-full" %>
+        <%= f.text_area :notes, rows: 6, maxlength: 700, class: "form-input w-full" %>
       
       </div>
 
-      <div id="<%= dom_id(@invoice, :total) %>" class="w-1/4 my-5">
+      <div id="<%= dom_id(@invoice, :total) %>" class="w-1/2 my-5">
 
         <%= render "total", invoice: @invoice%>
 
