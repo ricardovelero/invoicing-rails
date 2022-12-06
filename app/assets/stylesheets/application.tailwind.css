@@ -153,7 +153,7 @@
     @apply block appearance-none w-full mb-1 text-base leading-normal sm:text-sm shadow-sm mt-1 bg-white focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md;
   }
   .input-label {
-    @apply block text-sm font-medium text-gray-700;
+    @apply block text-sm font-medium mb-1;
   }
   .gravatar {
     @apply w-20 h-20 rounded-full;
@@ -332,6 +332,9 @@
 }
 .filter-buttons-inactive {
   @apply inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out;
+}
+.back-button {
+  @apply text-sm font-medium text-indigo-500 hover:text-indigo-600;
 }
 
 /* Pagy */

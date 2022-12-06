@@ -86,3 +86,8 @@ input[type=range]::-moz-focus-outer {
 div#line_items > div:not(:first-child) label.input-label {
   display:none;
 }
+
+div#line_items > div:first-child a.remove-link {
+  padding-top:35px;
+  margin-top: 0;
+}

@@ -1,10 +1,15 @@
 <%= turbo_stream.replace target="client_details" do %>
-    <div class="col-span-2 ">
-    <label class="input-label" for="client_details">Client's Details</label>
-    <div id="client_details" class="p-2 border input" data-clientselect-target="select">
-        <p>NIF/CIF: <%= @client.nif %></p>
-        <p><%= @client.address_line_1 %></p>
-        <p><%= @client.address_line_2 %></p>
-    </div>
+    <div class="col-span-2 mb-10">
+        <div id="client_details" class="p-2 border form-input bg-slate-50" data-clientselect-target="select">
+            <div class="flex justify-between items-center">
+                <h3 class="input-label underline" for="client_details"><%= t("detalle_cliente") %></h3>
+                <%= link_to "#", class: "text-indigo-600 hover:underline", data: { turbo_method: :post } do %>
+                  <%= (heroicon "pencil-square", options: { class: "inline"} ) %>
+                <% end %>
+            </div>
+            <p>NIF/CIF: <%= @client.nif %></p>
+            <p><%= @client.address_line_1 %></p>
+            <p><%= @client.address_line_2 %></p>
+        </div>
     </div>
 <% end %>
