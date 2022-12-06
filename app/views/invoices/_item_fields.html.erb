@@ -6,33 +6,38 @@
       <%= ff.hidden_field :_destroy, "data-removeitem-target" => "theHidden" %>
       <div class="w-2/3">
         <%= ff.label "Ítem", class: "input-label"  %>
-        <%= ff.collection_select :item_id, current_user.items, :id, :item_name,
-          {prompt: "Selecciona un item"}, { multiple: false, data: {action: "change->itemselect#change"}, class: "input"} %>
+        <div class="relative mt-1 rounded-md shadow-sm">
+          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <%= heroicon "cursor-arrow-rays", options: {class: "w-6 h-6 fill-current text-slate-400 shrink-0" } %>
+          </div>
+          <%= ff.collection_select :item_id, current_user.items, :id, :item_name,
+          {prompt: "Selecciona un item"}, { multiple: false, data: {action: "change->itemselect#change"}, class: "form-input w-full pl-10"} %>
+        </div>
       </div>
       <div class="w-1/6">
         <%= ff.label t("cantidad"), class: "input-label"  %>
-        <%= ff.number_field :quantity, min: 0, max: 10000000, class: "input", 
+        <%= ff.number_field :quantity, min: 0, max: 10000000, class: "form-input w-full", 
           data: {action: "change->recalculate#recalculate", removeitem_target: "qty", recalculate_target: "qty"} %>
       </div>
       <div class="w-1/3">
         <%= ff.label t("importe"), class: "input-label"  %>
-        <div id="invoice_line_items_attributes_<%= turboid %>_price" class="p-2 text-left border input h-10" data-recalculate-target="price" data-itemselect-target="select">
+        <div id="invoice_line_items_attributes_<%= turboid %>_price" class="p-2 text-left border form-input h-10" data-recalculate-target="price" data-itemselect-target="select">
           <%= number_to_currency line_item.item&.price %>
         </div>
       </div>
       <div class="w-1/12">
-        <%= ff.label t("iva"), class: "input-label uppercase text-center"  %>
-        <div id="invoice_line_items_attributes_<%= turboid %>_tax" class="p-2 text-left border input h-10 w-12" data-recalculate-target="tax">
+        <%= ff.label t("iva"), class: "input-label uppercase text-center" %>
+        <div id="invoice_line_items_attributes_<%= turboid %>_tax" class="p-2 text-left border form-input h-10 w-full" data-recalculate-target="tax">
           <%= number_with_precision(line_item.item&.iva, precision: 0) %>
         </div>
       </div>
       <div class="w-1/3">
         <%= ff.label t("total_item"), class: "input-label text-right"  %>
-        <div id="invoice_line_items_attributes_<%= turboid %>_total" class="p-2 text-right border input h-10" data-recalculate-target="total" >
+        <div id="invoice_line_items_attributes_<%= turboid %>_total" class="p-2 text-right border form-input h-10" data-recalculate-target="total" >
           <%= number_to_currency line_item.total_price %>
         </div>
       </div>
-      <a class="text-red-600 hover:underline mt-5 cursor-pointer" 
+      <a class="text-red-600 hover:underline mt-3 cursor-pointer remove-link"
         data-action="click->removeitem#click recalculate#recalculate">
         <%= heroicon "x-mark", options: { id: "x-mark" }%>
     <% end %>

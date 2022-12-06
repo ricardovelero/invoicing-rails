@@ -1,91 +1,102 @@
-<%= form_with(model: invoice, class: "contents", html: { data: {controller: "recalculate"} } ) do |f| %>
-  <% if invoice.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+<div class="my-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200" >
+  <%= form_with(model: invoice, class: "contents", html: { data: {controller: "recalculate"} } ) do |f| %>
+    <% if invoice.errors.any? %>
+      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+        <h2><%= pluralize(invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
 
-      <ul>
-        <% invoice.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% invoice.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <h2 class="text-lg underline"><%= t("cabecera_factura") %></h2>
+
+    <div class="grid grid-cols-5 gap-2" data-controller="clientselect" data-clientselect-url-value="<%= clients_path %>" data-clientselect-param-value="client">
+      <div class="my-5 col-span-2">
+        <%= f.label t("cliente"), class: "input-label"  %>
+        <div class="relative mt-1 rounded-md shadow-sm">
+          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <%= heroicon "users", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>
+          </div>
+          <%= f.collection_select :client_id, current_user.clients, :id, :full_name, {prompt: t("selecciona_cliente")}, {data: {action: "change->clientselect#change"}, class: "form-select w-full pl-10"} %>
+        </div>
+      </div>
+
+      <div class="my-5">
+        <%= f.label t("numero_factura"), class: "input-label"  %>
+        <div class="relative mt-1 rounded-md shadow-sm">
+          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <%= heroicon "hashtag", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>
+          </div>
+          <% if invoice.new_record? %>
+            <%= f.text_field :invoice_number, class: "form-input w-full pl-8", value: invoice.set_invoice_number %>
+          <% else %>
+            <%= f.text_field :invoice_number, class: "form-input w-full pl-8", value: invoice.invoice_number %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="my-5 col-span-1">
+        <%= f.label t("fecha"), class: "input-label "  %>
+        <%= f.date_field :date, class: "form-input w-full", value: Date.today %>
+      </div>
+
+      <div class="my-5">
+        <%= f.label t("fecha_vencimiento"), class: "input-label"  %>
+        <%= f.date_field :due_date, class: "form-input w-full", value: Date.today + 30.days %>
+      </div>
+
+      <div id="client_details" class="col-span-2" data-clientselect-target="select"></div>
+
+    </div>
+
+    <hr/>
+
+    <h2 class="text-lg my-5 underline"><%= t("items_facturar") %></h2>
+
+    <div id="line_items" class=" mb-6">
+      <% f.object.line_items.each do |i| %>
+        <%= render "item_fields", f: f, line_item: i, turboid: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) %>
+      <% end %>
+    </div>
+
+    <%= link_to add_item_invoices_path(id: f.object), class: "text-indigo-600 hover:underline",
+      data: { turbo_method: :post } do %>
+      <%= (heroicon "plus", options: { class: "inline -mt-1"} ) + t("agregar_linea_item") %>
+    <% end %>
+
+    <hr class="mt-5"/>
+
+    <div class="flex justify-between items-center">
+      <h2 class="flex text-lg my-5 underline"><%= t("mas_opciones") %></h2>
+      <%= link_to "#", class: "text-indigo-600 hover:underline", data: { turbo_method: :post } do %>
+        <%= (heroicon "chevron-up-down", options: { class: "inline"} ) %>
+        Mostrar
+      <% end %>
+    </div>
+
+    <hr class="mt-5"/>
+
+    <div class="flex space-x-16">
+      <div class="w-2/3 my-5">
+
+        <%= f.label t("notas"), class: "input-label"  %>
+        <%= f.text_area :notes, rows: 6, maxlength: 700, class: "form-input w-full" %>
+      
+      </div>
+
+      <div id="<%= dom_id(@invoice, :total) %>" class="w-1/2 my-5">
+
+        <%= render "total", invoice: @invoice%>
+
+      </div>
+    </div>
+
+    <div class="inline">
+      <%= f.submit t("guardar_factura"), class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
     </div>
   <% end %>
-
-  <div class="grid grid-cols-3 gap-2" data-controller="clientselect" data-clientselect-url-value="<%= clients_path %>" data-clientselect-param-value="client">
-    <div class="my-5 col-span-2">
-      <%= f.label t("cliente"), class: "input-label"  %>
-      <%= f.collection_select :client_id, current_user.clients, :id, :full_name, {prompt: t("selecciona_cliente")}, {data: {action: "change->clientselect#change"}, class: "input"} %>
-    </div>
-
-    <div class="my-5">
-      <%= f.label t("numero_factura"), class: "input-label"  %>
-      <% if invoice.new_record? %>
-        <%= f.text_field :invoice_number, class: "input", value: invoice.set_invoice_number %>
-      <% else %>
-        <%= f.text_field :invoice_number, class: "input", value: invoice.invoice_number %>
-      <% end %>
-    </div>
-
-    <div id="client_details" class="col-span-2" data-clientselect-target="select">
-      <% unless invoice.new_record? %>
-        <div class="col-span-2 ">
-          <label class="input-label" for="client_details"><%= t("detalle_cliente") %></label>
-          <div id="client_details" class="p-2 border input" data-clientselect-target="select">
-            <p>NIF/CIF: <%= @client.nif %></p>
-            <p><%= t("direccion") %>: <%= @client.address %></p>
-          </div>
-        </div>
-      <% end %>
-    </div>
-
-    <div class="">
-      <%= f.label t("fecha"), class: "input-label"  %>
-      <%= f.date_field :date, class: "input", value: Date.today %>
-    </div>
-
-    <div class="col-span-2">
-      
-    </div>
-
-    <div class="">
-      <%= f.label t("fecha_vencimiento"), class: "input-label"  %>
-      <%= f.date_field :due_date, class: "input", value: Date.today + 30.days %>
-    </div>
-  </div>
-
-  <hr/>
-
-  <h2 class="text-center text-lg my-5 underline"><%= t("items_facturar") %></h2>
-
-  <div id="line_items">
-    <% f.object.line_items.each do |i| %>
-      <%= render "item_fields", f: f, line_item: i, turboid: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) %>
-    <% end %>
-  </div>
-
-  <%= link_to t("agregar_linea_item"),
-    add_item_invoices_path(id: f.object),
-    class: "text-indigo-600 hover:underline",
-    data: { turbo_method: :post } %>
-
-  <hr class="mt-5"/>
-
-  <div class="flex space-x-2">
-    <div class="w-3/4 my-5">
-
-      <%= f.label t("notas"), class: "input-label"  %>
-      <%= f.text_area :notes, rows: 11, maxlength: 890, class: "input" %>
-    
-    </div>
-
-    <div id="<%= dom_id(@invoice, :total) %>" class="w-1/4 my-5">
-
-      <%= render "total", invoice: @invoice%>
-
-    </div>
-  </div>
-
-  <div class="inline">
-    <%= f.submit t("guardar_factura"), class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
-<% end %>
+</div>
