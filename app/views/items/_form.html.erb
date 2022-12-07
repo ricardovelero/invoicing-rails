@@ -1,37 +1,39 @@
-<%= form_with(model: item, class: "contents") do |form| %>
-  <% if item.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+<div class="my-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200">
+  <%= form_with(model: item, class: "grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8") do |form| %>
+    <% if item.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
 
-      <ul>
-        <% item.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% item.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="my-1 sm:col-span-2">
+      <%= form.label :item_name, t("nombre"), class: "input-label" %>
+      <%= form.text_field :item_name, class: "form-input w-full" %>
+    </div>
+
+    <div class="my-1 sm:col-span-2">
+      <%= form.label :descripticon, t("descripcion"), class: "input-label" %>
+      <%= form.text_area :description, rows: 10, cols: 60, class: "form-input w-full" %>
+    </div>
+
+    <div class="my-1">
+      <%= form.label :price, t("precio"), class: "input-label" %>
+      <%= form.text_field :price, class: "form-input w-full" %>
+    </div>
+
+    <div class="my-1">
+      <%= form.label :iva, t("iva"), class: "input-label" %>
+      <%= form.select :iva, options_for_select([["21%", 21], ["10%", 10], ["4%", 4], ["0%", 0]]), {}, {class: "form-select w-full" } %>
+    </div>
+
+    <div class="inline">
+      <%= form.submit class: "btn-primary"%>
     </div>
   <% end %>
-
-  <div class="my-5">
-    <%= form.label t("nombre"), class: "input-label" %>
-    <%= form.text_field :item_name, class: "input" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label t("descripcion"), class: "input-label" %>
-    <%= form.text_area :description, rows: 10, cols: 60, class: "input" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label t("precio"), class: "input-label" %>
-    <%= form.text_field :price, class: "input" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label t("iva"), class: "input-label" %>
-    <%= form.text_field :iva, class: "input" %>
-  </div>
-
-  <div class="inline">
-    <%= form.submit class: "btn-primary"%>
-  </div>
-<% end %>
+</div>

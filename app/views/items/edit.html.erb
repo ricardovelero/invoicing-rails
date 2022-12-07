@@ -1,6 +1,6 @@
 <div class="mx-auto md:w-2/3 w-full">
-  <%= link_to sanitize("&larr; Regresar a items"), items_path %>
-  <h1 class="font-bold text-4xl mt-8">Editing item</h1>
+  <%= link_to sanitize("&larr; Regresar a ítems"), items_path, class: "back-button" %>
+  <h1 class="title"><%= t("editar_item") %> ✨</h1>
 
   <%= render "form", item: @item %>
   
