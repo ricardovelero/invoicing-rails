@@ -21,7 +21,7 @@ es:
   codigo_postal: Código Postal
   pais: País
   telefono: Teléfono
-  activo: Activo?
+  activo: ¿Activo?
   ultima_factura: Última Factura
   total_facturado: Total Facturado
   acciones: Acciones

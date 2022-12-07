@@ -1,6 +1,6 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <%= link_to sanitize("&larr; Regresar a clientes"), clients_path %>
-  <h1 class="font-bold text-4xl"><%= t("nuevo_cliente") %></h1>
+<div class="mx-auto md:w-3/4 w-full">
+  <%= link_to sanitize("&larr; Regresar a clientes"), clients_path, class: "back-button" %>
+  <h1 class="title"><%= t("nuevo_cliente") %> ✨</h1>
 
   <%= render "form", client: @client %>
 
