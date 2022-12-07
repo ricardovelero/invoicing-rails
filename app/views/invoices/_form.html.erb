@@ -1,4 +1,4 @@
-<div class="my-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200" >
+<div class="my-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200" data-controller='toggle'>
   <%= form_with(model: invoice, class: "contents", html: { data: {controller: "recalculate"} } ) do |f| %>
     <% if invoice.errors.any? %>
       <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
@@ -12,7 +12,7 @@
       </div>
     <% end %>
 
-    <h2 class="text-lg underline"><%= t("cabecera_factura") %></h2>
+    <h2 class="text-lg font-bold"><%= t("cabecera_factura") %></h2>
 
     <div class="grid grid-cols-5 gap-2" data-controller="clientselect" data-clientselect-url-value="<%= clients_path %>" data-clientselect-param-value="client">
       <div class="my-5 col-span-2">
@@ -55,7 +55,7 @@
 
     <hr/>
 
-    <h2 class="text-lg my-5 underline"><%= t("items_facturar") %></h2>
+    <h2 class="text-lg my-5 font-bold"><%= t("items_facturar") %></h2>
 
     <div id="line_items" class=" mb-6">
       <% f.object.line_items.each do |i| %>
@@ -70,22 +70,23 @@
 
     <hr class="mt-5"/>
 
-    <div class="flex justify-between items-center">
-      <h2 class="flex text-lg my-5 underline"><%= t("mas_opciones") %></h2>
-      <%= link_to "#", class: "text-indigo-600 hover:underline", data: { turbo_method: :post } do %>
+    <div class="flex justify-between items-center cursor-pointer" data-action='click->toggle#toggle touch->toggle#toggle'>
+      <h2 class="flex text-lg my-5 font-bold"><%= t("mas_opciones") %></h2>
+      <%= link_to "#", class: "text-indigo-600 hover:underline" do %>
         <%= (heroicon "chevron-up-down", options: { class: "inline"} ) %>
-        Mostrar
+        <%= t("mostrar") %>
       <% end %>
+    </div>
+    <div class="hidden" data-toggle-target='toggleable'>
+      <%= f.label t("notas"), class: "input-label"  %>
+      <%= f.text_area :notes, rows: 6, maxlength: 700, class: "form-input w-full" %>
     </div>
 
     <hr class="mt-5"/>
 
     <div class="flex space-x-16">
       <div class="w-2/3 my-5">
-
-        <%= f.label t("notas"), class: "input-label"  %>
-        <%= f.text_area :notes, rows: 6, maxlength: 700, class: "form-input w-full" %>
-      
+        <span class="hidden">Payment Box</span>
       </div>
 
       <div id="<%= dom_id(@invoice, :total) %>" class="w-1/2 my-5">
@@ -94,6 +95,8 @@
 
       </div>
     </div>
+
+    <hr class="mb-5"/>
 
     <div class="inline">
       <%= f.submit t("guardar_factura"), class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
