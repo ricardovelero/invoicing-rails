@@ -52,13 +52,13 @@ class Invoice < ApplicationRecord
 
   def pdf_line_items
     the_line_items = Array.new
-    the_line_items << ["<b>Ítem</b>", "<b>Cantidad</b>", "<b>Importe</b>", "IVA", "<b>Monto</b>"]
+    the_line_items << ["<b>"+I18n.t("item")+"</b>", "<b>"+I18n.t("cantidad")+"</b>", "<b>"+I18n.t("importe")+"</b>", "<b>"+I18n.t("iva")+"</b>", "<b>"+I18n.t("monto")+"</b>"]
     line_items.map do |l|
       line = [l.item.item_name, l.quantity,  ActionController::Base.helpers.number_to_currency(l.item.price), l.item.iva, ActionController::Base.helpers.number_to_currency((l.item.price * l.quantity * (1 + l.item.iva/100)))]
       the_line_items << line
     end
-    the_line_items << [nil, nil, nil, "Base Imponible", ActionController::Base.helpers.number_to_currency(subtotal)]
-    the_line_items << [nil, nil, nil, "IVA", ActionController::Base.helpers.number_to_currency(iva)]
+    the_line_items << [nil, nil, nil, I18n.t("subtotal"), ActionController::Base.helpers.number_to_currency(subtotal)]
+    the_line_items << [nil, nil, nil, I18n.t("iva"), ActionController::Base.helpers.number_to_currency(iva)]
     the_line_items << [nil, nil, nil, "TOTAL", ActionController::Base.helpers.number_to_currency(total)]
     return the_line_items
   end
@@ -67,14 +67,15 @@ class Invoice < ApplicationRecord
     client = Client.find(client_id)
     user = User.find(user_id)
     Receipts::Invoice.new(
+      title: I18n.t("factura"),
       details: [
-        ["Factura #", invoice_number],
-        ["Fecha", date.strftime("%B %d, %Y")],
-        ["Fecha Vencimiento", due_date.strftime("%B %d, %Y")],
-        ["Estatus", "<b><color rgb='#5eba7d'>#{status.upcase}</color></b>"]
+        [I18n.t("factura")+" #", invoice_number],
+        [I18n.t("fecha"), date.strftime("%B %d, %Y")],
+        [I18n.t("fecha_vencimiento"), due_date.strftime("%B %d, %Y")],
+        [I18n.t("estatus"), "<b><color rgb='#5eba7d'>#{status.upcase}</color></b>"]
       ],
       recipient: [
-        "<b>Facturado A:</b>",
+        I18n.t("facturado_a"),
         client.full_name,
         client.address_line_1,
         client.address_line_2,
@@ -87,7 +88,8 @@ class Invoice < ApplicationRecord
         email: user.user_profile.email,
         logo: File.expand_path("app/assets/images/facturazen-oso.png")
       },
-      line_items: pdf_line_items
+      line_items: pdf_line_items,
+      footer: notes
     )
   end
 end
