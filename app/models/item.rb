@@ -13,7 +13,6 @@ class Item < ApplicationRecord
   validates :description, length: { maximum: 300 }
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :iva, numericality: { greater_than_or_equal_to: 0 }
-  validates :irpf, numericality: { greater_than_or_equal_to: 0 }
 
   private
 
