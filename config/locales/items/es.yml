@@ -4,15 +4,15 @@ es:
   items: Ítems
   item: Ítem
   nuevo_item: Nuevo ítem
+  editar_item: Editar ítem
   items_selecionados: ítems selecionados
   borrar: Borrar
   cantidad_por_pagina: Cantidad por pagina
   seleccionar todo: Seleccionar todo
   nombre: Nombre
-  descripcion: Descripcion
+  descripcion: Descripción
   precio: Precio
   iva: IVA
-  irpf: IRPF
   acciones: Acciones
   resultados: resultados
   mostrando: Mostrando
