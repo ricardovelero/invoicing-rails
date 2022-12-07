@@ -1,74 +1,84 @@
-<%= form_with(model: client, class: "contents") do |form| %>
-  <% if client.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
+<div class="my-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200"
+data-controller="select" data-select-url-value="<%= regions_path %>" data-select-param-value="country">
+  <%= form_with(model: client, class: "grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-8") do |form| %>
+    <% if client.errors.any? %>
+      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+        <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
 
-      <ul>
-        <% client.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% client.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="my-1">
+      <%= form.label :first_name, t("nombres"), class: "input-label" %>
+      <%= form.text_field :first_name, class: "form-input w-full" %>
+    </div>
+
+    <div class="my-1">
+      <%= form.label :last_name, t("apellidos"), class: "input-label" %>
+      <%= form.text_field :last_name, class: "form-input w-full" %>
+    </div>
+
+    <div class="my-1">
+      <%= form.label :nif, t("nif"), class: "input-label" %>
+      <%= form.text_field :nif, class: "form-input w-full" %>
+    </div>
+
+    <div class="my-1 col-span-2">
+      <%= form.label :email, t("email"), class: "input-label" %>
+      <%= form.text_field :email, class: "form-input w-full" %>
+    </div>
+
+    <div class="my-1">
+      <%= form.label :telephone, t("telefono"), class: "input-label" %>
+      <%= form.text_field :telephone, class: "form-input w-full" %>
+    </div>
+
+    <div class="my-1 sm:col-span-2">
+      <%= form.label :street, t("calle"), class: "input-label" %>
+      <%= form.text_field :street, class: "form-input w-full" %>
+    </div>
+
+    <div class="my-1">
+      <%= form.label :city, t("ciudad"), class: "input-label" %>
+      <%= form.text_field :city, class: "form-input w-full" %>
+    </div>
+
+    <div class="my-1">
+      <%= form.label :country, t("pais"), class: "input-label" %>
+      <%= form.collection_select :country, Country.all.sort, :alpha_2_code, :name,
+        { selected: client.country_code}, { data: {action: "change->select#change"}, class: "form-input w-full"} %>
+    </div>
+
+    <div class="my-1">
+      <%= form.label :region, t("provincia"), class: "input-label" %>
+      <%= form.select :region, [], {}, { data: { select_target: "select" }, class: "form-input w-full"} %>
+    </div>
+    
+    <div class="my-1">
+      <%= form.label :postal_code, t("codigo_postal"), class: "input-label" %>
+      <%= form.text_field :postal_code, class: "form-input w-full" %>
+    </div>
+
+    <div class="col-span-3">
+    <% unless client.new_record? %>
+      <div class="relative flex items-start my-1">
+        <div class="flex h-5 items-center">
+          <%= form.check_box :active, checked: true, class: "form-input" %>
+        </div>
+        <div class="ml-3 text-sm">
+          <%= form.label :active, t("activo"), class: "input-label" %>
+        </div>
+      </div>
+    <% end %>
+    </div>
+
+    <div class="my-1">
+      <%= form.submit class: "btn-primary" %>
     </div>
   <% end %>
-
-  <div class="my-5">
-    <%= form.label t("nombres") %>
-    <%= form.text_field :first_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label t("apellidos") %>
-    <%= form.text_field :last_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label t("nif") %>
-    <%= form.text_field :nif, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label t("calle") %>
-    <%= form.text_field :street, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label t("ciudad") %>
-    <%= form.text_field :city, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label t("provincia") %>
-    <%= form.text_field :region, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label t("codigo_postal") %>
-    <%= form.text_field :postal_code, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label t("pais") %>
-    <%= form.text_field :country, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label t("email") %>
-    <%= form.text_field :email, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label t("telefono") %>
-    <%= form.text_field :telephone, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <% unless client.new_record? %>
-    <div class="my-5">
-      <%= form.label t("activo") %>
-      <%= form.check_box :active, checked: true, class: "block mt-2 h-5 w-5 z-10" %>
-    </div>
-  <% end %>
-
-  <div class="inline">
-    <%= form.submit class: "btn-primary" %>
-  </div>
-<% end %>
+</div>

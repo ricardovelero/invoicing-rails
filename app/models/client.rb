@@ -30,4 +30,10 @@ class Client < ApplicationRecord
   def address_line_2
     [city, postal_code, region, country].reject(&:blank?).collect(&:titleize).join(", ")
   end
+
+  def country_code
+    return "ES" if country.nil?
+    return Country.named(country)&.alpha_2_code if country.count("a-zA-Z") > 2
+    country
+  end
 end
