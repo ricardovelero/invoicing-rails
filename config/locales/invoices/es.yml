@@ -1,6 +1,7 @@
 es:
   a: a
   de: de
+  factura: Factura
   facturas: Facturas
   nueva_factura: Nueva Factura
   resultados: resultados
@@ -51,3 +52,5 @@ es:
   mas_opciones: Más Opciones
   mostrar: Mostrar
   ocultar: Ocultar
+  facturado_a: <b>Facturado a:</b>
+  monto: Monto
