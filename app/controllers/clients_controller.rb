@@ -42,7 +42,7 @@ class ClientsController < ApplicationController
     respond_to do |format|
       if @client.save
         format.html do
-          redirect_to client_url(@client),
+          redirect_to clients_url,
                       notice: "Client was successfully created."
         end
         format.json { render :show, status: :created, location: @client }
@@ -60,7 +60,7 @@ class ClientsController < ApplicationController
     respond_to do |format|
       if @client.update(client_params)
         format.html do
-          redirect_to client_url(@client),
+          redirect_to clients_url,
                       notice: "Client was successfully updated."
         end
         format.json { render :show, status: :ok, location: @client }

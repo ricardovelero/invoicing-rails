@@ -56,7 +56,7 @@ data-controller="select" data-select-url-value="<%= regions_path %>" data-select
 
     <div class="my-1">
       <%= form.label :region, t("provincia"), class: "input-label" %>
-      <%= form.select :region, [], {}, { data: { select_target: "select" }, class: "form-input w-full"} %>
+      <%= form.select :region, [(options_for_select client.get_regions, client.region)], {prompt: t("selecciona_provincia")}, { data: { select_target: "select" }, class: "form-input w-full"} %>
     </div>
     
     <div class="my-1">
