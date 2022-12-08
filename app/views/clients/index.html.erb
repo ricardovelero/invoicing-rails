@@ -51,73 +51,73 @@
     </div>
 
 </div>
+<%= turbo_frame_tag "clients" do %>
+    <!-- Table -->
+    <div class="bg-white shadow-lg rounded-sm border border-slate-200">
+        <div x-data="handleSelect">
 
-<!-- Table -->
-<div class="bg-white shadow-lg rounded-sm border border-slate-200">
-    <div x-data="handleSelect">
-
-        <!-- Table -->
-        <div class="overflow-x-auto">
-            <% if @clients.none? %>
-                <%= render "empty_state" %>
-            <% else %>
-                <table class="table-auto w-full">
-                    <!-- Table header -->
-                    <thead class="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200">
-                        <tr>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
-                                <div class="flex items-center">
-                                    <label class="inline-flex">
-                                        <span class="sr-only"><%=t("seleccionar_todo")%></span>
-                                        <input id="parent-checkbox" class="form-checkbox" type="checkbox" @click="toggleAll" />
-                                    </label>
-                                </div>
-                            </th>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                <div class="font-semibold text-left">
-                                    <%= sort_link_to t("nombre"), :name, data: { turbo_action: "advance" } %>
-                                </div>
-                            </th>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                <div class="font-semibold text-left">
-                                    <%= sort_link_to t("email"), :email, data: { turbo_action: "advance" } %>
-                                </div>
-                            </th>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                <div class="font-semibold text-left">
-                                    <%= sort_link_to t("nif"), :nif, data: { turbo_action: "advance" } %>
-                                </div>
-                            </th>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                <div class="font-semibold text-left">
-                                    <%=t("ultima_factura")%>
-                                </div>
-                            </th>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                <div class="font-semibold text-left">
-                                    <%=t("total_facturado")%>
-                                </div>
-                            </th>
-                            <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                <span class="sr-only"><%=t("acciones")%></span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <!-- Table body -->
-                    <tbody class="text-sm divide-y divide-slate-200">
-                        <!-- Rows -->
-                        <%= render @clients %>
-                    </tbody>
-                </table>
-            <% end %>
+            <!-- Table -->
+            <div class="overflow-x-auto">
+                <% if @clients.none? %>
+                    <%= render "empty_state" %>
+                <% else %>
+                    <table class="table-auto w-full">
+                        <!-- Table header -->
+                        <thead class="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200">
+                            <tr>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
+                                    <div class="flex items-center">
+                                        <label class="inline-flex">
+                                            <span class="sr-only"><%=t("seleccionar_todo")%></span>
+                                            <input id="parent-checkbox" class="form-checkbox" type="checkbox" @click="toggleAll" />
+                                        </label>
+                                    </div>
+                                </th>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                    <div class="font-semibold text-left">
+                                        <%= sort_link_to t("nombre"), :name, data: { turbo_action: "advance" } %>
+                                    </div>
+                                </th>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                    <div class="font-semibold text-left">
+                                        <%= sort_link_to t("email"), :email, data: { turbo_action: "advance" } %>
+                                    </div>
+                                </th>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                    <div class="font-semibold text-left">
+                                        <%= sort_link_to t("nif"), :nif, data: { turbo_action: "advance" } %>
+                                    </div>
+                                </th>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                    <div class="font-semibold text-left">
+                                        <%=t("ultima_factura")%>
+                                    </div>
+                                </th>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                    <div class="font-semibold text-left">
+                                        <%=t("total_facturado")%>
+                                    </div>
+                                </th>
+                                <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                                    <span class="sr-only"><%=t("acciones")%></span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!-- Table body -->
+                        <tbody class="text-sm divide-y divide-slate-200">
+                            <!-- Rows -->
+                            <%= render @clients %>
+                        </tbody>
+                    </table>
+                <% end %>
+            </div>
         </div>
     </div>
-</div>
-<!-- Pagination -->
-<% unless @clients.none? %>
-    <%= render "shared/pagination", item_name: t('cliente') %>
+    <!-- Pagination -->
+    <% unless @clients.none? %>
+        <%= render "shared/pagination", item_name: t('cliente') %>
+    <% end %>
 <% end %>
-
 <script>
     // A basic demo function to handle "select all" functionality
     document.addEventListener('alpine:init', () => {
