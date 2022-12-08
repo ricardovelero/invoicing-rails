@@ -58,8 +58,8 @@ UserProfile.new(
     country: "ES", #Faker::Address.country,
     email: Faker::Internet.email(name: :first_name),
     telephone: Faker::PhoneNumber.cell_phone_in_e164,
-    active: rand(0..1),
-    user_id: rand(1..2)
+    active: 1, #rand(0..1),
+    user_id: 1, #rand(1..2)
   )
 end
 
@@ -69,7 +69,7 @@ end
     description: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4),
     price: Faker::Number.within(range: 1.0..2000.0),
     iva: %w[0 4 10 21].sample,
-    user_id: rand(1..2)
+    user_id: 1 #rand(1..2)
   )
 end
 
@@ -81,7 +81,7 @@ end
     notes: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4),
     status: %w[Pendiente Pagada].sample,
     client_id: rand(1..50),
-    user_id: rand(1..2)
+    user_id: 1 #rand(1..2)
   )
 end
 
