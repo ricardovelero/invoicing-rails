@@ -57,6 +57,12 @@ module.exports = {
       },
     },
   },
+  safelist: [
+    'border-red-500',
+    'focus:border-red-600',
+    'focus:ring-red-600',
+    'text-red-500',
+  ],
   plugins: [
     // eslint-disable-next-line global-require
     require('@tailwindcss/forms'),

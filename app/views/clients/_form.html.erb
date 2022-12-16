@@ -1,17 +1,6 @@
 <div class="my-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200"
 data-controller="select" data-select-url-value="<%= regions_path %>" data-select-param-value="country">
   <%= form_with(model: client, class: "grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-8") do |form| %>
-    <% if client.errors.any? %>
-      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-        <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
-
-        <ul>
-          <% client.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
 
     <div class="my-1">
       <%= form.label :first_name, t("nombres"), class: "input-label" %>

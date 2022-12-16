@@ -1,16 +1,5 @@
 <div class="my-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200" data-controller='toggle'>
   <%= form_with(model: invoice, class: "contents", html: { data: {controller: "recalculate"} } ) do |f| %>
-    <% if invoice.errors.any? %>
-      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-        <h2><%= pluralize(invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
-
-        <ul>
-          <% invoice.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
 
     <h2 class="text-lg font-bold"><%= t("cabecera_factura") %></h2>
 
