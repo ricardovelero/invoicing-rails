@@ -10,7 +10,7 @@ class InvoicesController < ApplicationController
   end
 
   def sort_column
-    %w{ invoice_number estatus date due_date }.include?(params[:sort]) ? params[:sort] : "invoice_number"
+    %w{ invoice_number total status date due_date }.include?(params[:sort]) ? params[:sort] : "invoice_number"
   end
 
   def sort_direction
