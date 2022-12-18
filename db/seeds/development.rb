@@ -92,3 +92,10 @@ end
     quantity: rand(1..12)
   )
 end
+
+Invoice.all.each do |i|
+  i.subtotal = i.sum_subtotal
+  i.iva = i.sum_iva
+  i.total = i.sum_total
+  i.save
+end
