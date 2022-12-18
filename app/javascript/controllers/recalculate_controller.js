@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["qty", "price", "tax", "total", "subtotal", "taxtotal", "grandtotal"];
+  static targets = ["qty", "price", "tax", "total", "subtotal", "taxtotal", "grandtotal", "hiddensubtotal", "hiddentaxtotal", "hiddengrandtotal"];
 
   recalculate(event) {
     const formatter = new Intl.NumberFormat(undefined, {
@@ -39,9 +39,13 @@ export default class extends Controller {
       subTotal += itemTotal / (1 + taxesArray[index]/100) 
     })
 
-    this.subtotalTarget.value = formatter.format(subTotal)
-    this.taxtotalTarget.value = formatter.format(grandTotal - subTotal)
-    this.grandtotalTarget.value = formatter.format(grandTotal)
+    this.subtotalTarget.textContent = formatter.format(subTotal)
+    this.taxtotalTarget.textContent = formatter.format(grandTotal - subTotal)
+    this.grandtotalTarget.textContent = formatter.format(grandTotal)
+
+    this.hiddensubtotalTarget.value = subTotal
+    this.hiddentaxtotalTarget.value = grandTotal - subTotal
+    this.hiddengrandtotalTarget.value = grandTotal
   }
 
   convertNum(element) {
