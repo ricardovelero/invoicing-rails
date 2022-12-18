@@ -39,9 +39,9 @@ export default class extends Controller {
       subTotal += itemTotal / (1 + taxesArray[index]/100) 
     })
 
-    this.subtotalTarget.textContent = formatter.format(subTotal)
-    this.taxtotalTarget.textContent = formatter.format(grandTotal - subTotal)
-    this.grandtotalTarget.textContent = formatter.format(grandTotal)
+    this.subtotalTarget.value = formatter.format(subTotal)
+    this.taxtotalTarget.value = formatter.format(grandTotal - subTotal)
+    this.grandtotalTarget.value = formatter.format(grandTotal)
   }
 
   convertNum(element) {

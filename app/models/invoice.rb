@@ -28,15 +28,15 @@ class Invoice < ApplicationRecord
     end
   end
 
-  def subtotal
+  def sum_subtotal
     line_items.sum(&:sub_total)
   end
 
-  def total
+  def sum_total
     line_items.sum(&:total_price)
   end
 
-  def iva
+  def sum_iva
     line_items.sum(&:total_iva)
   end
 

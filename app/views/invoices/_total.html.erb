@@ -2,23 +2,26 @@
   <div class="table-row-group">
     <div class="table-row">
       <div class="table-cell input-label text-left"><%= t("subtotal") %></div>
-      <div class="table-cell text-right text-lg py-1" data-recalculate-target="subtotal">
-        <%= number_to_currency invoice.subtotal %>
+      <div class="table-cell text-right text-lg py-1">
+        <%= f.hidden_field :subtotal, class: "border-none text-right", value: invoice.subtotal, readonly: true, data: { recalculate_target: "subtotal"} %>
       </div>
     </div>
     <div class="table-row">
       <div class="table-cell input-label text-left"><%= t("iva") %></div>
-      <div class="table-cellp-2 text-right py-1" data-recalculate-target="taxtotal">
-        <%= number_to_currency invoice.iva %></div>
+      <div class="table-cellp-2 text-right py-1">
+        <%= f.hidden_field :iva, class: "border-none text-right", value: invoice.iva, readonly: true, data: { recalculate_target: "taxtotal"} %>
+      </div>
     </div>
     <div class="table-row hidden">
       <div class="table-cell input-label text-left"><%= t("irpf") %></div>
-      <div class="table-cell text-right py-1"><%= number_to_currency invoice.irpf %></div>
+      <div class="table-cell text-right py-1">
+        <%= f.hidden_field :irpf, class: "border-none text-right", value: invoice.irpf, readonly: true, data: { recalculate_target: "irpf"}  %>
+      </div>
     </div>
     <div class="table-row">
       <div class="table-cell input-label text-left text-xl font-bold"><%= t("total") %></div>
-      <div class="table-cell text-right text-xl font-bold py-5" data-recalculate-target="grandtotal">
-        <%= number_to_currency invoice.total %>
+      <div class="table-cell text-right text-xl font-bold py-5">
+        <%= f.hidden_field :total, class: "border-none text-right", value: invoice.total, readonly: true, data: { recalculate_target: "grandtotal"}  %>
       </div>
     </div>
   </div>
