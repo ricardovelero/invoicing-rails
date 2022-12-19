@@ -2,3 +2,8 @@
 import "@hotwired/turbo-rails";
 import "controllers";
 import "@rails/request.js";
+import 'alpine-turbo-drive-adapter'
+import Alpine from 'alpinejs'
+
+window.Alpine = Alpine
+Alpine.start()
