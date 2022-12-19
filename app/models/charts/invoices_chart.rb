@@ -13,7 +13,7 @@ class Charts::InvoicesChart
   def query_data
     Invoice
       .for_account(@user_id)
-      .where('invoices.date > ?', 90.days.ago)
+      .where('invoices.date > ?', 30.days.ago)
       .group('date(invoices.date)')
       .count
   end
