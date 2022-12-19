@@ -76,7 +76,7 @@ end
 100.times do |i|
   Invoice.create(
     invoice_number: i,
-    date: Faker::Date.between(from: 7.days.ago, to: Date.today),
+    date: Faker::Date.between(from: 30.days.ago, to: Date.today),
     due_date: Faker::Date.forward(days: 30),
     notes: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4),
     status: %w[Pendiente Pagada].sample,
