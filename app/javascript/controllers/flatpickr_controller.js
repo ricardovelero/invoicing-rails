@@ -1,12 +1,7 @@
-import Flatpickr from 'stimulus-flatpickr'
+import { Controller } from "@hotwired/stimulus"
 
-export default class extends Flatpickr {
-  static targets = ["start", "end"]
-
+// Connects to data-controller="flatpickr"
+export default class extends Controller {
   connect() {
-    flatpickr(this.startTarget)
-    flatpickr(this.endTarget)
   }
-
-  disconnect() {}
 }
