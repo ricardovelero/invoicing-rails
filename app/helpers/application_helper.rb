@@ -10,10 +10,6 @@ module ApplicationHelper
     link_to name, request.params.merge(sort: column, direction: direction), **options
   end
 
-  def sort_active_class
-    sort_active_class = ""
-  end
-
   def sort_indicator
     case params[:direction]
     when "asc"
