@@ -100,18 +100,27 @@
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left">
+                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "invoice_number" %>">
                                         <%= sort_link_to t("numero"), :invoice_number, data: { turbo_action: "advance" } %>
+                                        <span class="absolute top-0 left-13">
+                                            <%= sort_indicator if params[:sort] == "invoice_number" %>
+                                        </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left">
+                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "total" %>">
                                         <%= sort_link_to t("total"), :total, data: { turbo_action: "advance" } %>
+                                        <span class="absolute top-0 left-10">
+                                            <%= sort_indicator if params[:sort] == "total" %>
+                                        </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left">
+                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "status" %>">
                                         <%= sort_link_to t("estatus"), :status, data: { turbo_action: "advance" } %>
+                                        <span class="absolute top-0 left-14">
+                                            <%= sort_indicator if params[:sort] == "status" %>
+                                        </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
@@ -120,13 +129,19 @@
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left">
+                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "date" %>">
                                         <%= sort_link_to t("emitida"), :date, data: { turbo_action: "advance" } %>
+                                        <span class="absolute top-0 left-12">
+                                            <%= sort_indicator if params[:sort] == "date" %>
+                                        </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left">
+                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "due_date" %>">
                                         <%= sort_link_to t("vencimiento"), :due_date, data: { turbo_action: "advance" } %>
+                                        <span class="absolute top-0 left-18">
+                                            <%= sort_indicator if params[:sort] == "due_date" %>
+                                        </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
