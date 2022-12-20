@@ -10,6 +10,19 @@ module ApplicationHelper
     link_to name, request.params.merge(sort: column, direction: direction), **options
   end
 
+  def sort_active_class
+    sort_active_class = ""
+  end
+
+  def sort_indicator
+    case params[:direction]
+    when "asc"
+      heroicon "chevron-up", variant: :mini
+    when "desc"
+      heroicon "chevron-down", variant: :mini
+    end
+  end
+
   def flash_class(level)
     case level.to_sym
     when :notice

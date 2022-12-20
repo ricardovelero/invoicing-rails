@@ -70,23 +70,35 @@
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left">
+                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "item_name" %>">
                                         <%= sort_link_to t("nombre"), :item_name, data: { turbo_action: "advance" } %>
+                                        <span class="absolute top-0 left-14">
+                                            <%= sort_indicator if params[:sort] == "item_name" %>
+                                        </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left">
+                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "description" %>">
                                         <%= sort_link_to t("descripcion"), :description, data: { turbo_action: "advance" } %>
+                                        <span class="absolute top-0 left-15 text-indigo-500">
+                                            <%= sort_indicator if params[:sort] == "description" %>
+                                        </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left">
+                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "price" %>">
                                         <%= sort_link_to t("precio"), :price, data: { turbo_action: "advance" } %>
+                                        <span class="absolute top-0 left-13 text-indigo-500">
+                                            <%= sort_indicator if params[:sort] == "price" %>
+                                        </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold">
+                                    <div class="font-semibold relative <%= "text-indigo-500" if params[:sort] == "iva" %>">
                                         <%= sort_link_to t("iva") , :iva, data: { turbo_action: "advance" } %>
+                                        <span class="absolute top-0 left-5 text-indigo-500">
+                                            <%= sort_indicator if params[:sort] == "iva" %>
+                                        </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
