@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   get "/terms", to: "home#terms"
   get "/regions", to: "countries#regions"
   get "/dashboard", to: "dashboard#index"
-
+  get 'charts/show', as: :chart
+  
   scope "(:locale)", locale: /es|en/ do
     resources :users
     resources :dashboard
