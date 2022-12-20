@@ -1,18 +1,7 @@
-import { Controller } from "@hotwired/stimulus"
-import ApexCharts from "apexcharts"
+import ChartsController from './charts_controller'
 
-export default class extends Controller {
-  static targets = ["chart"]
+export default class extends ChartsController {
 
-  static values = {
-    labels: Array,
-    series: Array
-  }
-
-  initialize() {
-    this.chart = new ApexCharts(this.chartTarget, this.chartOptions);
-    this.chart.render();
-  }
   get chartOptions() {
     return {
       chart: {

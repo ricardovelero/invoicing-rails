@@ -1,8 +1,8 @@
 <div
   data-controller="paid-vs-unpaid-chart"
-  data-paid-vs-unpaid-chart-labels-value="<%= pvsu_labels %>"
-  data-paid-vs-unpaid-chart-series-value="<%= pvsu_series %>"
-  id="paid-vs-unpaid-chart-container"
+  data-paid-vs-unpaid-chart-labels-value="<%= labels %>"
+  data-paid-vs-unpaid-chart-series-value="<%= series %>"
+  id="paid-vs-unpaid-chart-container" data-turbo-cache="false"
 >
   <header class="px-5 py-4 border-b border-slate-100 flex items-center">
       <h2 class="font-semibold text-slate-800"><%= t("pendientes_vs_pagadas") %></h2>
