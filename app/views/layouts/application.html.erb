@@ -16,7 +16,9 @@
           document.querySelector('body').classList.remove('sidebar-expanded');
       }
     </script>
-    <%= render "layouts/alert" %>
+    <div class="flash">
+      <%= render "shared/flash" %>
+    </div>
     <!-- Page wrapper -->
     <div class="flex h-screen overflow-hidden">
       <% if user_signed_in? %>
