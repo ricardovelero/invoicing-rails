@@ -74,18 +74,27 @@
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left">
+                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "name" %>">
                                         <%= sort_link_to t("nombre"), :name, data: { turbo_action: "advance" } %>
+                                        <span class="absolute top-0 left-13">
+                                            <%= sort_indicator if params[:sort] == "name" %>
+                                        </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left">
+                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "email" %>">
                                         <%= sort_link_to t("email"), :email, data: { turbo_action: "advance" } %>
+                                        <span class="absolute top-0 left-18">
+                                            <%= sort_indicator if params[:sort] == "email" %>
+                                        </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left">
+                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "nif" %>">
                                         <%= sort_link_to t("nif"), :nif, data: { turbo_action: "advance" } %>
+                                        <span class="absolute top-0 left-5">
+                                            <%= sort_indicator if params[:sort] == "nif" %>
+                                        </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
