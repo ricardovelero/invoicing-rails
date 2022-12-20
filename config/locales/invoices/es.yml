@@ -42,6 +42,7 @@ es:
   quitar_item: Eliminar Ítem
   items_facturar: Ítems a Facturar
   guardar_factura: Guardar Factura
+  factura_creada: Factura creada exitosamente
   subtotal: Base imponible
   iva: IVA
   irpf: IRPF

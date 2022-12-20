@@ -46,9 +46,7 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       if @invoice.save
-        format.html do
-          redirect_to invoices_path,
-                      notice: "Invoice was successfully created."
+        format.html do redirect_to invoices_path, notice: I18n.t("factura_creada")
         end
         format.json { render :show, status: :created, location: @invoice }
       else
