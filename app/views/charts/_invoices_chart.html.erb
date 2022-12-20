@@ -1,7 +1,8 @@
 <div
   data-controller="invoices-chart"
-  data-invoices-chart-categories-value="<%= categories %>"
+  data-invoices-chart-labels-value="<%= labels %>"
   data-invoices-chart-series-value="<%= series %>"
+  id="invoices-chart-container" data-turbo-cache="false"
 >
   <header class="px-5 py-4 border-b border-slate-100 flex items-center">
       <h2 class="font-semibold text-slate-800"><%= t("facturacion_diaria") %></h2>
