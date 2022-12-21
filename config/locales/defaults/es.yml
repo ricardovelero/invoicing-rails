@@ -219,3 +219,12 @@ es:
     pm: pm
   selecciona_pais: Selecciona País
   selecciona_provincia: Selecciona Provincia
+  remember_me: Recuérdame
+  login: Entrar
+  forgot_password: ¿Olvidaste tu contraseña?
+  dont_have_an_account?: ¿No tienes una cuenta?
+  sign_up: Crear una cuenta
+  confirm_account_question: ¿No has recibido las instrucciones para confirmar tu cuenta?
+  confirm_account: Confirmar tu cuenta
+  email: Correo electrónico
+  password: Contraseña

@@ -1,6 +1,6 @@
 <% flash.each do |flash_type, message| %>
   <div x-show="open" x-data="{ open: true }" x-transition x-init="setTimeout(() => open = false, 3000)"
-    class="fixed top-10 left-1/2 z-60 flex pointer-events-none">
+    class="fixed <%= position %> z-60 flex pointer-events-none">
       <div @click.outside="open = false" @keydown.escape.window="open = false"
         class="inline-flex min-w-80 px-4 py-2 rounded-sm text-sm border <%= flash_class(flash_type) %>">
           <div class="flex w-full justify-between items-start">
