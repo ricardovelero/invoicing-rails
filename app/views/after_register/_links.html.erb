@@ -1,3 +1,5 @@
 <% unless previous_step?("sign_up") %>
-    <%= link_to "<- Atrás", previous_wizard_path, class: "text-sm underline hover:no-underline" %>
+    <%= link_to previous_wizard_path, class: 'text-sm underline hover:no-underline' do %>
+        <%= heroicon "arrow-left", variant: :mini, options: { class: "inline" } %> <%= t("back") %>
+    <% end %>
 <% end %>

@@ -19,9 +19,9 @@
 </div>
 <div class="max-w-md mx-auto">
   <% if @user_profile.is_freelance %>
-    <h1 class="text-3xl text-slate-800 font-bold mb-6">Información Personal ✨</h1>
+    <h1 class="text-3xl text-slate-800 font-bold mb-6"><%= t("personal_information") %> ✨</h1>
   <% else %>
-    <h1 class="text-3xl text-slate-800 font-bold mb-6">Información de la Empresa ✨</h1>
+    <h1 class="text-3xl text-slate-800 font-bold mb-6"><%= t("company_information") %> ✨</h1>
   <% end %>
   <%= form_for(@user_profile, url: wizard_path, method: 'put' ) do |f| %>
     <% if f.object.errors.any? %>
@@ -37,38 +37,52 @@
     <div class="space-y-4 mb-8">
       <% if @user_profile.is_freelance %>
         <div class="my-5">
-          <label class="input-label" for="first_name">Nombres <span class="text-rose-500">*</span></label>
-          <%= f.text_field :first_name, class: "input", required: true %>
+          <%= f.label :first_name, class: "input-label" do %>
+            <%= t("name") %> <%= required_field_indicator %>
+          <% end %>
+          <%= f.text_field :first_name, class: "form-input w-full", required: true, autofocus: true %>
         </div>
         <div class="my-5">
-          <label class="input-label" for="last_name">Apellidos <span class="text-rose-500">*</span></label>
-          <%= f.text_field :last_name, class: "input", required: true %>
+          <%= f.label :last_name, class: "input-label" do %>
+            <%= t("last_name") %> <%= required_field_indicator %>
+          <% end %>
+          <%= f.text_field :last_name, class: "form-input w-full", required: true %>
         </div>
         <div class="my-5">
-            <label class="input-label" for="gov_id">NIF/NIE <span class="text-rose-500">*</span></label>
-            <%= f.text_field :gov_id, class: "input", required: true %>
+          <%= f.label :gov_id, class: "input-label" do %>
+            <%= t("fiscal_identification_number") %> <%= required_field_indicator %>
+          <% end %>
+          <%= f.text_field :gov_id, class: "form-input w-full", required: true %>
         </div>
       <% else %>
         <div class="my-5">
-          <label class="input-label" for="company_name">Nombre Empresa <span class="text-rose-500">*</span></label>
-          <%= f.text_field :company_name, class: "input", required: true %>
+          <%= f.label :company_name, class: "input-label" do %>
+            <%= t("company_name") %> <%= required_field_indicator %>
+          <% end %>
+          <%= f.text_field :company_name, class: "form-input w-full", required: true, autofocus: true %>
         </div>
         <div class="my-5">
-            <label class="input-label" for="gov_id">CIF <span class="text-rose-500">*</span></label>
+          <%= f.label :gov_id, class: "input-label" do %>
+            <%= t("fiscal_identification_number") %> <%= required_field_indicator %>
+          <% end %>
             <%= f.text_field :gov_id, class: "input", required: true %>
         </div>
         <div class="my-5">
-          <label class="input-label" for="company_name">Datos Representante Legal <span class="text-rose-500">*</span></label>
-          <%= f.text_field :first_name, class: "input", placeholder: "Nombres", required: true %>
+          <%= f.label "legal_representative_information", class: "input-label" do %>
+            <%= t("legal_representative_information") %> <%= required_field_indicator %>
+          <% end %>
+          <%= f.text_field :first_name, class: "form-input w-full", placeholder: "Nombres", required: true %>
         </div>
         <div class="my-5">
-          <%= f.text_field :last_name, class: "input", placeholder: "Apellidos", required: true %>
+          <%= f.text_field :last_name, class: "form-input w-full", placeholder: "Apellidos", required: true %>
         </div>
       <% end %>
     </div>
     <div class="flex items-center justify-between">
       <%= render "after_register/links" %>
-      <%= f.submit 'Siguiente ->', class: 'btn-primary' %>
+      <%= f.button class: 'btn bg-indigo-600 hover:bg-indigo-700 text-white ml-auto cursor-pointer' do %>
+          <%= t("next") %> <%= heroicon "arrow-right", variant: :mini %>
+      <% end %>
     </div>
 
   <% end %>
