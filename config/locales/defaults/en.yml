@@ -214,3 +214,9 @@ en:
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
+  confirm_account_question: Didn't you receive instructions to confirm your account?
+  company_text: Any type of limited liability company or corporation
+  self_empoyed_text: Freelance, Self employed profesional, etc
+  forgot_password_instructions: Please, type your email, and we will send you instructions to reset your password.
+  remember_password?: Do you remeber your password?
+  send_instructions: Send me the instructions

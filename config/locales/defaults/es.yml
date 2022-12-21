@@ -217,5 +217,45 @@ es:
       long: "%-d de %B de %Y %H:%M"
       short: "%-d de %b %H:%M"
     pm: pm
-  selecciona_pais: Selecciona País
-  selecciona_provincia: Selecciona Provincia
+  select_country: Selecciona país
+  select_region: Selecciona provincia
+  remember_me: Recuérdame
+  login: Entrar
+  forgot_password: ¿Olvidaste tu contraseña?
+  dont_have_an_account?: ¿No tienes una cuenta?
+  sign_up: Crear una cuenta
+  confirm_account_question: ¿No has recibido las instrucciones para confirmar tu cuenta?
+  confirm_account: Confirmar tu cuenta
+  email: Correo electrónico
+  password: Contraseña
+  register: Registrarse
+  confirm_password: Confirmar contraseña
+  already_registered?: ¿Ya estás registrado?
+  email_me_news: Enviarme noticias del servicio
+  how_will_you_invoice?: ¿Cómo vas a facturar?
+  next: Siguiente
+  back: Atrás
+  company: Empresa
+  company_text: Cualquier tipo de sociedad anomina o limitada
+  company_information: Información de la Empresa
+  company_name: Nombre empresa
+  self_employed: Autónomo
+  self_employed_text: Freelance, Profesionales, y afines
+  personal_information: Información Personal
+  name: Nombres
+  last_name: Apellidos
+  fiscal_identification_number: Número de identificación fiscal
+  legal_representative_information: Información de Representante Legal
+  fiscal_address: Dirección Fiscal
+  country: País
+  region: Provincia
+  city: Ciudad
+  postal_code: Código Postal
+  street_address_1: Calle
+  street_address_2: Dato adicional de la dirección
+  forgot_password?: ¿Olvidaste tu contraseña?
+  forgot_password_instructions: Por favor, ingrese su dirección de correo electrónico, y le enviaremos instrucciones para restablecer su contraseña.
+  remember_password?: ¿Tienes la contraseña?
+  send_instructions: Enviarme instrucciones
+  send_confirmation: Reenviar confirmación de cuenta
+  account_confirmed?: ¿Tu cuenta ya está confirmada?
