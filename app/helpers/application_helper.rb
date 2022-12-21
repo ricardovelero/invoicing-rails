@@ -33,4 +33,8 @@ module ApplicationHelper
       'bg-indigo-100 border-indigo-200 text-indigo-500'
     end
   end
+
+  def required_field_indicator
+    heroicon "star", variant: :mini, options: { class: "h-2 w-2 inline text-rose-500", disable_default_class: true }
+  end
 end
