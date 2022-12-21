@@ -55,7 +55,7 @@
             <!-- Table -->
             <div class="overflow-x-auto">
                 <% if @items.none? %>
-                    <%= render "shared/empty_state", title: t("no_hay_items"), text: t("no_hay_items_texto"), button_text: t("nuevo_item") %>
+                    <%= render "shared/empty_state", title: t("no_hay_items"), text: t("no_hay_items_texto"), button_text: t("nuevo_item"), the_link: new_item_path %>
                 <% else %>
                     <table class="table-auto w-full">
                         <!-- Table header -->
