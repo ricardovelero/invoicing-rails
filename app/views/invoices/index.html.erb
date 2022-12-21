@@ -85,7 +85,7 @@
             <div class="overflow-x-auto">
 
                 <% if @invoices.none? %>
-                    <%= render "empty_state" %>
+                    <%= render "shared/empty_state", title: t("no_hay_facturas"), text: t("no_hay_facturas_texto"), button_text: t("nueva_factura") %>
                 <% else %>
                     <table class="table-auto w-full">
                         <!-- Table header -->
