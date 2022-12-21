@@ -214,3 +214,4 @@ en:
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
+  confirm_account_question: Didn't you receive instructions to confirm your account?
