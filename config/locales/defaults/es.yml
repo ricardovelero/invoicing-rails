@@ -253,3 +253,9 @@ es:
   postal_code: Código Postal
   street_address_1: Calle
   street_address_2: Dato adicional de la dirección
+  forgot_password?: ¿Olvidaste tu contraseña?
+  forgot_password_instructions: Por favor, ingrese su dirección de correo electrónico, y le enviaremos instrucciones para restablecer su contraseña.
+  remember_password?: ¿Tienes la contraseña?
+  send_instructions: Enviarme instrucciones
+  send_confirmation: Reenviar confirmación de cuenta
+  account_confirmed?: ¿Tu cuenta ya está confirmada?
