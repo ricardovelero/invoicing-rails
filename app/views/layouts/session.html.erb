@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= yield :page_title %></title>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <%= render 'shared/head' %>
   </head>
 
-  <body class="body-session">
+  <body class="font-inter antialiased bg-slate-100 text-slate-600">
     <main class="container mx-auto mt-28 px-5 flex">
       <div class="m-auto w-84 md:w-96 session">
         <%= render "layouts/alert" %>
