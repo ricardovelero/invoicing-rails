@@ -1,33 +1,38 @@
-  <% content_for(:page_title, "Registrarse") %>
+  <% content_for(:page_title, t("register")) %>
   
-  <%= form_for(resource,
-    as: resource_name,
-    url: registration_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     
-    <div class="form-group">
+    <div class="space-y-4">
       <%= render "devise/shared/error_messages", resource: resource %>
-      <div class="mb-4">
-        <%= f.label :email, "Correo Electrónico", class: "input-label" %>
-        <%= f.email_field :email, required: true, class: "input" %>
+      <div>
+        <%= f.label :email, t("email"), class: "input-label" %>
+        <%= f.email_field :email, required: true, class: "form-input w-full" %>
       </div>
 
-      <div class="mb-4">
-        <%= f.label :password, "Contraseña", class: "input-label" %>
-        <%= f.password_field :password, required: true, class: "input" %>
+      <div>
+        <%= f.label :password, t("password"), class: "input-label" %>
+        <%= f.password_field :password, required: true, class: "form-input w-full" %>
       </div>
 
-      <div class="mb-4">
-        <%= f.label :password_confirmation, "Confirmar contraseña", class: "input-label" %>
-        <%= f.password_field :password_confirmation, required: true, class: "input" %>
+      <div>
+        <%= f.label :password_confirmation, t("confirm_password"), class: "input-label" %>
+        <%= f.password_field :password_confirmation, required: true, class: "form-input w-full" %>
       </div>
-
-      <%= f.submit "Registrarse", class: "btn-primary" %>
+    </div>
+    <div class="flex items-center justify-between mt-6">
+      <div class="mr-1">
+          <label class="flex items-center">
+              <input type="checkbox" class="form-checkbox" />
+              <span class="text-sm ml-2"><%= t("email_me_news") %></span>
+          </label>
+      </div>
+      <%= f.submit t("register"), class: "btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3 whitespace-nowrap" %>
     </div>
   <% end %>
-
-  <div class="text-center">
-    <p class="text-grey-500 text-sm">
-      ¿Ya estás registrado?
-      <%= link_to "Entrar", new_user_session_path, class: "link" %>.
-    </p>
+  <!-- Footer -->
+  <div class="pt-5 mt-6 border-t border-slate-200">
+    <div class="text-sm">
+      <%= t("already_registered?") %>
+      <%= link_to t("signin"), new_user_session_path, class: "font-medium text-indigo-500 hover:text-indigo-600" %>
+    </div>
   </div>
