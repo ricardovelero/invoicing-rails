@@ -4,6 +4,8 @@ es:
   factura: Factura
   facturas: Facturas
   nueva_factura: Nueva Factura
+  no_hay_facturas: No tienes facturas
+  no_hay_facturas_texto: ¡Empieza creando una nueva factura!
   resultados: resultados
   mostrando: Mostrando
   fecha: Fecha

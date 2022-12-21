@@ -59,7 +59,7 @@
             <!-- Table -->
             <div class="overflow-x-auto">
                 <% if @clients.none? %>
-                    <%= render "empty_state" %>
+                    <%= render "shared/empty_state", title: t("no_hay_clientes"), text: t("no_hay_clientes_texto"), button_text: t("nuevo_cliente") %>
                 <% else %>
                     <table class="table-auto w-full">
                         <!-- Table header -->

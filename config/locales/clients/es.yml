@@ -5,6 +5,8 @@ es:
   cliente: Cliente
   nuevo_cliente: Nuevo cliente
   editar_cliente: Editar cliente
+  no_hay_clientes: No tienes clientes
+  no_hay_clientes_texto: Agrega tu primer cliente para poder facturar
   clientes_selecionados: clientes selecionados
   borrar: Borrar
   cantidad_por_pagina: Cantidad por pagina
