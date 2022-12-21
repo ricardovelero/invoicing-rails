@@ -228,3 +228,7 @@ es:
   confirm_account: Confirmar tu cuenta
   email: Correo electrónico
   password: Contraseña
+  register: Registrarse
+  confirm_password: Confirmar contraseña
+  already_registered?: ¿Ya estás registrado?
+  email_me_news: Enviarme noticias del servicio
