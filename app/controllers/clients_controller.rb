@@ -4,8 +4,8 @@ class ClientsController < ApplicationController
 
   # GET /clients or /clients.json
   def index
-    @clients = current_user.clients.all
-    @clients = current_user.clients.search(params[:query]) if params[:query].present?
+    @clients = current_user.clients.includes(:invoices).all
+    @clients = current_user.clients.includes(:invoices).search(params[:query]) if params[:query].present?
     @pagy, @clients = pagy @clients.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
   end
 
