@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   # GET /items or /items.json
   def index
-    @items = current_user.items.all
+    @items = current_user.items
     @items = current_user.items.search(params[:query]) if params[:query].present?
     @pagy, @items = pagy @items.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
   end
