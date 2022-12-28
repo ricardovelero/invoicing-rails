@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
   end
 
   def sort_column
-    %w{ item_name description price iva irpf }.include?(params[:sort]) ? params[:sort] : "item_name"
+    %w{ item_name description price iva }.include?(params[:sort]) ? params[:sort] : "item_name"
   end
 
   def sort_direction
