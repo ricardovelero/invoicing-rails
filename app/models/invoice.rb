@@ -12,12 +12,16 @@ class Invoice < ApplicationRecord
 
   before_create :set_invoice_number
 
-  scope :for_account, ->(user_id) { where(user_id: user_id) }
+  scope :for_account, -> (user_id) { where(user_id: user_id) }
 
   pg_search_scope :search, 
     against: [:invoice_number, :status, :date, :due_date],
     using: { tsearch: { prefix: true } },
     ignoring: :accents
+
+  def client_full_name
+    Client.find(client_id).full_name
+  end
 
   def set_invoice_number
     last_invoice = Invoice.last

@@ -18,7 +18,7 @@
                             <div class="<%= invoice.status? %>"><%= invoice.status %></div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div class="font-medium text-slate-800"><%= Client.find(invoice.client_id).full_name %></div>
+                            <div class="font-medium text-slate-800"><%= invoice.client_full_name %></div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
                             <div><%= invoice.date.strftime("%d %b %Y") %></div>
