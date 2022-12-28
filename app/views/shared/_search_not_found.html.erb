@@ -1,0 +1,16 @@
+<div class="border-t border-slate-200">
+    <div class="max-w-2xl m-auto my-16">
+
+        <div class="text-center px-4">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-t from-slate-200 to-slate-100 mb-4">
+              <%= image_tag "404-illustration.svg", alt: t("imagen_busqueda") %>
+            </div>
+            <h2 class="text-2xl text-slate-800 font-bold mb-2"><%= t("no_encontrado") %></h2>
+            <div class="mb-6"><%= t("no_encontrado_texto") %></div>
+            <%= link_to the_link, class: "btn bg-indigo-500 hover:bg-indigo-600 text-white", data: { turbo_frame: "_top" } do %>
+              <%= heroicon "arrow-uturn-left" %>
+              <span class="ml-2"><%= t("limpiar_busqueda") %></span>
+            <% end %>
+        </div>
+    </div>
+</div>
