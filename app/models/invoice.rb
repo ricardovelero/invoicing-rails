@@ -14,8 +14,10 @@ class Invoice < ApplicationRecord
 
   scope :for_account, ->(user_id) { where(user_id: user_id) }
 
-  pg_search_scope :search, against: [:invoice_number, :status, :date, :due_date],
-  using: { tsearch: { prefix: true } }
+  pg_search_scope :search, 
+    against: [:invoice_number, :status, :date, :due_date],
+    using: { tsearch: { prefix: true } },
+    ignoring: :accents
 
   def set_invoice_number
     last_invoice = Invoice.last

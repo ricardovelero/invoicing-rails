@@ -1,7 +1,10 @@
 class Item < ApplicationRecord
   
-  pg_search_scope :search, against: [:item_name, :description, :price, :iva, :irpf],
-    using: { tsearch: { prefix: true } }
+  pg_search_scope :search, 
+    against: [:item_name, :description, :price, :iva, :irpf],
+    using: { tsearch: { prefix: true } },
+    ignoring: :accents
+    
   belongs_to :user
   has_many :line_items
   has_many :invoices, through: :line_items
