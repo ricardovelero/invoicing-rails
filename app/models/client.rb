@@ -12,8 +12,10 @@ class Client < ApplicationRecord
             :country,
             presence: true
     
-  pg_search_scope :search, against: [:first_name, :last_name, :nif, :city, :region, :country],
-  using: { tsearch: { prefix: true } }          
+  pg_search_scope :search, 
+    against: [:first_name, :last_name, :nif, :city, :region, :country],
+    using: { tsearch: { prefix: true } },
+    ignoring: :accents
 
   def full_name
     [first_name, last_name].reject(&:blank?).collect(&:capitalize).join(" ")
