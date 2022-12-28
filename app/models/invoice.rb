@@ -94,7 +94,7 @@ class Invoice < ApplicationRecord
         address: user.user_profile.address_line_1+"\n"+user.user_profile.address_line_3,
         phone: user.user_profile.phone,
         email: user.user_profile.email,
-        logo: File.expand_path("app/assets/images/facturazen-oso.png")
+        logo: File.expand_path("app/assets/images/logo.png")
       },
       line_items: pdf_line_items,
       footer: notes
