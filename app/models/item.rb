@@ -1,10 +1,4 @@
 class Item < ApplicationRecord
-  
-  pg_search_scope :search, 
-    against: [:item_name, :description, :price, :iva, :irpf],
-    using: { tsearch: { prefix: true } },
-    ignoring: :accents
-    
   belongs_to :user
   has_many :line_items
   has_many :invoices, through: :line_items
@@ -16,6 +10,11 @@ class Item < ApplicationRecord
   validates :description, length: { maximum: 300 }
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :iva, numericality: { greater_than_or_equal_to: 0 }
+
+  pg_search_scope :search, 
+    against: [:item_name, :description, :price, :iva],
+    using: { tsearch: { prefix: true } },
+    ignoring: :accents
 
   private
 
