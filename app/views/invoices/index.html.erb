@@ -85,7 +85,11 @@
             <div class="overflow-x-auto">
 
                 <% if @invoices.none? %>
-                    <%= render "shared/empty_state", title: t("no_hay_facturas"), text: t("no_hay_facturas_texto"), button_text: t("nueva_factura"), the_link: new_invoice_path %>
+                    <% if params[:query].nil? %>
+                        <%= render "shared/empty_state", title: t("no_hay_facturas"), text: t("no_hay_facturas_texto"), button_text: t("nueva_factura"), the_link: new_invoice_path %>
+                    <% else %>
+                       <%= render "shared/search_not_found", the_link: invoices_url %>
+                    <% end %>
                 <% else %>
                     <table class="table-auto w-full">
                         <!-- Table header -->
