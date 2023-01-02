@@ -91,18 +91,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    enable_starttls_auto: true,
-    address: "mail.authsmtp.com",
-    port: 2525,
-    domain: "mail.authsmtp.com",
-    user_name: "ac52377",
-    password: "ksjrewd8vdfqpf",
-    authentication: "plain"
-  }
-  config.action_mailer.default_url_options = {
-    host: "https://monkfish-app-x5lnq.ondigitalocean.app",
-    protocol: "https"
-  }
+  config.action_mailer.delivery_method = :letter_opener_web
+
 end
