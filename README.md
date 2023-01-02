@@ -1,24 +1,3 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-- Ruby version, 3.1.2
-
-- System dependencies
-
-- Configuration
-
-- Database creation
-
-- Database initialization
-
-- How to run the test suite
-
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
+This is a small application for invoicing. It uses Devise for authentication and has an onboarding feature for new subscribers. You can generate PDFs for the invoices. I will be modifiying it to instead of having the option to delete, better to have archived and a section to manage archived items, clients, and invoices.
