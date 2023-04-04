@@ -39,13 +39,13 @@
                     <%= t("country") %> <%= required_field_indicator %>
                 <% end %>
                 <%= f.collection_select :country, Country.all.sort, :alpha_2_code, :name,
-                { prompt: t("select_country")}, { data: {action: "change->select#change"}, class: "form-input w-full", required: true} %>
+                { prompt: t("select_country"), selected: "ES" }, { data: {action: "change->select#change"}, class: "form-input w-full", required: true} %>
             </div>
             <div class="my-5">
                 <%= f.label :region, class: "input-label" do %>
                     <%= t("province") %> <%= required_field_indicator %>
                 <% end %>
-                <%= f.select :region, [], {}, { data: { select_target: "select" }, class: "form-input w-full", required: true} %>
+                <%= f.select :region, [(options_for_select spanish_regions)], {prompt: t("selecciona_provincia")}, { data: { select_target: "select" }, class: "form-input w-full", required: true} %>
             </div>
         </div>        
         <div class="my-5">

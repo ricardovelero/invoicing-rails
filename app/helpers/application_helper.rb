@@ -37,4 +37,10 @@ module ApplicationHelper
   def required_field_indicator
     heroicon "star", variant: :mini, options: { class: "h-2 w-2 inline text-rose-500", disable_default_class: true }
   end
+
+  def spanish_regions
+    @es_regions = Array.new
+    Country.alpha_2_coded("ES").subregions.each { |r| @es_regions << r.subregions }
+    @es_regions.flatten.sort
+  end
 end
