@@ -24,7 +24,7 @@
                         </div>
                         <div class="my-5">
                             <%= upf.label "Provincia", class: "input-label" %>
-                            <%= upf.select :region, [], {}, { data: { select_target: "select" }, class: "input", name: "[user_profile][region]", required: true }%>
+                            <%= upf.select :region, [(options_for_select resource.user_profile.get_regions, resource.user_profile.region)], {prompt: t("selecciona_provincia")}, { data: { select_target: "select" }, class: "form-input w-full"} %>
                         </div>
                     </div>        
                     <div class="my-5">
