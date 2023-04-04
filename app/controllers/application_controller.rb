@@ -9,23 +9,6 @@ class ApplicationController < ActionController::Base
 
   include Pagy::Backend
 
-  private
-
-  def member_controller?
-    return false if controller_path == "home"
-
-    true
-  end
-
-  def layout_by_resource
-    case
-    when devise_controller? && resource_name == :user && (action_name == "new" || action_name == "create" || action_name == "password")
-      "session"
-    else
-      "application"
-    end
-  end
-
   protected
 
   def after_sign_in_path_for(resource_or_scope)
@@ -74,6 +57,21 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def member_controller?
+    return false if controller_path == "home"
+
+    true
+  end
+
+  def layout_by_resource
+    case
+    when devise_controller? && resource_name == :user && (action_name == "new" || action_name == "create" || action_name == "password")
+      "session"
+    else
+      "application"
+    end
+  end
 
   def extract_locale_from_accept_language_header
     request.env["HTTP_ACCEPT_LANGUAGE"].scan(/^[a-z]{2}/).first
