@@ -4,7 +4,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   def get_regions
     @regions = Array.new
-    if new_record?
+    if new_record? || country.nil?
       Country.alpha_2_coded("ES").subregions.each { |r| @regions << r.subregions }
     else
       if country.count("a-zA-Z") > 2
