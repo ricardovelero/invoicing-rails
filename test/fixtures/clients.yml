@@ -4,7 +4,7 @@ one:
     first_name: MyString
     last_name: MyString
     nif: 35610828C
-    street: MyString
+    street: <%= Faker::Address.street_name %>
     city: MyString
     region: MyString
     postal_code: MyString
@@ -18,11 +18,11 @@ two:
     first_name: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
     last_name: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
     nif: 123435610828C
-    street: MyString
-    city: MyString
-    region: MyString
+    street: <%= Faker::Lorem.sentence(word_count: 20) %>
+    city: <%= Faker::Lorem.sentence(word_count: 10) %>
+    region: <%= Faker::Lorem.sentence(word_count: 10) %>
     postal_code: MyString
-    country: MyString
+    country: <%= Faker::Lorem.sentence(word_count: 10) %>
     email: MyString
     telephone: MyString
     active: false
