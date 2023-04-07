@@ -1,6 +1,12 @@
 class UserProfile < ApplicationRecord
   belongs_to :user, inverse_of: :user_profile
 
+  validates :gov_id, uniqueness: true
+  
+  validates :street_address_1, :street_address_2, length: { maximum: 70 }
+  validates :first_name, :last_name, :city, :region, :country, :company_name, :email, length: { maximum: 50 }
+  validates :gov_id, :postal_code, length: { maximum: 12 }
+
   def full_name
     [first_name, last_name].reject(&:blank?).collect(&:capitalize).join(" ")
   end
