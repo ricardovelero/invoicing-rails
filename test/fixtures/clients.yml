@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+    first_name: MyString
+    last_name: MyString
+    nif: 35610828C
+    street: MyString
+    city: MyString
+    region: MyString
+    postal_code: MyString
+    country: MyString
+    email: MyString
+    telephone: MyString
+    active: true
+    user: first
+
+two:
+    first_name: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
+    last_name: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
+    nif: 123435610828C
+    street: MyString
+    city: MyString
+    region: MyString
+    postal_code: MyString
+    country: MyString
+    email: MyString
+    telephone: MyString
+    active: false
+    user: first
