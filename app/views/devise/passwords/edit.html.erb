@@ -14,7 +14,7 @@
       <%= f.password_field :password, 
         autofocus: true, 
         autocomplete: "new-password", 
-        class: "input", 
+        class: "form-input w-full", 
         placeholder: @placeholder  
       %>
     </div>
@@ -23,13 +23,13 @@
       <%= f.label :password_confirmation, "Confirmar nueva contraseña", class: "input-label" %>
       <%= f.password_field :password_confirmation, 
         autocomplete: "new-password", 
-        class: "input",
+        class: "form-input w-full",
         placeholder: "tienen que coincidir"
       %>
     </div>
 
     <div class="actions">
-      <%= f.submit "Cambiar mi contraseña", class: "cta-btn w-full" %>
+      <%= f.submit "Cambiar mi contraseña", class: "btn-primary" %>
     </div>
   </div>
 <% end %>
@@ -37,6 +37,6 @@
 <div class="text-center">
   <p class="text-grey-500 text-sm">
     ¿Tienes la contraseña?
-    <%= link_to "Entrar", new_user_session_path %>.
+    <%= link_to "Entrar", new_user_session_path, class: "font-medium text-indigo-500 hover:text-indigo-600" %>.
   </p>
 </div>
