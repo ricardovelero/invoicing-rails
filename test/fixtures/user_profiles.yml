@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+    first_name: <%= Faker::Name.first_name %>
+    last_name: <%= Faker::Name.last_name %>
+    gov_id: <%= Faker::IDNumber.spanish_citizen_number %>
+    street_address_1: <%= Faker::Address.street_name %>
+    street_address_2: <%= Faker::Address.secondary_address %>
+    city: <%= Faker::Address.city %>
+    region: <%= Faker::Address.state %>
+    postal_code: <%= Faker::Address.zip_code %>
+    country: <%= Faker::Address.country %>
+    email: <%= Faker::Internet.email %>
+    phone: <%= Faker::PhoneNumber.phone_number %>
+    company_name: <%= Faker::Company.name %>
+    user: first
+
+two:
+    first_name: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
+    last_name: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
+    gov_id: 123435610828C
+    street_address_1: <%= Faker::Lorem.sentence(word_count: 20) %>
+    street_address_2: <%= Faker::Lorem.sentence(word_count: 20) %>
+    city: <%= Faker::Lorem.sentence(word_count: 10) %>
+    region: <%= Faker::Lorem.sentence(word_count: 10) %>
+    postal_code: 123435610828C
+    country: <%= Faker::Lorem.sentence(word_count: 10) %>
+    email: 123435610828C@example.com
+    phone: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
+    company_name: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
+    user: second
