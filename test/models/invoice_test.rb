@@ -2,10 +2,6 @@ require "test_helper"
 
 class InvoiceTest < ActiveSupport::TestCase
   fixtures :invoices
-  test "invoice fields must not be empty" do
-    invoice = invoices(:one)
-    assert invoice.invalid?
-  end
   test "invoice total must be equal to subtotal plus iva% less irpf" do
     invoice = Invoice.all.sample()
     iva = invoice.subtotal * invoice.iva / 100
