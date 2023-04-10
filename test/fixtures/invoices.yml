@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+    invoice_number: 100
+    date: <%= Faker::Date.backward(days: 1) %>
+    due_date: <%= Faker::Date.forward(days: 30) %>
+    subtotal: 100
+    iva: 21
+    irpf: 2
+    total: 119
+    notes: <%= Faker::Lorem.sentence(word_count: 20) %>
+    status: Paid
+    user: first
+
+two:
+    invoice_number: 101
+    date: 2022-09-25 00:01:44
+    due_date: 2022-09-25 00:01:44
+    subtotal: 9.99
+    iva: 9.99
+    irpf: 9.99
+    total: 9.99
+    notes: <%= Faker::Lorem.sentence(word_count: 20) %>
+    status: Not_Paid
+    user: first
