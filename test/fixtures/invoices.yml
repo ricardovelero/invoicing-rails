@@ -2,24 +2,31 @@
 
 one:
     invoice_number: 100
-    date: <%= Faker::Date.backward(days: 1) %>
+    date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
     due_date: <%= Faker::Date.forward(days: 30) %>
-    subtotal: 100
-    iva: 21
-    irpf: 2
-    total: 119
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
-    status: Paid
+    status: <%= %w[Pendiente Pagada].sample %>
     user: first
 
 two:
     invoice_number: 101
-    date: 2022-09-25 00:01:44
-    due_date: 2022-09-25 00:01:44
-    subtotal: 9.99
-    iva: 9.99
-    irpf: 9.99
-    total: 9.99
+    date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
+    due_date: <%= Faker::Date.forward(days: 30) %>
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
-    status: Not_Paid
+    status: <%= %w[Pendiente Pagada].sample %>
     user: first
+
+three:
+    invoice_number: 102
+    date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
+    due_date: <%= Faker::Date.forward(days: 30) %>
+    notes: <%= Faker::Lorem.sentence(word_count: 20) %>
+    status: <%= %w[Pendiente Pagada].sample %>
+    user: first
+
+<% Invoice.all.each do |i|
+  i.subtotal = i.sum_subtotal
+  i.iva = i.sum_iva
+  i.total = i.sum_total
+  i.save
+end %>
