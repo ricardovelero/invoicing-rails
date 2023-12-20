@@ -1,13 +1,9 @@
-# frozen_string_literal: true
-
 class RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
   def update
-    unless current_user.user_profile
-      current_user.build_user_profile(user_profile_params)
-    end
+    current_user.build_user_profile(user_profile_params) unless current_user.user_profile
     current_user.user_profile.update(user_profile_params)
     super
   end
@@ -22,25 +18,22 @@ class RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
   end
 
-  def after_update_path_for(resource)
-    "/users/edit/"
+  def after_update_path_for(_resource)
+    '/users/edit/'
   end
 
-  def after_inactive_sign_up_path_for(resource)
-    "/" # Or :prefix_to_your_route
+  def after_inactive_sign_up_path_for(_resource)
+    '/' # Or :prefix_to_your_route
   end
 
-  def after_sign_up_path_for(resource)
+  def after_sign_up_path_for(_resource)
     after_register_path(:freelance_or_company)
   end
 
-  protected
-
   def update_resource(resource, params)
-    
-    return super if params["password"]&.present?
+    return super if params['password']&.present?
 
-    resource.update_without_password(params.except("current_password"))
+    resource.update_without_password(params.except('current_password'))
   end
 
   private
