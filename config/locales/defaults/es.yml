@@ -8,6 +8,10 @@ es:
           has_many: No se puede eliminar el registro porque existen %{record} dependientes
     attributes:
       user_profile:
+        first_name: Nombres
+        last_name: Apellidos
+        gov_id: NIF/NIE
+        company_name: Nombre Empresa
         country: País
         region: Provincia
         city: Ciudad
