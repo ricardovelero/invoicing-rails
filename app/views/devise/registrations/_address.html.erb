@@ -24,27 +24,27 @@
                         <div class="my-5">
                             <%= upf.label :country, class: "input-label required" %>
                             <%= upf.collection_select :country, Country.all.sort, :alpha_2_code, :name,
-                            { selected: "ES"}, { data: {action: "change->select#change"}, class: "form-input w-full", name: "[user_profile][country]", required: true } %>
+                            { selected: "ES"}, { data: {action: "change->select#change"}, class: "form-input w-full", name: "user_profile[country]", required: true } %>
                         </div>
                         <div class="my-5">
                             <%= upf.label :region, class: "input-label required" %>
-                            <%= upf.select :region, [(options_for_select resource.user_profile.get_regions, resource.user_profile.region)], {prompt: t("selecciona_provincia")}, { data: { select_target: "select" }, class: "form-input w-full"} %>
+                            <%= upf.select :region, [(options_for_select resource.user_profile.get_regions, resource.user_profile.region)], {prompt: t("selecciona_provincia")}, { data: { select_target: "select" }, class: "form-input w-full", name: "user_profile[region]"} %>
                         </div>
                         <div class="my-5">
                             <%= upf.label :city, class: "input-label required" %>
-                            <%= upf.text_field :city, class: "form-input w-full", name: "[user_profile][city]", required: true %>
+                            <%= upf.text_field :city, class: "form-input w-full", name: "user_profile[city]", required: true %>
                         </div>
                         <div class="my-5">
                             <%= upf.label :postal_code, class: "input-label required" %>
-                            <%= upf.text_field :postal_code, class: "form-input w-full", name: "[user_profile][postal_code]", required: true %>
+                            <%= upf.text_field :postal_code, class: "form-input w-full", name: "user_profile[postal_code]", required: true %>
                         </div>
                         <div class="my-5">
                             <%= upf.label :street_address_1, class: "input-label required" %>
-                            <%= upf.text_field :street_address_1, class: "form-input w-full", name: "[user_profile][street_address_1]", required: true %>
+                            <%= upf.text_field :street_address_1, class: "form-input w-full", name: "user_profile[street_address_1]", required: true %>
                         </div>
                         <div class="my-5">
                             <%= upf.label :street_address_2, class: "input-label" %>
-                            <%= upf.text_field :street_address_2, name: "[user_profile][street_address_2]", class: "form-input w-full" %>
+                            <%= upf.text_field :street_address_2, name: "user_profile[street_address_2]", class: "form-input w-full" %>
                         </div>
                     <% end %>
                 </div>   
