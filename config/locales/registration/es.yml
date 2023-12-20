@@ -1,0 +1,9 @@
+es:
+  my_account: Mi Cuenta
+  change: Cambiar
+  email_change_text: Al cambiar de correo electrónico, tendrá que confirmar su cuenta de nuevo.
+  email_waiting_confirmation: Esperando confirmación de
+  danger_zone: Zona de Peligro
+  delete_account: Eliminar cuenta
+  are_you_sure: ¿Estás seguro?
+  save_changes: Guardar Cambios

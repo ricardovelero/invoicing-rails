@@ -2,7 +2,7 @@
 
         <!-- Panel body -->
         <div class="p-6 space-y-6">
-            <h2 class="text-2xl text-slate-800 font-bold mb-5"><%= t("mi_cuenta")%></h2>
+            <h2 class="text-2xl text-slate-800 font-bold mb-5"><%= t("my_account")%></h2>
 
             <!-- Picture -->
             <section>
@@ -10,7 +10,7 @@
                     <div class="mr-4">
                       <%= gravatar_for current_user %>
                     </div>
-                    <button class="btn-sm bg-indigo-500 hover:bg-indigo-600 text-white"><%= t("cambiar")%></button>
+                    <button class="btn-sm bg-indigo-500 hover:bg-indigo-600 text-white"><%= t("change")%></button>
                 </div>
             </section>
 
@@ -21,8 +21,8 @@
 
                 <!-- Email -->
                 <section>
-                    <h3 class="text-xl leading-snug text-slate-800 font-bold mb-1">Email</h3>
-                    <div class="text-sm">Al cambiar de correo electrónico, tendrá que confirmar su cuenta de nuevo.</div>
+                    <h3 class="text-xl leading-snug text-slate-800 font-bold mb-1"><%= t("email")%></h3>
+                    <div class="text-sm"><%= t("email_change_text")%></div>
                     <div class="flex flex-wrap mt-5">
                         <div class="mr-2">
                           <%= f.label :email, class: "sr-only" %>
@@ -31,13 +31,13 @@
                         <%= f.submit "Cambiar", class: "btn border-slate-200 hover:border-slate-300 shadow-sm text-indigo-500" %>
                     </div>
                     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                      <div class="mt-4 font-semibold text-sm text-red-500">Esperando confirmación de: <%= resource.unconfirmed_email %></div>
+                      <div class="mt-4 font-semibold text-sm text-red-500"><%= t("email_waiting_confirmation")%>: <%= resource.unconfirmed_email %></div>
                     <% end %>
                 </section>
 
                 <!-- Password -->
                 <section class="mt-10">
-                    <h3 class="text-xl leading-snug text-slate-800 font-bold mb-1">Contraseña</h3>
+                    <h3 class="text-xl leading-snug text-slate-800 font-bold mb-1"><%= t("password")%></h3>
                     <div class="text-sm">Deja estos campos vacíos si no quieres cambiar la contraseña</div>
                     <div class="sm:flex sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-5">
                         <div class="sm:w-1/3">
@@ -65,14 +65,14 @@
               </div>
               <div class="flex flex-col px-6 py-5 border-t border-slate-200 mt-10">
                   <div class="flex self-end">
-                    <%= f.submit "Guardar Cambios", class: "btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3" %>
+                    <%= f.submit t("save_changes"), class: "btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3" %>
                   </div>
               </div>
             <% end %>
             <div class="mt-10">
-              <p class="text-sm text-red-500 ml-1"><i>Zona de Peligro</i></p>
-              <%= button_to "Eliminar cuenta", registration_path(resource_name),
-              form: { data: { turbo_confirm: "¿Estás seguro?" } }, method: :delete,
+              <p class="text-sm text-red-500 ml-1"><i><%= t("danger_zone")%></i></p>
+              <%= button_to t("delete_account"), registration_path(resource_name),
+              form: { data: { turbo_confirm: t("are_you_sure") } }, method: :delete,
               class: "btn-danger text-xs" %>
             </div>
         </div>
