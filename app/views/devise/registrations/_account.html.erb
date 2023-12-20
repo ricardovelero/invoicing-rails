@@ -41,26 +41,26 @@
                     <div class="text-sm">Deja estos campos vacíos si no quieres cambiar la contraseña</div>
                     <div class="sm:flex sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-5">
                         <div class="sm:w-1/3">
-                            <label class="block text-sm font-medium mb-1" for="password">Nueva contraseña</label>
+                            <%= f.label :password, class: "input-label" %>
                             <%= f.password_field :password, class: "form-input w-full", autocomplete: "new-password" %>
                             <% if @minimum_password_length %>
                               <em class="text-xs">mínimo <%= @minimum_password_length %> caracteres</em>
                             <% end %>
                         </div>
                         <div class="sm:w-1/3">
-                            <label class="block text-sm font-medium mb-1" for="password_confirmation">Confirmar contraseña</label>
+                            <%= f.label :password_confirmation, class: "input-label" %>
                             <%= f.password_field :password_confirmation, class: "form-input w-full", autocomplete: "new-password" %>
                             <i class="text-xs">por favor, repite la nueva contraseña</i>
                         </div>
                         <div class="sm:w-1/3">
-                          <label class="block text-sm font-medium mb-1" for="location">Contraseña Actual</label>
+                          <%= f.label :current_password, class: "input-label" %>
                           <%= f.password_field :current_password, class: "form-input w-full", autocomplete: "current-password" %>
-                          <i class="text-xs">es necesaria tu contraseña actual para confirmar los cambios</i>
+                          <i class="text-xs">para confirmar cambio de contraseña</i>
                         </div>
                     </div>
                 </section>
                 <%= f.fields_for :user_profile, resource.user_profile do |upf| %>
-                  <%= upf.hidden_field :gov_id, name: "[user_profile][gov_id]", id: "user_profile_gov_id" %>
+                  <%= upf.hidden_field :gov_id, name: "user_profile[gov_id]", id: "user_profile_gov_id" %>
                 <% end %>
               </div>
               <div class="flex flex-col px-6 py-5 border-t border-slate-200 mt-10">
