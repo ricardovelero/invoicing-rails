@@ -18,32 +18,32 @@
                     <%= f.fields_for :user_profile, resource.user_profile do |upf| %>
                         <% if resource.user_profile.is_freelance %>
                             <div class="my-5">
-                                <label class="input-label" for="first_name">Nombres <span class="text-rose-500">*</span></label>
-                                <%= upf.text_field :first_name, class: "input", name: "[user_profile][first_name]",  required: true %>
+                                <%= upf.label :first_name, class: "input-label required" %>
+                                <%= upf.text_field :first_name, class: "input", name: "user_profile[first_name]",  required: true %>
                             </div>
                             <div class="my-5">
-                                <label class="input-label" for="last_name">Apellidos <span class="text-rose-500">*</span></label>
-                                <%= upf.text_field :last_name, class: "input", name: "[user_profile][last_name]", required: true %>
+                                <%= upf.label :last_name, class: "input-label required" %>
+                                <%= upf.text_field :last_name, class: "input", name: "user_profile[last_name]", required: true %>
                             </div>
                             <div class="my-5">
-                                <label class="input-label" for="gov_id">NIF/NIE <span class="text-rose-500">*</span></label>
-                                <%= upf.text_field :gov_id, class: "input", name: "[user_profile][gov_id]", required: true %>
+                                <%= upf.label :gov_id, class: "input-label required" %>
+                                <%= upf.text_field :gov_id, class: "input", name: "user_profile[gov_id]", required: true %>
                             </div>
                         <% else %>
                             <div class="my-5">
-                                <label class="input-label" for="company_name">Nombre Empresa <span class="text-rose-500">*</span></label>
-                                <%= upf.text_field :company_name, class: "input", name: "[user_profile][company_name]", required: true %>
+                                <%= upf.label :company_name, class: "input-label required" %>
+                                <%= upf.text_field :company_name, class: "input", name: "user_profile[company_name]", required: true %>
                             </div>
                             <div class="my-5">
-                                <label class="input-label" for="gov_id">CIF <span class="text-rose-500">*</span></label>
-                                <%= upf.text_field :gov_id, class: "input", name: "[user_profile][gov_id]", required: true %>
+                                <%= upf.label "CIF", class: "input-label required" %>
+                                <%= upf.text_field :gov_id, class: "input", name: "user_profile[gov_id]", required: true %>
                             </div>
                             <div class="my-5">
-                                <label class="input-label" for="company_name">Datos Representante Legal <span class="text-rose-500">*</span></label>
-                                <%= upf.text_field :first_name, class: "input", placeholder: "Nombres", name: "[user_profile][first_name]", required: true %>
+                                <%= upf.label "Datos Representante Legal", class: "input-label required" %>
+                                <%= upf.text_field :first_name, class: "input", placeholder: "Nombres", name: "user_profile[first_name]", required: true %>
                             </div>
                             <div class="my-5">
-                                <%= upf.text_field :last_name, class: "input", placeholder: "Apellidos", name: "[user_profile][last_name]", required: true %>
+                                <%= upf.text_field :last_name, class: "input", placeholder: "Apellidos", name: "user_profile[last_name]", required: true %>
                             </div>
                         <% end %>
                     <% end %>
