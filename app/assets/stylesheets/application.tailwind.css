@@ -155,6 +155,10 @@
   .input-label {
     @apply block text-sm font-medium mb-1;
   }
+  .required::after {
+    content: " *";
+    @apply text-red-500;
+  }
   .gravatar {
     @apply w-20 h-20 rounded-full;
   }
@@ -225,7 +229,7 @@
     top: 2px;
     left: 2px;
     right: 50%;
-    transition: all .15s ease-out;
+    transition: all 0.15s ease-out;
   }
 
   .form-switch input[type="checkbox"]:checked + label {
@@ -318,7 +322,8 @@
 }
 
 /* Invoice view */
-.past-due, .not-paid {
+.past-due,
+.not-paid {
   @apply inline-flex font-medium bg-rose-100 text-rose-500 rounded-full text-center px-2.5 py-0.5;
 }
 .on-time {
@@ -352,10 +357,10 @@
 .pagy-nav-js .page.prev.disabled,
 .pagy-nav-js .page.next.disabled {
   @apply block rounded px-4 py-2 font-normal border-slate-200 text-indigo-500 bg-white shadow-md;
-  &:hover{
+  &:hover {
     @apply border-slate-300;
   }
-  &:active{
+  &:active {
     @apply bg-white text-indigo-500;
   }
 }
