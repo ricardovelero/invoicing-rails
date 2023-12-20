@@ -6,6 +6,14 @@ es:
         restrict_dependent_destroy:
           has_one: No se puede eliminar el registro porque existe un %{record} dependiente
           has_many: No se puede eliminar el registro porque existen %{record} dependientes
+    attributes:
+      user_profile:
+        country: País
+        region: Provincia
+        city: Ciudad
+        postal_code: Código Postal
+        street_address_1: Calle
+        street_address_2: Información Adicional
   date:
     abbr_day_names:
       - dom
