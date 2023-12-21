@@ -21,10 +21,11 @@
                             <div class="font-medium text-slate-800"><%= invoice.client_full_name %></div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div><%= invoice.date.strftime("%d %b %Y") %></div>
+                            <div><%= I18n.l(invoice.date, format: "%d %b %Y") %></div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div class="<%= invoice.past_due? %>"><%= invoice.due_date.strftime("%d %b %Y") %></div>
+                            <div class="<%= invoice.past_due? %>"><%= I18n.l(invoice.due_date, format: "%d %b %Y") %>
+                            </div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
                             <div class="space-x-1 inline-flex">

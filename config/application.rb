@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -16,13 +16,13 @@ module Fz
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    config.time_zone = "Madrid"
+    config.time_zone = 'Madrid'
     # config.eager_load_paths << Rails.root.join("extras"
-    # config.i18n.default_locale = :es
+    config.i18n.default_locale = :es
 
     config.i18n.load_path +=
-      Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
+      Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
 
-    config.to_prepare { Devise::Mailer.layout "mailer" }
+    config.to_prepare { Devise::Mailer.layout 'mailer' }
   end
 end
