@@ -14,7 +14,7 @@
       </div>
       <%= f.hidden_field :iva, value: invoice.iva, data: { recalculate_target: "hiddentaxtotal"} %>
     </div>
-    <div class="table-row hidden">
+    <div class="hidden">
       <div class="table-cell input-label text-left"><%= t("irpf") %></div>
       <div class="table-cell text-right py-1" data-recalculate-target="irpf">
         <%= number_to_currency invoice.irpf %>
