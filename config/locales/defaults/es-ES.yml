@@ -7,54 +7,30 @@ es-ES:
           has_one: No se puede eliminar el registro porque existe un %{record} dependiente
           has_many: No se puede eliminar el registro porque existen %{record} dependientes
   date:
-    abbr_day_names:
-      - dom
-      - lun
-      - mar
-      - mié
-      - jue
-      - vie
-      - sáb
+    day_names: [domingo, lunes, martes, miércoles, jueves, viernes, sábado]
+    abbr_day_names: [dom, lun, mar, mié, jue, vie, sáb]
+    month_names:
+      [
+        ~,
+        enero,
+        febrero,
+        marzo,
+        abril,
+        mayo,
+        junio,
+        julio,
+        agosto,
+        septiembre,
+        octubre,
+        noviembre,
+        diciembre,
+      ]
     abbr_month_names:
-      -
-      - ene
-      - feb
-      - mar
-      - abr
-      - may
-      - jun
-      - jul
-      - ago
-      - sep
-      - oct
-      - nov
-      - dic
-    day_names:
-      - domingo
-      - lunes
-      - martes
-      - miércoles
-      - jueves
-      - viernes
-      - sábado
+      [ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
     formats:
       default: "%d/%m/%Y"
       long: "%d de %B de %Y"
       short: "%d de %b"
-    month_names:
-      -
-      - enero
-      - febrero
-      - marzo
-      - abril
-      - mayo
-      - junio
-      - julio
-      - agosto
-      - septiembre
-      - octubre
-      - noviembre
-      - diciembre
     order:
       - :day
       - :month
