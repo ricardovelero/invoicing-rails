@@ -5,26 +5,20 @@ class LineItem < ApplicationRecord
   validates :quantity, presence: true
 
   def sub_total
-    if item && quantity
-      quantity * item.price
-    else
-      return 0
-    end
+    return 0 unless item && quantity
+
+    quantity * item.price
   end
 
   def total_price
-    if item && quantity
-      sub_total * (1 + item.iva / 100)
-    else
-      return 0
-    end
+    return 0 unless item && quantity
+
+    sub_total * (1 + item.iva / 100)
   end
 
   def total_iva
-    if item && quantity
-      total_price - sub_total
-    else
-      return 0
-    end
+    return 0 unless item && quantity
+
+    total_price - sub_total
   end
 end
