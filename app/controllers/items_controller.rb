@@ -10,11 +10,11 @@ class ItemsController < ApplicationController
   end
 
   def sort_column
-    %w{ item_name description price iva }.include?(params[:sort]) ? params[:sort] : "item_name"
+    %w[item_name description price iva].include?(params[:sort]) ? params[:sort] : 'item_name'
   end
 
   def sort_direction
-    %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 
   # GET /items/1 or /items/1.json
@@ -32,8 +32,7 @@ class ItemsController < ApplicationController
   end
 
   # GET /items/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /items or /items.json
   def create
@@ -43,7 +42,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.save
         format.html do
-          redirect_to items_path, notice: "Item was successfully created."
+          redirect_to items_path, notice: 'Item was successfully created.'
         end
         format.json { render :show, status: :created, location: @item }
       else
@@ -57,7 +56,7 @@ class ItemsController < ApplicationController
   def update
     if @item.update(item_params)
       respond_to do |format|
-        format.html { redirect_to items_path, notice: "Item was successfully updated." }
+        format.html { redirect_to items_path, notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
       end
     else
@@ -72,7 +71,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirect_to items_url, notice: "Item was successfully destroyed."
+        redirect_to items_url, notice: 'Item was successfully destroyed.'
       end
       format.json { head :no_content }
     end
@@ -92,8 +91,7 @@ class ItemsController < ApplicationController
       :item_name,
       :description,
       :price,
-      :iva,
-      :irpf
+      :iva
     )
   end
 end

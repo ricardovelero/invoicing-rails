@@ -10,11 +10,11 @@ class InvoicesController < ApplicationController
   end
 
   def sort_column
-    %w{ invoice_number total status date due_date }.include?(params[:sort]) ? params[:sort] : "invoice_number"
+    %w[invoice_number total status date due_date].include?(params[:sort]) ? params[:sort] : 'invoice_number'
   end
 
   def sort_direction
-    %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 
   # GET /invoices/1 or /invoices/1.json
@@ -40,13 +40,13 @@ class InvoicesController < ApplicationController
 
   # POST /invoices or /invoices.json
   def create
-
     @invoice = Invoice.new(invoice_params)
     @invoice.user = current_user
 
     respond_to do |format|
       if @invoice.save
-        format.html do redirect_to invoices_path, notice: I18n.t("factura_creada")
+        format.html do
+          redirect_to invoices_path, notice: I18n.t('factura_creada')
         end
         format.json { render :show, status: :created, location: @invoice }
       else
@@ -61,9 +61,9 @@ class InvoicesController < ApplicationController
   def add_item
     helpers.fields model: Invoice.new do |f|
       render turbo_stream: turbo_stream.append(
-        "line_items",
-        partial: "item_fields",
-        locals: { f: f, line_item: LineItem.new, turboid: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) }
+        'line_items',
+        partial: 'item_fields',
+        locals: { f:, line_item: LineItem.new, turboid: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) }
       )
     end
   end
@@ -74,7 +74,7 @@ class InvoicesController < ApplicationController
       if @invoice.update(invoice_params)
         format.html do
           redirect_to invoices_url,
-                      notice: "Invoice was successfully updated."
+                      notice: 'Invoice was successfully updated.'
         end
         format.json { render :show, status: :ok, location: @invoice }
       else
@@ -92,7 +92,7 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirect_to invoices_url, notice: "Invoice was successfully destroyed."
+        redirect_to invoices_url, notice: 'Invoice was successfully destroyed.'
       end
       format.json { head :no_content }
     end
@@ -118,15 +118,15 @@ class InvoicesController < ApplicationController
       :total,
       :notes,
       :status,
-      line_items_attributes: [:id, :item_id, :invoice_id, :quantity, :_destroy]
+      line_items_attributes: %i[id item_id invoice_id quantity price iva total _destroy]
     )
   end
 
   def send_pdf
     # Render the PDF in memory and send as the response
     send_data @invoice.pdf.render,
-      filename: "#{@invoice.created_at.strftime("%Y-%m-%d")}-invoice.pdf",
-      type: "application/pdf",
-      disposition: :inline # or :attachment to download
+              filename: "#{@invoice.created_at.strftime('%Y-%m-%d')}-invoice.pdf",
+              type: 'application/pdf',
+              disposition: :inline # or :attachment to download
   end
 end
