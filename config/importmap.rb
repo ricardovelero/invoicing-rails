@@ -9,3 +9,4 @@ pin "tailwindcss-stimulus-components" # @3.0.4
 pin "apexcharts", to: "https://ga.jspm.io/npm:apexcharts@3.36.3/dist/apexcharts.common.js"
 pin "alpinejs", to: "https://ga.jspm.io/npm:alpinejs@3.10.5/dist/module.esm.js"
 pin "alpine-turbo-drive-adapter", to: "https://ga.jspm.io/npm:alpine-turbo-drive-adapter@2.0.0/dist/alpine-turbo-drive-adapter.esm.js"
+pin "stripe.js", to: "https://ga.jspm.io/npm:stripe.js@0.0.1/lib/index.js"

@@ -24,5 +24,6 @@ module Fz
       Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
 
     config.to_prepare { Devise::Mailer.layout 'mailer' }
+    config.action_mailer.default_url_options = { host: 'example.com' }
   end
 end
