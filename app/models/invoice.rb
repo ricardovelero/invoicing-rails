@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Invoice model including search with association
-class Invoice < ApplicationRecord
+class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
   belongs_to :client
   belongs_to :user
 
@@ -16,6 +16,11 @@ class Invoice < ApplicationRecord
   before_create :set_invoice_number
 
   scope :for_account, ->(user_id) { where(user_id:) }
+
+  scope :filter_status, ->(status) { where(status:) }
+
+  scope :due, -> { where('due_date <= ?', Date.today) }
+  scope :about_to_be_due, -> { where('due_date = ?', Date.tomorrow) }
 
   pg_search_scope :search,
                   against: %i[invoice_number status date due_date],
@@ -40,6 +45,26 @@ class Invoice < ApplicationRecord
                           end
   end
 
+  def self.total_invoice_count
+    count
+  end
+
+  def self.total_paid_count
+    filter_status('pagada').count
+  end
+
+  def self.total_not_paid_count
+    filter_status('pendiente').count
+  end
+
+  def self.total_due_count
+    due.count
+  end
+
+  def self.total_about_to_be_due_count
+    about_to_be_due.count
+  end
+
   def sum_subtotal
     line_items.sum(&:sub_total)
   end
@@ -59,9 +84,9 @@ class Invoice < ApplicationRecord
   end
 
   def status?
-    return 'paid' if status == 'Pagada'
+    return 'paid' if status == 'pagada'
 
-    'not-paid' if status == 'Pendiente'
+    'not-paid' if status == 'pendiente'
   end
 
   def pdf_line_items
