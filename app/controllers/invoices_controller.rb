@@ -1,11 +1,15 @@
-class InvoicesController < ApplicationController
+# frozen_string_literal: true
+
+# Invoice controller with search, sort, and filter
+class InvoicesController < ApplicationController # rubocop:disable Metrics/ClassLength
   before_action :authenticate_user!
   before_action :set_invoice, only: %i[show edit update destroy]
 
   # GET /invoices or /invoices.json
-  def index
+  def index # rubocop:disable Metrics/AbcSize
     @invoices = current_user.invoices
     @invoices = current_user.invoices.search(params[:query]) if params[:query].present?
+    @invoices = current_user.invoices.filter_status(params[:status]) if params[:status].present?
     @pagy, @invoices = pagy @invoices.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
   end
 
