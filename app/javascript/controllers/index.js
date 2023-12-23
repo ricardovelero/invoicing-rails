@@ -4,8 +4,14 @@
 
 import { application } from "./application"
 
+import ChartsController from "./charts_controller"
+application.register("charts", ChartsController)
+
 import ClientselectController from "./clientselect_controller"
 application.register("clientselect", ClientselectController)
+
+import FilterController from "./filter_controller"
+application.register("filter", FilterController)
 
 import FormValidationController from "./form_validation_controller"
 application.register("form-validation", FormValidationController)
