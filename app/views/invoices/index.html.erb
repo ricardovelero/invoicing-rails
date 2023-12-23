@@ -45,21 +45,48 @@
 <div class="sm:flex sm:justify-between sm:items-center mb-5">
     <% unless @invoices.none? %>
         <!-- Left side -->
-        <div class="mb-4 sm:mb-0 hidden">
-            <ul class="flex flex-wrap -m-1">
-                <li class="m-1">
-                    <button class="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-transparent shadow-sm bg-indigo-500 text-white duration-150 ease-in-out"><%= t("todas") %> <span class="ml-1 text-indigo-200">67</span></button>
-                </li>
-                <li class="m-1">
-                    <button class="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out"><%= t("pagadas") %> <span class="ml-1 text-slate-400">14</span></button>
-                </li>
-                <li class="m-1">
-                    <button class="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out"><%= t("por_vencer") %> <span class="ml-1 text-slate-400">34</span></button>
-                </li>
-                <li class="m-1">
-                    <button class="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out"><%= t("vencidas") %> <span class="ml-1 text-slate-400">19</span></button>
-                </li>
-            </ul>
+        <div class="mb-4 sm:mb-0">
+            <%= form_tag(invoices_path, method: 'get', id: 'filterForm', data: { controller: 'filter' }) do %>
+                <%= hidden_field_tag 'status', '', id: 'statusValue', data: { filter_target: 'statusValue' } %>
+                <ul class="flex flex-wrap -m-1">
+                    <li class="m-1">
+                        <%= button_tag(type: 'button', data: { action: 'click->filter#submitForm', value: '' }, class: (params[:status].nil? || params[:status].empty?) ? 'filter-btn-active' : 'filter-btn') do %>
+                            <%= t("todas") %>
+                            <%= content_tag :span, Invoice.total_invoice_count, class: 'ml-1 text-slate-400' %>
+                        <% end %>
+                    </li>
+                    <li class="m-1">
+                        <% if Invoice.total_paid_count > 0 %>
+                            <%= button_tag(type: 'button', data: { action: 'click->filter#submitForm', value: 'pagada' }, class: params[:status] == 'pagada' ? 'filter-btn-active' : 'filter-btn') do %>
+                                <%= t('pagadas') %>
+                                <%= content_tag :span, Invoice.total_paid_count, class: 'ml-1 text-slate-400' %>
+                            <% end %>
+                        <% end %>
+                    </li>
+                    <li class="m-1">
+                        <%= button_tag(type: 'button', data: { action: 'click->filter#submitForm', value: 'pendiente' }, class: params[:status] == 'pendiente' ? 'filter-btn-active' : 'filter-btn') do %>
+                            <%= t("pendientes") %>
+                            <%= content_tag :span, Invoice.total_not_paid_count, class: 'ml-1 text-slate-400' %>
+                        <% end %>
+                    </li>
+                    <li class="m-1">
+                        <% if Invoice.total_about_to_be_due_count > 0 %>
+                            <%= button_tag(type: 'button', data: { action: 'click->filter#submitForm', value: 'por_vencer' }, class: params[:query] == 'por_vencer' ? 'filter-btn-active' : 'filter-btn') do %>
+                                <%= t("por_vencer") %>
+                                <%= content_tag :span, Invoice.total_about_to_be_due_count, class: 'ml-1 text-slate-400' %>
+                            <% end %>
+                        <% end %>
+                    </li>
+                    <li class="m-1">
+                        <% if Invoice.total_due_count > 0 %>
+                            <%= button_tag(type: 'button', data: { action: 'click->filter#submitForm', value: 'vencidas' }, class: params[:due] == 'vencidas' ? 'filter-btn-active' : 'filter-btn') do %>
+                                <%= t("vencidas") %>
+                                <%= content_tag :span, Invoice.total_due_count, class: 'ml-1 text-slate-400' %>
+                            <% end %>
+                        <% end %>
+                    </li>
+                </ul>
+            <% end %>
         </div>
 
         <!-- Right side -->
