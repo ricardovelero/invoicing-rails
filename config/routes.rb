@@ -1,6 +1,8 @@
-Rails.application.routes.draw do
-  root "dashboard#index"
-  devise_for :users, controllers: { registrations: "registrations" }
+# frozen_string_literal: true
+
+Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
+  root 'dashboard#index'
+  devise_for :users, controllers: { registrations: 'registrations' }
   resources :users
   resources :clients
   resources :items
@@ -9,20 +11,21 @@ Rails.application.routes.draw do
     post :add_item, on: :collection
   end
   resources :after_register
-  
-  get "/privacy", to: "home#privacy"
-  get "/terms", to: "home#terms"
-  get "/regions", to: "countries#regions"
-  get "/dashboard", to: "dashboard#index"
+
+  get '/', to: 'home#index'
+  get '/privacy', to: 'home#privacy'
+  get '/terms', to: 'home#terms'
+  get '/regions', to: 'countries#regions'
+  get '/dashboard', to: 'dashboard#index'
   get 'charts/show', as: :chart
-  
-  scope "(:locale)", locale: /es|en/ do
+
+  scope '(:locale)', locale: /es|en/ do
     resources :users
     resources :dashboard
     resources :invoices
     resources :clients
     resources :items
-    root "home#index", as: "home_index", via: :all
+    root 'home#index', as: 'home_index', via: :all
   end
 
   localized do
@@ -33,5 +36,5 @@ Rails.application.routes.draw do
     resources :privacy
   end
 
-  mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  mount LetterOpenerWeb::Engine, at: '/letter_opener'
 end

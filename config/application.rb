@@ -6,10 +6,15 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Fz
+module Facturacion
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 7.1
+
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: %w[assets tasks])
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -17,11 +22,7 @@ module Fz
     # in config/environments, which are processed later.
     #
     config.time_zone = 'Madrid'
-    # config.eager_load_paths << Rails.root.join("extras"
-    config.i18n.default_locale = :es
-
-    config.i18n.load_path +=
-      Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    # config.eager_load_paths << Rails.root.join("extras")
 
     config.to_prepare { Devise::Mailer.layout 'mailer' }
   end
