@@ -29,13 +29,13 @@
       </div>
 
       <div class="my-5 col-span-1">
-        <%= f.label t("fecha"), class: "input-label "  %>
+        <%= f.label t("fecha"), class: "input-label"  %>
         <%= f.date_field :date, class: "form-input w-full", value: (@invoice.date || Date.today)%>
       </div>
 
       <div class="my-5">
         <%= f.label t("fecha_vencimiento"), class: "input-label"  %>
-        <%= f.date_field :due_date, class: "form-input w-full", value: @invoice.due_date || Date.today + 30.days %>
+        <%= f.date_field :due_date, class: "form-input w-full", value: (@invoice.due_date || Date.today + 30.days) %>
       </div>
 
       <div id="client_details" class="col-span-2" data-clientselect-target="select"></div>
