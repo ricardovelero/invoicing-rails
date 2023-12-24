@@ -69,17 +69,17 @@
                             <%= content_tag :span, Invoice.total_not_paid_count, class: 'ml-1 text-slate-400' %>
                         <% end %>
                     </li>
-                    <li class="m-1">
+                    <li class="m-1 hidden">
                         <% if Invoice.total_about_to_be_due_count > 0 %>
-                            <%= button_tag(type: 'button', data: { action: 'click->filter#submitForm', value: 'por_vencer' }, class: params[:query] == 'por_vencer' ? 'filter-btn-active' : 'filter-btn') do %>
+                            <%= button_tag(type: 'button', data: { action: 'click->filter#submitForm', value: 'por_vencer' }, class: params[:status] == 'por_vencer' ? 'filter-btn-active' : 'filter-btn') do %>
                                 <%= t("por_vencer") %>
                                 <%= content_tag :span, Invoice.total_about_to_be_due_count, class: 'ml-1 text-slate-400' %>
                             <% end %>
                         <% end %>
                     </li>
-                    <li class="m-1">
+                    <li class="m-1 hidden">
                         <% if Invoice.total_due_count > 0 %>
-                            <%= button_tag(type: 'button', data: { action: 'click->filter#submitForm', value: 'vencidas' }, class: params[:due] == 'vencidas' ? 'filter-btn-active' : 'filter-btn') do %>
+                            <%= button_tag(type: 'button', data: { action: 'click->filter#submitForm', value: 'vencidas' }, class: params[:status] == 'vencidas' ? 'filter-btn-active' : 'filter-btn') do %>
                                 <%= t("vencidas") %>
                                 <%= content_tag :span, Invoice.total_due_count, class: 'ml-1 text-slate-400' %>
                             <% end %>

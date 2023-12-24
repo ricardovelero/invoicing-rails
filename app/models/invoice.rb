@@ -23,7 +23,7 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :about_to_be_due, -> { where('due_date = ?', Date.tomorrow) }
 
   pg_search_scope :search,
-                  against: %i[invoice_number status date due_date],
+                  against: %i[invoice_number status notes],
                   associated_against: {
                     client: %i[first_name last_name]
                   },
