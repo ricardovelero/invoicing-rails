@@ -44,9 +44,9 @@ es:
     abbr_month_names:
       [~, ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
     formats:
-      default: "%-d/%-m/%Y"
-      long: "%-d de %B de %Y"
-      short: "%-d de %b"
+      default: "%d/%m/%Y"
+      long: "%d de %B de %Y"
+      short: "%d de %b"
     order:
       - :day
       - :month

@@ -1,3 +1,62 @@
 en:
-  a: of
-  de: to
+  a: to
+  de: from
+  factura: Invoice
+  facturas: Invoices
+  nueva_factura: New Invoice
+  no_hay_facturas: You have no invoices
+  no_hay_facturas_texto: Start by creating a new invoice!
+  resultados: results
+  mostrando: Showing
+  fecha: Date
+  fecha_vencimiento: Due Date
+  hoy: Today
+  ultimo_mes: Last Month
+  ultimos_7_dias: Last 7 Days
+  ultimos_12_meses: Last 12 Months
+  todos: All
+  todas: All
+  seleccionar_todos: Select All
+  siguiente: Next
+  anterior: Previous
+  pagadas: Paid
+  pendientes: Pending
+  por_vencer: Due Soon
+  vencidas: Overdue
+  buscar_factura: Search invoice...
+  buscar: Search
+  cantidad_por_pagina: Quantity per page
+  facturas_seleccionadas: selected invoices
+  borrar: Delete
+  numero: Number
+  total: Total
+  estatus: Status
+  cliente: Client
+  emitida: Issued
+  vencimiento: Due Date
+  acciones: Actions
+  cabecera_factura: Invoice Header
+  numero_factura: Invoice Number
+  selecciona_cliente: Select a client
+  direccion: Address
+  detalle_cliente: Customer Information
+  notas: Notes
+  agregar_linea_item: Add Item Line
+  quitar_item: Remove Item
+  items_facturar: Items to Invoice
+  guardar_factura: Save Invoice
+  factura_creada: Invoice created successfully
+  subtotal: Subtotal
+  iva: VAT
+  irpf: IRPF
+  total: TOTAL
+  total_item: Total item
+  cantidad: Quantity
+  importe: Amount
+  mas_opciones: More Options
+  mostrar: Show
+  ocultar: Hide
+  facturado_a: <b>Billed to:</b>
+  monto: Amount
+  regresar_a_facturas: "&larr; Back to invoices"
+  
