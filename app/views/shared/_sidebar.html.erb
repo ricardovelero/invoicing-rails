@@ -60,13 +60,13 @@
                 <ul class="mt-3">
                     <!-- Dashboard -->
                     <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" x-data="{ open: false }">
-                        <%= link_to(dashboard_path, class: "block text-slate-200 hover:text-slate-200 truncate transition duration-150") do %>
+                        <%= link_to(dashboard_path, class: "sidebar_link") do %>
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
-                                        <path class="fill-current" d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z" :class="open || active_path.match(/(?<=(<%= dashboard_path %>))\d*/) ? 'text-indigo-500' : 'text-slate-400'" />
-                                        <path class="fill-current" d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9z" :class="open || active_path.match(/(?<=(<%= dashboard_path %>))\d*/) ? 'text-indigo-600' : 'text-slate-600'" />
-                                        <path class="fill-current" d="M12 15c-1.654 0-3-1.346-3-3 0-.462.113-.894.3-1.285L6 6l4.714 3.301A2.973 2.973 0 0112 9c1.654 0 3 1.346 3 3s-1.346 3-3 3z" :class="open || active_path.match(/(?<=(<%= dashboard_path %>))\d*/) ? 'text-indigo-200' : 'text-slate-400'" />
+                                        <path class="fill-current" d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z" :class="open || active_path.match(/(?<=(dashboard))\d*/) ? 'text-indigo-500' : 'text-slate-400'" />
+                                        <path class="fill-current" d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9z" :class="open || active_path.match(/(?<=(dashboard))\d*/) ? 'text-indigo-600' : 'text-slate-600'" />
+                                        <path class="fill-current" d="M12 15c-1.654 0-3-1.346-3-3 0-.462.113-.894.3-1.285L6 6l4.714 3.301A2.973 2.973 0 0112 9c1.654 0 3 1.346 3 3s-1.346 3-3 3z" :class="open || active_path.match(/(?<=(dashboard))\d*/) ? 'text-indigo-200' : 'text-slate-400'" />
                                     </svg>
                                     <span class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><%= t("tablero") %></span>
                                 </div>
@@ -75,7 +75,7 @@
                     </li>
                     <!-- Invoices -->
                     <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" x-data="{ open: false }">
-                        <a class="block text-slate-200 hover:text-white truncate transition duration-150" href="#0" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
+                        <a class="sidebar_link" href="#0" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
@@ -96,21 +96,21 @@
                         <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
                             <ul class="pl-9 mt-1 hidden" :class="open ? '!block' : 'hidden'">
                                 <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" href="/invoices">
-                                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Facturas</span>
-                                    </a>
+                                    <%= link_to(invoices_path, class: "sidebar_link_scondary") do %>
+                                        <span class="link_text"><%= t("listado_facturas") %></span>
+                                    <% end %>
                                 </li>
                                 <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" href="/invoices/new">
-                                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Nueva Factura</span>
-                                    </a>
+                                    <%= link_to(new_invoice_path, class: "sidebar_link_scondary") do %>
+                                        <span class="link_text"><%= t("nueva_factura") %></span>
+                                    <% end %>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <!-- Clients -->
                     <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" x-data="{ open: false }">
-                        <a class="block text-slate-200 hover:text-white truncate transition duration-150" href="#0" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
+                        <a class="sidebar_link" href="#0" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
@@ -130,21 +130,21 @@
                         <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
                             <ul class="pl-9 mt-1 hidden" :class="open ? '!block' : 'hidden'">
                                 <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" href="/clients">
-                                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Listado Clientes</span>
-                                    </a>
+                                    <%= link_to(clients_path, class: "sidebar_link_scondary") do %>
+                                        <span class="link_text"><%= t("listado_clientes") %></span>
+                                    <% end %>
                                 </li>
                                 <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" href="/clients/new">
-                                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Nuevo Cliente</span>
-                                    </a>
+                                    <%= link_to(new_client_path, class: "sidebar_link_scondary") do %>
+                                        <span class="link_text"><%= t("nuevo_cliente") %></span>
+                                    <% end %>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <!-- Items -->
                     <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" x-data="{ open: false }">
-                        <a class="block text-slate-200 hover:text-white truncate transition duration-150" href="#0" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
+                        <a class="sidebar_link" href="#0" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
@@ -165,21 +165,21 @@
                         <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
                             <ul class="pl-9 mt-1 hidden" :class="open ? '!block' : 'hidden'">
                                 <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" href="/items">
-                                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Listado Items</span>
-                                    </a>
+                                    <%= link_to(items_path, class: "sidebar_link_scondary") do %>
+                                        <span class="link_text"><%= t("listado_items") %></span>
+                                    <% end %>
                                 </li>
                                 <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" href="/items/new">
-                                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Nuevo Item</span>
-                                    </a>
+                                    <%= link_to(new_item_path, class: "sidebar_link_scondary") do %>
+                                        <span class="link_text"><%= t("nuevo_item") %></span>
+                                    <% end %>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <!-- Settings -->
                     <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" x-data="{ open: false }">
-                        <a class="block text-slate-200 hover:text-white truncate transition duration-150" href="/dashboard" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
+                        <a class="sidebar_link" href="/dashboard" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
@@ -201,23 +201,23 @@
                         <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
                             <ul class="pl-9 mt-1 hidden" :class="open ? '!block' : 'hidden'">
                                 <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" href="<%= edit_user_registration_path %>">
-                                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><%= t("mi_cuenta") %></span>
+                                    <a class="sidebar_link_scondary" href="<%= edit_user_registration_path %>">
+                                        <span class="link_text"><%= t("mi_cuenta") %></span>
                                     </a>
                                 </li>
                                 <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" href="#">
-                                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><%= t("notificaciones") %></span>
+                                    <a class="sidebar_link_scondary" href="#">
+                                        <span class="link_text"><%= t("notificaciones") %></span>
                                     </a>
                                 </li>
                                 <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" href="#">
-                                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><%= t("planes") %></span>
+                                    <a class="sidebar_link_scondary" href="#">
+                                        <span class="link_text"><%= t("planes") %></span>
                                     </a>
                                 </li>
                                 <li class="mb-1 last:mb-0">
-                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" href="#">
-                                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"><%= t("enviar_comentarios") %></span>
+                                    <a class="sidebar_link_scondary" href="#">
+                                        <span class="link_text"><%= t("enviar_comentarios") %></span>
                                     </a>
                                 </li>
                             </ul>
