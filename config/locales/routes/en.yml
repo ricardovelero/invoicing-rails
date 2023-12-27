@@ -1,6 +1,14 @@
 es:
   routes:
+    users: users
     dashboard: dashboard
     invoices: invoices
+    new_invoice: new
+    edit_invoice: edit
     clients: clients
+    new_client: new
+    edit_client: edit
+    items: items
+    new_item: new
+    edit_item: edit
     privacy: privacy
