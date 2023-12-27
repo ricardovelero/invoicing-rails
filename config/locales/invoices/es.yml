@@ -4,6 +4,7 @@ es:
   factura: Factura
   facturas: Facturas
   nueva_factura: Nueva Factura
+  editar_factura: Editar Factura
   no_hay_facturas: No tienes facturas
   no_hay_facturas_texto: ¡Empieza creando una nueva factura!
   resultados: resultados
