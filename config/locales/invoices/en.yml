@@ -4,6 +4,7 @@ en:
   factura: Invoice
   facturas: Invoices
   nueva_factura: New Invoice
+  editar_factura: Edit Invoice
   no_hay_facturas: You have no invoices
   no_hay_facturas_texto: Start by creating a new invoice!
   resultados: results
