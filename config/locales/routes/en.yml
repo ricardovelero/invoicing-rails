@@ -1,2 +1,6 @@
-en:
+es:
   routes:
+    dashboard: dashboard
+    invoices: invoices
+    clients: clients
+    privacy: privacy
