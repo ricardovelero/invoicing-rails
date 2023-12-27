@@ -25,5 +25,7 @@ module Facturacion
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.to_prepare { Devise::Mailer.layout 'mailer' }
+
+    config.i18n.raise_on_missing_translations = true
   end
 end
