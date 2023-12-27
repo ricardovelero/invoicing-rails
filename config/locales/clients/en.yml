@@ -1,3 +1,46 @@
 en:
-  a: of
-  de: to
+  a: a
+  de: from
+  clientes: Clients
+  cliente: Client
+  nuevo_cliente: New client
+  editar_cliente: Edit client
+  no_hay_clientes: You have no clients
+  no_hay_clientes_texto: Add your first client to be able to invoice
+  clientes_selecionados: selected clients
+  borrar: Delete
+  cantidad_por_pagina: Quantity per page
+  seleccionar_todo: Select all
+  nombre: Name
+  apellido: Last Name
+  nombres: Names
+  apellidos: Last Names
+  email: Email
+  nif: Tax ID (NIF)
+  calle: Street
+  ciudad: City
+  provincia: Province
+  codigo_postal: Postal Code
+  pais: Country
+  telefono: Phone
+  activo: Active
+  ultima_factura: Last Invoice
+  total_facturado: Total Invoiced
+  acciones: Actions
+  resultados: results
+  mostrando: Showing
+  hoy: Today
+  ultimo_mes: Last Month
+  ultimos_7_dias: Last 7 days
+  ultimos_12_meses: Last 12 months
+  todos: All
+  todas: All (feminine)
+  siguiente: Next
+  anterior: Previous
+  pagadas: Paid
+  por_vencer: Due Soon
+  vencidas: Overdue
+  buscar_clientes: Search clients...
+  eliminar: Delete
+  estas_seguro: Are you sure?
+  selecciona_provincia: Select region
