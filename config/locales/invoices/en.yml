@@ -59,4 +59,9 @@ en:
   facturado_a: <b>Billed to:</b>
   monto: Amount
   regresar_a_facturas: "&larr; Back to invoices"
+  seleccionar: Select
+  editar: Edit
+  descargar: Download
+  eliminar: Delete
+  
   

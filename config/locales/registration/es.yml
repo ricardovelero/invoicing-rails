@@ -1,9 +1,15 @@
 es:
-  my_account: Mi Cuenta
-  change: Cambiar
-  email_change_text: Al cambiar de correo electrónico, tendrá que confirmar su cuenta de nuevo.
-  email_waiting_confirmation: Esperando confirmación de
-  danger_zone: Zona de Peligro
-  delete_account: Eliminar cuenta
-  are_you_sure: ¿Estás seguro?
-  save_changes: Guardar Cambios
+  titulo_cuenta: Ajustes de tu Cuenta
+  texto_cambio_correo: Al cambiar de correo electrónico, tendrá que confirmar su cuenta de nuevo.
+  texto_esperando_confirmacion_email: Esperando confirmación de
+  guardar_cambios: Guardar cambios
+  cambiar: Cambiar
+  contraseña: Constraseña
+  minimo: mínimo
+  caracteres: caracteres
+  texto_cambio_contraseña: Deja estos campos vacíos si no quieres cambiar la contraseña
+  text_confirmar_contraseña: para confirmar cambio de contraseña
+  texto_repite_contraseña: por favor, repite la nueva contraseña
+  zona_peligro: Zona Peligro
+  borrar_cuenta: Borrar cuenta
+  direccion_fiscal: Dirección fiscal

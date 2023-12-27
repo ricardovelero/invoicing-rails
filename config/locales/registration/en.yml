@@ -1,5 +1,16 @@
 en:
-  email_change_text: If you change your email, you will need to confirm the new one.
-  email_waiting_confirmation: Wainting confirmation of
-  are_you_sure: Are you sure?
-  save_changes: Save Changes
+  titulo_cuenta: Account Settings
+  texto_cambio_correo: If you change your email, you will need to confirm the new one.
+  texto_esperando_confirmacion_email: Wainting confirmation of
+  estas_seguro: Are you sure?
+  guardar_cambios: Save Changes
+  cambiar: Change
+  contraseña: Password
+  minimo: at least
+  caracteres: characters
+  texto_cambio_contraseña: Leave these fields empty if you don't want to change your password
+  text_confirmar_contraseña: to confirm password change
+  texto_repite_contraseña: please, repeat password to confirm
+  zona_peligro: Danger Zone
+  borrar_cuenta: Delete account
+  direccion_fiscal: Fiscal address
