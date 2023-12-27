@@ -3,8 +3,8 @@ es:
   de: de
   clientes: Clientes
   cliente: Cliente
-  nuevo_cliente: Nuevo cliente
-  editar_cliente: Editar cliente
+  nuevo_cliente: Nuevo Cliente
+  editar_cliente: Editar Cliente
   no_hay_clientes: No tienes clientes
   no_hay_clientes_texto: Agrega tu primer cliente para poder facturar
   clientes_selecionados: clientes selecionados
@@ -44,3 +44,4 @@ es:
   eliminar: Eliminiar
   estas_seguro: ¿Estás seguro?
   selecciona_provincia: Selecciona provincia
+  seleccionar_todo: Seleccionar todo
