@@ -220,3 +220,7 @@ en:
   forgot_password_instructions: Please, type your email, and we will send you instructions to reset your password.
   remember_password?: Do you remeber your password?
   send_instructions: Send me the instructions
+  buenas_tardes: Good afternoon
+  buenos_dias: Good morning
+  buenas_noches: Good evening
+  hola: Hello!
