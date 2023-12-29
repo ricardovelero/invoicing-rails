@@ -53,7 +53,8 @@ class RegistrationsController < Devise::RegistrationsController
       :gov_id,
       :user_id,
       :is_freelance,
-      :company_name
+      :company_name,
+      :locale
     )
   end
 end
