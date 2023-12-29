@@ -57,7 +57,7 @@ data-controller="select" data-select-url-value="<%= regions_path %>" data-select
     <% unless client.new_record? %>
       <div class="relative flex items-start my-1">
         <div class="flex h-5 items-center">
-          <%= form.check_box :active, checked: true, class: "form-input" %>
+          <%= form.check_box :active, checked: true, class: "form-input p-2" %>
         </div>
         <div class="ml-3 text-sm">
           <%= form.label :active, t("activo"), class: "input-label" %>
