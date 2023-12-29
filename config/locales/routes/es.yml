@@ -2,13 +2,10 @@ es:
   routes:
     users: usuarios
     dashboard: tablero
-    invoices: facturas
-    new_invoice: nueva
-    edit_invoice: editar
     clients: clientes
-    new_client: nuevo
-    edit_client: editar
-    items: items
-    new_item: nuevo
-    edit_item: editar
+    invoices: facturas
+    items: ítems
+    new: nuevo
+    edit: editar
+    show: mostrar
     privacy: privacidad
