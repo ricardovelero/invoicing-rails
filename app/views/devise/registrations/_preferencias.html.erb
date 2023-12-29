@@ -1,0 +1,31 @@
+    <div class="hidden grow" data-tabs-target="panel">
+
+        <!-- Panel body -->
+        <div class="p-6 space-y-6">
+            <h2 class="text-2xl text-slate-800 font-bold mb-5"><%= t :preferencias %></h2>
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: "edit_configuration" }) do |f| %>
+                <% if f.object.errors.any? %>
+                    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+                        <h2><%= pluralize(f.object.errors.count, "error") %> <%= t :error_forma %></h2>
+
+                        <ul>
+                        <% f.object.errors.each do |error| %>
+                            <li><%= error.full_message %></li>
+                        <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+                <%= f.fields_for :user_profile, resource.user_profile do |upf| %>
+                    <div class="my-5">
+                        <%= upf.label t("idioma"), class: "input-label" %>
+                        <%= upf.text_field :locale, class: "input", name: "user_profile[locale]" %>
+                    </div>
+                <% end %>
+                <div class="flex flex-col px-6 py-5 border-t border-slate-200 mt-10">
+                    <div class="flex self-end">
+                        <%= f.submit t("guardar_cambios"), class: "btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3" %>
+                    </div>
+                </div>
+            <% end %>
+        </div> 
+    </div>   
