@@ -13,13 +13,13 @@ en:
   seleccionar_todo: Select all
   nombre: Name
   apellido: Last Name
-  nombres: Names
-  apellidos: Last Names
+  nombres: Name
+  apellidos: Last Name
   email: Email
-  nif: Tax ID (NIF)
+  nif: Tax ID
   calle: Street
   ciudad: City
-  provincia: Province
+  provincia: Region
   codigo_postal: Postal Code
   pais: Country
   telefono: Phone
