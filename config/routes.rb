@@ -27,7 +27,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   end
 
   localized do
-    resources :users
+    # get '/users/edit', to: 'registrations#edit', as: :edit_user_registration
     get '/invoices', to: 'invoices#index', as: :invoices
     get '/invoices/new', to: 'invoices#new', as: :new_invoice
     get '/invoices/:id', to: 'invoices#show', as: :show_invoice
