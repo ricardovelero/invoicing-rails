@@ -179,7 +179,7 @@
                     </li>
                     <!-- Settings -->
                     <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" x-data="{ open: false }">
-                        <a class="sidebar_link" href="/dashboard" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
+                        <a class="sidebar_link" href="" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
@@ -201,9 +201,9 @@
                         <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
                             <ul class="pl-9 mt-1 hidden" :class="open ? '!block' : 'hidden'">
                                 <li class="mb-1 last:mb-0">
-                                    <a class="sidebar_link_scondary" href="<%= edit_user_registration_path %>">
+                                    <%= link_to(edit_user_registration_path, locale: I18n.locale.to_s, class: "sidebar_link_scondary") do %>
                                         <span class="link_text"><%= t("mi_cuenta") %></span>
-                                    </a>
+                                    <% end %>
                                 </li>
                                 <li class="mb-1 last:mb-0">
                                     <a class="sidebar_link_scondary" href="#">
