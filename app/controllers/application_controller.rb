@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base # rubocop:disable Style/Doc
   protected
 
   def after_sign_in_path_for(_resource_or_scope)
-    '/tablero'
+    "/dashboard?locale=#{I18n.locale}"
     # stored_location_for(resource_or_scope) || super
   end
 
@@ -50,11 +50,7 @@ class ApplicationController < ActionController::Base # rubocop:disable Style/Doc
   end
 
   def switch_locale(&action)
-    logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
-    locale =
-      current_user.try(:locale) || locale_from_url ||
-      extract_locale_from_accept_language_header || I18n.default_locale
-    logger.debug "* Locale set to '#{locale}'"
+    locale = I18n.available_locales.include?(params[:locale].to_s.strip.to_sym) ? params[:locale] : I18n.default_locale
     I18n.with_locale(locale, &action)
     Carmen.i18n_backend.locale = locale
   end
