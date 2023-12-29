@@ -23,3 +23,6 @@ en:
   dont_have_an_account?: "Don't have and account?"
   confirm_account: Confirm account
   cerrar: Close
+  error_forma: "prohibited this invoice from being saved:"
+  preferencias: Preference
+  idioma: Language
