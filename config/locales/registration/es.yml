@@ -15,3 +15,6 @@ es:
   direccion_fiscal: Dirección fiscal
   cerrar: Cerrar
   ingresar: Ingresar
+  error_forma: "no permitieron que se pueda guardar:"
+  preferencias: Preferencias
+  idioma: Idioma
