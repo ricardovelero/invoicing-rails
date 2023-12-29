@@ -18,7 +18,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   get '/dashboard', to: 'dashboard#index'
   get 'charts/show', as: :chart
 
-  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
+  scope '/:locale', locale: /#{I18n.available_locales.join('|')}/ do
     resources :users
     resources :dashboard
     resources :invoices
@@ -28,13 +28,13 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   localized do
     resources :users
-    resources :dashboard
     resources :invoices, path_names: { new: 'new_invoice', edit: 'edit_invoice' }
     resources :clients, path_names: { new: 'new_client', edit: 'edit_client' }
     resources :items, path_names: { new: 'new_item', edit: 'edit_item' }
+    get '/dashboard', to: 'dashboard#index', as: :dashboard
     resources :privacy
-    root 'dashboard#index'
   end
 
+  root 'dashboard#index'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'
 end
