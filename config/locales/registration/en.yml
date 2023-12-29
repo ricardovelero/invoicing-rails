@@ -14,3 +14,12 @@ en:
   zona_peligro: Danger Zone
   borrar_cuenta: Delete account
   direccion_fiscal: Fiscal address
+  ingresar: Sign in
+  password: Password
+  remember_me: Remember me
+  forgot_password: Forgot password
+  login: Sign in
+  sign_up: Sign up
+  dont_have_an_account?: "Don't have and account?"
+  confirm_account: Confirm account
+  cerrar: Close
