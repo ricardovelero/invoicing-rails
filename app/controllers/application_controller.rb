@@ -86,4 +86,8 @@ class ApplicationController < ActionController::Base # rubocop:disable Style/Doc
 
     locale if I18n.available_locales.map(&:to_s).include?(locale)
   end
+
+  def default_url_options
+    { locale: I18n.locale }
+  end
 end
