@@ -278,13 +278,13 @@
                         </ul>                
                     </div>
                 </div>
-<ul>
+<ul class="flex gap-2 text-sm">
   <% I18n.available_locales.each do |locale| %>
     <li>
       <% if I18n.locale == locale %>
         <%= t(locale, scope: 'locales') %>
       <% else %>
-        <%= link_to t(locale, scope: 'locales'), url_for(locale: locale) %>
+        <%= link_to t(locale, scope: 'locales'), url_for(locale: locale.to_s) %>
       <% end %>
     </li>
   <% end %>
