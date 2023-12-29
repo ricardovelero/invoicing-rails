@@ -56,6 +56,7 @@ class ApplicationController < ActionController::Base # rubocop:disable Style/Doc
       extract_locale_from_accept_language_header || I18n.default_locale
     logger.debug "* Locale set to '#{locale}'"
     I18n.with_locale(locale, &action)
+    Carmen.i18n_backend.locale = locale
   end
 
   private
