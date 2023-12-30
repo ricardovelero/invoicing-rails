@@ -7,7 +7,6 @@
                 <% if f.object.errors.any? %>
                     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
                         <h2><%= pluralize(f.object.errors.count, "error") %> <%= t :error_forma %></h2>
-
                         <ul>
                         <% f.object.errors.each do |error| %>
                             <li><%= error.full_message %></li>
@@ -18,7 +17,7 @@
                 <%= f.fields_for :user_profile, resource.user_profile do |upf| %>
                     <div class="my-5">
                         <%= upf.label t("idioma"), class: "input-label" %>
-                        <%= upf.text_field :locale, class: "input", name: "user_profile[locale]" %>
+                        <%= upf.select :region, options_for_select([['Español', 'es'], ['English', 'en']], resource.user_profile.locale), {prompt: t("selecciona_idioma")}, { class: "form-input w-full", name: "user_profile[locale]"} %>
                     </div>
                 <% end %>
                 <div class="flex flex-col px-6 py-5 border-t border-slate-200 mt-10">
@@ -28,4 +27,4 @@
                 </div>
             <% end %>
         </div> 
-    </div>   
+    </div>

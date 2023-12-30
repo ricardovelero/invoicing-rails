@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base # rubocop:disable Style/Doc
   end
 
   def switch_locale(&action)
-    locale = I18n.available_locales.include?(params[:locale].to_s.strip.to_sym) ? params[:locale] : I18n.default_locale
+    locale = I18n.available_locales.include?(params[:locale].to_s.strip.to_sym) ? params[:locale] : resource.user_profile.locale || I18n.default_locale
     I18n.with_locale(locale, &action)
     Carmen.i18n_backend.locale = locale
   end
