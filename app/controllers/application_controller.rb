@@ -49,8 +49,9 @@ class ApplicationController < ActionController::Base # rubocop:disable Style/Doc
     )
   end
 
-  def switch_locale(&action)
-    locale = I18n.available_locales.include?(params[:locale].to_s.strip.to_sym) ? params[:locale] : resource.user_profile.locale || I18n.default_locale
+  def switch_locale(&action) # rubocop:disable Metrics/AbcSize
+    locale = I18n.available_locales.include?(params[:locale].to_s.strip.to_sym) ? params[:locale] : (user_signed_in? ? current_user.user_profile.locale : I18n.default_locale) # rubocop:disable Style/NestedTernaryOperator,Layout/LineLength
+
     I18n.with_locale(locale, &action)
     Carmen.i18n_backend.locale = locale
   end
@@ -75,12 +76,6 @@ class ApplicationController < ActionController::Base # rubocop:disable Style/Doc
 
   def extract_locale_from_accept_language_header
     request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
-  end
-
-  def locale_from_url
-    locale = params[:locale]
-
-    locale if I18n.available_locales.map(&:to_s).include?(locale)
   end
 
   def default_url_options
