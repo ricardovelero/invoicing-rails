@@ -81,7 +81,7 @@ end
     date: Faker::Date.between(from: 30.days.ago, to: Date.today),
     due_date: Faker::Date.forward(days: 30),
     notes: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4),
-    status: %w[Pendiente Pagada].sample,
+    status: %w[pendiente pagada].sample,
     client_id: rand(1..50),
     user_id: 1 # rand(1..2)
   )
