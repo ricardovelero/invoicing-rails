@@ -326,7 +326,7 @@
                                 <a class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3" href="<%= edit_user_registration_path %>" @click="open = false" @focus="open = true" @focusout="open = false"><%= t("tu_perfil") %></a>
                             </li>
                             <li>
-                                <a class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3" href="<%= destroy_user_session_path%>" @click="open = false" @focus="open = true" @focusout="open = false"><%= t("salir") %></a>
+                                <a class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3" data-method="delete" href="<%= destroy_user_session_path%>" @click="open = false" @focus="open = true" @focusout="open = false"><%= t("salir") %></a>
                             </li>
                         </ul>                
                     </div>
