@@ -15,13 +15,13 @@
  */
 
 /* See Alpine.js: https://github.com/alpinejs/alpine#x-cloak */
-[x-cloak=""] {
-  display: none;
+[x-cloak] {
+  display: none !important;
 }
 
 @media screen and (max-width: theme("screens.lg")) {
   [x-cloak="lg"] {
-    display: none;
+    display: none !important;
   }
 }
 
