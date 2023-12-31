@@ -4,26 +4,26 @@
           <div>
               <div class="text-xs font-semibold text-slate-400 uppercase mb-3"><%= t("opciones_ajustes")%></div>
               <ul class="flex flex-nowrap md:block mr-3 md:mr-0">
-                  <li class="mr-0.5 md:mr-0 md:mb-0.5" id="account" data-tabs-target="tab" data-action="click->tabs#change">
-                      <a class="flex items-center px-2.5 py-2 rounded whitespace-nowrap"  href="#">
+                  <li class="mr-0.5 md:mr-0 md:mb-0.5" id="account" :class="{ 'bg-indigo-50': tab === 'account' }">
+                      <button type="button" class="flex items-center px-2.5 py-2 rounded whitespace-nowrap" @click="tab = 'account'">
                         <%= heroicon "cog", options: { class: "w-5 h-5 shrink-0 text-slate-400 mr-1" } %>
                         <span class="text-sm font-medium text-slate-600 hover:text-slate-700"><%= t("mi_cuenta")%></span>
-                      </a>
+                      </button>
                   </li>
-                  <li class="mr-0.5 md:mr-0 md:mb-0.5" id="personal" data-tabs-target="tab" data-action="click->tabs#change">
-                      <a class="flex items-center px-2.5 py-2 rounded whitespace-nowrap" href="#">
+                  <li class="mr-0.5 md:mr-0 md:mb-0.5" id="personal" :class="{ 'bg-indigo-50': tab === 'personal' }">
+                      <button type="button" class="flex items-center px-2.5 py-2 rounded whitespace-nowrap" @click="tab = 'personal'">
                         <%= heroicon "user-circle", options: { class: "w-5 h-5 shrink-0 text-slate-400 mr-1" } %>
                         <span class="text-sm font-medium text-slate-600 hover:text-slate-700"><%= t("datos_personales")%></span>
-                      </a>
+                      </button>
                   </li>
-                  <li class="mr-0.5 md:mr-0 md:mb-0.5" id="address" data-tabs-target="tab" data-action="click->tabs#change">
-                      <a class="flex items-center px-2.5 py-2 rounded whitespace-nowrap" href="#">
+                  <li class="mr-0.5 md:mr-0 md:mb-0.5" id="address" :class="{ 'bg-indigo-50': tab === 'address' }">
+                      <button type="button" class="flex items-center px-2.5 py-2 rounded whitespace-nowrap" @click="tab = 'address'">
                         <%= heroicon "map-pin", options: { class: "w-5 h-5 shrink-0 text-slate-400 mr-1" } %>
                         <span class="text-sm font-medium text-slate-600 hover:text-slate-700"><%= t("direccion")%></span>
-                      </a>
+                      </button>
                   </li>
-                  <li class="mr-0.5 md:mr-0 md:mb-0.5" id="preferences" data-tabs-target="tab" data-action="click->tabs#change">
-                      <button class="flex items-center px-2.5 py-2 rounded whitespace-nowrap" type="button">
+                  <li class="mr-0.5 md:mr-0 md:mb-0.5" id="preferences" :class="{ 'bg-indigo-50': tab === 'preferences' }">
+                      <button type="button" class="flex items-center px-2.5 py-2 rounded whitespace-nowrap" @click="tab = 'preferences'">
                         <%= heroicon "adjustments-horizontal", options: { class: "w-5 h-5 shrink-0 text-slate-400 mr-1" } %>
                         <span class="text-sm font-medium text-slate-600 hover:text-slate-700"><%= t :preferencias %></span>
                       </button>
@@ -34,13 +34,13 @@
           <div>
               <div class="text-xs font-semibold text-slate-400 uppercase mb-3"><%= t("ayuda")%></div>
               <ul class="flex flex-nowrap md:block mr-3 md:mr-0">
-                  <li class="mr-0.5 md:mr-0 md:mb-0.5" id="fourth" data-tabs-target="tab" data-action="click->tabs#change">
-                      <a class="flex items-center px-2.5 py-2 rounded whitespace-nowrap" href="#">
+                  <li class="mr-0.5 md:mr-0 md:mb-0.5" id="help" :class="{ 'bg-indigo-50': tab === 'help' }">
+                      <button type="button" class="flex items-center px-2.5 py-2 rounded whitespace-nowrap" @click="tab = 'help'">
                           <svg class="w-4 h-4 shrink-0 fill-current text-slate-400 mr-2" viewBox="0 0 16 16">
                               <path d="M7.001 3h2v4h-2V3zm1 7a1 1 0 110-2 1 1 0 010 2zM15 16a1 1 0 01-.6-.2L10.667 13H1a1 1 0 01-1-1V1a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1zM2 11h9a1 1 0 01.6.2L14 13V2H2v9z" />
                           </svg>
                           <span class="text-sm font-medium text-slate-600 hover:text-slate-700"><%= t("enviar_comentarios")%></span>
-                      </a>
+                      </button>
                   </li>
               </ul>
           </div>-->
