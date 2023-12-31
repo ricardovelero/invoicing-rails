@@ -1,4 +1,8 @@
-    <div class="hidden grow" data-tabs-target="panel">
+    <div x-cloak x-show="tab === 'address'" class="grow"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 scale-90"
+        x-transition:enter-end="opacity-100 scale-100"
+    >
 
         <!-- Panel body -->
         <div class="p-6 space-y-6">
