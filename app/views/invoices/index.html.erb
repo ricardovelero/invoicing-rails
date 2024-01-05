@@ -51,7 +51,7 @@
                 <ul class="flex flex-wrap -m-1">
                     <li class="m-1">
                         <%= button_tag(type: 'button', data: { action: 'click->filter#submitForm', value: '' }, class: (params[:status].nil? || params[:status].empty?) ? 'filter-btn-active' : 'filter-btn') do %>
-                            <%= t("todas") %>
+                            <%= t "todas" %>
                             <%= content_tag :span, Invoice.total_invoice_count, class: 'ml-1 text-slate-400' %>
                         <% end %>
                     </li>
