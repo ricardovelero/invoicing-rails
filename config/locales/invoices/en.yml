@@ -47,6 +47,8 @@ en:
   items_facturar: Items to Invoice
   guardar_factura: Save Invoice
   factura_creada: Invoice created successfully
+  factura_borrada: Invoice was successfully deleted
+  factura_editada: Invoice was successfully updated
   subtotal: Subtotal
   iva: VAT
   irpf: IRPF

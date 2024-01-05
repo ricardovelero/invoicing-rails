@@ -78,7 +78,7 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
       if @invoice.update(invoice_params)
         format.html do
           redirect_to invoices_url,
-                      notice: 'Invoice was successfully updated.'
+                      notice: I18n.t('factura_editada')
         end
         format.json { render :show, status: :ok, location: @invoice }
       else
@@ -96,7 +96,7 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
 
     respond_to do |format|
       format.html do
-        redirect_to invoices_url, notice: 'Invoice was successfully destroyed.'
+        redirect_to invoices_url, notice: I18n.t('factura_borrada')
       end
       format.json { head :no_content }
     end
