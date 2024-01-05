@@ -11,7 +11,7 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   validates :client_id, presence: true
 
-  attribute :status, :string, default: 'Pendiente'
+  attribute :status, :string, default: 'pendiente'
 
   before_create :set_invoice_number
 
