@@ -21,10 +21,10 @@
                             <div class="font-medium text-slate-800"><%= invoice.client_full_name %></div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div><%= l(invoice.date, format: "%d %b %Y") %></div>
+                            <div><%= l(invoice.date, format: :corta) %></div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div class="<%= invoice.past_due? %>"><%= l(invoice.due_date, format: "%d %b %Y") %>
+                            <div class="<%= invoice.past_due? %>"><%= l(invoice.due_date, format: :corta) %>
                             </div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
