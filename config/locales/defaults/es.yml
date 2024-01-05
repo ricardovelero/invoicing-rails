@@ -97,6 +97,14 @@ es:
       day: Día
       month: Mes
       year: Año
+  time:
+    am: am
+    formats:
+      default: "%A, %-d de %B de %Y %H:%M:%S %z"
+      long: "%-d de %B de %Y %H:%M"
+      short: "%-d de %b %H:%M"
+      corta: "%d %b %Y"
+    pm: pm
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -202,13 +210,6 @@ es:
       last_word_connector: " y "
       two_words_connector: " y "
       words_connector: ", "
-  time:
-    am: am
-    formats:
-      default: "%A, %-d de %B de %Y %H:%M:%S %z"
-      long: "%-d de %B de %Y %H:%M"
-      short: "%-d de %b %H:%M"
-    pm: pm
   select_country: Selecciona país
   select_region: Selecciona provincia
   remember_me: Recuérdame
