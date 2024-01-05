@@ -1,5 +1,5 @@
 <%= turbo_stream.replace target="invoice_line_items_attributes_#{@target}_price" do %>
-    <input class="form-input w-full" readonly data-recalculate-target="price" data-itemselect-target="select" type="text" name="invoice[line_items_attributes][<%=@target%>][price]" id="invoice_line_items_attributes_<%=@target%>_price" value="<%= number_to_currency @item&.price %>">
+    <input class="form-input w-full" readonly data-recalculate-target="price" data-itemselect-target="select" type="text" name="invoice[line_items_attributes][<%=@target%>][price]" id="invoice_line_items_attributes_<%=@target%>_price" value="<%= @item&.price %>">
 <% end %>
 
 <%= turbo_stream.replace target="invoice_line_items_attributes_#{@target}_iva" do %>
