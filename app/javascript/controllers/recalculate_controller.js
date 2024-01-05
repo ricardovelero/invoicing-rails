@@ -49,7 +49,7 @@ export default class extends Controller {
       itemTotal =
         pricesArray[index] * (1 + ivaArray[index] / 100) * qtysArray[index];
 
-      element.value = formatter.format(itemTotal);
+      element.value = itemTotal.toFixed(2);
 
       grandTotal += itemTotal;
 
