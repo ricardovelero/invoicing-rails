@@ -15,7 +15,7 @@
                             <div class="font-medium text-rose-500"><%= number_to_currency(invoice.total, locale: :es) %></div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div class="<%= invoice.status? %>"><%= invoice.status.titleize %></div>
+                            <div class="<%= invoice.status? %>"><%= t invoice.status.titleize %></div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
                             <div class="font-medium text-slate-800"><%= invoice.client_full_name %></div>

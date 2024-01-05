@@ -21,7 +21,9 @@ es:
   siguiente: Siguiente
   anterior: Anterior
   pagadas: Pagadas
+  Pagada: Pagada
   pendientes: Pendientes
+  Pendiente: Pendiente
   por_vencer: Por vencer
   vencidas: Vencidas
   buscar_factura: Buscar factura...

@@ -21,7 +21,9 @@ en:
   siguiente: Next
   anterior: Previous
   pagadas: Paid
+  Pagada: Paid
   pendientes: Pending
+  Pendiente: Pending
   por_vencer: Due Soon
   vencidas: Overdue
   buscar_factura: Search invoice...
