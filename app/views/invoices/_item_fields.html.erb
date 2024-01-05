@@ -22,7 +22,7 @@
       <div class="w-1/3">
         <div class="flex gap-1">
           <%= ff.label t("importe"), class: "input-label"  %>
-          (<%= I18n.t('number.currency.format.unit') %>)
+          <span id="currency" class="text-sm">(<%= I18n.t('number.currency.format.unit') %>)</span>
         </div>
         <%= ff.text_field :price, readonly: true, class: "form-input w-full", value: line_item.price, data: { recalculate_target: "price", itemselect_target: "select" } %>
       </div>
