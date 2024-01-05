@@ -7,6 +7,6 @@
 <% end %>
 
 <%= turbo_stream.replace target="invoice_line_items_attributes_#{@target}_quantity" do %>
-    <input min="0" max="10000000" step=1 class="input" data-action="change->recalculate#recalculate" data-removeitem-target="qty" data-recalculate-target="qty"
+    <input min="0" max="10000000" step=1 class="form-input w-full" data-action="change->recalculate#recalculate" data-removeitem-target="qty" data-recalculate-target="qty"
     type="number" name="invoice[line_items_attributes][<%=@target%>][quantity]" id="invoice_line_items_attributes_<%=@target%>_quantity" value="0">
 <% end %>
