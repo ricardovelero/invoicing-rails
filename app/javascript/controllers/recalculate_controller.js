@@ -14,10 +14,16 @@ export default class extends Controller {
     "hiddengrandtotal",
   ];
 
+  connect() {
+    const langAttribute = document.documentElement.lang;
+    this.currency = langAttribute === "es" ? "EUR" : "USD";
+    this.format = langAttribute === "es" ? "es-ES" : "en-US";
+  }
+
   recalculate(event) {
-    const formatter = new Intl.NumberFormat("es-ES", {
+    const formatter = new Intl.NumberFormat(this.format, {
       style: "currency",
-      currency: "EUR",
+      currency: this.currency,
     });
 
     let itemTotal = 0;
@@ -36,7 +42,7 @@ export default class extends Controller {
     });
 
     this.priceTargets.forEach((price, index) => {
-      pricesArray[index] = this.convertNum(price.value);
+      pricesArray[index] = price.value;
     });
 
     this.totalTargets.forEach((element, index) => {
@@ -62,6 +68,7 @@ export default class extends Controller {
   convertNum(element) {
     return (
       element
+        .replace("$", "")
         .replace("€", "")
         .replace("&euro", "")
         .replace(".", "")
