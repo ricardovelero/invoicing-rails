@@ -18,7 +18,11 @@ export default class extends Controller {
     let query = { target: this.selectTarget.id.match(/\d/g).join("") };
     query[this.paramValue] = event.target.selectedOptions[0].value;
 
-    get(this.urlValue + "/" + query[this.paramValue], {
+    // A fix so the locale query parameter doesn't go in the middle
+    // Maybe use the locale as a url path is better for future cases
+    const url = this.urlValue.replace(/\?locale=[a-zA-Z]{2}/, "");
+
+    get(url + "/" + query[this.paramValue], {
       query,
       responseKind: "turbo-stream",
     });
