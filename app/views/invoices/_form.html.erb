@@ -10,7 +10,7 @@
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <%= heroicon "users", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>
           </div>
-          <%= f.collection_select :client_id, current_user.clients, :id, :full_name, {prompt: t("selecciona_cliente")}, {data: {action: "change->clientselect#change"}, class: "form-select w-full pl-10"} %>
+          <%= f.collection_select :client_id, current_user.clients.order(:first_name), :id, :full_name, {prompt: t("selecciona_cliente")}, {data: {action: "change->clientselect#change"}, class: "form-select w-full pl-10"} %>
         </div>
       </div>
 
@@ -44,7 +44,7 @@
 
     <hr/>
 
-    <h2 class="text-lg my-5 font-bold"><%= t("items_facturar") %></h2>
+    <h2 class="text-lg my-5 font-bold"><%= t "items_facturar" %></h2>
 
     <div id="line_items" class=" mb-6">
       <% f.object.line_items.each do |i| %>
