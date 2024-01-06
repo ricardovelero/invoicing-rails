@@ -5,7 +5,7 @@
     <%= f.fields_for :line_items, line_item, child_index: turboid do |ff| %>
       <%= ff.hidden_field :_destroy, "data-removeitem-target" => "theHidden" %>
       <div class="w-2/3">
-        <%= ff.label "Ítem", class: "input-label"  %>
+        <%= ff.label t("item"), class: "input-label"  %>
         <div class="relative mt-1 rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <%= heroicon "cursor-arrow-rays", options: {class: "w-6 h-6 fill-current text-slate-400 shrink-0" } %>
