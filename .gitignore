@@ -36,3 +36,6 @@
 .DS_store
 
 .rubocop.yml
+/config/credentials/development.key
+
+/config/credentials/production.key
