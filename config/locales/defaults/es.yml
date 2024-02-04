@@ -224,6 +224,7 @@ es:
   register: Registrarse
   confirm_password: Confirmar contraseña
   already_registered?: ¿Ya estás registrado?
+  signin: Ingresar
   email_me_news: Enviarme noticias del servicio
   how_will_you_invoice?: ¿Cómo vas a facturar?
   next: Siguiente
