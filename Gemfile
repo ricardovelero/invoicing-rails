@@ -105,3 +105,5 @@ gem 'matrix', '~> 0.4'
 gem 'receipts'
 
 gem 'pg_search'
+
+gem 'postmark-rails'
