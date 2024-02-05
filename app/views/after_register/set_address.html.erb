@@ -43,7 +43,7 @@
             </div>
             <div class="my-5">
                 <%= f.label :region, class: "input-label" do %>
-                    <%= t("province") %> <%= required_field_indicator %>
+                    <%= t("region") %> <%= required_field_indicator %>
                 <% end %>
                 <%= f.select :region, [(options_for_select spanish_regions)], {prompt: t("selecciona_provincia")}, { data: { select_target: "select" }, class: "form-input w-full", required: true} %>
             </div>
