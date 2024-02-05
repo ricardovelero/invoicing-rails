@@ -126,13 +126,13 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '8ddd5d775b13b10aff2f6f027b2460df270fce4d4fc61de6e962657370896fbe3474ef63becef40daaab72ce5e1dbc4effa37730b76213ef58511def428f292e'
+  config.pepper = '8ddd5d775b13b10aff2f6f027b2460df270fce4d4fc61de6e962657370896fbe3474ef63becef40daaab72ce5e1dbc4effa37730b76213ef58511def428f292e'
 
   # Send a notification to the original email when the user's email is changed.
-  # config.send_email_changed_notification = false
+  config.send_email_changed_notification = true
 
   # Send a notification email when the user's password is changed.
-  # config.send_password_change_notification = false
+  config.send_password_change_notification = true
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -309,5 +309,5 @@ Devise.setup do |config|
 
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
-  # config.sign_in_after_change_password = true
+  config.sign_in_after_change_password = true
 end

@@ -196,6 +196,11 @@ GEM
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    postmark (1.25.0)
+      json
+    postmark-rails (0.22.1)
+      actionmailer (>= 3.0.0)
+      postmark (>= 1.21.3, < 2.0)
     prawn (2.4.0)
       pdf-core (~> 0.9.0)
       ttfunk (~> 1.7)
@@ -382,6 +387,7 @@ DEPENDENCIES
   pagy
   pg (~> 1.1)
   pg_search
+  postmark-rails
   premailer-rails
   prettier
   puma (~> 6.4.2)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails/all'
@@ -7,7 +9,7 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Facturacion
-  class Application < Rails::Application
+  class Application < Rails::Application # rubocop:disable Style/Documentation
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
@@ -27,5 +29,11 @@ module Facturacion
     config.to_prepare { Devise::Mailer.layout 'mailer' }
 
     config.i18n.raise_on_missing_translations = true
+
+    config.action_mailer.delivery_method = :postmark
+
+    config.action_mailer.postmark_settings = {
+      api_token: Rails.application.credentials.postmark_api_token
+    }
   end
 end
