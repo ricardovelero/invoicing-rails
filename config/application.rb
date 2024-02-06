@@ -29,11 +29,5 @@ module Facturacion
     config.to_prepare { Devise::Mailer.layout 'mailer' }
 
     config.i18n.raise_on_missing_translations = true
-
-    config.action_mailer.delivery_method = :postmark
-
-    config.action_mailer.postmark_settings = {
-      api_token: Rails.application.credentials.postmark_api_token
-    }
   end
 end
