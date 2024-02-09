@@ -1,32 +1,13 @@
 <!DOCTYPE html>
-<html class="h-full bg-gray-100">
+<html class="h-full">
   <head>
     <%= render 'shared/head' %>
   </head>
 
-  <body 
-    class="font-inter antialiased bg-slate-100 text-slate-600"
-    :class="{ 'sidebar-expanded': sidebarExpanded }"
-    x-data="{ sidebarOpen: false, sidebarExpanded: localStorage.getItem('sidebar-expanded') == 'true' }"
-    x-init="$watch('sidebarExpanded', value => localStorage.setItem('sidebar-expanded', value))">
-    <script>
-      if (localStorage.getItem('sidebar-expanded') == 'true') {
-          document.querySelector('body').classList.add('sidebar-expanded');
-      } else {
-          document.querySelector('body').classList.remove('sidebar-expanded');
-      }
-    </script>
+  <body class="font-inter antialiased text-slate-600">
     <%= render "layouts/alert" %>
-    <!-- Page wrapper -->
-    <div class="flex h-screen overflow-hidden">
-      <!-- Content area -->
-      <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <main>
-          <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             <%= yield %>
-          </div>
-        <main>
-      </div>
-    </div>
+        </main>
   </body>
 </html>
