@@ -78,7 +78,7 @@ group :test do
   gem 'webdrivers'
 end
 
-gem 'tailwindcss-rails', '~> 2.0'
+gem 'tailwindcss-rails', '~> 2.3'
 
 gem 'devise'
 
