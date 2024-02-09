@@ -45,6 +45,6 @@ Rails.application.routes.draw do
   #   get '/privacy', to: 'home#privacy', as: :privacy
   # end
 
-  root 'dashboard#index'
+  root 'home#index'
   mount LetterOpenerWeb::Engine, at: '/letter_opener'
 end

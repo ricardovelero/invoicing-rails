@@ -1,4 +1,8 @@
 es:
+  empezar: "Registrarse"
   home:
     index:
       eslogan_inicio: "Lo más fácil para Facturar en España"
+      entrar: "Ingresar"
+      salir: "Salir"
+      empezar: "Registrarse"
