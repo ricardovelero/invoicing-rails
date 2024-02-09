@@ -1,5 +1,5 @@
 <% method = local_assigns.fetch(:method, :get) %>
 
-<%= link_to link, class: "action", method: method do %>
-  <%= caption %>
+<%= link_to link, class: "text-sm font-semibold leading-6 text-gray-900", method: method do %>
+  <%= caption %> <span aria-hidden="true">&rarr;</span>
 <% end %>
