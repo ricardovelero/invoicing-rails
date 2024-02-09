@@ -186,55 +186,6 @@
   .gravatar {
     @apply w-20 h-20 rounded-full;
   }
-  /* Temp */
-  .home header {
-    @apply w-full p-2 flex items-center justify-between flex-wrap;
-  }
-
-  .home header .title {
-    @apply font-extrabold text-2xl;
-  }
-
-  .home .heading {
-    @apply font-semibold text-gray-900 text-4xl pt-8;
-  }
-
-  .home .actions {
-    @apply w-auto flex items-center justify-end;
-  }
-
-  .home .action {
-    @apply inline-flex items-center justify-center rounded-md border border-transparent;
-    @apply bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm;
-    @apply hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500;
-    @apply focus:ring-offset-2 sm:w-auto;
-  }
-
-  .home .theatre {
-    @apply m-auto pt-8 pb-16;
-  }
-
-  .home .theatre .center {
-    @apply flex flex-col justify-center items-center text-center px-4;
-  }
-
-  @screen md {
-    .home .header {
-      @apply px-0;
-    }
-
-    .home header .title {
-      @apply text-4xl;
-    }
-
-    .home .heading {
-      @apply pt-16 pb-2;
-    }
-
-    .home .theatre {
-      @apply pt-32 pb-32;
-    }
-  }
 
   /* Switch element */
   .form-switch {
