@@ -65,13 +65,19 @@ class ApplicationController < ActionController::Base # rubocop:disable Style/Doc
   end
 
   def layout_by_resource
-    if devise_controller? &&
-       resource_name == :user &&
-       (action_name == 'new' || action_name == 'create' || action_name == 'password')
-      'session'
-    else
-      'application'
-    end
+    return 'session' if session_layout_needed?
+    return 'home' if home_layout_needed?
+
+    'application'
+  end
+
+  def session_layout_needed?
+    devise_controller? && resource_name == :user &&
+      (action_name == 'new' || action_name == 'create' || action_name == 'password')
+  end
+
+  def home_layout_needed?
+    controller_name == 'home' && action_name == 'index'
   end
 
   def extract_locale_from_accept_language_header
