@@ -1,8 +1,9 @@
 es:
-  empezar: "Registrarse"
   home:
     index:
-      eslogan_inicio: "Lo más fácil para Facturar en España"
+      eslogan_inicio: "Lo forma más fácil de Facturar a tus clientes"
       entrar: "Ingresar"
       salir: "Salir"
-      empezar: "Registrarse"
+      empezar: "Empezar"
+      aprender_mas: "Más info."
+      flujo_trabajo: "Un mejor flujo de trabajo"
