@@ -1,7 +1,8 @@
 en:
   home:
     index:
-      eslogan_inicio: "The easiest Invoicing in Spain"
+      eslogan_inicio: "The easiest way to Invoice your clients"
       entrar: "Sign in"
       salir: "Sign out"
       empezar: "Sign up"
+      aprender_mas: "Learn more"
