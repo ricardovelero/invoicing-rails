@@ -1,0 +1,16 @@
+es:
+  welcome: Bienvenido
+  email_confirmation_text: "¡Hola! Por favor, confirma tu cuenta en Factura iO, haciendo click en el enlace de aquí abajo"
+  confirm_my_account: Confirmar mi cuenta
+  hello: Hola
+  email_changed_text: Te estamos contactando para notificarte que tu correo está siendo cambiado a
+  password_changed_title: Contraseña cambiada
+  password_changed: Te estamos contactando para notificarte que tu contraseña ha sido cambiada.
+  reset_password_title: Resetea tu contraseña
+  reset_password: "Alguien ha solicitado un enlace para cambiar tu contraseña. Puedes confirmar haciendo click en el siguiente enlace."
+  change_password: Cambiar mi contraseña
+  reset_ignore: Si NO has solicitado el enlace, por favor ignora este correo electrónico.
+  reset_igonre2: Tu contraseña no cambiará hasta que accedas al enlace superior e ingreses una nueva.
+  account_blocked: Tu cuenta ha sido bloqueada debido a un número excesivo de intentos fallidos de inicio de sesión.
+  account_blocked_click: "Haga clic en el enlace a continuación para desbloquear su cuenta"
+  unlock_my_account: Desbloquear mi cuenta
