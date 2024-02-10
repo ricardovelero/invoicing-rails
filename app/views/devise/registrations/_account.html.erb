@@ -36,6 +36,7 @@
                     </div>
                     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                       <div class="mt-4 font-semibold text-sm text-red-500"><%= t("email_waiting_confirmation")%>: <%= resource.unconfirmed_email %></div>
+                      <%= link_to t('resend_confirmation'), user_confirmation_path(user: {email: resource.unconfirmed_email}), method: :get, class: "link" %>
                     <% end %>
                 </section>
 
