@@ -1,0 +1,16 @@
+en:
+  welcome: Bienvenido
+  email_confirmation_text: "Hello! Please, you can confirm your account email in Facturación iO through the link below:"
+  confirm_my_account: Confirm my account
+  hello: Hello
+  email_changed_text: "We're contacting you to notify you that your email is being changed to"
+  password_changed_title: Password changed
+  password_changed: "We're notifiying that your password is changed."
+  reset_password_title: Reset your password
+  reset_password: "Someone has requested a link to change your password. You can do this through the link below."
+  change_password: Change password
+  reset_ignore: If you didn't request this, please ignore this email.
+  reset_igonre2: Your password won't change until you access the link above and create a new one.
+  account_blocked: Your account has been locked due to an excessive number of unsuccessful sign in attempts.
+  account_blocked_click: "Click the link below to unlock your account"
+  unlock_my_account: Unlock my account
