@@ -2,6 +2,7 @@
   <%= link_to sanitize("&larr; Regresar a clientes"), clients_path, class: "back-button" %>
   <h1 class="title"><%= t("nuevo_cliente") %> ✨</h1>
 
-  <%= render "form", client: @client %>
-
+  <div class="my-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200">
+    <%= render "form", client: @client %>
+  </div>
 </div>
