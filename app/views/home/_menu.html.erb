@@ -22,11 +22,9 @@
       <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center space-x-2">
         <% if current_user %>
             <%= link_to t('dashboard'), dashboard_path, class: "text-sm font-semibold leading-6 text-gray-900" %>
+            <%= button_to t('signout'), destroy_user_session_path, method: :delete, class: "text-sm font-semibold leading-6 text-gray-900" %>
         <% else %>
-            <%= button_to t('signin'), destroy_user_session_path, method: :delete, class: "text-sm font-semibold leading-6 text-gray-900" %>
-          <%= render "action_button",
-            caption: t('register'),
-            link: new_user_session_path %>
+            <%= link_to t("signin"), new_user_session_path, class: "text-sm font-semibold leading-6 text-gray-900" %>
         <% end %>
       </div>
     </nav>
