@@ -9,7 +9,7 @@
         <div class="relative">
           <% if current_user %>
             <%= render "action_button",
-              caption: t('.salir'),
+              caption: t('signout'),
               link: destroy_user_session_path,
               method: :delete %>
           <% else %>

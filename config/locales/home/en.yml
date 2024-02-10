@@ -2,8 +2,5 @@ en:
   home:
     index:
       eslogan_inicio: "The easiest way to Invoice"
-      entrar: "Sign in"
-      salir: "Sign out"
-      empezar: "Sign up"
       aprender_mas: "Learn more"
       flujo_trabajo: A better workflow

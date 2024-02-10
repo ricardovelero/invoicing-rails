@@ -1,5 +1,4 @@
 es:
-  tablero: Tablero
   facturacion_diaria: Facturación diaria
   pendientes_vs_pagadas: Pendientes vs Pagadas
   menu: Menú
@@ -14,7 +13,6 @@ es:
   informacion: Información
   ¿necesita_ayuda?: ¿Necesita ayuda?
   tu_perfil: Tu perfil
-  salir: Salir
   cerrar_menu: Cerrar menú
   opciones_ajustes: Opciones de ajustes
   mi_cuenta: Mi Cuenta

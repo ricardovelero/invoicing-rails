@@ -325,7 +325,7 @@
                                 <a class="menu-link" href="<%= edit_user_registration_path %>" @click="open = false" @focus="open = true" @focusout="open = false"><%= t("tu_perfil") %></a>
                             </li>
                             <li>
-                                <%= button_to t("salir"), destroy_user_session_path, method: :delete, class: "menu-link" %>
+                                <%= button_to t("signout"), destroy_user_session_path, method: :delete, class: "menu-link" %>
                             </li>
                         </ul>                
                     </div>

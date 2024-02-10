@@ -218,6 +218,10 @@ en:
   confirm_account_question: Didn't you receive instructions to confirm your account?
   company_text: Any type of limited liability company or corporation
   self_empoyed_text: Freelance, Self employed profesional, etc
+  signin: Sign in
+  signout: Sign out
+  signup: Sign up
+  sign_up: Register
   forgot_password_instructions: Please, type your email, and we will send you instructions to reset your password.
   remember_password?: Do you remeber your password?
   send_instructions: Send me the instructions
@@ -232,3 +236,4 @@ en:
   buenas_noches: Good evening
   hola: Hello!
   estas_seguro: "Are you sure?"
+  dashboard: Dashboard
