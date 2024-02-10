@@ -252,6 +252,7 @@ es:
   remember_password?: ¿Tienes la contraseña?
   send_instructions: Enviarme instrucciones
   send_confirmation: Reenviar confirmación de cuenta
+  resend_confirmation: Reenviar confirmación
   account_confirmed?: ¿Tu cuenta ya está confirmada?
   no_encontrado: ¡Búsqueda no encontrada!
   no_encontrado_texto: Lo sentimos, pero su búsqueda no ha dado resultados.

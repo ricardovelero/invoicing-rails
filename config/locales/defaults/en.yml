@@ -221,6 +221,12 @@ en:
   forgot_password_instructions: Please, type your email, and we will send you instructions to reset your password.
   remember_password?: Do you remeber your password?
   send_instructions: Send me the instructions
+  send_confirmation: Send confirmation
+  resend_confirmation: Resend confirmation
+  account_confirmed?: Is your account confirmed?
+  no_encontrado: Search not found
+  no_encontrado_texto: We're sorry, but your search is empty
+  limpiar_busqueda: Start again
   buenas_tardes: Good afternoon
   buenos_dias: Good morning
   buenas_noches: Good evening
