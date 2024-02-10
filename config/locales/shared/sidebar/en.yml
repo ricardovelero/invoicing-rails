@@ -1,5 +1,4 @@
 en:
-  tablero: Dashboard
   facturacion_diaria: Invoicing by days
   pendientes_vs_pagadas: Outstanding vs paid invoices
   cerrar_menu: Close menu
@@ -16,7 +15,6 @@ en:
   informacion: Information
   ¿necesita_ayuda?: Need help?
   tu_perfil: Profile
-  salir: Logout
   cerrar_menu: Close menu
   opciones_ajustes: Settings options
   mi_cuenta: Account
