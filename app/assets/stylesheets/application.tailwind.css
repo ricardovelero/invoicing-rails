@@ -149,9 +149,7 @@
     @apply inline-flex items-center justify-center sm:w-auto py-2 text-sm font-medium rounded-md border border-transparent px-4 text-white shadow-sm bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer;
   }
   .btn-secondary {
-    @apply inline-flex justify-center rounded-md shadow-sm text-lg font-medium;
-    @apply text-gray-700 bg-white py-2 px-4 border border-gray-300 hover:bg-gray-50;
-    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer;
+    @apply inline-flex items-center justify-center sm:w-auto py-2 text-sm font-medium rounded-md border border-transparent px-4 text-gray-700 shadow-sm bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer;
   }
   .btn-danger {
     @apply px-3 py-2 shadow-sm rounded-md border border-transparent text-red-500 hover:text-red-900 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 cursor-pointer;
