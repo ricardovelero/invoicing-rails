@@ -6,11 +6,14 @@
     <div class="grid grid-cols-5 gap-2" data-controller="clientselect" data-clientselect-url-value="<%= clients_path %>" data-clientselect-param-value="client">
       <div class="my-5 col-span-2">
         <%= f.label t("cliente"), class: "input-label"  %>
-        <div class="relative mt-1 rounded-md shadow-sm">
-          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <%= heroicon "users", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>
+        <div class="flex items-center space-x-1">
+          <%= render "invoices/components/add_client_button" %>
+          <div class="relative rounded-md shadow-sm w-full">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <%= heroicon "users", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>
+            </div>
+            <%= f.collection_select :client_id, current_user.clients.order(:first_name), :id, :full_name, {prompt: t("selecciona_cliente")}, {data: {action: "change->clientselect#change"}, class: "form-select w-full pl-10"} %>
           </div>
-          <%= f.collection_select :client_id, current_user.clients.order(:first_name), :id, :full_name, {prompt: t("selecciona_cliente")}, {data: {action: "change->clientselect#change"}, class: "form-select w-full pl-10"} %>
         </div>
       </div>
 

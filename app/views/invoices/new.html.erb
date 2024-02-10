@@ -1,7 +1,27 @@
-<div class="mx-auto w-full">
+<div class="mx-auto w-full"
+        x-data="{
+          open: false,
+          toggle() {
+            if (this.open) {
+              return this.close()
+            }
+            this.open = true
+          },
+          close(focusAfter) {
+            if (!this.open) return
+            this.open = false
+          }
+        }"
+  >
     <%= link_to sanitize(t("regresar_a_facturas")), invoices_path, class: "back-button" %>
   <h1 class="title"><%= t("nueva_factura")%> ✨</h1>
 
   <%= render "form", invoice: @invoice %>
+
+  <%# <div x-show="open" style="display: none;"> %>
+    <%# <%= render "clients/form", client: Client.new %>
+  <%# </div> %>
+
+  <%= render "invoices/components/modal", client: Client.new %>
 
 </div>

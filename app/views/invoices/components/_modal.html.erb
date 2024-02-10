@@ -1,0 +1,45 @@
+<div class="px-5 py-16 min-h-[20rem] flex items-center justify-center">
+  <div class="flex justify-center">
+    <div
+      x-show="open"
+      class="fixed inset-0 overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title-1"
+      style="display: none"
+    >
+      <div
+        x-show="open"
+        x-transition.opacity=""
+        class="fixed inset-0 bg-black bg-opacity-50"
+        style="display: none"
+      ></div>
+
+      <div
+        x-show="open"
+        x-transition=""
+        x-on:click="open = false"
+        class="relative flex min-h-screen items-center justify-center p-4"
+        style="display: none"
+      >
+        <div
+          x-on:click.stop=""
+          <%# x-trap.noscroll.inert="open" %>
+          class="relative w-full max-w-2xl overflow-y-auto rounded bg-white p-12 shadow-lg"
+        >
+          <h2
+            class="text-3xl font-bold"
+            :id="$id('modal-title')"
+            id="modal-title-1"
+          >
+            <%= t "nuevo_cliente" %>
+          </h2>
+
+          <div class="mt-2">
+            <%= render "clients/form", client: Client.new, is_modal: :true %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
