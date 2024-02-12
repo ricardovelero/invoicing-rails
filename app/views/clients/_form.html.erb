@@ -68,7 +68,7 @@ data-controller="select" data-select-url-value="<%= regions_path %>" data-select
 
     <div class="my-1 flex items-center justify-between col-span-3">
       <%= form.submit class: "btn btn-primary" %>
-      <%= link_to t("cancel"), clients_path, class: "btn btn-secondary", data: { action: "modal#close"} %>
+      <%= button_tag t("cancel"), data: { action: "modal#close" }, type: "button", class: "btn btn-secondary" %>
     </div>
   <% end %>
 </div>
