@@ -45,3 +45,6 @@ es:
   estas_seguro: ¿Estás seguro?
   selecciona_provincia: Selecciona provincia
   seleccionar_todo: Seleccionar todo
+  client_created: Cliente creado con éxito
+  client_updated: Cliente editado con éxito
+  client_destroyed: Cliente eliminado con éxito
