@@ -26,7 +26,7 @@ class Client < ApplicationRecord # rubocop:disable Style/Documentation
                   ignoring: :accents
 
   def full_name
-    [first_name, last_name].reject(&:blank?).collect(&:capitalize).join(' ')
+    [first_name, last_name].reject(&:blank?).collect(&:titleize).join(' ')
   end
 
   def address
