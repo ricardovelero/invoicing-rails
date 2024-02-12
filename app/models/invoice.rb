@@ -118,13 +118,13 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
       recipient: [
         I18n.t('facturado_a'),
         client.full_name,
-        client.address_line_1,
-        client.address_line_2,
+        client.address_line1,
+        client.address_line2,
         client.email
       ],
       company: {
         name: user.user_profile.full_name,
-        address: user.user_profile.address_line_1 + "\n" + user.user_profile.address_line_3,
+        address: user.user_profile.address_line1 + "\n" + user.user_profile.address_line_3,
         phone: user.user_profile.phone,
         email: user.user_profile.email,
         logo: File.expand_path('app/assets/images/logo.png')
