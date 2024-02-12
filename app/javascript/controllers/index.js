@@ -28,6 +28,9 @@ application.register("itemselect", ItemselectController)
 import MenuController from "./menu_controller"
 application.register("menu", MenuController)
 
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
 import PaidVsUnpaidChartController from "./paid_vs_unpaid_chart_controller"
 application.register("paid-vs-unpaid-chart", PaidVsUnpaidChartController)
 
