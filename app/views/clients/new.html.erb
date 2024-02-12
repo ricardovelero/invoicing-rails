@@ -2,6 +2,8 @@
   <%= link_to sanitize("&larr; Regresar a clientes"), clients_path, class: "back-button" %>
   <h1 class="title"><%= t("nuevo_cliente") %> ✨</h1>
 
-  <%= render "form", client: @client %>
-
+  <!-- Turbo frame tag to render form -->
+  <%= turbo_frame_tag "new_client" do %>
+    <%= render "form", client: @client %>
+  <% end %>
 </div>
