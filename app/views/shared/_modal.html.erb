@@ -1,6 +1,6 @@
   <div class="modal opacity-0 pointer-events-none" tabindex="-1" 
       data-controller="modal" 
-      data-action="turbo:frame-load->modal#open turbo:submit-end->modal#close"
+      data-action="turbo:frame-load->modal#open turbo:submit-end->modal#close keydown.esc->modal#close"
       data-modal-target="modal"
   >
     <div class="modal-content">
