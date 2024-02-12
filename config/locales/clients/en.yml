@@ -45,4 +45,6 @@ en:
   estas_seguro: Are you sure?
   selecciona_provincia: Select region
   seleccionar_todo: Seleccionar all
-
+  client_created: Client was successfully created
+  client_updated: Client was successfully updated
+  cleint_destroyed: Client was successfully destroyed
