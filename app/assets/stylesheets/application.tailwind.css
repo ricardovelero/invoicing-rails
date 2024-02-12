@@ -37,27 +37,30 @@
   .btn-xs {
     @apply font-medium text-sm inline-flex items-center justify-center border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out cursor-pointer;
   }
-
   .btn {
     @apply px-3 py-2;
   }
-
   .btn-lg {
     @apply px-4 py-3;
   }
-
   .btn-sm {
     @apply px-2 py-1;
   }
-
   .btn-xs {
     @apply px-2 py-0.5;
   }
-
+  .btn-primary {
+    @apply inline-flex items-center justify-center sm:w-auto py-2 text-sm font-medium border border-transparent px-4 text-white shadow-sm bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 cursor-pointer;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center sm:w-auto py-2 text-sm font-medium border border-transparent px-4 text-gray-700 shadow-sm bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 cursor-pointer;
+  }
+  .btn-danger {
+    @apply px-3 py-2 shadow-sm rounded-md border border-transparent text-red-500 hover:text-red-900 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 cursor-pointer;
+  }
   .filter-btn {
     @apply inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out;
   }
-
   .filter-btn-active {
     @apply inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-transparent shadow-sm bg-indigo-500 text-white duration-150 ease-in-out;
   }
@@ -144,15 +147,6 @@
   }
   .notice {
     @apply py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block;
-  }
-  .btn-primary {
-    @apply inline-flex items-center justify-center sm:w-auto py-2 text-sm font-medium rounded-md border border-transparent px-4 text-white shadow-sm bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer;
-  }
-  .btn-secondary {
-    @apply inline-flex items-center justify-center sm:w-auto py-2 text-sm font-medium rounded-md border border-transparent px-4 text-gray-700 shadow-sm bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer;
-  }
-  .btn-danger {
-    @apply px-3 py-2 shadow-sm rounded-md border border-transparent text-red-500 hover:text-red-900 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 cursor-pointer;
   }
   .paragraph {
     @apply mt-2 text-sm text-gray-700;
