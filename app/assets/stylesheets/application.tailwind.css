@@ -141,6 +141,15 @@
     scrollbar-width: none; /* Firefox */
   }
 
+  /* Modal */
+  .modal {
+    @apply fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center;
+  }
+
+  .modal-content {
+    @apply bg-white rounded-sm p-8;
+  }
+
   /* Misc */
   .alert {
     @apply text-white text-sm text-center font-medium px-4 py-3;
