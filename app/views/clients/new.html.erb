@@ -1,7 +1,7 @@
 <div class="mx-auto md:w-3/4 w-full">
+  <%= link_to sanitize("&larr; Regresar a clientes"), clients_path, class: "back-button" %>
   <!-- Turbo frame tag to render form -->
   <%= turbo_frame_tag "modal" do %>
-    <%= link_to sanitize("&larr; Regresar a clientes"), clients_path, class: "back-button", data: { action: "modal#close"} %>
     <h1 class="title"><%= t("nuevo_cliente") %> ✨</h1>
     <%= render "form", client: @client %>
   <% end %>
