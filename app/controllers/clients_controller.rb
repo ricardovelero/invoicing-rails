@@ -82,21 +82,22 @@ class ClientsController < ApplicationController
     Client.new(client_params)
   end
 
-  def handle_response(format)
+  def handle_response(format) # rubocop:disable Metrics/AbcSize
     if @client.save
       format.html { redirect_to clients_url, notice: I18n.t('client_created') }
       format.json { render :show, status: :created, location: @client }
-      format.turbo_stream
+      format.turbo_stream { flash.now[:success] = I18n.t('client_created') }
     else
       format.html { render :new, status: :unprocessable_entity }
       format.json { render json: @client.errors, status: :unprocessable_entity }
     end
   end
 
-  def handle_update_response(format)
+  def handle_update_response(format) # rubocop:disable Metrics/AbcSize
     if @client.update(client_params)
       format.html { redirect_to clients_url, notice: I18n.t('client_updated') }
       format.json { render :show, status: :ok, location: @client }
+      format.turbo_stream { flash.now[:success] = I18n.t('client_updated') }
     else
       format.html { render :edit, status: :unprocessable_entity }
       format.json { render json: @client.errors, status: :unprocessable_entity }
