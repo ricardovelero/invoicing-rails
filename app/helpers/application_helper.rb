@@ -1,25 +1,27 @@
-module ApplicationHelper
+# frozen_string_literal: true
+
+module ApplicationHelper # rubocop:disable Style/Documentation
   include Pagy::Frontend
 
   def sort_link_to(name, column, **options)
-    if params[:sort] == column.to_s
-      direction = params[:direction] == "asc" ? "desc" : "asc"
-    else
-      direction = "asc"
-    end
-    link_to name, request.params.merge(sort: column, direction: direction), **options
+    direction = if params[:sort] == column.to_s
+                  params[:direction] == 'asc' ? 'desc' : 'asc'
+                else
+                  'asc'
+                end
+    link_to name, request.params.merge(sort: column, direction:), **options
   end
 
   def sort_indicator
     case params[:direction]
-    when "asc"
-      heroicon "chevron-up", variant: :mini
-    when "desc"
-      heroicon "chevron-down", variant: :mini
+    when 'asc'
+      heroicon 'chevron-up', variant: :mini
+    when 'desc'
+      heroicon 'chevron-down', variant: :mini
     end
   end
 
-  def flash_class(level)
+  def flash_class(level) # rubocop:disable Metrics/MethodLength
     case level.to_sym
     when :notice
       'bg-indigo-100 border-indigo-200 text-indigo-500'
@@ -34,13 +36,17 @@ module ApplicationHelper
     end
   end
 
+  def render_turbo_stream_flash_messages
+    turbo_stream.prepend 'flash', partial: 'shared/flash', locals: { position: 'top-10 left-1/2' }
+  end
+
   def required_field_indicator
-    heroicon "star", variant: :mini, options: { class: "h-2 w-2 inline text-rose-500", disable_default_class: true }
+    heroicon 'star', variant: :mini, options: { class: 'h-2 w-2 inline text-rose-500', disable_default_class: true }
   end
 
   def spanish_regions
-    @es_regions = Array.new
-    Country.alpha_2_coded("ES").subregions.each { |r| @es_regions << r.subregions }
+    @es_regions = []
+    Country.alpha_2_coded('ES').subregions.each { |r| @es_regions << r.subregions }
     @es_regions.flatten.sort
   end
 end
