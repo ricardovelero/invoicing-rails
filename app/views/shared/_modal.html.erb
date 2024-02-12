@@ -1,7 +1,10 @@
-  <div class="modal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <%= turbo_frame_tag "modal" %>
-      </div>
+  <div class="modal opacity-0 pointer-events-none" tabindex="-1" 
+      data-controller="modal" 
+      data-action="turbo:frame-load->modal#open turbo:submit-end->modal#close"
+      data-modal-target="modal"
+  >
+    <div class="modal-content">
+      <%= turbo_frame_tag "modal" %>
     </div>
+
   </div>
