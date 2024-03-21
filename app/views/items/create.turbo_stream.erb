@@ -1,1 +1,2 @@
-<% turbo_stream.append 'items', @item %>
+<%= turbo_stream.prepend 'items', @item %>
+<%= render_turbo_stream_flash_messages %>

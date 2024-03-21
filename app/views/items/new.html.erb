@@ -1,7 +1,8 @@
 <div class="mx-auto md:w-2/3 w-full">
     <%= link_to sanitize(t("regresar_a_items")), items_path, class: "back-button" %>
-  <h1 class="title"><%= t("nuevo_item") %> ✨</h1>
-
-  <%= render "form", item: @item %>
-
+    <!-- Turbo frame tag to render form -->
+    <%= turbo_frame_tag "modal" do %>
+      <h1 class="title"><%= t("nuevo_item") %> ✨</h1>
+      <%= render "form", item: @item %>
+    <% end %>
 </div>
