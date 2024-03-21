@@ -21,8 +21,9 @@
       <%= form.select :iva, options_for_select([["21%", 21], ["10%", 10], ["4%", 4], ["0%", 0]]), {}, {class: "form-select w-full" } %>
     </div>
 
-    <div class="inline">
-      <%= form.submit class: "btn-primary"%>
+    <div class="my-1 flex items-center justify-between col-span-2">
+      <%= form.submit class: "btn btn-primary" %>
+      <%= button_tag t("cancel"), data: { action: "modal#close" }, type: "button", class: "btn btn-secondary" %>
     </div>
   <% end %>
 </div>
