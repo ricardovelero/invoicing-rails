@@ -1,16 +1,21 @@
-<div class="mx-auto md:w-2/3 w-full flex">
-<%= link_to sanitize("&larr; Regresar a items"), items_path %>
+<div class="mx-auto md:w-2/3 w-full">
+<%= link_to sanitize(t("regresar_a_items")), items_path, class: "back-button" %>
   <div class="mx-auto">
     <% if notice.present? %>
       <p class="notice" id="notice"><%= notice %></p>
     <% end %>
 
-    <%= render @item %>
-
-    <%= link_to 'Edit this item', edit_item_path(@item), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to 'Destroy this item', item_path(@item), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    <h1 class="title"><%= @item.item_name %></h1>
+    <p><%= simple_format @item.description %></p>
+    <div class="flex justify-between items-center">
+      <div class="flex gap-2">
+        <%= t("iva") %>:
+        <span class="font-normal"><%= @item.iva %></span>
+      </div>
+      <div class="flex gap-2">
+        <%= t("precio") %>:
+        <span class="font-semibold"><%= number_to_currency(@item.price, locale: :es) %></span>
+      </div>
     </div>
-    <%= link_to 'Back to items', items_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>
