@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Item < ApplicationRecord
   belongs_to :user
   has_many :line_items
@@ -11,18 +13,18 @@ class Item < ApplicationRecord
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :iva, numericality: { greater_than_or_equal_to: 0 }
 
-  pg_search_scope :search, 
-    against: [:item_name, :description, :price, :iva],
-    using: { tsearch: { prefix: true } },
-    ignoring: :accents
+  pg_search_scope :search,
+                  against: %i[item_name description price iva],
+                  using: { tsearch: { prefix: true } },
+                  ignoring: :accents
 
   private
 
-  #ensure that there are no line items referencing this item
+  # ensure that there are no line items referencing this item
   def ensure_not_referenced_by_any_line_item
-    unless line_items.empty?
-      errors.add(:base, "Ítem presente en una Factura")
-      throw :abort
-    end
+    return if line_items.empty?
+
+    errors.add(:base, 'Ítem presente en una Factura')
+    throw :abort
   end
 end
