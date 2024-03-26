@@ -1,22 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 first:
-    item_name: Item 1
-    description: Praesent vel purus interdum, tempor nulla at, venenatis nisl. Proin condimentum feugiat libero, et vestibulum enim pretium ac. Fusce congue nulla mi. Nullam suscipit quam.
-    price: 19.99
-    iva: 21
-    user: first
+  item_name: Item 1
+  description: Praesent vel purus interdum, tempor nulla at, venenatis nisl. Proin condimentum feugiat libero, et vestibulum enim pretium ac. Fusce congue nulla mi. Nullam suscipit quam.
+  price: 19.99
+  iva: 21
+  user: third
 
 second:
-    item_name: Item 2
-    description: Donec aliquam tincidunt leo, et molestie purus posuere volutpat. Cras.
-    price: 99.99
-    iva: 21
-    user: first
+  item_name: Item 2
+  description: Donec aliquam tincidunt leo, et molestie purus posuere volutpat. Cras.
+  price: 99.99
+  iva: 21
+  user: third
 
 third:
-    item_name: Item 3
-    description: Es una item para probar los fixtures en Rails
-    price: 999
-    iva: 21
-    user: first
+  item_name: Item 3
+  description: Es una item para probar los fixtures en Rails
+  price: 999
+  iva: 21
+  user: third

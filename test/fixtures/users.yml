@@ -5,7 +5,19 @@
 # below each fixture, per the syntax in the comments below
 #
 first:
-    email: dean@ex.com
+  email: dean@ex.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmation_token: <%= Devise.token_generator.generate(User, :confirmation_token) %>
+  confirmed_at: <%= Time.current %>
 
 second:
-    email: lea@example.com
+  email: lea@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmation_token: <%= Devise.token_generator.generate(User, :confirmation_token) %>
+  confirmed_at: <%= Time.current %>
+
+third:
+  email: ana@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmation_token: <%= Devise.token_generator.generate(User, :confirmation_token) %>
+  confirmed_at: <%= Time.current %>
