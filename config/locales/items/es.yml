@@ -3,12 +3,16 @@ es:
   de: de
   items: Ítems
   item: Ítem
-  nuevo_item: Nuevo Ítem
+  nuevo_item: Nuevo ítem
   editar_item: Editar ítem
   no_hay_items: No tienes ítems
   no_hay_items_texto: ¡Agrega tu primer ítem y empieza a facturar!
   items_selecionados: ítems selecionados
-  borrar: Borrar
+  item_creado: Ítem creado con éxito.
+  item_actualizado: Ítem actualizado con éxito.
+  item_borrado: Ítem borrado con éxito.
+  item_fallo_borrar: Ítem no se puede borrar, porque está presente en una Factura.
+  borrar_item: Borrar ítem
   cantidad_por_pagina: Cantidad por pagina
   seleccionar todo: Seleccionar todo
   nombre: Nombre
