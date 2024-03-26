@@ -52,14 +52,14 @@ class ItemsController < ApplicationController
 
   # PATCH/PUT /items/1 or /items/1.json
   def update
-    if @item.update(item_params)
-      respond_to do |format|
+    respond_to do |format|
+      if @item.update(item_params)
         format.html { redirect_to items_path, notice: I18n.t('item_actualizado') }
         format.json { render :show, status: :ok, location: @item }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
-    else
-      format.html { render :edit, status: :unprocessable_entity }
-      format.json { render json: @item.errors, status: :unprocessable_entity }
     end
   end
 
