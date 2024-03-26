@@ -41,9 +41,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html do
-          redirect_to items_path, notice: 'Item was successfully created.'
-        end
+        format.html { redirect_to items_path, notice: I18n.t('item_creado') }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -56,7 +54,7 @@ class ItemsController < ApplicationController
   def update
     if @item.update(item_params)
       respond_to do |format|
-        format.html { redirect_to items_path, notice: 'Item was successfully updated.' }
+        format.html { redirect_to items_path, notice: I18n.t('item_actualizado') }
         format.json { render :show, status: :ok, location: @item }
       end
     else
@@ -67,13 +65,16 @@ class ItemsController < ApplicationController
 
   # DELETE /items/1 or /items/1.json
   def destroy
-    @item.destroy
-
-    respond_to do |format|
-      format.html do
-        redirect_to items_url, notice: 'Item was successfully destroyed.'
+    if @item.destroy
+      respond_to do |format|
+        format.html { redirect_to items_path, notice: I18n.t('item_borrado') }
+        format.json { head :no_content }
       end
-      format.json { head :no_content }
+    else
+      respond_to do |format|
+        format.html { redirect_to items_path, notice: I18n.t('item_fallo_borrar'), status: :unprocessable_entity }
+        format.json { render json: { error: @item.errors.full_messages.join('. ') }, status: :unprocessable_entity }
+      end
     end
   end
 
