@@ -8,6 +8,10 @@ en:
   no_hay_items: You have no items
   no_hay_items_texto: Add your first item and start invoicing!
   items_selecionados: selected items
+  item_creado: Item was successfully created.
+  item_actualizado: Item was successfully updated.
+  item_borrado: Item was successfully destroyed.
+  item_fallo_borrar: Item failed to delete because it is present in an Invoice.
   borrar: Delete
   cantidad_por_pagina: Quantity per page
   seleccionar_todo: Select all
