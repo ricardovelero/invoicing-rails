@@ -6,6 +6,8 @@
     <div class="grid grid-cols-5 gap-2" data-controller="clientselect" data-clientselect-url-value="<%= clients_path %>" data-clientselect-param-value="client">
       <div class="my-5 col-span-2">
         <%= f.label t("cliente"), class: "input-label"  %>
+        <%= f.combobox :client_id, current_user.clients.order(:first_name), mobile_at: "640px" %>
+
         <div class="relative mt-1 rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <%= heroicon "users", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>

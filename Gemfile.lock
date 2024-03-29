@@ -131,6 +131,10 @@ GEM
       tilt
     heroicon (1.0.0)
       rails (>= 5.2)
+    hotwire_combobox (0.2.0)
+      rails (>= 7.0.7.2)
+      stimulus-rails (>= 1.2)
+      turbo-rails (>= 1.2)
     htmlbeautifier (1.4.2)
     htmlentities (4.3.4)
     i18n (1.14.1)
@@ -374,6 +378,7 @@ DEPENDENCIES
   devise
   faker
   heroicon
+  hotwire_combobox
   htmlbeautifier
   importmap-rails
   jbuilder
