@@ -40,4 +40,8 @@ class Client < ApplicationRecord # rubocop:disable Style/Documentation
   def address_line2
     [city, postal_code, region, country].reject(&:blank?).collect(&:titleize).join(', ')
   end
+
+  def to_combobox_display
+    full_name # or `title`, `to_s`, etc.
+  end
 end

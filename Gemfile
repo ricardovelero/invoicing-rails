@@ -107,3 +107,5 @@ gem 'receipts'
 gem 'pg_search'
 
 gem 'postmark-rails'
+
+gem 'hotwire_combobox'

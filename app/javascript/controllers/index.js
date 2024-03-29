@@ -2,43 +2,46 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "./application";
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading";
 
-import ChartsController from "./charts_controller"
-application.register("charts", ChartsController)
+eagerLoadControllersFrom("controllers", application);
 
-import ClientselectController from "./clientselect_controller"
-application.register("clientselect", ClientselectController)
+import ChartsController from "./charts_controller";
+application.register("charts", ChartsController);
 
-import FilterController from "./filter_controller"
-application.register("filter", FilterController)
+import ClientselectController from "./clientselect_controller";
+application.register("clientselect", ClientselectController);
 
-import FormValidationController from "./form_validation_controller"
-application.register("form-validation", FormValidationController)
+import FilterController from "./filter_controller";
+application.register("filter", FilterController);
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import FormValidationController from "./form_validation_controller";
+application.register("form-validation", FormValidationController);
 
-import InvoicesChartController from "./invoices_chart_controller"
-application.register("invoices-chart", InvoicesChartController)
+import HelloController from "./hello_controller";
+application.register("hello", HelloController);
 
-import ItemselectController from "./itemselect_controller"
-application.register("itemselect", ItemselectController)
+import InvoicesChartController from "./invoices_chart_controller";
+application.register("invoices-chart", InvoicesChartController);
 
-import MenuController from "./menu_controller"
-application.register("menu", MenuController)
+import ItemselectController from "./itemselect_controller";
+application.register("itemselect", ItemselectController);
 
-import ModalController from "./modal_controller"
-application.register("modal", ModalController)
+import MenuController from "./menu_controller";
+application.register("menu", MenuController);
 
-import PaidVsUnpaidChartController from "./paid_vs_unpaid_chart_controller"
-application.register("paid-vs-unpaid-chart", PaidVsUnpaidChartController)
+import ModalController from "./modal_controller";
+application.register("modal", ModalController);
 
-import RecalculateController from "./recalculate_controller"
-application.register("recalculate", RecalculateController)
+import PaidVsUnpaidChartController from "./paid_vs_unpaid_chart_controller";
+application.register("paid-vs-unpaid-chart", PaidVsUnpaidChartController);
 
-import RemoveitemController from "./removeitem_controller"
-application.register("removeitem", RemoveitemController)
+import RecalculateController from "./recalculate_controller";
+application.register("recalculate", RecalculateController);
 
-import SelectController from "./select_controller"
-application.register("select", SelectController)
+import RemoveitemController from "./removeitem_controller";
+application.register("removeitem", RemoveitemController);
+
+import SelectController from "./select_controller";
+application.register("select", SelectController);
