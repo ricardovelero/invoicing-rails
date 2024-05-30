@@ -35,6 +35,7 @@ es:
   total: Total
   estatus: Estatus
   cliente: Cliente
+  agregar_nuevo_cliente: Añadir Nuevo Cliente
   emitida: Emitida
   vencimiento: Vencimiento
   acciones: Acciones
