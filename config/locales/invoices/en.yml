@@ -35,6 +35,7 @@ en:
   total: Total
   estatus: Status
   cliente: Client
+  agregar_nuevo_cliente: Add New Client
   emitida: Issued
   vencimiento: Due Date
   acciones: Actions

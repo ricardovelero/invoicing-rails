@@ -4,14 +4,17 @@
     <h2 class="text-lg font-bold"><%= t("cabecera_factura") %></h2>
 
     <div class="grid grid-cols-5 gap-2" data-controller="clientselect" data-clientselect-url-value="<%= clients_path %>" data-clientselect-param-value="client">
-      <div class="my-5 col-span-2">
+      <div class="my-5 col-span-2 flex flex-col">
         <%= f.label t("cliente"), class: "input-label"  %>
-        <div class="relative mt-1 rounded-md shadow-sm">
+        <div class="relative rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <%= heroicon "users", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>
           </div>
           <%= f.collection_select :client_id, current_user.clients.order(:first_name), :id, :full_name, {prompt: t("selecciona_cliente")}, {data: {action: "change->clientselect#change"}, class: "form-select w-full pl-10"} %>
         </div>
+        <%= link_to new_client_path(id: f.object), class: "text-indigo-600 hover:underline mt-2", data: { turbo_method: :post } do %>
+          <%= (heroicon "plus", options: { class: "inline -mt-1"} ) + t("agregar_nuevo_cliente") %>
+        <% end %>
       </div>
 
       <div class="my-5">
