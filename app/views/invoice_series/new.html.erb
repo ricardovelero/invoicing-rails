@@ -1,6 +1,6 @@
 <div class="mx-auto w-full">
-  <%= link_to sanitize(t("back_to_scopes")), invoice_series_index_path, class: "back-button" %>
-  <h1 class="title"><%= t("new_scope") %></h1>
+  <%= link_to sanitize(t("volver_a_series")), invoice_series_index_path, class: "back-button" %>
+  <h1 class="title"><%= t("nueva_serie") %></h1>
 
   <div class="my-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200">
     <%= form_with(model: @series, url: invoice_series_index_path, class: "contents") do |f| %>
@@ -16,26 +16,26 @@
       <% end %>
 
       <div class="my-5">
-        <%= f.label t("scope_prefix"), class: "input-label" %>
+        <%= f.label t("prefijo"), class: "input-label" %>
         <div class="relative mt-1 rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <%= heroicon "hashtag", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>
           </div>
           <%= f.text_field :prefix, class: "form-input w-full pl-10", placeholder: "A", required: true, pattern: "[A-Za-z0-9]+" %>
         </div>
-        <p class="text-xs text-slate-500 mt-1"><%= t("scope_prefix_help") %></p>
+        <p class="text-xs text-slate-500 mt-1"><%= t("prefijo_ayuda") %></p>
       </div>
 
       <div class="my-5">
-        <%= f.label t("scope_name"), class: "input-label" %>
-        <%= f.text_field :name, class: "form-input w-full", placeholder: t("scope_name_placeholder") %>
-        <p class="text-xs text-slate-500 mt-1"><%= t("scope_name_help") %></p>
+        <%= f.label t("nombre_serie"), class: "input-label" %>
+        <%= f.text_field :name, class: "form-input w-full", placeholder: t("nombre_placeholder") %>
+        <p class="text-xs text-slate-500 mt-1"><%= t("nombre_ayuda") %></p>
       </div>
 
       <hr class="mb-5"/>
 
       <div class="inline">
-        <%= f.submit t("create_scope"), class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+        <%= f.submit t("crear_serie"), class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
       </div>
     <% end %>
   </div>

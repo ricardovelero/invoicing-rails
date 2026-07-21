@@ -91,6 +91,6 @@ class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
     get invoice_series_index_url
     assert_response :success
     # The page should show the empty state for user second (no scopes)
-    assert_match I18n.t('no_scopes'), response.body
+    assert_match I18n.t('no_hay_series'), response.body
   end
 end

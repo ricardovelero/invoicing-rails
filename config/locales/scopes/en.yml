@@ -1,22 +1,22 @@
 en:
-  scopes_title: Scopes
-  new_scope: New Scope
-  no_scopes: You have no scopes
-  no_scopes_text: Create your first scope to start issuing invoices.
-  scope_prefix: Prefix
-  scope_name: Name
-  scope_last_number: Last Number
-  scope_invoices_count: Invoices
+  series: Scopes
+  nueva_serie: New Scope
+  no_hay_series: You have no scopes
+  no_hay_series_texto: Create your first scope to start issuing invoices.
+  prefijo: Prefix
+  nombre_serie: Name
+  ultimo_numero: Last Number
+  contador_facturas: Invoices
   rollover: Rollover
   rollover_confirm: "Are you sure you want to rollover scope %{prefix}? The counter will restart at 1."
   rollover_success: Scope rolled over successfully. Counter restarted at 1.
   rollover_failed: "Rollover failed: %{error}"
-  scope_created: Scope created successfully.
-  scope_prefix_help: Alphanumeric characters only (e.g. A, B, R). Must be unique in your account.
-  scope_name_help: Optional descriptive name (e.g. "Rectifying invoices").
-  scope_name_placeholder: Optional name
-  create_scope: Create Scope
-  back_to_scopes: "&larr; Back to scopes"
-  scope_selector: Scope
-  select_scope: Select a scope
-  prefix_format: must contain only letters and numbers
+  serie_creada: Scope created successfully.
+  prefijo_ayuda: Alphanumeric characters only (e.g. A, B, R). Must be unique in your account.
+  nombre_ayuda: Optional descriptive name (e.g. "Rectifying invoices").
+  nombre_placeholder: Optional name
+  crear_serie: Create Scope
+  volver_a_series: "&larr; Back to scopes"
+  selector_serie: Scope
+  seleccionar_serie: Select a scope
+  prefijo_formato: must contain only letters and numbers
