@@ -68,11 +68,10 @@ export default class extends Controller {
   convertNum(element) {
     return (
       element
-        .replace("$", "")
-        .replace("€", "")
-        .replace("&euro", "")
-        .replace(".", "")
-        .replace(",", ".")
+        .replace(/[$€]/g, "")
+        .replace(/&euro;?/g, "")
+        .replace(/\./g, "")
+        .replace(/,/g, ".")
         .trim() * 1
     );
   }
