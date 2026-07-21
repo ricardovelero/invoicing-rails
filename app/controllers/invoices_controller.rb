@@ -14,7 +14,7 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
   end
 
   def sort_column
-    %w[invoice_number total status date due_date].include?(params[:sort]) ? params[:sort] : 'invoice_number'
+    %w[number total status date due_date].include?(params[:sort]) ? params[:sort] : 'number'
   end
 
   def sort_direction
@@ -48,7 +48,18 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
     @invoice.user = current_user
 
     respond_to do |format|
-      if @invoice.save
+      success = Invoice.transaction do
+        next false unless @invoice.save
+
+        # Assign correlative number for issued invoices (pendiente)
+        if @invoice.status == 'pendiente'
+          @invoice.assign_number_from_default_scope!
+        end
+
+        true
+      end
+
+      if success
         format.html do
           redirect_to invoices_path, notice: I18n.t('factura_creada')
         end
@@ -113,7 +124,6 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
   def invoice_params
     params.require(:invoice).permit(
       :client_id,
-      :invoice_number,
       :date,
       :due_date,
       :subtotal,

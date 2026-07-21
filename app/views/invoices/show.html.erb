@@ -4,12 +4,42 @@
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
 
-    <%= render "invoice_old" %>
+    <div id="<%= dom_id @invoice %>">
+      <p class="my-5">
+        <strong class="block font-medium mb-1"><%= t("cliente") %>:</strong>
+        <%= @client %>
+      </p>
 
-    <%= link_to 'Edit this invoice', edit_invoice_path(@invoice), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to 'Destroy this invoice', invoice_path(@invoice), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+      <p class="my-5">
+        <strong class="block font-medium mb-1"><%= t("numero_factura") %>:</strong>
+        <%= @invoice.display_number || @invoice.invoice_number %>
+      </p>
+
+      <p class="my-5">
+        <strong class="block font-medium mb-1"><%= t("fecha") %>:</strong>
+        <%= l(@invoice.date, format: :corta) %>
+      </p>
+
+      <p class="my-5">
+        <strong class="block font-medium mb-1"><%= t("fecha_vencimiento") %>:</strong>
+        <%= l(@invoice.due_date, format: :corta) %>
+      </p>
+
+      <p class="my-5">
+        <strong class="block font-medium mb-1"><%= t("estatus") %>:</strong>
+        <%= t @invoice.status.titleize %>
+      </p>
+
+      <p class="my-5">
+        <strong class="block font-medium mb-1"><%= t("notas") %>:</strong>
+        <%= @invoice.notes %>
+      </p>
     </div>
-    <%= link_to 'Back to invoices', invoices_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
+    <%= link_to t("editar"), edit_invoice_path(@invoice), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <div class="inline-block ml-2">
+      <%= button_to t("eliminar"), invoice_path(@invoice), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    </div>
+    <%= link_to t("volver"), invoices_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>

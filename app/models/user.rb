@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :invoices, dependent: :destroy
   has_many :clients, dependent: :destroy
   has_many :items, dependent: :destroy
+  has_many :invoice_series, dependent: :destroy
   has_one :user_profile, dependent: :destroy, inverse_of: :user
 
   #accepts_nested_attributes_for :user_profile, allow_destroy: true
