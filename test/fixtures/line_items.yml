@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  item: first
+  invoice: one
+  quantity: 1
+  price: 19.99
+  iva: 21
+  total: 24.19
+
+two:
+  item: second
+  invoice: two
+  quantity: 2
+  price: 99.99
+  iva: 21
+  total: 241.98

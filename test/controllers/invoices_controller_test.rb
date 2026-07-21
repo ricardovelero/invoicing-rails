@@ -1,7 +1,10 @@
 require "test_helper"
 
 class InvoicesControllerTest < ActionDispatch::IntegrationTest
-  setup { @invoice = invoices(:one) }
+  setup do
+    @invoice = invoices(:one)
+    sign_in users(:first)
+  end
 
   test "should get index" do
     get invoices_url
@@ -23,15 +26,16 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
                irpf: @invoice.irpf,
                iva: @invoice.iva,
                notes: @invoice.notes,
-               number: @invoice.number,
+               invoice_number: @invoice.invoice_number,
                status: @invoice.status,
                subtotal: @invoice.subtotal,
-               total: @invoice.total
+               total: @invoice.total,
+               client_id: Client.first.id
              }
            }
     end
 
-    assert_redirected_to invoice_url(Invoice.last)
+    assert_redirected_to invoices_url(locale: I18n.locale)
   end
 
   test "should show invoice" do
@@ -53,18 +57,19 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
               irpf: @invoice.irpf,
               iva: @invoice.iva,
               notes: @invoice.notes,
-              number: @invoice.number,
+              invoice_number: @invoice.invoice_number,
               status: @invoice.status,
               subtotal: @invoice.subtotal,
-              total: @invoice.total
+              total: @invoice.total,
+              client_id: Client.first.id
             }
           }
-    assert_redirected_to invoice_url(@invoice)
+    assert_redirected_to invoices_url(locale: I18n.locale)
   end
 
   test "should destroy invoice" do
     assert_difference("Invoice.count", -1) { delete invoice_url(@invoice) }
 
-    assert_redirected_to invoices_url
+    assert_redirected_to invoices_url(locale: I18n.locale)
   end
 end
