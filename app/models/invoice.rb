@@ -4,6 +4,7 @@
 class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
   belongs_to :client
   belongs_to :user
+  belongs_to :series, class_name: 'InvoiceSeries', optional: true
 
   has_many :line_items, dependent: :destroy
   has_many :items, through: :line_items
@@ -13,8 +14,6 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   attribute :status, :string, default: 'pendiente'
 
-  before_create :set_invoice_number
-
   scope :for_account, ->(user_id) { where(user_id:) }
 
   scope :filter_status, ->(status) { where(status:) }
@@ -23,7 +22,7 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :about_to_be_due, -> { where('due_date = ?', Date.tomorrow) }
 
   pg_search_scope :search,
-                  against: %i[invoice_number status notes],
+                  against: %i[status notes],
                   associated_against: {
                     client: %i[first_name last_name]
                   },
@@ -34,15 +33,21 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
     Client.find(client_id).full_name
   end
 
-  def set_invoice_number
-    last_invoice = Invoice.last
-    self.invoice_number = if last_invoice.nil?
-                            1
-                          elsif Invoice.last.invoice_number.to_i
-                            Invoice.last.invoice_number.to_i + 1
-                          else
-                            Invoice.last.invoice_number
-                          end
+  # Composed display string like "A-0042"
+  def display_number
+    return nil unless series && number
+
+    "#{series.prefix}-#{number.to_s.rjust(4, '0')}"
+  end
+
+  # Assigns the next correlative number from the user's default scope.
+  # Creates the default scope and sequence lazily if they don't exist.
+  # Must be called inside a transaction to guarantee atomicity.
+  def assign_number_from_default_scope!
+    default_series = user.invoice_series.find_or_create_by!(prefix: 'A')
+    sequence = default_series.active_sequence
+    next_number = sequence.reserve_next!
+    update!(series: default_series, number: next_number)
   end
 
   def self.total_invoice_count
@@ -110,7 +115,7 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
     Receipts::Invoice.new(
       title: I18n.t('factura'),
       details: [
-        [I18n.t('factura') + ' #', invoice_number],
+        [I18n.t('factura') + ' #', display_number || invoice_number],
         [I18n.t('fecha'), date.strftime('%B %d, %Y')],
         [I18n.t('fecha_vencimiento'), due_date.strftime('%B %d, %Y')],
         [I18n.t('estatus'), "<b><color rgb='#5eba7d'>#{status.upcase}</color></b>"]

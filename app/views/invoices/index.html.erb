@@ -131,10 +131,10 @@
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "invoice_number" %>">
-                                        <%= sort_link_to t("numero"), :invoice_number, data: { turbo_action: "advance" } %>
+                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "number" %>">
+                                        <%= sort_link_to t("numero"), :number, data: { turbo_action: "advance" } %>
                                         <span class="absolute top-0 left-13">
-                                            <%= sort_indicator if params[:sort] == "invoice_number" %>
+                                            <%= sort_indicator if params[:sort] == "number" %>
                                         </span>
                                     </div>
                                 </th>

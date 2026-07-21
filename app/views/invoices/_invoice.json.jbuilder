@@ -1,6 +1,5 @@
 json.extract! invoice,
               :id,
-              :number,
               :date,
               :due_date,
               :subtotal,
@@ -11,4 +10,5 @@ json.extract! invoice,
               :status,
               :created_at,
               :updated_at
+json.number invoice.display_number
 json.url invoice_url(invoice, format: :json)
