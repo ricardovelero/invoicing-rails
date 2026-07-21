@@ -11,6 +11,11 @@ Rails.application.routes.draw do
     post :add_item, on: :collection
   end
   resources :after_register
+  resources :invoice_series, only: [:index, :new, :create] do
+    member do
+      post :rollover
+    end
+  end
 
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'

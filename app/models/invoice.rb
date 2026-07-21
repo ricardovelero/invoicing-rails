@@ -40,14 +40,14 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
     "#{series.prefix}-#{number.to_s.rjust(4, '0')}"
   end
 
-  # Assigns the next correlative number from the user's default scope.
-  # Creates the default scope and sequence lazily if they don't exist.
-  # Must be called inside a transaction to guarantee atomicity.
-  def assign_number_from_default_scope!
-    default_series = user.invoice_series.find_or_create_by!(prefix: 'A')
-    sequence = default_series.active_sequence
+  # Assigns the next correlative number from the given scope (or the user's
+  # default scope "A" if none is provided). Creates the scope and sequence
+  # lazily if they don't exist. Must be called inside a transaction.
+  def assign_number!(scope = nil)
+    target_series = scope || user.invoice_series.find_or_create_by!(prefix: 'A')
+    sequence = target_series.active_sequence
     next_number = sequence.reserve_next!
-    update!(series: default_series, number: next_number)
+    update!(series: target_series, number: next_number)
   end
 
   def self.total_invoice_count
