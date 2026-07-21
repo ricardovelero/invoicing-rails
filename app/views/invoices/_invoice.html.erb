@@ -9,7 +9,7 @@
                             </div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                            <div class="font-medium text-sky-500">#<%= invoice.invoice_number %></div>
+                            <div class="font-medium text-sky-500"><%= invoice.display_number || "##{invoice.invoice_number}" %></div>
                         </td>
                         <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
                             <div class="font-medium text-rose-500"><%= number_to_currency(invoice.total, locale: :es) %></div>

@@ -1,40 +1,46 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-    invoice_number: 100
+    invoice_number: '100'
     date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
     due_date: <%= Faker::Date.forward(days: 30) %>
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
-    status: <%= %w[Pendiente Pagada].sample %>
+    status: pendiente
     subtotal: 100.0
     iva: 21.0
     irpf: 0.0
     total: 121.0
     user: first
     client: one
+    series: default_a
+    number: 100
 
 two:
-    invoice_number: 101
+    invoice_number: '101'
     date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
     due_date: <%= Faker::Date.forward(days: 30) %>
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
-    status: <%= %w[Pendiente Pagada].sample %>
+    status: pendiente
     subtotal: 200.0
     iva: 42.0
     irpf: 0.0
     total: 242.0
     user: first
     client: one
+    series: default_a
+    number: 101
 
 three:
-    invoice_number: 102
+    invoice_number: '102'
     date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
     due_date: <%= Faker::Date.forward(days: 30) %>
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
-    status: <%= %w[Pendiente Pagada].sample %>
+    status: pendiente
     subtotal: 0.0
     iva: 0.0
     irpf: 0.0
     total: 0.0
     user: first
     client: one
+    series: default_a
+    number: 102

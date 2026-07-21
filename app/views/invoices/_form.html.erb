@@ -24,9 +24,9 @@
             <%= heroicon "hashtag", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>
           </div>
           <% if invoice.new_record? %>
-            <%= f.text_field :invoice_number, class: "form-input w-full pl-8", value: invoice.set_invoice_number %>
+            <span class="form-input w-full pl-8 text-slate-500"><%= t("numero_asignado_al_guardar") %></span>
           <% else %>
-            <%= f.text_field :invoice_number, class: "form-input w-full pl-8", value: invoice.invoice_number %>
+            <span class="form-input w-full pl-8"><%= invoice.display_number || invoice.invoice_number %></span>
           <% end %>
         </div>
       </div>
