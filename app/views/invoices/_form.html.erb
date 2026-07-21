@@ -28,7 +28,7 @@
           <% elsif invoice.draft? %>
             <span class="form-input w-full pl-8 text-slate-500"><%= t("Borrador") %></span>
           <% else %>
-            <span class="form-input w-full pl-8"><%= invoice.display_number || invoice.invoice_number %></span>
+            <span class="form-input w-full pl-8"><%= invoice.display_number %></span>
           <% end %>
         </div>
       </div>

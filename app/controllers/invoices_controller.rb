@@ -180,6 +180,7 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
       :irpf,
       :total,
       :notes,
+      :series_id,
       line_items_attributes: %i[id item_id invoice_id quantity price iva total _destroy]
     )
   end

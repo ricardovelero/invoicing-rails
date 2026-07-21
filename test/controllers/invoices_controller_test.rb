@@ -121,10 +121,10 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
 
     post invoices_url,
          params: {
+           save_and_issue: true,
            invoice: {
              date: Date.today,
              due_date: Date.today + 30,
-             status: 'pendiente',
              subtotal: 100,
              iva: 21,
              total: 121,
@@ -145,10 +145,10 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
 
     post invoices_url,
          params: {
+           save_and_issue: true,
            invoice: {
              date: 1.year.ago,
              due_date: Date.today + 30,
-             status: 'pendiente',
              subtotal: 100,
              iva: 21,
              total: 121,
