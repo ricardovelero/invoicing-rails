@@ -7,9 +7,11 @@ class InvoiceSeries < ApplicationRecord
   has_many :invoice_sequences, dependent: :destroy
   has_many :invoices, foreign_key: :series_id, dependent: :nullify
 
+  before_validation :normalize_prefix
+
   validates :prefix, presence: true,
-                     format: { with: /\A[A-Za-z0-9]+\z/, message: ->(*_args) { I18n.t('prefix_format') } },
-                     uniqueness: { scope: :user_id, case_sensitive: false }
+                     format: { with: /\A[A-Za-z0-9]+\z/, message: ->(*_args) { I18n.t('prefijo_formato') } },
+                     uniqueness: { scope: :user_id }
 
   # Returns the active sequence for this series, creating one lazily if none exists.
   def active_sequence
@@ -38,5 +40,11 @@ class InvoiceSeries < ApplicationRecord
   # Display label for the scope (prefix + optional name)
   def display_name
     name.present? ? "#{prefix} — #{name}" : prefix
+  end
+
+  private
+
+  def normalize_prefix
+    self.prefix = prefix.to_s.upcase if prefix.present?
   end
 end

@@ -36,6 +36,9 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
     @invoice = Invoice.new
     @invoice.line_items.build
     @series = current_user.invoice_series.order(:prefix)
+    # Default to the user's default scope (prefix 'A') if it exists
+    default = @series.find_by(prefix: 'A') || @series.first
+    @invoice.series_id = default&.id
   end
 
   # GET /invoices/1/edit

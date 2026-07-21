@@ -33,8 +33,8 @@
 
       <% if invoice.new_record? && @series.present? %>
         <div class="my-5">
-          <%= f.label t("scope_selector"), class: "input-label" %>
-          <%= f.collection_select :series_id, @series, :id, :display_name, {prompt: t("select_scope")}, {class: "form-select w-full"} %>
+          <%= f.label t("selector_serie"), class: "input-label" %>
+          <%= f.collection_select :series_id, @series, :id, :display_name, {}, {class: "form-select w-full"} %>
         </div>
       <% end %>
 

@@ -10,6 +10,11 @@ class InvoiceSeriesController < ApplicationController
     @series = current_user.invoice_series
                           .includes(:invoice_sequences)
                           .order(:prefix)
+    # Precompute invoice counts to avoid N+1
+    @invoice_counts = Invoice.where(series_id: @series.pluck(:id))
+                             .where.not(number: nil)
+                             .group(:series_id)
+                             .count
   end
 
   # GET /invoice_series/new
@@ -24,7 +29,7 @@ class InvoiceSeriesController < ApplicationController
     if @series.save
       # Ensure the new scope gets an initial active Sequence automatically
       @series.active_sequence
-      redirect_to invoice_series_index_path, notice: I18n.t('scope_created')
+      redirect_to invoice_series_index_path, notice: I18n.t('serie_creada')
     else
       render :new, status: :unprocessable_entity
     end
