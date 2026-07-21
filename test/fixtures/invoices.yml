@@ -44,3 +44,17 @@ three:
     client: one
     series: default_a
     number: 102
+
+draft_one:
+    date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
+    due_date: <%= Faker::Date.forward(days: 30) %>
+    notes: Draft invoice
+    status: borrador
+    subtotal: 50.0
+    iva: 10.5
+    irpf: 0.0
+    total: 60.5
+    user: first
+    client: one
+    series:
+    number:
