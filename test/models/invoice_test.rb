@@ -191,4 +191,25 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_not invoice.valid?
     assert invoice.errors[:status].any?
   end
+
+  test "issued scope excludes drafts" do
+    assert_includes Invoice.issued, invoices(:one)
+    assert_not_includes Invoice.issued, invoices(:draft_one)
+  end
+
+  test "total_invoice_count excludes drafts" do
+    expected = Invoice.where.not(status: 'borrador').count
+    assert_equal expected, Invoice.total_invoice_count
+    assert_equal Invoice.count - Invoice.total_draft_count, Invoice.total_invoice_count
+  end
+
+  test "total_due_count excludes drafts" do
+    expected = Invoice.where.not(status: 'borrador').where('due_date <= ?', Date.today).count
+    assert_equal expected, Invoice.total_due_count
+  end
+
+  test "total_about_to_be_due_count excludes drafts" do
+    expected = Invoice.where.not(status: 'borrador').where('due_date = ?', Date.tomorrow).count
+    assert_equal expected, Invoice.total_about_to_be_due_count
+  end
 end

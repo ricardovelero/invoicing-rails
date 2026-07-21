@@ -1,7 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-    invoice_number: '100'
     date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
     due_date: <%= Faker::Date.forward(days: 30) %>
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
@@ -16,7 +15,6 @@ one:
     number: 100
 
 two:
-    invoice_number: '101'
     date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
     due_date: <%= Faker::Date.forward(days: 30) %>
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
@@ -31,7 +29,6 @@ two:
     number: 101
 
 three:
-    invoice_number: '102'
     date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
     due_date: <%= Faker::Date.forward(days: 30) %>
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
