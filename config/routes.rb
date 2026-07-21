@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resources :invoices do
     resources :line_items, except: [:index]
     post :add_item, on: :collection
+    member do
+      post :issue
+    end
   end
   resources :after_register
 
