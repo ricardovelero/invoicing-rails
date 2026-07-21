@@ -3,7 +3,7 @@
 # Invoice controller with search, sort, and filter
 class InvoicesController < ApplicationController # rubocop:disable Metrics/ClassLength
   before_action :authenticate_user!
-  before_action :set_invoice, only: %i[show edit update destroy]
+  before_action :set_invoice, only: %i[show edit update destroy issue]
 
   # GET /invoices or /invoices.json
   def index # rubocop:disable Metrics/AbcSize
@@ -46,6 +46,13 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
   def create
     @invoice = Invoice.new(invoice_params)
     @invoice.user = current_user
+
+    # Determine status from submit button
+    if params[:save_and_issue].present?
+      @invoice.status = 'pendiente'
+    else
+      @invoice.status = 'borrador'
+    end
 
     respond_to do |format|
       success = Invoice.transaction do
@@ -103,13 +110,49 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
 
   # DELETE /invoices/1 or /invoices/1.json
   def destroy
-    @invoice.destroy
+    if @invoice.destroy
+      respond_to do |format|
+        format.html do
+          redirect_to invoices_url, notice: I18n.t('factura_borrada')
+        end
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html do
+          redirect_to invoices_url, alert: @invoice.errors.full_messages.join(', ')
+        end
+        format.json { render json: @invoice.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
+  # POST /invoices/:id/issue
+  def issue
+    respond_to do |format|
+      success = Invoice.transaction do
+        @invoice.issue!
+        true
+      end
+
+      if success
+        format.html do
+          redirect_to invoices_path, notice: I18n.t('invoice.issued')
+        end
+        format.json { render :show, status: :ok, location: @invoice }
+      else
+        format.html do
+          redirect_to invoices_path, alert: I18n.t('invoice.issue_failed')
+        end
+        format.json { render json: @invoice.errors, status: :unprocessable_entity }
+      end
+    end
+  rescue StandardError => e
     respond_to do |format|
       format.html do
-        redirect_to invoices_url, notice: I18n.t('factura_borrada')
+        redirect_to invoices_path, alert: e.message
       end
-      format.json { head :no_content }
+      format.json { render json: { error: e.message }, status: :unprocessable_entity }
     end
   end
 
@@ -131,7 +174,6 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
       :irpf,
       :total,
       :notes,
-      :status,
       line_items_attributes: %i[id item_id invoice_id quantity price iva total _destroy]
     )
   end
