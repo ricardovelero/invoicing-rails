@@ -45,7 +45,7 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def issue!
     raise 'Invoice is not a draft' unless draft?
 
-    assign_number_from_default_scope!
+    assign_number!
     update!(status: 'pendiente')
   end
 
@@ -80,8 +80,10 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
     update!(series: target_series, number: next_number)
   end
 
+  scope :issued, -> { where.not(status: 'borrador') }
+
   def self.total_invoice_count
-    count
+    issued.count
   end
 
   def self.total_draft_count
@@ -97,11 +99,11 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def self.total_due_count
-    due.count
+    issued.due.count
   end
 
   def self.total_about_to_be_due_count
-    about_to_be_due.count
+    issued.about_to_be_due.count
   end
 
   def sum_subtotal
@@ -151,7 +153,7 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
     Receipts::Invoice.new(
       title: I18n.t('factura'),
       details: [
-        [I18n.t('factura') + ' #', display_number || invoice_number],
+        [I18n.t('factura') + ' #', display_number],
         [I18n.t('fecha'), date.strftime('%B %d, %Y')],
         [I18n.t('fecha_vencimiento'), due_date.strftime('%B %d, %Y')],
         [I18n.t('estatus'), "<b><color rgb='#5eba7d'>#{status.upcase}</color></b>"]

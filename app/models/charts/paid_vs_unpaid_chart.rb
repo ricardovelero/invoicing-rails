@@ -12,6 +12,7 @@ class Charts::PaidVsUnpaidChart
   def query_data
     Invoice
       .for_account(@user_id)
+      .issued
       .group('status')
       .count
   end

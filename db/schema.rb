@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_07_21_201249) do
+ActiveRecord::Schema[7.2].define(version: 2026_07_21_204020) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -55,7 +55,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_21_201249) do
   end
 
   create_table "invoices", force: :cascade do |t|
-    t.string "invoice_number"
     t.datetime "date"
     t.datetime "due_date"
     t.decimal "subtotal", default: "0.0"
