@@ -104,6 +104,11 @@
                                         <span class="link_text"><%= t("nueva_factura") %></span>
                                     <% end %>
                                 </li>
+                                <li class="mb-1 last:mb-0">
+                                    <%= link_to(invoice_series_index_path, class: "sidebar_link_scondary") do %>
+                                        <span class="link_text"><%= t("series") %></span>
+                                    <% end %>
+                                </li>
                             </ul>
                         </div>
                     </li>
