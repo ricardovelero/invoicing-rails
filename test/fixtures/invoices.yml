@@ -6,7 +6,12 @@ one:
     due_date: <%= Faker::Date.forward(days: 30) %>
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
     status: <%= %w[Pendiente Pagada].sample %>
+    subtotal: 100.0
+    iva: 21.0
+    irpf: 0.0
+    total: 121.0
     user: first
+    client: one
 
 two:
     invoice_number: 101
@@ -14,7 +19,12 @@ two:
     due_date: <%= Faker::Date.forward(days: 30) %>
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
     status: <%= %w[Pendiente Pagada].sample %>
+    subtotal: 200.0
+    iva: 42.0
+    irpf: 0.0
+    total: 242.0
     user: first
+    client: one
 
 three:
     invoice_number: 102
@@ -22,11 +32,9 @@ three:
     due_date: <%= Faker::Date.forward(days: 30) %>
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
     status: <%= %w[Pendiente Pagada].sample %>
+    subtotal: 0.0
+    iva: 0.0
+    irpf: 0.0
+    total: 0.0
     user: first
-
-<% Invoice.all.each do |i|
-  i.subtotal = i.sum_subtotal
-  i.iva = i.sum_iva
-  i.total = i.sum_total
-  i.save
-end %>
+    client: one

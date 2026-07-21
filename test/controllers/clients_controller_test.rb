@@ -1,7 +1,10 @@
 require "test_helper"
 
 class ClientsControllerTest < ActionDispatch::IntegrationTest
-  setup { @client = clients(:one) }
+  setup do
+    @client = clients(:one)
+    sign_in users(:first)
+  end
 
   test "should get index" do
     get clients_url
@@ -24,7 +27,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
                email: @client.email,
                last_name: @client.last_name,
                first_name: @client.first_name,
-               nif: @client.nif,
+               nif: "NIF#{rand(100_000)}",
                postal_code: @client.postal_code,
                region: @client.region,
                street: @client.street,
@@ -33,7 +36,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
            }
     end
 
-    assert_redirected_to client_url(Client.last)
+    assert_redirected_to clients_url(locale: I18n.locale)
   end
 
   test "should show client" do
@@ -63,12 +66,12 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
               telephone: @client.telephone
             }
           }
-    assert_redirected_to client_url(@client)
+    assert_redirected_to clients_url(locale: I18n.locale)
   end
 
   test "should destroy client" do
     assert_difference("Client.count", -1) { delete client_url(@client) }
 
-    assert_redirected_to clients_url
+    assert_redirected_to clients_url(locale: I18n.locale)
   end
 end

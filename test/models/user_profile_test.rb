@@ -9,7 +9,7 @@ class UserProfileTest < ActiveSupport::TestCase
         last_name: Faker::Name.last_name,
         gov_id: user_profiles(:one).gov_id,
         street_address_1: Faker::Address.street_name,
-        street_address_1: Faker::Address.secondary_address,
+        street_address_2: Faker::Address.secondary_address,
         city: Faker::Address.city,
         region: %w[Álava Albacete Alicante Almería Ávila Badajoz Baleares Barcelona Burgos Cuenca Cáceres Cádiz Córdoba Gipuzkoa Girona Granada Guadalajara Huelva Huesca Jaén León Lleida Lugo Madrid Murcia Málaga Navarra Ourense Palencia Pontevedra Salamanca Segovia Sevilla Soria Tarragona Teruel Toleda Valladolid Zamora Zaragoza].sample, #Faker::Address.state,
         postal_code: Faker::Address.zip,
