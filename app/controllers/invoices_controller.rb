@@ -8,8 +8,8 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
   # GET /invoices or /invoices.json
   def index # rubocop:disable Metrics/AbcSize
     @invoices = current_user.invoices
-    @invoices = current_user.invoices.filter_status(params[:status]) if params[:status].present?
-    @invoices = current_user.invoices.search(params[:query]) if params[:query].present?
+    @invoices = @invoices.filter_status(params[:status]) if params[:status].present?
+    @invoices = @invoices.search(params[:query]) if params[:query].present?
     @pagy, @invoices = pagy @invoices.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
   end
 
@@ -106,7 +106,7 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
 
   # Use callbacks to share common setup or constraints between actions.
   def set_invoice
-    @invoice = Invoice.find(params[:id])
+    @invoice = current_user.invoices.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

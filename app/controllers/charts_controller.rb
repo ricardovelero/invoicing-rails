@@ -1,6 +1,8 @@
 class ChartsController < ApplicationController
-  before_action :set_chart
+  ALLOWED_CHARTS = %w[Charts::InvoicesChart Charts::PaidVsUnpaidChart].freeze
+
   before_action :authenticate_user!
+  before_action :set_chart
 
   def show
     report_data = @chart.constantize.new(current_user).generate
@@ -12,6 +14,8 @@ class ChartsController < ApplicationController
   private
 
   def set_chart
+    raise ActiveRecord::RecordNotFound unless ALLOWED_CHARTS.include?(params[:chart_type])
+
     @chart = params[:chart_type]
   end
 
