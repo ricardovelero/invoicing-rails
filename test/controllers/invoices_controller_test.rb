@@ -60,6 +60,54 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
     assert_equal invoice_series(:default_a), created_invoice.series
   end
 
+  test "creating invoice with specific scope uses that scope's sequence" do
+    user = users(:first)
+    other_series = InvoiceSeries.create!(user: user, prefix: 'B')
+    other_seq = other_series.active_sequence
+
+    post invoices_url,
+         params: {
+           invoice: {
+             date: Date.today,
+             due_date: Date.today + 30,
+             status: 'pendiente',
+             subtotal: 100,
+             iva: 21,
+             total: 121,
+             client_id: clients(:one).id,
+             series_id: other_series.id
+           }
+         }
+
+    assert_redirected_to invoices_url(locale: I18n.locale)
+    created_invoice = Invoice.last
+    assert_equal other_series, created_invoice.series
+    assert_equal 1, created_invoice.number
+  end
+
+  test "backdating invoice does not change which sequence supplies its number" do
+    sequence = invoice_sequences(:default_a_active)
+    original_last = sequence.last_number
+
+    post invoices_url,
+         params: {
+           invoice: {
+             date: 1.year.ago,
+             due_date: Date.today + 30,
+             status: 'pendiente',
+             subtotal: 100,
+             iva: 21,
+             total: 121,
+             client_id: clients(:one).id
+           }
+         }
+
+    assert_redirected_to invoices_url(locale: I18n.locale)
+    created_invoice = Invoice.last
+    assert_equal original_last + 1, created_invoice.number
+    assert_equal invoice_series(:default_a), created_invoice.series
+  end
+
   test "two sequential creates produce n, n+1" do
     sequence = invoice_sequences(:default_a_active)
     original_last = sequence.last_number

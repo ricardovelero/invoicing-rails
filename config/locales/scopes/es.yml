@@ -1,0 +1,22 @@
+es:
+  scopes_title: Series
+  new_scope: Nueva Serie
+  no_scopes: No tienes series
+  no_scopes_text: Crea tu primera serie para empezar a emitir facturas.
+  scope_prefix: Prefijo
+  scope_name: Nombre
+  scope_last_number: Último Número
+  scope_invoices_count: Facturas
+  rollover: Rollover
+  rollover_confirm: "¿Seguro que quieres hacer rollover de la serie %{prefix}? El contador reiniciará en 1."
+  rollover_success: Serie renovada exitosamente. El contador reinició en 1.
+  rollover_failed: "Rollover fallido: %{error}"
+  scope_created: Serie creada exitosamente.
+  scope_prefix_help: Solo caracteres alfanuméricos (ej. A, B, R). Debe ser único en tu cuenta.
+  scope_name_help: Nombre descriptivo opcional (ej. "Facturas rectificativas").
+  scope_name_placeholder: Nombre opcional
+  create_scope: Crear Serie
+  back_to_scopes: "&larr; Volver a series"
+  scope_selector: Serie
+  select_scope: Selecciona una serie
+  prefix_format: solo debe contener letras y números
