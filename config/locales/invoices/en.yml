@@ -24,6 +24,8 @@ en:
   Pagada: Paid
   pendientes: Pending
   Pendiente: Pending
+  borradores: Drafts
+  Borrador: Draft
   por_vencer: Due Soon
   vencidas: Overdue
   buscar_factura: Search invoice...
@@ -49,6 +51,7 @@ en:
   quitar_item: Remove Item
   items_facturar: Items to Invoice
   guardar_factura: Save Invoice
+  guardar_borrador: Save as Draft
   factura_creada: Invoice created successfully
   factura_borrada: Invoice was successfully deleted
   factura_editada: Invoice was successfully updated
@@ -69,7 +72,12 @@ en:
   editar: Edit
   descargar: Download
   eliminar: Delete
+  emitir: Issue
   numero_asignado_al_guardar: Assigned on save
+  numero_asignado_al_emitir: Assigned on issue
   volver: Back
-  
-  
+  invoice:
+    destroy_blocked: Issued invoices cannot be deleted
+    issued: Invoice has been issued successfully
+    issue_failed: Could not issue the invoice
+  confirmar_emision: Are you sure you want to issue this invoice? This action cannot be undone.

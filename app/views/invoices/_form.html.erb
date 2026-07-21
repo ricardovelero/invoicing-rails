@@ -24,7 +24,9 @@
             <%= heroicon "hashtag", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>
           </div>
           <% if invoice.new_record? %>
-            <span class="form-input w-full pl-8 text-slate-500"><%= t("numero_asignado_al_guardar") %></span>
+            <span class="form-input w-full pl-8 text-slate-500"><%= t("numero_asignado_al_emitir") %></span>
+          <% elsif invoice.draft? %>
+            <span class="form-input w-full pl-8 text-slate-500"><%= t("Borrador") %></span>
           <% else %>
             <span class="form-input w-full pl-8"><%= invoice.display_number || invoice.invoice_number %></span>
           <% end %>
@@ -98,7 +100,8 @@
     <hr class="mb-5"/>
 
     <div class="inline">
-      <%= f.submit t("guardar_factura"), class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      <%= f.submit t("guardar_borrador"), name: 'save_draft', class: "rounded-lg py-3 px-5 bg-slate-500 text-white inline-block font-medium cursor-pointer" %>
+      <%= f.submit t("guardar_factura"), name: 'save_and_issue', class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer ml-2" %>
     </div>
   <% end %>
 </div>
