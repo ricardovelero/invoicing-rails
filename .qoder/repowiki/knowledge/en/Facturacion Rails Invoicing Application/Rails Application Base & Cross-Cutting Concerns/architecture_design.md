@@ -1,0 +1,7 @@
+This module is the leaf-level foundation layer of the Rails application. It defines the base classes every other component inherits from:
+- `ApplicationController` centralises cross-cutting request lifecycle: Devise auth (`authenticate_user!`, parameter sanitisation), per-request locale switching via `I18n.with_locale` plus Carmen's backend, Pagy integration (`Pagy::Backend`), flash/action storage for redirect-after-login, and dynamic layout selection (`session` / `home` / `application`).
+- `ApplicationRecord` is declared `primary_abstract_class` and mixes in `PgSearch::Model`; it also hosts country/region helpers (`get_regions`, `country_code`) used by forms.
+- `ApplicationHelper` exposes view helpers for sort links, flash styling, Turbo Stream flash rendering, and delegates icon rendering to `HeroiconHelper`, which simply includes `Heroicon::Engine.helpers`.
+- `CurrentInvoice` concern provides a session-backed current invoice (`set_invoice`) reused by controllers that need an in-flight invoice.
+- `ApplicationJob`, `ApplicationMailer`, and `ApplicationCable::*` are empty Rails scaffolds with one concrete subclass each (`TestMailer` sending through Postmark via `message_stream: 'outbound'`).
+Dependency direction is strictly outward: these bases are depended on by feature controllers/models/mailers/jobs/channels; nothing inside this module depends on domain-specific code except the `Invoice` class referenced by `CurrentInvoice`.

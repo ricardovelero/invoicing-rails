@@ -1,0 +1,1 @@
+Rails 7.1 (`load_defaults 7.1`), PostgreSQL via `pg`, Puma threaded server, Redis-backed Action Cable in production, Devise for authentication, SimpleForm + FormErrors for forms, Pagy for pagination, RouteTranslator + Carmen for I18n-aware routes and country data, LetterOpener for local email preview, Postmark for production mail delivery.

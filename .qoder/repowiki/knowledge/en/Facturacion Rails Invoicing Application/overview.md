@@ -1,0 +1,1 @@
+Rails 7.2 invoicing application that wires feature-scoped CRUD modules, Devise auth, and a Stimulus/Turbo frontend into a single Puma-backed Rack app.

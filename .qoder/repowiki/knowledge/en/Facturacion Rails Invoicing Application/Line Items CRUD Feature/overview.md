@@ -1,0 +1,1 @@
+Rails feature providing full CRUD for LineItem records, each representing a quantity of an Item within an Invoice.

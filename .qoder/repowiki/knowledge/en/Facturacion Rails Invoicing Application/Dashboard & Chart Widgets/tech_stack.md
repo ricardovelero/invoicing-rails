@@ -1,0 +1,1 @@
+Rails MVC + Hotwire Turbo frames for lazy loading chart fragments; Stimulus JS controllers consume chart data through HTML `data-*` attributes; Tailwind CSS for styling.

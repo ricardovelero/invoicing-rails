@@ -1,0 +1,5 @@
+Standard Rails MVC slice with three files:
+- `app/models/line_item.rb` — ActiveRecord model declaring `belongs_to :invoice` and `belongs_to :item`, a presence validation on `quantity`, and three computed helpers (`sub_total`, `total_price`, `total_iva`) that derive values from the associated item's price and IVA rate.
+- `app/controllers/line_items_controller.rb` — resourceful controller including the `CurrentInvoice` concern (used by `before_action :set_invoice` in `create`) and a `set_line_item` callback shared via `find(params[:id])`; actions are split into index/show/new/edit/create/update/destroy, each responding to both HTML and JSON formats via `respond_to` blocks.
+- `app/helpers/line_items_helper.rb` — empty helper module reserved for view logic.
+Dependency direction is one-way: controller → model; no cross-cutting concerns beyond the shared `CurrentInvoice` concern included from ApplicationController. The controller accepts only `item_id` and `invoice_id` through strong parameters.

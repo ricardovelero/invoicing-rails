@@ -1,0 +1,16 @@
+schema_version: 1
+module_path: home_pages
+title: Public Landing, Contact & Country Region Helpers
+scope:
+    - app/controllers/home_controller.rb
+    - app/controllers/contact_controller.rb
+    - app/controllers/countries_controller.rb
+    - app/views/home/
+    - app/views/countries/
+    - app/helpers/home_helper.rb
+    - config/locales/home/
+    - config/locales/routes/
+source_files: []
+depends_on: []
+related_to:
+    - path: users_auth

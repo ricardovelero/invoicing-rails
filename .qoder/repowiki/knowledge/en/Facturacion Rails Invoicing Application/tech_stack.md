@@ -1,0 +1,1 @@
+Ruby 3.3 / Rails 7.2.1 with PostgreSQL, Puma, Devise, Turbo + Stimulus, importmap-rails, Tailwind CSS, pg_search, pagy, simple_form, wicked multi-step wizard, Postmark mailer, and Minitest + Capybara/Selenium for tests.

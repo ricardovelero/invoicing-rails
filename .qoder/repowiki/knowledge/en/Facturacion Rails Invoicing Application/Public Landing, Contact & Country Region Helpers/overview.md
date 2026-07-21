@@ -1,0 +1,1 @@
+Serves unauthenticated public pages (home, privacy, terms), a JSON contact form endpoint, and a Turbo Stream country-region lookup used by the sign-up flow.

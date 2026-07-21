@@ -1,0 +1,6 @@
+Standard Rails resource scaffold split across four layers:
+- Controller (`clients_controller.rb`) enforces `authenticate_user!` via Devise, scopes every query to `current_user.clients`, and delegates search/sort/pagination to private helpers using `pg_search_scope :search` and Pagy (`pagy(...)`). Success responses are rendered as HTML redirect, JSON (via Jbuilder `.json.jbuilder`), or Turbo Stream (`create.turbo_stream.erb`, `update.turbo_stream.erb`, `show.turbo_stream.erb`).
+- Model (`client.rb`) owns validations, a Postgres `tsearch` prefix scope with accent insensitivity, and display helpers (`full_name`, `address`, `address_line1/2`).
+- Views under `app/views/clients/` follow the conventional index/show/new/edit partials plus Jbuilder serializers and Turbo Stream fragments; `.old.*` files are kept as legacy artifacts.
+- I18n lives in `config/locales/clients/{en,es}.yml`, keyed by action-specific messages (`client_created`, `client_updated`, `client_destroyed`) and shared UI strings used by the views.
+The helper module `clients_helper.rb` is present but empty — no view logic has been extracted there yet. Dependency direction is one-way: controller → model → views/helpers/locales.

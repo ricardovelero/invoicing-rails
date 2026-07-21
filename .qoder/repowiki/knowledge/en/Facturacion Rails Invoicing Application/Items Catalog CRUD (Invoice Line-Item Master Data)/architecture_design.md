@@ -1,0 +1,8 @@
+Standard Rails MVC slice under the `items` namespace:
+- `app/controllers/items_controller.rb` — RESTful controller scoped to `current_user.items`, with `before_action :authenticate_user!` and a shared `set_item` callback; actions respond to HTML, JSON, and Turbo Stream (`show.turbo_stream.erb`, `create.turbo_stream.erb`) via `respond_to` blocks.
+- `app/models/item.rb` — ApplicationRecord with `belongs_to :user`, `has_many :line_items`, `has_many :invoices, through: :line_items`; validation rules enforce presence/uniqueness/numericality; a `pg_search_scope :search` using Postgres `tsearch` with prefix matching and accent insensitivity powers the index query; a `before_destroy` callback prevents deletion when referenced by any `line_item`.
+- `app/views/items/` — standard scaffold views plus JBuilder `.json.jbuilder` serializers and Turbo Stream partials for non-full-page updates.
+- `app/helpers/items_helper.rb` — empty helper module (no view helpers defined here).
+- `config/locales/items/{en,es}.yml` — flat key namespace (`item_creado`, `item_actualizado`, `item_borrado`, `buscar_items`, etc.) consumed via `I18n.t(...)` from the controller.
+
+Dependency direction is one-way: controller → model → DB; views depend on the model and helpers; locales are read-only. Sorting and pagination are handled inline in the controller via `sort_column`/`sort_direction` helpers and Pagy (`pagy @items.reorder(...)`, items count parameter).

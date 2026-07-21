@@ -1,0 +1,1 @@
+Minitest + Rails Test Unit, Devise test helpers, Warden test helpers, Faker for generated data, and Selenium WebDriver driven by headless Chrome for system tests.

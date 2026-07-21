@@ -1,0 +1,1 @@
+Full-stack feature for creating, listing, searching, sorting, paginating, and managing client records owned by the current authenticated user.

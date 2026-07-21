@@ -1,0 +1,3 @@
+- Controllers that must be reachable without signing in explicitly call `skip_before_action :authenticate_user!` at the top of the class rather than relying on routing constraints.
+- User-facing strings are pulled from YAML files under `config/locales/<namespace>/` keyed by controller/view path (e.g. `home.index.eslogan_inicio`) instead of being hardcoded in ERB.
+- Turbo Stream partials follow the Rails convention of naming the view file `<action>.turbo_stream.erb` so `respond_to { |format| format.turbo_stream }` renders it automatically.

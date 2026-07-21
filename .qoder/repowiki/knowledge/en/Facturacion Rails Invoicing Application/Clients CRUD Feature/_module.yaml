@@ -1,0 +1,13 @@
+schema_version: 1
+module_path: clients_feature
+title: Clients CRUD Feature
+scope:
+    - app/controllers/clients_controller.rb
+    - app/models/client.rb
+    - app/views/clients/
+    - app/helpers/clients_helper.rb
+    - config/locales/clients/
+source_files: []
+depends_on: []
+related_to:
+    - path: invoices_feature

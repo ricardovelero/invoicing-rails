@@ -1,0 +1,4 @@
+- Each chart is a plain Ruby class under `app/models/charts/` exposing `initialize(user_id)` and `generate`, returning a `{label => count}` hash consumed uniformly by `ChartsController`.
+- View partials for charts follow the naming convention `_#{chart_class_name.gsub('Charts::','').underscore}.html.erb` and receive `labels` / `series` locals passed from the controller.
+- Chart partials expose their data to Stimulus via `data-controller="..."` plus `data-<controller>-labels-value` and `data-<controller>-series-value` attributes, and opt out of Turbo caching with `data-turbo-cache="false"`.
+- User-facing strings go through `I18n.t(...)` using keys scoped under `dashboard.*` in `config/locales/dashboard/*.yml` rather than inline literals.

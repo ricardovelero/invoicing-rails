@@ -1,0 +1,16 @@
+schema_version: 1
+module_path: users_auth
+title: User Registration & Profile Management
+scope:
+    - app/controllers/registrations_controller.rb
+    - app/controllers/user_profile_controller.rb
+    - app/models/user.rb
+    - app/models/user_profile.rb
+    - app/views/devise/
+    - app/views/after_register/
+    - config/locales/registration/
+    - config/initializers/devise.rb
+source_files: []
+depends_on: []
+related_to:
+    - path: home_pages

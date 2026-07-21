@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: database_schema
+title: Database Schema & Seed Data
+scope:
+    - db/schema.rb
+    - db/migrate/
+    - db/seeds.rb
+    - db/seeds/development.rb
+source_files: []
+depends_on: []
+related_to: []

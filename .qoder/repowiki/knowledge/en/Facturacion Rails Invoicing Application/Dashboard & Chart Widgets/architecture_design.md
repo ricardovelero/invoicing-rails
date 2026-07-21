@@ -1,0 +1,6 @@
+Thin MVC surface around a pluggable chart strategy:
+- `DashboardController#index` serves the dashboard shell; `ChartsController#show` is the single endpoint for all chart fragments. It resolves a chart class from `params[:chart_type]`, instantiates it with `current_user`, calls `generate`, and serializes the returned `{label => count}` hash into JSON for the view.
+- Each chart is a plain Ruby class under `app/models/charts/` implementing `initialize(user_id)` / `generate`, returning a hash of labels to counts — e.g. `Charts::InvoicesChart` zero-fills daily invoice counts over the last 90 days, `Charts::PaidVsUnpaidChart` groups by status. This makes adding a new chart a matter of defining a class and a matching partial.
+- Views are split: `dashboard/index.html.erb` hosts two `<turbo_frame_tag>` placeholders that lazily fetch `charts_path(chart_type: ...)`, while `charts/show.html.erb` delegates to a partial named after the chart class (`_invoices_chart.html.erb`, `_paid_vs_unpaid_chart.html.erb`).
+- Partial templates are self-contained UI components wired to Stimulus controllers via `data-controller` / `data-*` attributes carrying `labels` and `series`; they also set `data-turbo-cache="false"` so Turbo does not reuse stale chart DOM.
+- `DashboardHelper#greet` provides a time-of-day greeting via I18n keys in `config/locales/dashboard/{en,es}.yml`.

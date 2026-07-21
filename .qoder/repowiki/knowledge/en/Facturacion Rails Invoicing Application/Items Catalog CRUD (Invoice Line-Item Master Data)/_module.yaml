@@ -1,0 +1,13 @@
+schema_version: 1
+module_path: items_feature
+title: Items Catalog CRUD (Invoice Line-Item Master Data)
+scope:
+    - app/controllers/items_controller.rb
+    - app/models/item.rb
+    - app/views/items/
+    - app/helpers/items_helper.rb
+    - config/locales/items/
+source_files: []
+depends_on: []
+related_to:
+    - path: line_items_feature

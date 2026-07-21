@@ -1,0 +1,1 @@
+Renders the authenticated user dashboard with lazy-loaded chart widgets (invoices over time, paid vs unpaid) driven by pluggable report classes and Stimulus controllers.

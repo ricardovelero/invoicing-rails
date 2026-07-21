@@ -1,0 +1,1 @@
+PostgreSQL with `plpgsql` and `unaccent` extensions; Devise authentication columns on `users`; Active Storage variant/blobs tables; `database_cleaner` + `Faker` for seeding; Pay gem tables were previously present but dropped.

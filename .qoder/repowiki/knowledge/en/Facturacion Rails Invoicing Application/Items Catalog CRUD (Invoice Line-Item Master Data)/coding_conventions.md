@@ -1,0 +1,4 @@
+- Controller actions use `respond_to do |format| ... end` blocks to branch between HTML redirects, JSON renders, and Turbo Stream templates instead of separate action methods.
+- User-scoped queries always start from `current_user.items` rather than querying `Item` directly, enforcing per-tenant data isolation at the controller layer.
+- Model-side referential integrity is enforced with `before_destroy` callbacks that add an error to `:base` and `throw :abort` to prevent deletion, rather than relying solely on database constraints.
+- User-facing strings are externalized through `I18n.t('...')` calls keyed under the `items/` locale namespace instead of being embedded as literals in controllers or views.

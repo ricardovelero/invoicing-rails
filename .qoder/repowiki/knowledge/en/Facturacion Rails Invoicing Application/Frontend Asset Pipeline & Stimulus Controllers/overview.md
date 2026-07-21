@@ -1,0 +1,1 @@
+Rails frontend asset pipeline wiring Turbo, Stimulus controllers, Alpine.js, Tailwind CSS, and ApexCharts into the Sprockets build.

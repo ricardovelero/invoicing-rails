@@ -1,0 +1,4 @@
+- Controller parameter whitelisting is centralized in a private `*_params` method using `params.require(...).permit(...)` and duplicated across `RegistrationsController` and `UserProfileController`.
+- Post-action redirects use HTTP 303 (`status: :see_other`) for successful mutations, matching the Devise responder redirect status set in the initializer.
+- Validation failures return `render :action, status: :unprocessable_entity` rather than re-rendering with a 200 response, consistent with Turbo-friendly error handling.
+- The `User#user_profile` association is lazily built via an accessor override (`super || build_user_profile`) so forms can write into it without an explicit `build` call.

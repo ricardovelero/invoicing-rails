@@ -1,0 +1,1 @@
+Minitest-based test suite covering models, controllers, mailers, channels and Selenium-driven system tests for the invoicing Rails application.

@@ -1,0 +1,1 @@
+Rails resource for creating, listing, searching, and deleting invoice line-item master records, with per-user scoping, PostgreSQL full-text search, Turbo Stream responses, and i18n in English and Spanish.

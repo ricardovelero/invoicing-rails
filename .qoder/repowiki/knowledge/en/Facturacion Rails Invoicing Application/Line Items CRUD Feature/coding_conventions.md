@@ -1,0 +1,3 @@
+- Controller actions use `respond_to { |format| ... }` blocks to serve both HTML (redirect + notice or render) and JSON (rendered JSON object or head status) from the same action.
+- Shared per-action setup is extracted into private `before_action` callbacks (e.g. `set_line_item` using `LineItem.find(params[:id])`) rather than repeated inline.
+- Computed financials on the model guard against nil associations by returning `0` when `item` or `quantity` is absent before performing arithmetic.

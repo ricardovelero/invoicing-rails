@@ -1,0 +1,3 @@
+- Base classes live at the root of their namespace (`ApplicationController`, `ApplicationRecord`, `ApplicationJob`, `ApplicationMailer`) and are extended by feature subclasses rather than being mixed in.
+- Cross-cutting behaviour is packaged as modules under `app/controllers/concerns/` (e.g. `CurrentInvoice`) and included explicitly where needed instead of being baked into the base controller.
+- View helpers delegate UI details to dedicated helper modules (`HeroiconHelper` wraps `Heroicon::Engine.helpers`; `ApplicationHelper` owns sorting, flash, and region helpers).

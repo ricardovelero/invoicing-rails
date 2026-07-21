@@ -1,0 +1,1 @@
+Boots the Facturacion Rails application, wires third-party gems via initializers, and defines per-environment defaults for database, storage, mailer, and Action Cable.

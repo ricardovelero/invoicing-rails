@@ -1,0 +1,218 @@
+# 知识卡导出索引文件
+schema_version: 1
+locale: en-US
+branch: main
+nodes_managed: true
+exported_at: "2026-07-21T12:51:02Z"
+modules:
+    "":
+        dir_name: Facturacion Rails Invoicing Application
+        title: Facturacion Rails Invoicing Application
+        scope:
+            - README.md
+            - SECURITY.md
+            - CLAUDE.md
+            - .gitignore
+            - Gemfile
+            - Gemfile.lock
+            - package.json
+            - pnpm-lock.yaml
+            - Procfile
+            - Procfile.dev
+            - Rakefile
+            - config.ru
+            - .gitattributes
+            - .ruby-version
+        source_files: []
+        children:
+            - clients_feature
+            - configuration
+            - dashboard_charts
+            - database_schema
+            - frontend_assets
+            - home_pages
+            - invoices_feature
+            - items_feature
+            - line_items_feature
+            - shared_infrastructure
+            - tests
+            - users_auth
+        depends_on: []
+        related_to: []
+    clients_feature:
+        dir_name: Clients CRUD Feature
+        title: Clients CRUD Feature
+        scope:
+            - app/controllers/clients_controller.rb
+            - app/models/client.rb
+            - app/views/clients/
+            - app/helpers/clients_helper.rb
+            - config/locales/clients/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: invoices_feature
+    configuration:
+        dir_name: Rails Application Boot & Environment Configuration
+        title: Rails Application Boot & Environment Configuration
+        scope:
+            - config/application.rb
+            - config/boot.rb
+            - config/environment.rb
+            - config/routes.rb
+            - config/environments/
+            - config/initializers/
+            - config/locales/
+            - config/database.yml
+            - config/storage.yml
+            - config/puma.rb
+            - config/cable.yml
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    dashboard_charts:
+        dir_name: Dashboard & Chart Widgets
+        title: Dashboard & Chart Widgets
+        scope:
+            - app/controllers/dashboard_controller.rb
+            - app/controllers/charts_controller.rb
+            - app/models/dashboard.rb
+            - app/models/charts/
+            - app/views/dashboard/
+            - app/views/charts/
+            - app/helpers/dashboard_helper.rb
+            - app/helpers/charts_helper.rb
+            - config/locales/dashboard/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: invoices_feature
+    database_schema:
+        dir_name: Database Schema & Seed Data
+        title: Database Schema & Seed Data
+        scope:
+            - db/schema.rb
+            - db/migrate/
+            - db/seeds.rb
+            - db/seeds/development.rb
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    frontend_assets:
+        dir_name: Frontend Asset Pipeline & Stimulus Controllers
+        title: Frontend Asset Pipeline & Stimulus Controllers
+        scope:
+            - app/assets/
+            - app/javascript/
+            - config/tailwind.config.js
+            - config/importmap.rb
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    home_pages:
+        dir_name: Public Landing, Contact & Country Region Helpers
+        title: Public Landing, Contact & Country Region Helpers
+        scope:
+            - app/controllers/home_controller.rb
+            - app/controllers/contact_controller.rb
+            - app/controllers/countries_controller.rb
+            - app/views/home/
+            - app/views/countries/
+            - app/helpers/home_helper.rb
+            - config/locales/home/
+            - config/locales/routes/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: users_auth
+    invoices_feature:
+        dir_name: Invoice CRUD & Listing Feature
+        title: Invoice CRUD & Listing Feature
+        scope:
+            - app/controllers/invoices_controller.rb
+            - app/models/invoice.rb
+            - app/views/invoices/
+            - app/helpers/invoices_helper.rb
+            - config/locales/invoices/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: clients_feature
+            - path: dashboard_charts
+            - path: line_items_feature
+    items_feature:
+        dir_name: Items Catalog CRUD (Invoice Line-Item Master Data)
+        title: Items Catalog CRUD (Invoice Line-Item Master Data)
+        scope:
+            - app/controllers/items_controller.rb
+            - app/models/item.rb
+            - app/views/items/
+            - app/helpers/items_helper.rb
+            - config/locales/items/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: line_items_feature
+    line_items_feature:
+        dir_name: Line Items CRUD Feature
+        title: Line Items CRUD Feature
+        scope:
+            - app/controllers/line_items_controller.rb
+            - app/models/line_item.rb
+            - app/helpers/line_items_helper.rb
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: invoices_feature
+            - path: items_feature
+    shared_infrastructure:
+        dir_name: Rails Application Base & Cross-Cutting Concerns
+        title: Rails Application Base & Cross-Cutting Concerns
+        scope:
+            - app/controllers/application_controller.rb
+            - app/controllers/concerns/
+            - app/models/application_record.rb
+            - app/helpers/application_helper.rb
+            - app/helpers/heroicon_helper.rb
+            - app/jobs/
+            - app/mailers/
+            - app/channels/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    tests:
+        dir_name: Rails Test Suite (Unit, Integration & System)
+        title: Rails Test Suite (Unit, Integration & System)
+        scope:
+            - test/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    users_auth:
+        dir_name: User Registration & Profile Management
+        title: User Registration & Profile Management
+        scope:
+            - app/controllers/registrations_controller.rb
+            - app/controllers/user_profile_controller.rb
+            - app/models/user.rb
+            - app/models/user_profile.rb
+            - app/views/devise/
+            - app/views/after_register/
+            - config/locales/registration/
+            - config/initializers/devise.rb
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: home_pages

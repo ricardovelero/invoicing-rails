@@ -1,0 +1,1 @@
+Ruby on Rails with PostgreSQL full-text search via `pg_search_scope` (`tsearch`, prefix match, accent-insensitive); Turbo Streams for partial page updates; Pagy for pagination; JBuilder for JSON serialization.

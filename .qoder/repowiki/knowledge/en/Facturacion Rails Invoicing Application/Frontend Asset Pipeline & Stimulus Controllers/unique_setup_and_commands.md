@@ -1,0 +1,1 @@
+New Stimulus controllers must be registered by running `./bin/rails stimulus:manifest:update` (or generated via `./bin/rails generate stimulus <name>`); Tailwind output lives in `app/assets/builds/tailwind.css` and is linked by the Sprockets manifest.

@@ -1,0 +1,21 @@
+schema_version: 1
+module_path: ""
+title: Facturacion Rails Invoicing Application
+scope:
+    - README.md
+    - SECURITY.md
+    - CLAUDE.md
+    - .gitignore
+    - Gemfile
+    - Gemfile.lock
+    - package.json
+    - pnpm-lock.yaml
+    - Procfile
+    - Procfile.dev
+    - Rakefile
+    - config.ru
+    - .gitattributes
+    - .ruby-version
+source_files: []
+depends_on: []
+related_to: []

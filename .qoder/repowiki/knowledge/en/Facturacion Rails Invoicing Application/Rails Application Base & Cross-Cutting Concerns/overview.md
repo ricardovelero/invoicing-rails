@@ -1,0 +1,1 @@
+Root base classes and shared concerns (controllers, models, helpers, jobs, mailers, ActionCable) that provide authentication, i18n, layout selection, pagination, heroicons, and a session-backed invoice across the Rails app.

@@ -1,0 +1,1 @@
+Devise for authentication, Pagy for pagination (backend + frontend helpers), Heroicon for SVG icons, PgSearch for PostgreSQL full-text search, ActionCable for WebSockets, and Postmark as the email delivery backend (via `message_stream` option).

@@ -1,0 +1,15 @@
+schema_version: 1
+module_path: invoices_feature
+title: Invoice CRUD & Listing Feature
+scope:
+    - app/controllers/invoices_controller.rb
+    - app/models/invoice.rb
+    - app/views/invoices/
+    - app/helpers/invoices_helper.rb
+    - config/locales/invoices/
+source_files: []
+depends_on: []
+related_to:
+    - path: clients_feature
+    - path: dashboard_charts
+    - path: line_items_feature

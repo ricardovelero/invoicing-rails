@@ -1,0 +1,1 @@
+Boot: `bundle install && bin/rails db:create db:migrate db:seed && bin/dev` (Procfile.dev runs Puma + Tailwind watch); production: `bundle exec puma -C config/puma.rb` per Procfile.

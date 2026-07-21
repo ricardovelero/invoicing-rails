@@ -1,0 +1,1 @@
+Active Record schema definition, migration history, and development seed data for the invoicing application's PostgreSQL database.

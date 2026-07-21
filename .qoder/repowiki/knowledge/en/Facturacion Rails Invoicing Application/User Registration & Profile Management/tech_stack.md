@@ -1,0 +1,1 @@
+Devise (ActiveRecord ORM) with Hotwire/Turbo-aware responder defaults (`unprocessable_entity`, `see_other`) configured in `devise.rb`; i18n for registration messages in English and Spanish.

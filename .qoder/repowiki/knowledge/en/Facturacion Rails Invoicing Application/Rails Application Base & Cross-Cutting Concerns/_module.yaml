@@ -1,0 +1,15 @@
+schema_version: 1
+module_path: shared_infrastructure
+title: Rails Application Base & Cross-Cutting Concerns
+scope:
+    - app/controllers/application_controller.rb
+    - app/controllers/concerns/
+    - app/models/application_record.rb
+    - app/helpers/application_helper.rb
+    - app/helpers/heroicon_helper.rb
+    - app/jobs/
+    - app/mailers/
+    - app/channels/
+source_files: []
+depends_on: []
+related_to: []

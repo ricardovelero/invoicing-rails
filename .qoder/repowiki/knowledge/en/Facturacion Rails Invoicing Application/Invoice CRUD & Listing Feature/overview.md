@@ -1,0 +1,1 @@
+Full-stack invoice feature providing search, sort, filter, pagination, nested line-item editing, JSON and PDF responses for the invoices resource.

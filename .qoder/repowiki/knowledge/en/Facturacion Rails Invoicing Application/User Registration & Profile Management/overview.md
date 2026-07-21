@@ -1,0 +1,1 @@
+Devise-backed user registration, sign-in, and profile setup flow with a multi-step wizard that collects personal, address, and company/freelance details.

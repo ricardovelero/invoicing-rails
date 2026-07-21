@@ -1,0 +1,4 @@
+- Per-environment behavior is expressed as separate files under `config/environments/` that override `config.application.rb` defaults rather than branching on `Rails.env` inside shared code.
+- Third-party gem configuration lives in its own file under `config/initializers/` named after the gem (e.g. `devise.rb`, `simple_form.rb`, `pagy.rb`, `route_translator.rb`), keeping concerns isolated.
+- Environment-specific secrets and connection parameters are injected through `ENV[...]` / `ENV.fetch(...)` in YAML config files instead of being hard-coded.
+- I18n locale files mirror the feature directory structure under `config/locales/<feature>/` with paired `en.yml`/`es.yml` pairs, and default locales are declared centrally in `config/initializers/locale.rb`.

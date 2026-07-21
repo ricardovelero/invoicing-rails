@@ -1,0 +1,4 @@
+- Each spec requires only `test_helper` (or `application_system_test_case` for system tests) rather than loading individual files, relying on Rails autoloading conventions.
+- Model validations are asserted by constructing invalid records and checking `errors[:field]` against the exact I18n error message strings produced by the app's validators.
+- Test data is loaded from YAML fixtures under `test/fixtures/` and accessed via the `model_name(:key)` helper instead of building objects inline.
+- Authentication state in controller/system tests is established by including Devise/Warden test helpers rather than performing real sign-in requests.

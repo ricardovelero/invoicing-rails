@@ -1,0 +1,17 @@
+schema_version: 1
+module_path: dashboard_charts
+title: Dashboard & Chart Widgets
+scope:
+    - app/controllers/dashboard_controller.rb
+    - app/controllers/charts_controller.rb
+    - app/models/dashboard.rb
+    - app/models/charts/
+    - app/views/dashboard/
+    - app/views/charts/
+    - app/helpers/dashboard_helper.rb
+    - app/helpers/charts_helper.rb
+    - config/locales/dashboard/
+source_files: []
+depends_on: []
+related_to:
+    - path: invoices_feature

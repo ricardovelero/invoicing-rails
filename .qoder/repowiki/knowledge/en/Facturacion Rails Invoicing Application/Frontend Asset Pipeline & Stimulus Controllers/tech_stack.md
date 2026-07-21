@@ -1,0 +1,1 @@
+Turbo + Stimulus for progressive enhancement, Alpine.js with `alpine-turbo-drive-adapter` for lightweight reactivity, Tailwind CSS (with `@tailwindcss/forms`) compiled to `app/assets/builds/tailwind.css`, and ApexCharts for charting — all served via `importmap-rails` and Sprockets.

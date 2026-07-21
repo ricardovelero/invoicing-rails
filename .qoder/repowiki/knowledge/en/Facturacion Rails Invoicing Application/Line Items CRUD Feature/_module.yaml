@@ -1,0 +1,12 @@
+schema_version: 1
+module_path: line_items_feature
+title: Line Items CRUD Feature
+scope:
+    - app/controllers/line_items_controller.rb
+    - app/models/line_item.rb
+    - app/helpers/line_items_helper.rb
+source_files: []
+depends_on: []
+related_to:
+    - path: invoices_feature
+    - path: items_feature

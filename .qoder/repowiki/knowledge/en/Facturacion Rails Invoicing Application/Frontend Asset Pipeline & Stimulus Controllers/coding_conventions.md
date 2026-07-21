@@ -1,0 +1,3 @@
+- Stimulus controllers live one-per-file under `app/javascript/controllers/` with the `<name>_controller.js` naming convention and are registered in `controllers/index.js` using a kebab-case identifier matching the filename.
+- Runtime dependencies are pinned exclusively in `config/importmap.rb` and imported by relative path in JS source files rather than via bundlers or npm scripts.
+- Tailwind utility classes are written directly in templates/views/helpers and scanned by `config/tailwind.config.js` content globs; dynamic class names that might be dropped are whitelisted in the `safelist` array.

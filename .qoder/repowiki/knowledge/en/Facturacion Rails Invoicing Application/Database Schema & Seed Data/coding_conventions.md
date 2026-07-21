@@ -1,0 +1,4 @@
+- Migrations use the reversible `change` method with `t.timestamps` rather than explicit `created_at`/`updated_at` columns.
+- Decimal financial fields are declared with `precision: 8, scale: 2` and seeded as floats or integers, never strings.
+- Foreign keys between `clients`, `invoices`, `items`, `line_items`, and `user_profiles` are all `bigint` references to `users` (or each other) and indexed explicitly by name.
+- Development seeds rely on `DatabaseCleaner.clean_with(:truncation)` at the top so re-running is idempotent.

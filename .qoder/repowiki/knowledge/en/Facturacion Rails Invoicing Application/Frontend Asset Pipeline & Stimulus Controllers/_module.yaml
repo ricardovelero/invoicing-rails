@@ -1,0 +1,11 @@
+schema_version: 1
+module_path: frontend_assets
+title: Frontend Asset Pipeline & Stimulus Controllers
+scope:
+    - app/assets/
+    - app/javascript/
+    - config/tailwind.config.js
+    - config/importmap.rb
+source_files: []
+depends_on: []
+related_to: []
