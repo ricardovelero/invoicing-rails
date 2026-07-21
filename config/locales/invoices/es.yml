@@ -24,6 +24,8 @@ es:
   Pagada: Pagada
   pendientes: Pendientes
   Pendiente: Pendiente
+  borradores: Borradores
+  Borrador: Borrador
   por_vencer: Por vencer
   vencidas: Vencidas
   buscar_factura: Buscar factura...
@@ -49,6 +51,7 @@ es:
   quitar_item: Eliminar Ítem
   items_facturar: Ítems a Facturar
   guardar_factura: Guardar Factura
+  guardar_borrador: Guardar como Borrador
   factura_creada: Factura creada exitosamente
   factura_borrada: Factura borrada exitosamente
   factura_editada: Factura editada exitosamente
@@ -69,6 +72,12 @@ es:
   editar: Editar
   descargar: Descargar
   eliminar: Eliminar
+  emitir: Emitir
   numero_asignado_al_guardar: Se asigna al guardar
+  numero_asignado_al_emitir: Se asigna al emitir
   volver: Volver
-
+  invoice:
+    destroy_blocked: Las facturas emitidas no se pueden eliminar
+    issued: La factura ha sido emitida exitosamente
+    issue_failed: No se pudo emitir la factura
+  confirmar_emision: ¿Estás seguro de que quieres emitir esta factura? Esta acción no se puede deshacer.
