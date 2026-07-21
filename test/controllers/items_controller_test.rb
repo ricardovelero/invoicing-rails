@@ -4,7 +4,7 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @item = items(:first)
     @title = "Item test #{rand(100)}"
-    sign_in users(:first)
+    sign_in users(:third)
   end
 
   test "should get index" do

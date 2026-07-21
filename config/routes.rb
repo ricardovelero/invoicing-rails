@@ -46,5 +46,5 @@ Rails.application.routes.draw do
   # end
 
   root 'home#index'
-  mount LetterOpenerWeb::Engine, at: '/letter_opener'
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

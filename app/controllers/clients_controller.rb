@@ -67,7 +67,7 @@ class ClientsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_client
-    @client = Client.find(params[:id])
+    @client = current_user.clients.find(params[:id])
   end
 
   def apply_search_query
@@ -107,7 +107,6 @@ class ClientsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def client_params # rubocop:disable Metrics/MethodLength
     params.require(:client).permit(
-      :user_id,
       :first_name,
       :last_name,
       :nif,

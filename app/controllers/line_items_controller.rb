@@ -76,7 +76,7 @@ class LineItemsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_line_item
-    @line_item = LineItem.find(params[:id])
+    @line_item = LineItem.joins(:invoice).where(invoices: { user_id: current_user.id }).find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

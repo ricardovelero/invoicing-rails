@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   # GET /items or /items.json
   def index
     @items = current_user.items
-    @items = current_user.items.search(params[:query]) if params[:query].present?
+    @items = @items.search(params[:query]) if params[:query].present?
     @pagy, @items = pagy @items.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
   end
 
@@ -82,13 +82,12 @@ class ItemsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_item
-    @item = Item.find(params[:id])
+    @item = current_user.items.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def item_params
     params.require(:item).permit(
-      :user_id,
       :item_name,
       :description,
       :price,
