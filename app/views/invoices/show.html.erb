@@ -12,7 +12,11 @@
 
       <p class="my-5">
         <strong class="block font-medium mb-1"><%= t("numero_factura") %>:</strong>
-        <%= @invoice.display_number || @invoice.invoice_number %>
+        <% if @invoice.draft? %>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"><%= t("Borrador") %></span>
+        <% else %>
+          <%= @invoice.display_number %>
+        <% end %>
       </p>
 
       <p class="my-5">
@@ -36,10 +40,15 @@
       </p>
     </div>
 
+    <% if @invoice.draft? %>
+      <%= button_to t("emitir"), issue_invoice_path(@invoice), method: :post, data: { turbo_confirm: t("confirmar_emision") }, class: "mt-2 rounded-lg py-3 px-5 bg-green-600 text-white inline-block font-medium" %>
+    <% end %>
     <%= link_to t("editar"), edit_invoice_path(@invoice), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to t("eliminar"), invoice_path(@invoice), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-    </div>
+    <% if @invoice.draft? %>
+      <div class="inline-block ml-2">
+        <%= button_to t("eliminar"), invoice_path(@invoice), method: :delete, data: { turbo_confirm: t("estas_seguro") }, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+      </div>
+    <% end %>
     <%= link_to t("volver"), invoices_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>

@@ -12,7 +12,10 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   validates :client_id, presence: true
 
-  attribute :status, :string, default: 'pendiente'
+  attribute :status, :string, default: 'borrador'
+
+  STATUSES = %w[borrador pendiente pagada].freeze
+  validates :status, inclusion: { in: STATUSES }
 
   scope :for_account, ->(user_id) { where(user_id:) }
 
@@ -28,6 +31,33 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
                   },
                   using: { tsearch: { prefix: true } },
                   ignoring: :accents
+
+  def draft?
+    status == 'borrador'
+  end
+
+  def issued?
+    %w[pendiente pagada].include?(status)
+  end
+
+  # Transitions draft to pendiente, reserving the next correlative number atomically.
+  # Must be called inside a transaction.
+  def issue!
+    raise 'Invoice is not a draft' unless draft?
+
+    assign_number_from_default_scope!
+    update!(status: 'pendiente')
+  end
+
+  # Prevents destruction of issued invoices
+  def prevent_destruction_if_issued
+    return if draft?
+
+    errors.add(:base, I18n.t('invoice.destroy_blocked'))
+    throw :abort
+  end
+
+  before_destroy :prevent_destruction_if_issued
 
   def client_full_name
     Client.find(client_id).full_name
@@ -52,6 +82,10 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def self.total_invoice_count
     count
+  end
+
+  def self.total_draft_count
+    filter_status('borrador').count
   end
 
   def self.total_paid_count
@@ -90,8 +124,10 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def status?
     return 'paid' if status == 'pagada'
+    return 'not-paid' if status == 'pendiente'
+    return 'draft' if status == 'borrador'
 
-    'not-paid' if status == 'pendiente'
+    nil
   end
 
   def pdf_line_items

@@ -91,4 +91,80 @@ class InvoiceTest < ActiveSupport::TestCase
     # The sequence counter should remain unchanged
     assert_equal original_last, sequence.reload.last_number
   end
+
+  test "draft? returns true for borrador status" do
+    invoice = invoices(:draft_one)
+    assert invoice.draft?
+    assert_not invoice.issued?
+  end
+
+  test "issued? returns true for pendiente and pagada" do
+    invoice = invoices(:one)
+    assert invoice.issued?
+    assert_not invoice.draft?
+  end
+
+  test "issue! transitions draft to pendiente with number" do
+    draft = invoices(:draft_one)
+    sequence = invoice_sequences(:default_a_active)
+    original_last = sequence.last_number
+
+    Invoice.transaction do
+      draft.issue!
+    end
+
+    assert_equal 'pendiente', draft.status
+    assert_equal original_last + 1, draft.number
+    assert_equal invoice_series(:default_a), draft.series
+  end
+
+  test "issue! raises error for non-draft invoice" do
+    invoice = invoices(:one)
+    assert_raises(RuntimeError) { invoice.issue! }
+  end
+
+  test "failed issue does not burn a number" do
+    sequence = invoice_sequences(:default_a_active)
+    original_last = sequence.last_number
+
+    draft = invoices(:draft_one)
+    # Make the draft invalid by removing the client
+    draft.client_id = nil
+
+    begin
+      Invoice.transaction do
+        draft.issue!
+      end
+    rescue StandardError
+      # Expected to fail
+    end
+
+    assert_equal original_last, sequence.reload.last_number
+    assert_equal 'borrador', draft.reload.status
+    assert_nil draft.number
+  end
+
+  test "cannot destroy issued invoice" do
+    invoice = invoices(:one)
+    assert_not invoice.destroy
+    assert invoice.persisted?
+    assert_includes invoice.errors[:base], I18n.t('invoice.destroy_blocked')
+  end
+
+  test "can destroy draft invoice" do
+    draft = invoices(:draft_one)
+    assert draft.destroy
+    assert draft.destroyed?
+  end
+
+  test "default status is borrador" do
+    invoice = Invoice.new
+    assert_equal 'borrador', invoice.status
+  end
+
+  test "validates status inclusion" do
+    invoice = Invoice.new(status: 'invalid')
+    assert_not invoice.valid?
+    assert invoice.errors[:status].any?
+  end
 end
