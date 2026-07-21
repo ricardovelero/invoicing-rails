@@ -2,8 +2,9 @@ require "test_helper"
 
 class ItemsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @item = items(:one)
+    @item = items(:first)
     @title = "Item test #{rand(100)}"
+    sign_in users(:first)
   end
 
   test "should get index" do
@@ -21,16 +22,15 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
       post items_url,
            params: {
              item: {
+               item_name: @title,
                description: @item.description,
                price: @item.price,
-               iva: @item.iva,
-               irpf: @item.irpf,
-               title: @title
+               iva: @item.iva
              }
            }
     end
 
-    assert_redirected_to item_url(Item.last)
+    assert_redirected_to items_url(locale: I18n.locale)
   end
 
   test "should show item" do
@@ -47,24 +47,24 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     patch item_url(@item),
           params: {
             item: {
+              item_name: @item.item_name,
               description: @item.description,
               price: @item.price,
-              iva: @item.iva,
-              irpf: @item.irpf,
-              title: @title
+              iva: @item.iva
             }
           }
-    assert_redirected_to item_url(@item)
+    assert_redirected_to items_url(locale: I18n.locale)
   end
 
   test "can't delete product in invoice" do
-    assert_difference("Item.count", 0) { delete item_url(items(:two)) }
-    assert_redirected_to item_url
+    assert_difference("Item.count", 0) { delete item_url(items(:second)) }
+    assert_response :unprocessable_entity
   end
 
   test "should destroy item" do
+    @item = items(:third)
     assert_difference("Item.count", -1) { delete item_url(@item) }
 
-    assert_redirected_to items_url
+    assert_redirected_to items_url(locale: I18n.locale)
   end
 end
