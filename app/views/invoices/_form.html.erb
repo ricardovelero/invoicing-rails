@@ -33,6 +33,13 @@
         </div>
       </div>
 
+      <% if invoice.new_record? && @series.present? %>
+        <div class="my-5">
+          <%= f.label t("selector_serie"), class: "input-label" %>
+          <%= f.collection_select :series_id, @series, :id, :display_name, {}, {class: "form-select w-full"} %>
+        </div>
+      <% end %>
+
       <div class="my-5 col-span-1">
         <%= f.label t("fecha"), class: "input-label"  %>
         <%= f.date_field :date, class: "form-input w-full", value: (@invoice.date || Date.today)%>

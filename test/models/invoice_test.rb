@@ -22,7 +22,7 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_nil invoice.display_number
   end
 
-  test "assign_number_from_default_scope! assigns next correlative number" do
+  test "assign_number! assigns next correlative number from default scope" do
     user = users(:first)
     series = invoice_series(:default_a)
     sequence = invoice_sequences(:default_a_active)
@@ -40,14 +40,38 @@ class InvoiceTest < ActiveSupport::TestCase
     )
 
     Invoice.transaction do
-      invoice.assign_number_from_default_scope!
+      invoice.assign_number!
     end
 
     assert_equal series, invoice.series
     assert_equal original_last + 1, invoice.number
   end
 
-  test "assign_number_from_default_scope! creates series lazily for new user" do
+  test "assign_number! assigns next correlative number from a specific scope" do
+    user = users(:first)
+    other_series = InvoiceSeries.create!(user: user, prefix: 'B')
+    other_seq = other_series.active_sequence
+
+    invoice = Invoice.create!(
+      user: user,
+      client: clients(:one),
+      date: Date.today,
+      due_date: Date.today + 30,
+      status: 'pendiente',
+      subtotal: 100,
+      iva: 21,
+      total: 121
+    )
+
+    Invoice.transaction do
+      invoice.assign_number!(other_series)
+    end
+
+    assert_equal other_series, invoice.series
+    assert_equal 1, invoice.number
+  end
+
+  test "assign_number! creates series lazily for new user" do
     user = users(:second)
     # User second has no invoice_series yet
     assert_equal 0, user.invoice_series.count
@@ -64,7 +88,7 @@ class InvoiceTest < ActiveSupport::TestCase
     )
 
     Invoice.transaction do
-      invoice.assign_number_from_default_scope!
+      invoice.assign_number!
     end
 
     assert_equal 1, user.invoice_series.count

@@ -35,11 +35,16 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
   def new
     @invoice = Invoice.new
     @invoice.line_items.build
+    @series = current_user.invoice_series.order(:prefix)
+    # Default to the user's default scope (prefix 'A') if it exists
+    default = @series.find_by(prefix: 'A') || @series.first
+    @invoice.series_id = default&.id
   end
 
   # GET /invoices/1/edit
   def edit
     @client = Client.find(@invoice.client_id)
+    @series = current_user.invoice_series.order(:prefix)
   end
 
   # POST /invoices or /invoices.json
@@ -60,7 +65,8 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
 
         # Assign correlative number for issued invoices (pendiente)
         if @invoice.status == 'pendiente'
-          @invoice.assign_number_from_default_scope!
+          chosen_series = resolve_series_for_issue
+          @invoice.assign_number!(chosen_series)
         end
 
         true
@@ -176,6 +182,12 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
       :notes,
       line_items_attributes: %i[id item_id invoice_id quantity price iva total _destroy]
     )
+  end
+
+  def resolve_series_for_issue
+    if invoice_params[:series_id].present?
+      current_user.invoice_series.find(invoice_params[:series_id])
+    end
   end
 
   def send_pdf
