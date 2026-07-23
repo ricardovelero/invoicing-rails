@@ -7,16 +7,12 @@ es:
   nombre_serie: Nombre
   ultimo_numero: Último Número
   contador_facturas: Facturas
-  rollover: Rollover
-  rollover_confirm: "¿Seguro que quieres hacer rollover de la serie %{prefix}? El contador reiniciará en 1."
-  rollover_success: Serie renovada exitosamente. El contador reinició en 1.
-  rollover_failed: "Rollover fallido: %{error}"
   serie_creada: Serie creada exitosamente.
   prefijo_ayuda: Solo caracteres alfanuméricos (ej. A, B, R). Debe ser único en tu cuenta.
   nombre_ayuda: Nombre descriptivo opcional (ej. "Facturas rectificativas").
   nombre_placeholder: Nombre opcional
   crear_serie: Crear Serie
-  volver_a_series: "&larr; Volver a series"
+  volver_a_series: '&larr; Volver a series'
   selector_serie: Serie
   seleccionar_serie: Selecciona una serie
   prefijo_formato: solo debe contener letras y números

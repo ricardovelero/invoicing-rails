@@ -12,7 +12,6 @@
     <% end %>
   </div>
 </div>
-
 <!-- Scopes table -->
 <div class="bg-white shadow-lg rounded-sm border border-slate-200 mb-8">
   <div class="overflow-x-auto">
@@ -50,12 +49,6 @@
                 <div class="text-slate-800"><%= @invoice_counts[s.id] || 0 %></div>
               </td>
               <td class="px-4 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                <%= button_to rollover_invoice_series_path(s),
-                      method: :post,
-                      form: { data: { turbo_confirm: t("rollover_confirm", prefix: s.prefix) } },
-                      class: "text-amber-600 hover:text-amber-700 text-sm font-medium" do %>
-                  <%= t("rollover") %>
-                <% end %>
               </td>
             </tr>
           <% end %>

@@ -7,16 +7,12 @@ en:
   nombre_serie: Name
   ultimo_numero: Last Number
   contador_facturas: Invoices
-  rollover: Rollover
-  rollover_confirm: "Are you sure you want to rollover scope %{prefix}? The counter will restart at 1."
-  rollover_success: Scope rolled over successfully. Counter restarted at 1.
-  rollover_failed: "Rollover failed: %{error}"
   serie_creada: Scope created successfully.
   prefijo_ayuda: Alphanumeric characters only (e.g. A, B, R). Must be unique in your account.
   nombre_ayuda: Optional descriptive name (e.g. "Rectifying invoices").
   nombre_placeholder: Optional name
   crear_serie: Create Scope
-  volver_a_series: "&larr; Back to scopes"
+  volver_a_series: '&larr; Back to scopes'
   selector_serie: Scope
   seleccionar_serie: Select a scope
   prefijo_formato: must contain only letters and numbers
