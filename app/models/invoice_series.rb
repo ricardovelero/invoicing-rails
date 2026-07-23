@@ -23,20 +23,6 @@ class InvoiceSeries < ApplicationRecord
       end
   end
 
-  # Closes the active Sequence and opens a fresh one (counter restarting at 1).
-  # Atomic: the one-active-per-scope invariant is guaranteed by the DB partial
-  # unique index even under races.
-  def rollover!
-    transaction do
-      current = invoice_sequences.where(active: true).lock('FOR UPDATE').first
-      current&.update!(active: false)
-      invoice_sequences.create!(active: true, last_number: 0)
-    end
-  rescue ActiveRecord::RecordNotUnique
-    # Another transaction already created the new active sequence
-    invoice_sequences.find_by!(active: true)
-  end
-
   # Display label for the scope (prefix + optional name)
   def display_name
     name.present? ? "#{prefix} — #{name}" : prefix

@@ -35,14 +35,6 @@ class InvoiceSeriesController < ApplicationController
     end
   end
 
-  # POST /invoice_series/:id/rollover
-  def rollover
-    @series.rollover!
-    redirect_to invoice_series_index_path, notice: I18n.t('rollover_success')
-  rescue StandardError => e
-    redirect_to invoice_series_index_path, alert: I18n.t('rollover_failed', error: e.message)
-  end
-
   private
 
   def set_series

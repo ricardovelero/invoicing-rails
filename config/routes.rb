@@ -14,11 +14,7 @@ Rails.application.routes.draw do
     end
   end
   resources :after_register
-  resources :invoice_series, only: [:index, :new, :create] do
-    member do
-      post :rollover
-    end
-  end
+  resources :invoice_series, only: %i[index new create]
 
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'

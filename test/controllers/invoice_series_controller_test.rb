@@ -1,22 +1,22 @@
-require "test_helper"
+require 'test_helper'
 
 class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in users(:first)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get invoice_series_index_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_invoice_series_url
     assert_response :success
   end
 
-  test "should create scope with prefix only" do
-    assert_difference("InvoiceSeries.count") do
+  test 'should create scope with prefix only' do
+    assert_difference('InvoiceSeries.count') do
       post invoice_series_index_url, params: { invoice_series: { prefix: 'B' } }
     end
 
@@ -28,8 +28,8 @@ class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to invoice_series_index_url(locale: I18n.locale)
   end
 
-  test "should create scope with prefix and name" do
-    assert_difference("InvoiceSeries.count") do
+  test 'should create scope with prefix and name' do
+    assert_difference('InvoiceSeries.count') do
       post invoice_series_index_url, params: { invoice_series: { prefix: 'R', name: 'Rectifying' } }
     end
 
@@ -39,42 +39,28 @@ class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to invoice_series_index_url(locale: I18n.locale)
   end
 
-  test "rejects duplicate prefix within same account" do
+  test 'rejects duplicate prefix within same account' do
     # 'A' already exists for user first (from fixture)
-    assert_no_difference("InvoiceSeries.count") do
+    assert_no_difference('InvoiceSeries.count') do
       post invoice_series_index_url, params: { invoice_series: { prefix: 'A' } }
     end
 
     assert_response :unprocessable_entity
   end
 
-  test "allows same prefix for different user" do
+  test 'allows same prefix for different user' do
     sign_in users(:second)
-    assert_difference("InvoiceSeries.count") do
+    assert_difference('InvoiceSeries.count') do
       post invoice_series_index_url, params: { invoice_series: { prefix: 'A' } }
     end
     assert_redirected_to invoice_series_index_url(locale: I18n.locale)
   end
 
-  test "rejects non-alphanumeric prefix" do
-    assert_no_difference("InvoiceSeries.count") do
+  test 'rejects non-alphanumeric prefix' do
+    assert_no_difference('InvoiceSeries.count') do
       post invoice_series_index_url, params: { invoice_series: { prefix: 'A-B' } }
     end
     assert_response :unprocessable_entity
-  end
-
-  test "rollover closes active sequence and opens new one" do
-    series = invoice_series(:default_a)
-    old_seq = series.invoice_sequences.find_by(active: true)
-
-    post rollover_invoice_series_url(series)
-
-    assert_redirected_to invoice_series_index_url(locale: I18n.locale)
-    old_seq.reload
-    assert_not old_seq.active?
-    new_seq = series.invoice_sequences.find_by(active: true)
-    assert new_seq.present?
-    assert_equal 0, new_seq.last_number
   end
 
   test "user cannot rollover another user's scope" do
