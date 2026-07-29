@@ -139,6 +139,28 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, created_invoice.number
   end
 
+  test "cannot create an invoice in another user's scope" do
+    foreign_series = InvoiceSeries.create!(user: users(:second), prefix: 'Z')
+
+    assert_no_difference("Invoice.count") do
+      post invoices_url,
+           params: {
+             save_and_issue: true,
+             invoice: {
+               date: Date.today,
+               due_date: Date.today + 30,
+               subtotal: 100,
+               iva: 21,
+               total: 121,
+               client_id: clients(:one).id,
+               series_id: foreign_series.id
+             }
+           }
+    end
+
+    assert_response :unprocessable_entity
+  end
+
   test "backdating invoice does not change which sequence supplies its number" do
     sequence = invoice_sequences(:default_a_active)
     original_last = sequence.last_number
@@ -228,26 +250,40 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get edit" do
-    get edit_invoice_url(@invoice)
+    get edit_invoice_url(@draft)
     assert_response :success
   end
 
+  test "should not get edit for an issued invoice" do
+    get edit_invoice_url(@invoice)
+
+    assert_redirected_to invoices_url(locale: I18n.locale)
+    assert_match I18n.t('invoice.update_blocked'), flash[:alert]
+  end
+
   test "should update invoice" do
-    patch invoice_url(@invoice),
+    patch invoice_url(@draft),
           params: {
             invoice: {
-              date: @invoice.date,
-              due_date: @invoice.due_date,
-              irpf: @invoice.irpf,
-              iva: @invoice.iva,
-              notes: @invoice.notes,
-              status: @invoice.status,
-              subtotal: @invoice.subtotal,
-              total: @invoice.total,
+              date: @draft.date,
+              due_date: @draft.due_date,
+              irpf: @draft.irpf,
+              iva: @draft.iva,
+              notes: @draft.notes,
+              status: @draft.status,
+              subtotal: @draft.subtotal,
+              total: @draft.total,
               client_id: Client.first.id
             }
           }
     assert_redirected_to invoices_url(locale: I18n.locale)
+  end
+
+  test "should not update an issued invoice" do
+    patch invoice_url(@invoice), params: { invoice: { total: 99_999 } }
+
+    assert_response :unprocessable_entity
+    assert_equal 121.0, @invoice.reload.total
   end
 
   test "should destroy draft invoice" do

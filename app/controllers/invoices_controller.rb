@@ -4,6 +4,7 @@
 class InvoicesController < ApplicationController # rubocop:disable Metrics/ClassLength
   before_action :authenticate_user!
   before_action :set_invoice, only: %i[show edit update destroy issue]
+  before_action :ensure_draft, only: %i[edit]
 
   # GET /invoices or /invoices.json
   def index # rubocop:disable Metrics/AbcSize
@@ -51,23 +52,15 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
   def create
     @invoice = Invoice.new(invoice_params)
     @invoice.user = current_user
-
-    # Determine status from submit button
-    if params[:save_and_issue].present?
-      @invoice.status = 'pendiente'
-    else
-      @invoice.status = 'borrador'
-    end
+    # Always born a draft: an invoice is never persisted as issued-but-unnumbered.
+    # The Issue button then runs the same transition as the Issue action.
+    @invoice.status = 'borrador'
 
     respond_to do |format|
       success = Invoice.transaction do
         next false unless @invoice.save
 
-        # Assign correlative number for issued invoices (pendiente)
-        if @invoice.status == 'pendiente'
-          chosen_series = resolve_series_for_issue
-          @invoice.assign_number!(chosen_series)
-        end
+        @invoice.issue! if params[:save_and_issue].present?
 
         true
       end
@@ -169,6 +162,14 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
     @invoice = current_user.invoices.find(params[:id])
   end
 
+  # Issued invoices are immutable; the model rejects the write either way, this
+  # just keeps the edit form from being a dead end.
+  def ensure_draft
+    return if @invoice.draft?
+
+    redirect_to invoices_path, alert: I18n.t('invoice.update_blocked')
+  end
+
   # Only allow a list of trusted parameters through.
   def invoice_params
     params.require(:invoice).permit(
@@ -183,12 +184,6 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
       :series_id,
       line_items_attributes: %i[id item_id invoice_id quantity price iva total _destroy]
     )
-  end
-
-  def resolve_series_for_issue
-    if invoice_params[:series_id].present?
-      current_user.invoice_series.find(invoice_params[:series_id])
-    end
   end
 
   def send_pdf

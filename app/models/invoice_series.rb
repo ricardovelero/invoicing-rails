@@ -5,7 +5,9 @@
 class InvoiceSeries < ApplicationRecord
   belongs_to :user
   has_many :invoice_sequences, dependent: :destroy
-  has_many :invoices, foreign_key: :series_id, dependent: :nullify
+  # restrict, never nullify: detaching invoices from their series would strip
+  # the prefix off numbers that are already on issued documents.
+  has_many :invoices, foreign_key: :series_id, dependent: :restrict_with_error
 
   before_validation :normalize_prefix
 
@@ -15,12 +17,7 @@ class InvoiceSeries < ApplicationRecord
 
   # Returns the active sequence for this series, creating one lazily if none exists.
   def active_sequence
-    invoice_sequences.find_by(active: true) ||
-      begin
-        invoice_sequences.create!(active: true, last_number: 0)
-      rescue ActiveRecord::RecordNotUnique
-        invoice_sequences.find_by!(active: true)
-      end
+    invoice_sequences.find_by(active: true) || create_active_sequence
   end
 
   # Display label for the scope (prefix + optional name)
@@ -29,6 +26,17 @@ class InvoiceSeries < ApplicationRecord
   end
 
   private
+
+  # requires_new so the losing side of a race can recover: Issue calls this
+  # inside its own transaction, and without a savepoint the unique violation
+  # aborts that transaction before the rescue can query for the winner's row.
+  def create_active_sequence
+    transaction(requires_new: true) do
+      invoice_sequences.create!(active: true, last_number: 0)
+    end
+  rescue ActiveRecord::RecordNotUnique
+    invoice_sequences.find_by!(active: true)
+  end
 
   def normalize_prefix
     self.prefix = prefix.to_s.upcase if prefix.present?
