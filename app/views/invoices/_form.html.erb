@@ -1,7 +1,7 @@
 <div class="my-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200" data-controller='toggle'>
   <%= form_with(model: invoice, class: "contents", html: { data: {controller: "recalculate"} } ) do |f| %>
     <h2 class="text-lg font-bold"><%= t("cabecera_factura") %></h2>
-    <div class="grid grid-cols-5 gap-2" data-controller="clientselect" data-clientselect-url-value="<%= clients_path %>" data-clientselect-param-value="client">
+    <div class="grid <%= invoice.new_record? ? "grid-cols-6" : "grid-cols-5" %> gap-2" data-controller="clientselect" data-clientselect-url-value="<%= clients_path %>" data-clientselect-param-value="client">
       <div class="my-5 col-span-2 flex flex-col">
         <%= f.label t("cliente"), class: "input-label"  %>
         <div class="relative rounded-md shadow-sm">
@@ -15,17 +15,15 @@
         <% end %>
       </div>
       <div class="my-5">
-        <%= f.label t("numero_factura"), class: "input-label"  %>
+        <%= label_tag :invoice_number_display, t("numero_factura"), class: "input-label"  %>
         <div class="relative mt-1 rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <%= heroicon "hashtag", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>
           </div>
           <% if invoice.new_record? %>
-            <%= f.text_field :invoice_number, class: "form-input w-full pl-8", value: t("numero_asignado_al_emitir"), disabled: true %>
-          <% elsif invoice.draft? %>
-            <%= f.text_field :invoice_number, class: "form-input w-full pl-8", value: t("Borrador"), disabled: true %>
+            <%= text_field_tag :invoice_number_display, t("numero_asignado_al_emitir"), class: "form-input w-full pl-8", disabled: true %>
           <% else %>
-            <%= f.text_field :invoice_number, class: "form-input w-full pl-8", value: invoice.display_number, readonly: true %>
+            <%= text_field_tag :invoice_number_display, t("Borrador"), class: "form-input w-full pl-8", disabled: true %>
           <% end %>
         </div>
       </div>
