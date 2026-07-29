@@ -97,17 +97,17 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
     "#{series.prefix}-#{number.to_s.rjust(4, '0')}"
   end
 
-  # Assigns the next correlative number from the given scope (or the user's
-  # default scope "A" if none is provided). Creates the scope and sequence
+  # Assigns the next correlative number from the given series (or the user's
+  # default series "A" if none is provided). Creates the series and sequence
   # lazily if they don't exist. Must be called inside a transaction.
-  def assign_number!(scope = nil)
-    target_series = scope || default_series
+  def assign_number!(series = nil)
+    target_series = series || default_series
     sequence = target_series.active_sequence
     next_number = sequence.reserve_next!
     update!(series: target_series, number: next_number)
   end
 
-  # The user's default scope "A", created on first use. requires_new for the
+  # The user's default series "A", created on first use. requires_new for the
   # same reason as InvoiceSeries#create_active_sequence: two concurrent first
   # Issues must not leave one of them inside an aborted transaction.
   def default_series

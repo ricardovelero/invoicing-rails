@@ -41,7 +41,7 @@ class InvoiceSeriesTest < ActiveSupport::TestCase
     assert_equal existing, series.active_sequence
   end
 
-  test 'new scope gets initial active sequence automatically via active_sequence' do
+  test 'new series gets initial active sequence automatically via active_sequence' do
     series = InvoiceSeries.create!(user: users(:first), prefix: 'C')
     # No sequence exists yet
     assert_equal 0, series.invoice_sequences.count
@@ -53,7 +53,7 @@ class InvoiceSeriesTest < ActiveSupport::TestCase
     assert_equal 0, seq.last_number
   end
 
-  test 'cannot destroy a scope that has invoices' do
+  test 'cannot destroy a series that has invoices' do
     series = invoice_series(:default_a)
 
     assert_not series.destroy
@@ -61,7 +61,7 @@ class InvoiceSeriesTest < ActiveSupport::TestCase
     assert_equal invoice_series(:default_a), invoices(:one).reload.series
   end
 
-  test 'can destroy a scope with no invoices' do
+  test 'can destroy a series with no invoices' do
     series = InvoiceSeries.create!(user: users(:first), prefix: 'B')
     series.active_sequence
 

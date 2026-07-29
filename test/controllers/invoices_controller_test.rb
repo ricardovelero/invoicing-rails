@@ -114,7 +114,7 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
     assert_equal invoice_series(:default_a), created_invoice.series
   end
 
-  test "creating invoice with specific scope uses that scope's sequence" do
+  test "creating invoice with specific series uses that series' sequence" do
     user = users(:first)
     other_series = InvoiceSeries.create!(user: user, prefix: 'B')
     other_seq = other_series.active_sequence
@@ -139,7 +139,7 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, created_invoice.number
   end
 
-  test "cannot create an invoice in another user's scope" do
+  test "cannot create an invoice in another user's series" do
     foreign_series = InvoiceSeries.create!(user: users(:second), prefix: 'Z')
 
     assert_no_difference("Invoice.count") do

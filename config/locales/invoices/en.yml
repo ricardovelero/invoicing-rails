@@ -49,7 +49,7 @@ en:
   notas: Notes
   agregar_linea_item: Add Item Line
   quitar_item: Remove Item
-  items_facturar: Items to Invoice
+  items_facturar: Invoice Items
   guardar_factura: Save Invoice
   guardar_borrador: Save as Draft
   factura_creada: Invoice created successfully

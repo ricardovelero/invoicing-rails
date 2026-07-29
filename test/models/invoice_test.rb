@@ -1,9 +1,11 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class InvoiceTest < ActiveSupport::TestCase
   fixtures :invoices
 
-  test "invoice total must be equal to subtotal plus iva% less irpf" do
+  test 'invoice total must be equal to subtotal plus iva% less irpf' do
     invoice = invoices(:one)
     iva = invoice.subtotal * invoice.iva / 100
     irpf = invoice.subtotal * invoice.irpf / 100
@@ -12,24 +14,24 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal(invoice.total, total)
   end
 
-  test "display_number returns composed string like A-0100" do
+  test 'display_number returns composed string like A-0100' do
     invoice = invoices(:one)
-    assert_equal "A-0100", invoice.display_number
+    assert_equal 'A-0100', invoice.display_number
   end
 
-  test "display_number returns nil when no series or number" do
+  test 'display_number returns nil when no series or number' do
     invoice = Invoice.new
     assert_nil invoice.display_number
   end
 
-  test "assign_number! assigns next correlative number from default scope" do
+  test 'assign_number! assigns next correlative number from default series' do
     user = users(:first)
     series = invoice_series(:default_a)
     sequence = invoice_sequences(:default_a_active)
     original_last = sequence.last_number
 
     invoice = Invoice.create!(
-      user: user,
+      user:,
       client: clients(:one),
       date: Date.today,
       due_date: Date.today + 30,
@@ -47,13 +49,12 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal original_last + 1, invoice.number
   end
 
-  test "assign_number! assigns next correlative number from a specific scope" do
+  test 'assign_number! assigns next correlative number from a specific series' do
     user = users(:first)
-    other_series = InvoiceSeries.create!(user: user, prefix: 'B')
-    other_seq = other_series.active_sequence
+    other_series = InvoiceSeries.create!(user:, prefix: 'B')
 
     invoice = Invoice.create!(
-      user: user,
+      user:,
       client: clients(:one),
       date: Date.today,
       due_date: Date.today + 30,
@@ -71,13 +72,13 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal 1, invoice.number
   end
 
-  test "assign_number! creates series lazily for new user" do
+  test 'assign_number! creates series lazily for new user' do
     user = users(:second)
     # User second has no invoice_series yet
     assert_equal 0, user.invoice_series.count
 
     invoice = Invoice.create!(
-      user: user,
+      user:,
       client: clients(:one),
       date: Date.today,
       due_date: Date.today + 30,
@@ -98,7 +99,7 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal 1, invoice.number
   end
 
-  test "failed save does not burn a number" do
+  test 'failed save does not burn a number' do
     sequence = invoice_sequences(:default_a_active)
     original_last = sequence.last_number
 
@@ -116,19 +117,19 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal original_last, sequence.reload.last_number
   end
 
-  test "draft? returns true for borrador status" do
+  test 'draft? returns true for borrador status' do
     invoice = invoices(:draft_one)
     assert invoice.draft?
     assert_not invoice.issued?
   end
 
-  test "issued? returns true for pendiente and pagada" do
+  test 'issued? returns true for pendiente and pagada' do
     invoice = invoices(:one)
     assert invoice.issued?
     assert_not invoice.draft?
   end
 
-  test "issue! transitions draft to pendiente with number" do
+  test 'issue! transitions draft to pendiente with number' do
     draft = invoices(:draft_one)
     sequence = invoice_sequences(:default_a_active)
     original_last = sequence.last_number
@@ -142,7 +143,7 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal invoice_series(:default_a), draft.series
   end
 
-  test "issue! draws the number from the draft's own scope" do
+  test "issue! draws the number from the draft's own series" do
     other_series = InvoiceSeries.create!(user: users(:first), prefix: 'B')
     default_sequence = invoice_sequences(:default_a_active)
     default_last = default_sequence.last_number
@@ -159,12 +160,12 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal default_last, default_sequence.reload.last_number
   end
 
-  test "issue! raises error for non-draft invoice" do
+  test 'issue! raises error for non-draft invoice' do
     invoice = invoices(:one)
     assert_raises(RuntimeError) { invoice.issue! }
   end
 
-  test "failed issue does not burn a number" do
+  test 'failed issue does not burn a number' do
     sequence = invoice_sequences(:default_a_active)
     original_last = sequence.last_number
 
@@ -185,20 +186,20 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_nil draft.number
   end
 
-  test "cannot destroy issued invoice" do
+  test 'cannot destroy issued invoice' do
     invoice = invoices(:one)
     assert_not invoice.destroy
     assert invoice.persisted?
     assert_includes invoice.errors[:base], I18n.t('invoice.destroy_blocked')
   end
 
-  test "can destroy draft invoice" do
+  test 'can destroy draft invoice' do
     draft = invoices(:draft_one)
     assert draft.destroy
     assert draft.destroyed?
   end
 
-  test "cannot change amounts or dates of an issued invoice" do
+  test 'cannot change amounts or dates of an issued invoice' do
     invoice = invoices(:one)
 
     assert_not invoice.update(total: 99_999, date: 10.years.ago)
@@ -206,7 +207,7 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal 121.0, invoice.reload.total
   end
 
-  test "cannot move an issued invoice to another scope" do
+  test 'cannot move an issued invoice to another series' do
     invoice = invoices(:one)
     other_series = InvoiceSeries.create!(user: users(:first), prefix: 'B')
 
@@ -215,35 +216,35 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal invoice_series(:default_a), invoice.reload.series
   end
 
-  test "issued invoice still accepts status and notes changes" do
+  test 'issued invoice still accepts status and notes changes' do
     invoice = invoices(:one)
 
     assert invoice.update(status: 'pagada', notes: 'Paid by transfer')
     assert_equal 'pagada', invoice.reload.status
   end
 
-  test "draft invoice remains freely editable" do
+  test 'draft invoice remains freely editable' do
     draft = invoices(:draft_one)
 
     assert draft.update(total: 500, date: 3.days.ago)
     assert_equal 500, draft.reload.total
   end
 
-  test "cannot change line items of an issued invoice" do
+  test 'cannot change line items of an issued invoice' do
     line_item = invoices(:one).line_items.first
 
     assert_not line_item.update(quantity: 99)
     assert_includes line_item.errors[:base], I18n.t('invoice.update_blocked')
   end
 
-  test "cannot destroy line items of an issued invoice" do
+  test 'cannot destroy line items of an issued invoice' do
     line_item = invoices(:one).line_items.first
 
     assert_not line_item.destroy
     assert line_item.persisted?
   end
 
-  test "database rejects an issued invoice with no number" do
+  test 'database rejects an issued invoice with no number' do
     invoice = invoices(:one)
 
     assert_raises(ActiveRecord::StatementInvalid) do
@@ -251,7 +252,7 @@ class InvoiceTest < ActiveSupport::TestCase
     end
   end
 
-  test "database rejects an issued invoice with no scope" do
+  test 'database rejects an issued invoice with no series' do
     invoice = invoices(:one)
 
     assert_raises(ActiveRecord::StatementInvalid) do
@@ -259,7 +260,7 @@ class InvoiceTest < ActiveSupport::TestCase
     end
   end
 
-  test "cannot reference a scope owned by another user" do
+  test 'cannot reference a series owned by another user' do
     other_series = InvoiceSeries.create!(user: users(:second), prefix: 'Z')
     draft = invoices(:draft_one)
 
@@ -268,34 +269,34 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_includes draft.errors[:series], I18n.t('invoice.series_not_owned')
   end
 
-  test "default status is borrador" do
+  test 'default status is borrador' do
     invoice = Invoice.new
     assert_equal 'borrador', invoice.status
   end
 
-  test "validates status inclusion" do
+  test 'validates status inclusion' do
     invoice = Invoice.new(status: 'invalid')
     assert_not invoice.valid?
     assert invoice.errors[:status].any?
   end
 
-  test "issued scope excludes drafts" do
+  test 'issued scope excludes drafts' do
     assert_includes Invoice.issued, invoices(:one)
     assert_not_includes Invoice.issued, invoices(:draft_one)
   end
 
-  test "total_invoice_count excludes drafts" do
+  test 'total_invoice_count excludes drafts' do
     expected = Invoice.where.not(status: 'borrador').count
     assert_equal expected, Invoice.total_invoice_count
     assert_equal Invoice.count - Invoice.total_draft_count, Invoice.total_invoice_count
   end
 
-  test "total_due_count excludes drafts" do
+  test 'total_due_count excludes drafts' do
     expected = Invoice.where.not(status: 'borrador').where('due_date <= ?', Date.today).count
     assert_equal expected, Invoice.total_due_count
   end
 
-  test "total_about_to_be_due_count excludes drafts" do
+  test 'total_about_to_be_due_count excludes drafts' do
     expected = Invoice.where.not(status: 'borrador').where('due_date = ?', Date.tomorrow).count
     assert_equal expected, Invoice.total_about_to_be_due_count
   end

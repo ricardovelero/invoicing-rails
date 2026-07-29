@@ -1,17 +1,17 @@
 es:
   series: Series
-  nueva_serie: Nueva Serie
+  nueva_serie: Nueva serie
   no_hay_series: No tienes series
   no_hay_series_texto: Crea tu primera serie para empezar a emitir facturas.
   prefijo: Prefijo
   nombre_serie: Nombre
-  ultimo_numero: Último Número
+  ultimo_numero: Último número
   contador_facturas: Facturas
-  serie_creada: Serie creada exitosamente.
+  serie_creada: Serie creada correctamente.
   prefijo_ayuda: Solo caracteres alfanuméricos (ej. A, B, R). Debe ser único en tu cuenta.
   nombre_ayuda: Nombre descriptivo opcional (ej. "Facturas rectificativas").
   nombre_placeholder: Nombre opcional
-  crear_serie: Crear Serie
+  crear_serie: Crear serie
   volver_a_series: '&larr; Volver a series'
   selector_serie: Serie
   seleccionar_serie: Selecciona una serie

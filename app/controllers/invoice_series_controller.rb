@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# CRUD for user-owned invoice Scopes (series).
+# CRUD for user-owned invoice series.
 class InvoiceSeriesController < ApplicationController
   before_action :authenticate_user!
 
@@ -26,7 +26,7 @@ class InvoiceSeriesController < ApplicationController
     @series = current_user.invoice_series.build(series_params)
 
     if @series.save
-      # Ensure the new scope gets an initial active Sequence automatically
+      # Ensure the new series gets an initial active sequence automatically
       @series.active_sequence
       redirect_to invoice_series_index_path, notice: I18n.t('serie_creada')
     else

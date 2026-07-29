@@ -1,18 +1,18 @@
 en:
-  series: Scopes
-  nueva_serie: New Scope
-  no_hay_series: You have no scopes
-  no_hay_series_texto: Create your first scope to start issuing invoices.
+  series: Series
+  nueva_serie: New Series
+  no_hay_series: You have no series
+  no_hay_series_texto: Create your first series to start issuing invoices.
   prefijo: Prefix
   nombre_serie: Name
   ultimo_numero: Last Number
   contador_facturas: Invoices
-  serie_creada: Scope created successfully.
+  serie_creada: Series created successfully.
   prefijo_ayuda: Alphanumeric characters only (e.g. A, B, R). Must be unique in your account.
   nombre_ayuda: Optional descriptive name (e.g. "Rectifying invoices").
   nombre_placeholder: Optional name
-  crear_serie: Create Scope
-  volver_a_series: '&larr; Back to scopes'
-  selector_serie: Scope
-  seleccionar_serie: Select a scope
+  crear_serie: Create Series
+  volver_a_series: '&larr; Back to series'
+  selector_serie: Series
+  seleccionar_serie: Select a series
   prefijo_formato: must contain only letters and numbers

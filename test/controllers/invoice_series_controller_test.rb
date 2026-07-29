@@ -15,7 +15,7 @@ class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should create scope with prefix only' do
+  test 'should create series with prefix only' do
     assert_difference('InvoiceSeries.count') do
       post invoice_series_index_url, params: { invoice_series: { prefix: 'B' } }
     end
@@ -28,7 +28,7 @@ class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to invoice_series_index_url(locale: I18n.locale)
   end
 
-  test 'should create scope with prefix and name' do
+  test 'should create series with prefix and name' do
     assert_difference('InvoiceSeries.count') do
       post invoice_series_index_url, params: { invoice_series: { prefix: 'R', name: 'Rectifying' } }
     end
@@ -63,11 +63,11 @@ class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
   end
 
-  test "user cannot see another user's scopes on index" do
+  test "user cannot see another user's series on index" do
     sign_in users(:second)
     get invoice_series_index_url
     assert_response :success
-    # The page should show the empty state for user second (no scopes)
+    # The page should show the empty state for user second (no series)
     assert_match I18n.t('no_hay_series'), response.body
   end
 end
