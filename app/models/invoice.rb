@@ -17,6 +17,14 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
   STATUSES = %w[borrador pendiente pagada].freeze
   validates :status, inclusion: { in: STATUSES }
 
+  # Fields frozen once the invoice holds a Number. A correlative chain is
+  # worthless if the content behind a Number can still be rewritten; errors on
+  # issued invoices are corrected by rectifying invoices, never by editing.
+  IMMUTABLE_ONCE_ISSUED = %w[series_id number date client_id subtotal iva irpf total].freeze
+
+  validate :immutable_once_issued
+  validate :series_belongs_to_user
+
   scope :for_account, ->(user_id) { where(user_id:) }
 
   scope :filter_status, ->(status) { where(status:) }
@@ -57,7 +65,26 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
     throw :abort
   end
 
-  before_destroy :prevent_destruction_if_issued
+  # prepend: true so this runs before the line_items dependent: :destroy
+  # callback, which would otherwise abort first and swallow the message.
+  before_destroy :prevent_destruction_if_issued, prepend: true
+
+  # An invoice is frozen from the moment it holds a Number *in the database*.
+  # Keying on the stored Number rather than on status lets Issue reserve the
+  # first Number (the row is still unnumbered at that point) while rejecting
+  # every later write.
+  def immutable_once_issued
+    return if number_in_database.nil?
+    return if (changed & IMMUTABLE_ONCE_ISSUED).empty?
+
+    errors.add(:base, I18n.t('invoice.update_blocked'))
+  end
+
+  def series_belongs_to_user
+    return if series.nil? || series.user_id == user_id
+
+    errors.add(:series, I18n.t('invoice.series_not_owned'))
+  end
 
   def client_full_name
     Client.find(client_id).full_name

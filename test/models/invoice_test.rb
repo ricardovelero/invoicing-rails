@@ -198,6 +198,60 @@ class InvoiceTest < ActiveSupport::TestCase
     assert draft.destroyed?
   end
 
+  test "cannot change amounts or dates of an issued invoice" do
+    invoice = invoices(:one)
+
+    assert_not invoice.update(total: 99_999, date: 10.years.ago)
+    assert_includes invoice.errors[:base], I18n.t('invoice.update_blocked')
+    assert_equal 121.0, invoice.reload.total
+  end
+
+  test "cannot move an issued invoice to another scope" do
+    invoice = invoices(:one)
+    other_series = InvoiceSeries.create!(user: users(:first), prefix: 'B')
+
+    assert_not invoice.update(series: other_series)
+    assert_includes invoice.errors[:base], I18n.t('invoice.update_blocked')
+    assert_equal invoice_series(:default_a), invoice.reload.series
+  end
+
+  test "issued invoice still accepts status and notes changes" do
+    invoice = invoices(:one)
+
+    assert invoice.update(status: 'pagada', notes: 'Paid by transfer')
+    assert_equal 'pagada', invoice.reload.status
+  end
+
+  test "draft invoice remains freely editable" do
+    draft = invoices(:draft_one)
+
+    assert draft.update(total: 500, date: 3.days.ago)
+    assert_equal 500, draft.reload.total
+  end
+
+  test "cannot change line items of an issued invoice" do
+    line_item = invoices(:one).line_items.first
+
+    assert_not line_item.update(quantity: 99)
+    assert_includes line_item.errors[:base], I18n.t('invoice.update_blocked')
+  end
+
+  test "cannot destroy line items of an issued invoice" do
+    line_item = invoices(:one).line_items.first
+
+    assert_not line_item.destroy
+    assert line_item.persisted?
+  end
+
+  test "cannot reference a scope owned by another user" do
+    other_series = InvoiceSeries.create!(user: users(:second), prefix: 'Z')
+    draft = invoices(:draft_one)
+
+    draft.series = other_series
+    assert_not draft.valid?
+    assert_includes draft.errors[:series], I18n.t('invoice.series_not_owned')
+  end
+
   test "default status is borrador" do
     invoice = Invoice.new
     assert_equal 'borrador', invoice.status

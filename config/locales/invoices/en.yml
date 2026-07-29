@@ -78,6 +78,8 @@ en:
   volver: Back
   invoice:
     destroy_blocked: Issued invoices cannot be deleted
+    update_blocked: Issued invoices cannot be modified
+    series_not_owned: does not belong to your account
     issued: Invoice has been issued successfully
     issue_failed: Could not issue the invoice
   confirmar_emision: Are you sure you want to issue this invoice? This action cannot be undone.

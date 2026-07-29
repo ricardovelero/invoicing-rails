@@ -42,9 +42,7 @@
 
     <% if @invoice.draft? %>
       <%= button_to t("emitir"), issue_invoice_path(@invoice), method: :post, data: { turbo_confirm: t("confirmar_emision") }, class: "mt-2 rounded-lg py-3 px-5 bg-green-600 text-white inline-block font-medium" %>
-    <% end %>
-    <%= link_to t("editar"), edit_invoice_path(@invoice), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <% if @invoice.draft? %>
+      <%= link_to t("editar"), edit_invoice_path(@invoice), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
       <div class="inline-block ml-2">
         <%= button_to t("eliminar"), invoice_path(@invoice), method: :delete, data: { turbo_confirm: t("estas_seguro") }, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
       </div>

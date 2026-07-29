@@ -4,6 +4,7 @@
 class InvoicesController < ApplicationController # rubocop:disable Metrics/ClassLength
   before_action :authenticate_user!
   before_action :set_invoice, only: %i[show edit update destroy issue]
+  before_action :ensure_draft, only: %i[edit]
 
   # GET /invoices or /invoices.json
   def index # rubocop:disable Metrics/AbcSize
@@ -167,6 +168,14 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
   # Use callbacks to share common setup or constraints between actions.
   def set_invoice
     @invoice = current_user.invoices.find(params[:id])
+  end
+
+  # Issued invoices are immutable; the model rejects the write either way, this
+  # just keeps the edit form from being a dead end.
+  def ensure_draft
+    return if @invoice.draft?
+
+    redirect_to invoices_path, alert: I18n.t('invoice.update_blocked')
   end
 
   # Only allow a list of trusted parameters through.

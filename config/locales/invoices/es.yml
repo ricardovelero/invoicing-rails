@@ -78,6 +78,8 @@ es:
   volver: Volver
   invoice:
     destroy_blocked: Las facturas emitidas no se pueden eliminar
+    update_blocked: Las facturas emitidas no se pueden modificar
+    series_not_owned: no pertenece a tu cuenta
     issued: La factura ha sido emitida exitosamente
     issue_failed: No se pudo emitir la factura
   confirmar_emision: ¿Estás seguro de que quieres emitir esta factura? Esta acción no se puede deshacer.

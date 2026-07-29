@@ -15,3 +15,11 @@ two:
   price: 99.99
   iva: 21
   total: 241.98
+
+draft:
+  item: first
+  invoice: draft_one
+  quantity: 1
+  price: 19.99
+  iva: 21
+  total: 24.19
