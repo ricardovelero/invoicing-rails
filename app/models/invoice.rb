@@ -45,7 +45,7 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def issue!
     raise 'Invoice is not a draft' unless draft?
 
-    assign_number!
+    assign_number!(series)
     update!(status: 'pendiente')
   end
 

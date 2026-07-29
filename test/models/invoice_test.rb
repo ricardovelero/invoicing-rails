@@ -142,6 +142,23 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal invoice_series(:default_a), draft.series
   end
 
+  test "issue! draws the number from the draft's own scope" do
+    other_series = InvoiceSeries.create!(user: users(:first), prefix: 'B')
+    default_sequence = invoice_sequences(:default_a_active)
+    default_last = default_sequence.last_number
+
+    draft = invoices(:draft_one)
+    draft.update!(series: other_series)
+
+    Invoice.transaction do
+      draft.issue!
+    end
+
+    assert_equal other_series, draft.series
+    assert_equal 'B-0001', draft.display_number
+    assert_equal default_last, default_sequence.reload.last_number
+  end
+
   test "issue! raises error for non-draft invoice" do
     invoice = invoices(:one)
     assert_raises(RuntimeError) { invoice.issue! }
