@@ -63,15 +63,6 @@ class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
   end
 
-  test "user cannot rollover another user's scope" do
-    sign_in users(:second)
-    series = invoice_series(:default_a) # belongs to user first
-
-    post rollover_invoice_series_url(series)
-    # Should get a 404 because the scope is not found for this user
-    assert_response :not_found
-  end
-
   test "user cannot see another user's scopes on index" do
     sign_in users(:second)
     get invoice_series_index_url

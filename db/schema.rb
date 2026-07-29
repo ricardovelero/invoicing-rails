@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_07_29_160000) do
+ActiveRecord::Schema[7.2].define(version: 2026_07_29_161000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -37,7 +37,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_29_160000) do
     t.bigint "invoice_series_id", null: false
     t.integer "last_number", default: 0, null: false
     t.boolean "active", default: true, null: false
-    t.string "year_label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["invoice_series_id"], name: "index_invoice_sequences_on_invoice_series_id"

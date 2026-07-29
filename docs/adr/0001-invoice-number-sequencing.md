@@ -3,6 +3,7 @@
 Status: accepted
 Date: 2026-07-21
 Amended: 2026-07-23 — removed rollover (non-compliant with Art. 6.1.a RD 1619/2012); numbering is continuous within each series.
+Amended: 2026-07-29 — issued invoices are immutable, not merely undeletable (point 6); reservation is fixed against counter drift and the issued-⇒-numbered invariant is enforced in the database (points 4 and 5).
 
 ## Context
 
@@ -22,9 +23,9 @@ Spanish law (RD 1619/2012; Veri\*factu enforcement from 2026) requires strictly 
 3. **Gapless numbering.** Numbers are strictly correlative within a scope. Consequently:
    - **Drafts hold no number** — new `borrador` status; `number` stays NULL; drafts are freely editable/deletable.
    - **Reservation happens at Issue time**, never at draft creation.
-4. **Atomic reservation via row lock.** Issue locks the active sequence row (`SELECT … FOR UPDATE`), increments `last_number`, assigns, and saves the invoice in **one transaction**. Rollback on failure restores the counter — no burned numbers. Postgres sequences are rejected (they burn values on rollback); `MAX+1` is rejected (races).
-5. **Split storage.** `invoices` gains `series_id` (FK) + `number` (integer, NULL while draft), unique on `(series_id, number)`. Display strings (`"A-0042"`) are composed at render; nothing formatted is stored.
-6. **Issued invoices are undeletable.** `destroy` is blocked for non-draft invoices. Rectification via an `"R"` series is a follow-up feature.
+4. **Atomic reservation via row lock.** Issue locks the active sequence row (`SELECT … FOR UPDATE`), increments `last_number`, assigns, and saves the invoice in **one transaction**. Rollback on failure restores the counter — no burned numbers. Postgres sequences are rejected (they burn values on rollback); `MAX+1` is rejected (races). The lock must refresh the whole record (`reload(lock: true)`), not just re-read the value: `increment!` derives its delta from the attribute's in-database value, so a stale record advances the counter by more than one and punches the gap this design exists to prevent.
+5. **Split storage.** `invoices` gains `series_id` (FK) + `number` (integer, NULL while draft), unique on `(series_id, number)`. Display strings (`"A-0042"`) are composed at render; nothing formatted is stored. A check constraint enforces that a non-draft row carries both `series_id` and `number`. The converse is deliberately not enforced — Issue writes the Number while the row is still `borrador`, so a numbered draft is valid mid-transaction, and Postgres cannot defer CHECK constraints.
+6. **Issued invoices are undeletable and immutable.** `destroy` is blocked for non-draft invoices, and the fields that make up the fiscal document — scope, number, date, client, amounts, and line items — are frozen from the moment the invoice holds a Number in the database. Status, payment terms, and notes stay editable. Rectification via an `"R"` series is a follow-up feature.
 7. **Migration preserves legacy numbers.** Each existing user gets default scope `"A"` + one active sequence; existing integer `invoice_number` values are copied into `number`; the counter starts at the user's `MAX`. Historical gaps remain as pre-compliance history. Legacy single-string `invoice_number` column is dropped after backfill. New users get their default scope lazily at first Issue.
 
 ## Consequences

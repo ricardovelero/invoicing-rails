@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-# CRUD for user-owned invoice Scopes (series) and manual Rollover.
+# CRUD for user-owned invoice Scopes (series).
 class InvoiceSeriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_series, only: [:rollover]
 
   # GET /invoice_series
   def index
@@ -36,10 +35,6 @@ class InvoiceSeriesController < ApplicationController
   end
 
   private
-
-  def set_series
-    @series = current_user.invoice_series.find(params[:id])
-  end
 
   def series_params
     params.require(:invoice_series).permit(:prefix, :name)
