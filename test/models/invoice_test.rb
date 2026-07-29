@@ -33,7 +33,7 @@ class InvoiceTest < ActiveSupport::TestCase
       client: clients(:one),
       date: Date.today,
       due_date: Date.today + 30,
-      status: 'pendiente',
+      status: 'borrador',
       subtotal: 100,
       iva: 21,
       total: 121
@@ -57,7 +57,7 @@ class InvoiceTest < ActiveSupport::TestCase
       client: clients(:one),
       date: Date.today,
       due_date: Date.today + 30,
-      status: 'pendiente',
+      status: 'borrador',
       subtotal: 100,
       iva: 21,
       total: 121
@@ -81,7 +81,7 @@ class InvoiceTest < ActiveSupport::TestCase
       client: clients(:one),
       date: Date.today,
       due_date: Date.today + 30,
-      status: 'pendiente',
+      status: 'borrador',
       subtotal: 50,
       iva: 10.5,
       total: 60.5
@@ -241,6 +241,22 @@ class InvoiceTest < ActiveSupport::TestCase
 
     assert_not line_item.destroy
     assert line_item.persisted?
+  end
+
+  test "database rejects an issued invoice with no number" do
+    invoice = invoices(:one)
+
+    assert_raises(ActiveRecord::StatementInvalid) do
+      invoice.update_columns(number: nil)
+    end
+  end
+
+  test "database rejects an issued invoice with no scope" do
+    invoice = invoices(:one)
+
+    assert_raises(ActiveRecord::StatementInvalid) do
+      invoice.update_columns(series_id: nil)
+    end
   end
 
   test "cannot reference a scope owned by another user" do

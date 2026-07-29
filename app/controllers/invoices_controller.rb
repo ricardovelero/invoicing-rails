@@ -52,23 +52,15 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
   def create
     @invoice = Invoice.new(invoice_params)
     @invoice.user = current_user
-
-    # Determine status from submit button
-    if params[:save_and_issue].present?
-      @invoice.status = 'pendiente'
-    else
-      @invoice.status = 'borrador'
-    end
+    # Always born a draft: an invoice is never persisted as issued-but-unnumbered.
+    # The Issue button then runs the same transition as the Issue action.
+    @invoice.status = 'borrador'
 
     respond_to do |format|
       success = Invoice.transaction do
         next false unless @invoice.save
 
-        # Assign correlative number for issued invoices (pendiente)
-        if @invoice.status == 'pendiente'
-          chosen_series = resolve_series_for_issue
-          @invoice.assign_number!(chosen_series)
-        end
+        @invoice.issue! if params[:save_and_issue].present?
 
         true
       end
@@ -192,12 +184,6 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
       :series_id,
       line_items_attributes: %i[id item_id invoice_id quantity price iva total _destroy]
     )
-  end
-
-  def resolve_series_for_issue
-    if invoice_params[:series_id].present?
-      current_user.invoice_series.find(invoice_params[:series_id])
-    end
   end
 
   def send_pdf

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_07_21_204020) do
+ActiveRecord::Schema[7.2].define(version: 2026_07_29_160000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -73,6 +73,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_21_204020) do
     t.index ["series_id", "number"], name: "index_invoices_on_series_id_and_number", unique: true
     t.index ["series_id"], name: "index_invoices_on_series_id"
     t.index ["user_id"], name: "index_invoices_on_user_id"
+    t.check_constraint "status::text = 'borrador'::text OR series_id IS NOT NULL AND number IS NOT NULL", name: "issued_invoices_are_numbered"
   end
 
   create_table "items", force: :cascade do |t|

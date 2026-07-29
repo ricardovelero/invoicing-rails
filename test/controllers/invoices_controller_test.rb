@@ -139,6 +139,28 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, created_invoice.number
   end
 
+  test "cannot create an invoice in another user's scope" do
+    foreign_series = InvoiceSeries.create!(user: users(:second), prefix: 'Z')
+
+    assert_no_difference("Invoice.count") do
+      post invoices_url,
+           params: {
+             save_and_issue: true,
+             invoice: {
+               date: Date.today,
+               due_date: Date.today + 30,
+               subtotal: 100,
+               iva: 21,
+               total: 121,
+               client_id: clients(:one).id,
+               series_id: foreign_series.id
+             }
+           }
+    end
+
+    assert_response :unprocessable_entity
+  end
+
   test "backdating invoice does not change which sequence supplies its number" do
     sequence = invoice_sequences(:default_a_active)
     original_last = sequence.last_number

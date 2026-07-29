@@ -101,10 +101,22 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
   # default scope "A" if none is provided). Creates the scope and sequence
   # lazily if they don't exist. Must be called inside a transaction.
   def assign_number!(scope = nil)
-    target_series = scope || user.invoice_series.find_or_create_by!(prefix: 'A')
+    target_series = scope || default_series
     sequence = target_series.active_sequence
     next_number = sequence.reserve_next!
     update!(series: target_series, number: next_number)
+  end
+
+  # The user's default scope "A", created on first use. requires_new for the
+  # same reason as InvoiceSeries#create_active_sequence: two concurrent first
+  # Issues must not leave one of them inside an aborted transaction.
+  def default_series
+    user.invoice_series.find_by(prefix: 'A') ||
+      begin
+        transaction(requires_new: true) { user.invoice_series.create!(prefix: 'A') }
+      rescue ActiveRecord::RecordNotUnique
+        user.invoice_series.find_by!(prefix: 'A')
+      end
   end
 
   scope :issued, -> { where.not(status: 'borrador') }
