@@ -20,7 +20,7 @@ class InvoiceSeries < ApplicationRecord
     invoice_sequences.find_by(active: true) || create_active_sequence
   end
 
-  # Display label for the scope (prefix + optional name)
+  # Display label for the series (prefix + optional name)
   def display_name
     name.present? ? "#{prefix} — #{name}" : prefix
   end

@@ -16,7 +16,7 @@
       <% end %>
 
       <div class="my-5">
-        <%= f.label t("prefijo"), class: "input-label" %>
+        <%= f.label :prefix, t("prefijo"), class: "input-label" %>
         <div class="relative mt-1 rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <%= heroicon "hashtag", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>
@@ -27,7 +27,7 @@
       </div>
 
       <div class="my-5">
-        <%= f.label t("nombre_serie"), class: "input-label" %>
+        <%= f.label :name, t("nombre_serie"), class: "input-label" %>
         <%= f.text_field :name, class: "form-input w-full", placeholder: t("nombre_placeholder") %>
         <p class="text-xs text-slate-500 mt-1"><%= t("nombre_ayuda") %></p>
       </div>
