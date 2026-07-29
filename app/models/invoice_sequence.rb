@@ -13,13 +13,14 @@ class InvoiceSequence < ApplicationRecord
   # Must be called inside the caller's transaction.
   # Locks the row (SELECT … FOR UPDATE), increments last_number,
   # and returns the new number.
+  #
+  # reload(lock: true) rather than a plain re-read: increment! derives its
+  # delta from last_number_in_database, so the in-memory record must be fully
+  # refreshed from the locked row or the counter jumps by more than one.
   def reserve_next!
     raise 'Sequence is not active' unless active?
 
-    # Lock the row AND refresh in-memory attributes from the locked row
-    locked = self.class.where(id: id).lock('FOR UPDATE').first!
-    self.last_number = locked.last_number
-
+    reload(lock: true)
     increment!(:last_number)
     last_number
   end

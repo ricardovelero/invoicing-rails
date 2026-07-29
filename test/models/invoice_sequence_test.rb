@@ -14,6 +14,22 @@ class InvoiceSequenceTest < ActiveSupport::TestCase
     assert_equal original_number + 1, sequence.last_number
   end
 
+  test "reserve_next! increments by exactly one from a stale record" do
+    sequence = invoice_sequences(:default_a_active)
+    stale = InvoiceSequence.find(sequence.id)
+
+    # A concurrent request reserves two numbers and commits before `stale`
+    # reaches the lock, leaving its in-memory attributes behind the row.
+    InvoiceSequence.update_counters(sequence.id, last_number: 2)
+    last_number = sequence.reload.last_number
+
+    reserved = nil
+    Invoice.transaction { reserved = stale.reserve_next! }
+
+    assert_equal last_number + 1, reserved
+    assert_equal reserved, sequence.reload.last_number
+  end
+
   test "reserve_next! raises if sequence is not active" do
     sequence = invoice_sequences(:default_a_active)
     sequence.update_column(:active, false)
