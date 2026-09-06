@@ -269,6 +269,91 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_includes draft.errors[:series], I18n.t('invoice.series_not_owned')
   end
 
+  # --- dates are required (an issued invoice with none is unrenderable and unfixable)
+
+  test 'date and due_date are required' do
+    invoice = Invoice.new(user: users(:first), client: clients(:one))
+
+    assert_not invoice.valid?
+    assert invoice.errors[:date].any?
+    assert invoice.errors[:due_date].any?
+  end
+
+  test 'an invoice cannot be issued without dates' do
+    sequence = invoice_sequences(:default_a_active)
+    original_last = sequence.last_number
+
+    assert_raises(ActiveRecord::RecordInvalid) do
+      Invoice.create!(user: users(:first), client: clients(:one))
+    end
+
+    assert_equal original_last, sequence.reload.last_number
+  end
+
+  test 'database rejects an issued invoice with no date' do
+    invoice = invoices(:one)
+
+    assert_raises(ActiveRecord::StatementInvalid) do
+      invoice.update_columns(date: nil)
+    end
+  end
+
+  test 'database rejects an issued invoice with no due_date' do
+    invoice = invoices(:one)
+
+    assert_raises(ActiveRecord::StatementInvalid) do
+      invoice.update_columns(due_date: nil)
+    end
+  end
+
+  # --- a series is a chain, so its numbers cannot travel backwards in time
+
+  test 'issue! rejects a date earlier than the last invoice issued in the series' do
+    sequence = invoice_sequences(:default_a_active)
+    original_last = sequence.last_number
+
+    draft = invoices(:draft_one)
+    draft.update!(date: 2.years.ago)
+
+    error = assert_raises(ActiveRecord::RecordInvalid) do
+      Invoice.transaction { draft.issue! }
+    end
+
+    assert_includes error.record.errors[:base], I18n.t('invoice.backdated')
+    assert_equal original_last, sequence.reload.last_number
+    assert_equal 'borrador', draft.reload.status
+    assert_nil draft.number
+  end
+
+  test 'issue! accepts a backdated invoice that still follows the last one issued' do
+    last_issued = invoices(:three).date
+    draft = invoices(:draft_one)
+    draft.update!(date: last_issued)
+
+    Invoice.transaction { draft.issue! }
+
+    assert_equal 'pendiente', draft.status
+    assert_equal invoices(:three).number + 1, draft.number
+  end
+
+  test 'the chronological rule is scoped to the series' do
+    other_series = InvoiceSeries.create!(user: users(:first), prefix: 'B')
+    draft = invoices(:draft_one)
+    draft.update!(date: 2.years.ago, series: other_series)
+
+    Invoice.transaction { draft.issue! }
+
+    assert_equal 'B-0001', draft.display_number
+  end
+
+  test 'an already issued invoice is not re-checked against the chain' do
+    # Fixture one carries the oldest date in series A, so a rule that re-ran on
+    # every save would make it permanently unsaveable.
+    invoice = invoices(:one)
+
+    assert invoice.update(notes: 'Paid by transfer')
+  end
+
   test 'default status is borrador' do
     invoice = Invoice.new
     assert_equal 'borrador', invoice.status

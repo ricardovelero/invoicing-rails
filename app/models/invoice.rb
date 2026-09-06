@@ -11,6 +11,9 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
   accepts_nested_attributes_for :line_items, allow_destroy: true
 
   validates :client_id, presence: true
+  # An invoice with no dates is unrenderable (#pdf and the index both read them)
+  # and, once issued, unfixable, because both fields are frozen from then on.
+  validates :date, :due_date, presence: true
 
   attribute :status, :string, default: 'borrador'
 
@@ -24,6 +27,7 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   validate :immutable_once_issued
   validate :series_belongs_to_user
+  validate :date_not_before_last_issued, if: :reserving_number?
 
   scope :for_account, ->(user_id) { where(user_id:) }
 
@@ -84,6 +88,25 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
     return if series.nil? || series.user_id == user_id
 
     errors.add(:series, I18n.t('invoice.series_not_owned'))
+  end
+
+  # True only while Issue writes the first Number onto the row: the Number is
+  # set in memory but not yet in the database. Same keying as
+  # #immutable_once_issued, from the other side.
+  def reserving_number?
+    number_in_database.nil? && number.present? && series.present?
+  end
+
+  # A series is a chain, so its Numbers must not travel backwards in time.
+  # Gated on #reserving_number? for two reasons: it has to run with the
+  # sequence row already locked, so concurrent Issues cannot interleave their
+  # dates, and it must never re-run on an invoice that is already issued --
+  # the chain it was checked against is history and cannot be re-litigated.
+  def date_not_before_last_issued
+    last_date = series.invoices.issued.where.not(id:).maximum(:date)
+    return if last_date.nil? || date.nil? || date >= last_date
+
+    errors.add(:base, I18n.t('invoice.backdated'))
   end
 
   def client_full_name
