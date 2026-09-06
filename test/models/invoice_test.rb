@@ -162,7 +162,7 @@ class InvoiceTest < ActiveSupport::TestCase
 
   test 'issue! raises error for non-draft invoice' do
     invoice = invoices(:one)
-    assert_raises(RuntimeError) { invoice.issue! }
+    assert_raises(Invoice::NotADraft) { invoice.issue! }
   end
 
   test 'failed issue does not burn a number' do
@@ -184,6 +184,56 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal original_last, sequence.reload.last_number
     assert_equal 'borrador', draft.reload.status
     assert_nil draft.number
+  end
+
+  # --- Issue is atomic on its own, not only when a caller wraps it
+
+  test 'issue! without an enclosing transaction still burns no number on failure' do
+    sequence = invoice_sequences(:default_a_active)
+    original_last = sequence.last_number
+
+    draft = invoices(:draft_one)
+    draft.date = 2.years.ago # rejected by the chain, after the number is reserved
+
+    assert_raises(ActiveRecord::RecordInvalid) { draft.issue! }
+
+    assert_equal original_last, sequence.reload.last_number
+    assert_equal 'borrador', draft.reload.status
+    assert_nil draft.number
+  end
+
+  test 'assign_number! without an enclosing transaction still burns no number on failure' do
+    sequence = invoice_sequences(:default_a_active)
+    original_last = sequence.last_number
+
+    draft = invoices(:draft_one)
+    draft.client_id = nil
+
+    assert_raises(ActiveRecord::RecordInvalid) { draft.assign_number! }
+
+    assert_equal original_last, sequence.reload.last_number
+    assert_nil draft.reload.number
+  end
+
+  test 'issue! joins an enclosing transaction rather than committing inside it' do
+    sequence = invoice_sequences(:default_a_active)
+    original_last = sequence.last_number
+    draft = invoices(:draft_one)
+
+    Invoice.transaction do
+      draft.issue!
+      raise ActiveRecord::Rollback
+    end
+
+    assert_equal original_last, sequence.reload.last_number
+    assert_equal 'borrador', draft.reload.status
+    assert_nil draft.number
+  end
+
+  test 'issue! reports a non-draft with a translatable error' do
+    error = assert_raises(Invoice::NotADraft) { invoices(:one).issue! }
+
+    assert_equal I18n.t('invoice.not_a_draft'), error.message
   end
 
   test 'cannot destroy issued invoice' do

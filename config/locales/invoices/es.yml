@@ -82,5 +82,6 @@ es:
     series_not_owned: no pertenece a tu cuenta
     issued: La factura ha sido emitida exitosamente
     issue_failed: No se pudo emitir la factura
+    not_a_draft: Solo los borradores se pueden emitir
     backdated: La fecha de la factura no puede ser anterior a la última factura emitida en esta serie
   confirmar_emision: ¿Estás seguro de que quieres emitir esta factura? Esta acción no se puede deshacer.

@@ -140,9 +140,10 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end
     end
-  rescue StandardError => e
-    # A rejected Issue is ordinary user error (a backdated invoice, say), so
-    # show what the model said rather than the raw exception text.
+  # Only the two ways an Issue can legitimately be refused. Anything else --
+  # a unique violation on the Number, say -- means the locking failed and is a
+  # bug, which belongs in the error tracker as a 500, not in a flash message.
+  rescue Invoice::NotADraft, ActiveRecord::RecordInvalid => e
     message = @invoice.errors.full_messages.to_sentence.presence || e.message
 
     respond_to do |format|

@@ -82,5 +82,6 @@ en:
     series_not_owned: does not belong to your account
     issued: Invoice has been issued successfully
     issue_failed: Could not issue the invoice
+    not_a_draft: Only drafts can be issued
     backdated: The invoice date cannot be earlier than the last invoice issued in this series
   confirmar_emision: Are you sure you want to issue this invoice? This action cannot be undone.

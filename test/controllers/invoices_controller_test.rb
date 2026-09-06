@@ -307,6 +307,28 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/name="_method" value="patch"/, response.body)
   end
 
+  test "issuing a non-draft is refused in the user's language, not with raw exception text" do
+    post issue_invoice_url(@invoice)
+
+    assert_redirected_to invoices_url(locale: I18n.locale)
+    assert_equal I18n.t('invoice.not_a_draft'), flash[:alert]
+  end
+
+  test "an unexpected failure during issue is not swallowed into a flash message" do
+    # A counter that has fallen behind its own series hands out a Number that
+    # is already taken. That is corruption, not user error, and a redirect
+    # saying "could not issue" would hide it behind an endless retry.
+    sequence = invoice_sequences(:default_a_active)
+    sequence.update_column(:last_number, invoices(:one).number - 1)
+
+    post issue_invoice_url(@draft)
+
+    assert_response :internal_server_error
+    assert_nil flash[:alert]
+    assert_equal 'borrador', @draft.reload.status
+    assert_equal invoices(:one).number - 1, sequence.reload.last_number
+  end
+
   test "cannot issue a draft dated before the last invoice in its series" do
     sequence = invoice_sequences(:default_a_active)
     original_last = sequence.last_number

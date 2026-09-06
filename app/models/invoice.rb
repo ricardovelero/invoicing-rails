@@ -10,6 +10,10 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_many :items, through: :line_items
   accepts_nested_attributes_for :line_items, allow_destroy: true
 
+  # Raised when Issue is asked of an invoice that is not a draft. Typed so the
+  # controller can tell it apart from a genuine bug and not swallow both.
+  NotADraft = Class.new(StandardError)
+
   validates :client_id, presence: true
   # An invoice with no dates is unrenderable (#pdf and the index both read them)
   # and, once issued, unfixable, because both fields are frozen from then on.
@@ -52,13 +56,17 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
     %w[pendiente pagada].include?(status)
   end
 
-  # Transitions draft to pendiente, reserving the next correlative number atomically.
-  # Must be called inside a transaction.
+  # Transitions draft to pendiente, reserving the next correlative number.
+  # Opens its own transaction, or joins the caller's when there is one, so the
+  # Number and the status land together however this is called. Reserving
+  # outside a transaction would burn the Number on any later failure.
   def issue!
-    raise 'Invoice is not a draft' unless draft?
+    raise NotADraft, I18n.t('invoice.not_a_draft') unless draft?
 
-    assign_number!(series)
-    update!(status: 'pendiente')
+    transaction do
+      assign_number!(series)
+      update!(status: 'pendiente')
+    end
   end
 
   # Prevents destruction of issued invoices
@@ -122,12 +130,15 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   # Assigns the next correlative number from the given series (or the user's
   # default series "A" if none is provided). Creates the series and sequence
-  # lazily if they don't exist. Must be called inside a transaction.
+  # lazily if they don't exist. Transactional for the same reason as #issue!:
+  # a reservation that outlives its failed write is a gap in the chain.
   def assign_number!(series = nil)
-    target_series = series || default_series
-    sequence = target_series.active_sequence
-    next_number = sequence.reserve_next!
-    update!(series: target_series, number: next_number)
+    transaction do
+      target_series = series || default_series
+      sequence = target_series.active_sequence
+      next_number = sequence.reserve_next!
+      update!(series: target_series, number: next_number)
+    end
   end
 
   # The user's default series "A", created on first use. requires_new for the

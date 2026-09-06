@@ -34,7 +34,7 @@ class InvoiceSequenceTest < ActiveSupport::TestCase
     sequence = invoice_sequences(:default_a_active)
     sequence.update_column(:active, false)
 
-    assert_raises(RuntimeError, 'Sequence is not active') do
+    assert_raises(InvoiceSequence::Inactive) do
       sequence.reserve_next!
     end
   end
