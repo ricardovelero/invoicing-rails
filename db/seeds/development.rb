@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-require 'database_cleaner'
-
-DatabaseCleaner.clean_with(:truncation)
+# Rails truncates on its own; database_cleaner 2.1.0 reaches for
+# connection.schema_migration, which Rails 7.2 removed.
+ActiveRecord::Base.connection.truncate_tables(
+  *ActiveRecord::Base.connection.tables - %w[schema_migrations ar_internal_metadata]
+)
 
 dean = User.new(
   email: 'dean@example.com',
@@ -61,7 +63,7 @@ UserProfile.new(
     email: Faker::Internet.email(name: :first_name),
     telephone: Faker::PhoneNumber.cell_phone_in_e164,
     active: 1, # rand(0..1),
-    user_id: 1 # rand(1..2)
+    user: dean
   )
 end
 
@@ -71,35 +73,48 @@ end
     description: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4),
     price: Faker::Number.within(range: 1.0..2000.0),
     iva: %w[0 4 10 21].sample,
-    user_id: 1 # rand(1..2)
+    user: dean
   )
 end
+
+# Invoices take the path the app takes: born a draft, filled with line items,
+# totalled, and only then issued, so the series hands out the Number. Dates
+# climb with the chain because Issue refuses to number an invoice that predates
+# the last one in its series.
+clients = Client.where(user: dean).to_a
+items = Item.where(user: dean).to_a
 
 100.times do |i|
-  Invoice.create(
-    date: Faker::Date.between(from: 30.days.ago, to: Date.today),
-    due_date: Faker::Date.forward(days: 30),
+  date = (100 - i).days.ago.to_date
+
+  invoice = Invoice.create!(
+    date:,
+    due_date: date + 30,
     notes: Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4),
-    status: %w[pendiente pagada].sample,
-    client_id: rand(1..50),
-    user_id: 1 # rand(1..2)
+    client: clients.sample,
+    user: dean
   )
-end
 
-400.times do |_i|
-  LineItem.create(
-    invoice_id: rand(1..100),
-    item_id: rand(1..300),
-    quantity: rand(1..12),
-    price: rand(1..3000),
-    iva: rand(1..12),
-    total: rand(1..4000)
-  )
-end
+  rand(1..5).times do
+    item = items.sample
+    quantity = rand(1..12)
 
-Invoice.all.each do |i|
-  i.subtotal = i.sum_subtotal
-  i.iva = i.sum_iva
-  i.total = i.sum_total
-  i.save
+    invoice.line_items.create!(
+      item:,
+      quantity:,
+      price: item.price,
+      iva: item.iva,
+      total: quantity * item.price * (1 + item.iva / 100)
+    )
+  end
+
+  # Totals have to land while the invoice is still a draft: they freeze on issue.
+  invoice.update!(subtotal: invoice.sum_subtotal, iva: invoice.sum_iva, total: invoice.sum_total)
+
+  # The last ten stay drafts so the draft list and the Issue button have
+  # something to act on.
+  next if i >= 90
+
+  Invoice.transaction { invoice.issue! }
+  invoice.update!(status: 'pagada') if rand < 0.5
 end
