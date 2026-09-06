@@ -26,31 +26,37 @@ class InvoiceSeriesTest < ActiveSupport::TestCase
     assert series.errors[:prefix].any?
   end
 
-  test 'active_sequence creates lazily if none exists' do
+  test 'sequence creates lazily if none exists' do
     series = InvoiceSeries.create!(user: users(:first), prefix: 'B')
-    assert_nil series.invoice_sequences.find_by(active: true)
-    sequence = series.active_sequence
+    assert_equal 0, series.invoice_sequences.count
+
+    sequence = series.sequence
     assert sequence.persisted?
-    assert sequence.active?
     assert_equal 0, sequence.last_number
   end
 
-  test 'active_sequence returns existing active sequence' do
+  test 'sequence returns the existing counter' do
     series = invoice_series(:default_a)
-    existing = series.invoice_sequences.find_by(active: true)
-    assert_equal existing, series.active_sequence
+    assert_equal series.invoice_sequences.first, series.sequence
   end
 
-  test 'new series gets initial active sequence automatically via active_sequence' do
-    series = InvoiceSeries.create!(user: users(:first), prefix: 'C')
-    # No sequence exists yet
-    assert_equal 0, series.invoice_sequences.count
+  test 'a series can never hold a second counter' do
+    series = invoice_series(:default_a)
 
-    # Calling active_sequence creates one
-    seq = series.active_sequence
-    assert seq.persisted?
-    assert seq.active?
-    assert_equal 0, seq.last_number
+    assert_raises(ActiveRecord::RecordNotUnique) do
+      InvoiceSequence.create!(invoice_series: series, last_number: 0)
+    end
+  end
+
+  test 'a series that has issued invoices cannot restart its numbering' do
+    # The rollover this replaces: retire the counter, get a fresh one at zero,
+    # and hand out A-0001 again after A-0102. Art. 6.1.a RD 1619/2012 forbids it.
+    series = invoice_series(:default_a)
+    counter = series.sequence
+
+    assert_equal counter, series.reload.sequence
+    assert_equal 102, series.sequence.last_number
+    assert_equal 1, series.invoice_sequences.count
   end
 
   test 'cannot destroy a series that has invoices' do
@@ -63,29 +69,22 @@ class InvoiceSeriesTest < ActiveSupport::TestCase
 
   test 'can destroy a series with no invoices' do
     series = InvoiceSeries.create!(user: users(:first), prefix: 'B')
-    series.active_sequence
+    series.sequence
 
     assert series.destroy
     assert series.destroyed?
   end
 
-  test 'active_sequence recovers when another process wins the race' do
+  test 'sequence recovers when another process wins the race' do
     series = InvoiceSeries.create!(user: users(:first), prefix: 'D')
-    winner = InvoiceSequence.create!(invoice_series: series, active: true, last_number: 7)
+    winner = InvoiceSequence.create!(invoice_series: series, last_number: 7)
 
-    # Stand in for the read that happened before the winner committed: the row
-    # is already there, but this caller has not seen it and tries to create one.
-    blind = series.invoice_sequences
-    def blind.find_by(*)
-      nil
-    end
-    series.define_singleton_method(:invoice_sequences) { blind }
-
-    # Inside a transaction, as Issue does — the unique violation must not take
-    # the surrounding transaction down with it.
+    # Stand in for the caller whose read happened before the winner committed:
+    # it saw no counter and tries to create one. Inside a transaction, as Issue
+    # is -- the unique violation must not take that transaction down with it.
     Invoice.transaction do
-      assert_equal winner, series.active_sequence
-      assert_equal 1, InvoiceSequence.where(invoice_series: series).count
+      assert_equal winner, series.send(:create_sequence)
+      assert_equal 1, series.invoice_sequences.count
     end
   end
 

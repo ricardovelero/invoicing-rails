@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
 # A counter inside an InvoiceSeries. Holds last_number.
-# Exactly one active Sequence per Series at any time, enforced by a
-# Postgres partial unique index — never by application code.
+# Exactly one Sequence per Series, for the life of the Series, enforced by a
+# Postgres unique index — never by application code. A Series that could swap
+# counters could restart its numbering, which Art. 6.1.a RD 1619/2012 forbids.
 class InvoiceSequence < ApplicationRecord
-  # Raised when a Number is asked of a retired sequence. Nothing deactivates a
-  # sequence today, so this means the row was tampered with.
-  Inactive = Class.new(StandardError)
-
   belongs_to :invoice_series
 
-  validates :active, inclusion: { in: [true, false] }
   validates :last_number, numericality: { greater_than_or_equal_to: 0 }
 
   # Atomically reserves the next invoice number for this sequence.
@@ -22,8 +18,6 @@ class InvoiceSequence < ApplicationRecord
   # delta from last_number_in_database, so the in-memory record must be fully
   # refreshed from the locked row or the counter jumps by more than one.
   def reserve_next!
-    raise Inactive unless active?
-
     reload(lock: true)
     increment!(:last_number)
     last_number

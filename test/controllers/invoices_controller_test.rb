@@ -117,7 +117,7 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
   test "creating invoice with specific series uses that series' sequence" do
     user = users(:first)
     other_series = InvoiceSeries.create!(user: user, prefix: 'B')
-    other_seq = other_series.active_sequence
+    other_seq = other_series.sequence
 
     post invoices_url,
          params: {

@@ -24,7 +24,7 @@ class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'B', series.prefix
     assert_equal users(:first), series.user
     # Should have an initial active sequence
-    assert series.invoice_sequences.find_by(active: true).present?
+    assert series.invoice_sequences.first.present?
     assert_redirected_to invoice_series_index_url(locale: I18n.locale)
   end
 
