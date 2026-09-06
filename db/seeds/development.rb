@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Rails truncates on its own; database_cleaner 2.1.0 reaches for
-# connection.schema_migration, which Rails 7.2 removed.
+# Rails truncates on its own. This used database_cleaner, which reached for
+# connection.schema_migration -- removed in Rails 7.2.
 ActiveRecord::Base.connection.truncate_tables(
   *ActiveRecord::Base.connection.tables - %w[schema_migrations ar_internal_metadata]
 )
