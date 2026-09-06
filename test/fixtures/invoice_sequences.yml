@@ -3,4 +3,3 @@
 default_a_active:
   invoice_series: default_a
   last_number: 102
-  active: true

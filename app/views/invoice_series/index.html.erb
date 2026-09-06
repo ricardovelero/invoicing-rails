@@ -34,7 +34,7 @@
         </thead>
         <tbody class="text-sm divide-y divide-slate-200">
           <% @series.each do |s| %>
-            <% active_seq = s.invoice_sequences.find { |seq| seq.active? } %>
+            <% counter = s.invoice_sequences.first %>
             <tr>
               <td class="px-4 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
                 <div class="font-medium text-slate-800"><%= s.prefix %></div>
@@ -43,7 +43,7 @@
                 <div class="text-slate-500"><%= s.name || "—" %></div>
               </td>
               <td class="px-4 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                <div class="text-slate-800"><%= active_seq ? active_seq.last_number : "—" %></div>
+                <div class="text-slate-800"><%= counter ? counter.last_number : "—" %></div>
               </td>
               <td class="px-4 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
                 <div class="text-slate-800"><%= @invoice_counts[s.id] || 0 %></div>

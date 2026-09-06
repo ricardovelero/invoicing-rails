@@ -26,8 +26,8 @@ class InvoiceSeriesController < ApplicationController
     @series = current_user.invoice_series.build(series_params)
 
     if @series.save
-      # Ensure the new series gets an initial active sequence automatically
-      @series.active_sequence
+      # Ensure the new series gets its counter straight away
+      @series.sequence
       redirect_to invoice_series_index_path, notice: I18n.t('serie_creada')
     else
       render :new, status: :unprocessable_entity

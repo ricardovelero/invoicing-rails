@@ -10,7 +10,14 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_many :items, through: :line_items
   accepts_nested_attributes_for :line_items, allow_destroy: true
 
+  # Raised when Issue is asked of an invoice that is not a draft. Typed so the
+  # controller can tell it apart from a genuine bug and not swallow both.
+  NotADraft = Class.new(StandardError)
+
   validates :client_id, presence: true
+  # An invoice with no dates is unrenderable (#pdf and the index both read them)
+  # and, once issued, unfixable, because both fields are frozen from then on.
+  validates :date, :due_date, presence: true
 
   attribute :status, :string, default: 'borrador'
 
@@ -24,6 +31,7 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   validate :immutable_once_issued
   validate :series_belongs_to_user
+  validate :date_not_before_last_issued, if: :reserving_number?
 
   scope :for_account, ->(user_id) { where(user_id:) }
 
@@ -48,13 +56,17 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
     %w[pendiente pagada].include?(status)
   end
 
-  # Transitions draft to pendiente, reserving the next correlative number atomically.
-  # Must be called inside a transaction.
+  # Transitions draft to pendiente, reserving the next correlative number.
+  # Opens its own transaction, or joins the caller's when there is one, so the
+  # Number and the status land together however this is called. Reserving
+  # outside a transaction would burn the Number on any later failure.
   def issue!
-    raise 'Invoice is not a draft' unless draft?
+    raise NotADraft, I18n.t('invoice.not_a_draft') unless draft?
 
-    assign_number!(series)
-    update!(status: 'pendiente')
+    transaction do
+      assign_number!(series)
+      update!(status: 'pendiente')
+    end
   end
 
   # Prevents destruction of issued invoices
@@ -86,6 +98,25 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
     errors.add(:series, I18n.t('invoice.series_not_owned'))
   end
 
+  # True only while Issue writes the first Number onto the row: the Number is
+  # set in memory but not yet in the database. Same keying as
+  # #immutable_once_issued, from the other side.
+  def reserving_number?
+    number_in_database.nil? && number.present? && series.present?
+  end
+
+  # A series is a chain, so its Numbers must not travel backwards in time.
+  # Gated on #reserving_number? for two reasons: it has to run with the
+  # sequence row already locked, so concurrent Issues cannot interleave their
+  # dates, and it must never re-run on an invoice that is already issued --
+  # the chain it was checked against is history and cannot be re-litigated.
+  def date_not_before_last_issued
+    last_date = series.invoices.issued.where.not(id:).maximum(:date)
+    return if last_date.nil? || date.nil? || date >= last_date
+
+    errors.add(:base, I18n.t('invoice.backdated'))
+  end
+
   def client_full_name
     Client.find(client_id).full_name
   end
@@ -99,16 +130,19 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   # Assigns the next correlative number from the given series (or the user's
   # default series "A" if none is provided). Creates the series and sequence
-  # lazily if they don't exist. Must be called inside a transaction.
+  # lazily if they don't exist. Transactional for the same reason as #issue!:
+  # a reservation that outlives its failed write is a gap in the chain.
   def assign_number!(series = nil)
-    target_series = series || default_series
-    sequence = target_series.active_sequence
-    next_number = sequence.reserve_next!
-    update!(series: target_series, number: next_number)
+    transaction do
+      target_series = series || default_series
+      sequence = target_series.sequence
+      next_number = sequence.reserve_next!
+      update!(series: target_series, number: next_number)
+    end
   end
 
   # The user's default series "A", created on first use. requires_new for the
-  # same reason as InvoiceSeries#create_active_sequence: two concurrent first
+  # same reason as InvoiceSeries#create_sequence: two concurrent first
   # Issues must not leave one of them inside an aborted transaction.
   def default_series
     user.invoice_series.find_by(prefix: 'A') ||

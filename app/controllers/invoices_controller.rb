@@ -4,7 +4,7 @@
 class InvoicesController < ApplicationController # rubocop:disable Metrics/ClassLength
   before_action :authenticate_user!
   before_action :set_invoice, only: %i[show edit update destroy issue]
-  before_action :ensure_draft, only: %i[edit]
+  before_action :ensure_draft, only: %i[edit update]
 
   # GET /invoices or /invoices.json
   def index # rubocop:disable Metrics/AbcSize
@@ -57,20 +57,14 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
     @invoice.status = 'borrador'
 
     respond_to do |format|
-      success = Invoice.transaction do
-        next false unless @invoice.save
-
-        @invoice.issue! if params[:save_and_issue].present?
-
-        true
-      end
-
-      if success
+      if save_and_maybe_issue
         format.html do
           redirect_to invoices_path, notice: I18n.t('factura_creada')
         end
         format.json { render :show, status: :created, location: @invoice }
       else
+        # The form needs the series list back to re-render its selector.
+        @series = current_user.invoice_series.order(:prefix)
         format.html { render :new, status: :unprocessable_entity }
         format.json do
           render json: @invoice.errors, status: :unprocessable_entity
@@ -146,24 +140,50 @@ class InvoicesController < ApplicationController # rubocop:disable Metrics/Class
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end
     end
-  rescue StandardError => e
+  # Only the two ways an Issue can legitimately be refused. Anything else --
+  # a unique violation on the Number, say -- means the locking failed and is a
+  # bug, which belongs in the error tracker as a 500, not in a flash message.
+  rescue Invoice::NotADraft, ActiveRecord::RecordInvalid => e
+    message = @invoice.errors.full_messages.to_sentence.presence || e.message
+
     respond_to do |format|
       format.html do
-        redirect_to invoices_path, alert: e.message
+        redirect_to invoices_path, alert: message
       end
-      format.json { render json: { error: e.message }, status: :unprocessable_entity }
+      format.json { render json: { error: message }, status: :unprocessable_entity }
     end
   end
 
   private
+
+  # Draft and Issue commit together or not at all, so a rejected Issue leaves
+  # no half-created invoice and burns no number. Returns false on either
+  # failure, with the reason on @invoice.errors either way.
+  def save_and_maybe_issue
+    Invoice.transaction do
+      raise ActiveRecord::Rollback unless @invoice.save
+
+      @invoice.issue! if params[:save_and_issue].present?
+
+      true
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    # The insert is rolled back, but the object keeps the id it was given, so
+    # the re-rendered form would aim a PATCH at a row that no longer exists.
+    # Hand the view an unsaved invoice carrying the same input and the reason.
+    @invoice = Invoice.new(invoice_params)
+    @invoice.errors.copy!(e.record.errors)
+    false
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_invoice
     @invoice = current_user.invoices.find(params[:id])
   end
 
-  # Issued invoices are immutable; the model rejects the write either way, this
-  # just keeps the edit form from being a dead end.
+  # Issued invoices are immutable. The model rejects the field writes on its
+  # own, but a nested line-item destroy gets through as a raise rather than a
+  # validation error, so update is turned away here alongside edit.
   def ensure_draft
     return if @invoice.draft?
 

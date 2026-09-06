@@ -1,6 +1,15 @@
 <div class="my-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200" data-controller='toggle'>
   <%= form_with(model: invoice, class: "contents", html: { data: {controller: "recalculate"} } ) do |f| %>
     <h2 class="text-lg font-bold"><%= t("cabecera_factura") %></h2>
+    <% if f.object.errors.any? %>
+      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+        <ul>
+          <% f.object.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
     <div class="grid <%= invoice.new_record? ? "grid-cols-6" : "grid-cols-5" %> gap-2" data-controller="clientselect" data-clientselect-url-value="<%= clients_path %>" data-clientselect-param-value="client">
       <div class="my-5 col-span-2 flex flex-col">
         <%= f.label t("cliente"), class: "input-label"  %>

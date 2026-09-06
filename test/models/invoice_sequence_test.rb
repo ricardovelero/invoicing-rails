@@ -30,19 +30,9 @@ class InvoiceSequenceTest < ActiveSupport::TestCase
     assert_equal reserved, sequence.reload.last_number
   end
 
-  test "reserve_next! raises if sequence is not active" do
-    sequence = invoice_sequences(:default_a_active)
-    sequence.update_column(:active, false)
-
-    assert_raises(RuntimeError, 'Sequence is not active') do
-      sequence.reserve_next!
-    end
-  end
-
-  test "exactly one active sequence per series enforced by DB" do
+  test "exactly one sequence per series enforced by DB" do
     series = invoice_series(:default_a)
-    # There's already one active sequence from fixtures
-    second = InvoiceSequence.new(invoice_series: series, active: true, last_number: 0)
+    second = InvoiceSequence.new(invoice_series: series, last_number: 0)
 
     assert_raises(ActiveRecord::RecordNotUnique) do
       second.save!

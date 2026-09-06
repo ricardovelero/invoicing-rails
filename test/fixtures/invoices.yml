@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-    date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
+    date: <%= 20.days.ago.to_date %>
     due_date: <%= Faker::Date.forward(days: 30) %>
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
     status: pendiente
@@ -15,7 +15,7 @@ one:
     number: 100
 
 two:
-    date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
+    date: <%= 15.days.ago.to_date %>
     due_date: <%= Faker::Date.forward(days: 30) %>
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
     status: pendiente
@@ -29,7 +29,7 @@ two:
     number: 101
 
 three:
-    date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
+    date: <%= 10.days.ago.to_date %>
     due_date: <%= Faker::Date.forward(days: 30) %>
     notes: <%= Faker::Lorem.sentence(word_count: 20) %>
     status: pendiente
@@ -43,7 +43,7 @@ three:
     number: 102
 
 draft_one:
-    date: <%= Faker::Date.between(from: 30.days.ago, to: Date.today) %>
+    date: <%= Date.today %>
     due_date: <%= Faker::Date.forward(days: 30) %>
     notes: Draft invoice
     status: borrador

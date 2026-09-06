@@ -51,7 +51,7 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
            params: {
              save_and_issue: true,
              invoice: {
-               date: @invoice.date,
+               date: Date.today,
                due_date: @invoice.due_date,
                irpf: @invoice.irpf,
                iva: @invoice.iva,
@@ -75,7 +75,7 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
            params: {
              save_and_issue: true,
              invoice: {
-               date: @invoice.date,
+               date: Date.today,
                due_date: @invoice.due_date,
                irpf: @invoice.irpf,
                iva: @invoice.iva,
@@ -117,7 +117,7 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
   test "creating invoice with specific series uses that series' sequence" do
     user = users(:first)
     other_series = InvoiceSeries.create!(user: user, prefix: 'B')
-    other_seq = other_series.active_sequence
+    other_seq = other_series.sequence
 
     post invoices_url,
          params: {
@@ -169,7 +169,7 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
          params: {
            save_and_issue: true,
            invoice: {
-             date: 1.year.ago,
+             date: 5.days.ago,
              due_date: Date.today + 30,
              subtotal: 100,
              iva: 21,
@@ -244,6 +244,121 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
     assert_nil Invoice.last.number
   end
 
+  test "cannot create and issue an invoice with no dates" do
+    sequence = invoice_sequences(:default_a_active)
+    original_last = sequence.last_number
+
+    assert_no_difference("Invoice.count") do
+      post invoices_url, params: { save_and_issue: true, invoice: { client_id: clients(:one).id } }
+    end
+
+    assert_response :unprocessable_entity
+    assert_equal original_last, sequence.reload.last_number
+
+    # The invoice list used to die on the dateless row this request created.
+    get invoices_url
+    assert_response :success
+  end
+
+  test "cannot create and issue an invoice dated before the last one in the series" do
+    sequence = invoice_sequences(:default_a_active)
+    original_last = sequence.last_number
+
+    assert_no_difference("Invoice.count") do
+      post invoices_url,
+           params: {
+             save_and_issue: true,
+             invoice: {
+               date: 2.years.ago,
+               due_date: Date.today + 30,
+               subtotal: 100,
+               iva: 21,
+               total: 121,
+               client_id: clients(:one).id
+             }
+           }
+    end
+
+    assert_response :unprocessable_entity
+    assert_match I18n.t('invoice.backdated'), response.body
+    assert_equal original_last, sequence.reload.last_number
+  end
+
+  test "a rejected create still renders a form that would create, not update" do
+    # A backdated issue fails *after* the insert, so this is the path where the
+    # record has to come back out of the rolled-back transaction as new again.
+    post invoices_url,
+         params: {
+           save_and_issue: true,
+           invoice: {
+             date: 2.years.ago,
+             due_date: Date.today + 30,
+             subtotal: 100,
+             iva: 21,
+             total: 121,
+             client_id: clients(:one).id
+           }
+         }
+
+    assert_response :unprocessable_entity
+    # The rolled-back invoice must come back as a new record, or the form
+    # points its PATCH at a row that no longer exists.
+    assert_select "form[action=?][method=?]", invoices_path(locale: I18n.locale), "post"
+    assert_no_match(/name="_method" value="patch"/, response.body)
+  end
+
+  test "issuing a non-draft is refused in the user's language, not with raw exception text" do
+    post issue_invoice_url(@invoice)
+
+    assert_redirected_to invoices_url(locale: I18n.locale)
+    assert_equal I18n.t('invoice.not_a_draft'), flash[:alert]
+  end
+
+  test "an unexpected failure during issue is not swallowed into a flash message" do
+    # A counter that has fallen behind its own series hands out a Number that
+    # is already taken. That is corruption, not user error, and a redirect
+    # saying "could not issue" would hide it behind an endless retry.
+    sequence = invoice_sequences(:default_a_active)
+    sequence.update_column(:last_number, invoices(:one).number - 1)
+
+    post issue_invoice_url(@draft)
+
+    assert_response :internal_server_error
+    assert_nil flash[:alert]
+    assert_equal 'borrador', @draft.reload.status
+    assert_equal invoices(:one).number - 1, sequence.reload.last_number
+  end
+
+  test "cannot issue a draft dated before the last invoice in its series" do
+    sequence = invoice_sequences(:default_a_active)
+    original_last = sequence.last_number
+    @draft.update!(date: 2.years.ago)
+
+    post issue_invoice_url(@draft)
+
+    assert_redirected_to invoices_url(locale: I18n.locale)
+    assert_match I18n.t('invoice.backdated'), flash[:alert]
+    assert_equal original_last, sequence.reload.last_number
+    assert_equal 'borrador', @draft.reload.status
+    assert_nil @draft.number
+  end
+
+  test "cannot destroy a line item of an issued invoice through the invoice form" do
+    line_item = @invoice.line_items.first
+
+    patch invoice_url(@invoice),
+          params: {
+            invoice: {
+              notes: 'tampering',
+              line_items_attributes: { '0' => { id: line_item.id, _destroy: '1' } }
+            }
+          }
+
+    assert_redirected_to invoices_url(locale: I18n.locale)
+    assert_match I18n.t('invoice.update_blocked'), flash[:alert]
+    assert LineItem.exists?(line_item.id)
+  end
+
   test "should show invoice" do
     get invoice_url(@invoice)
     assert_response :success
@@ -282,7 +397,8 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
   test "should not update an issued invoice" do
     patch invoice_url(@invoice), params: { invoice: { total: 99_999 } }
 
-    assert_response :unprocessable_entity
+    assert_redirected_to invoices_url(locale: I18n.locale)
+    assert_match I18n.t('invoice.update_blocked'), flash[:alert]
     assert_equal 121.0, @invoice.reload.total
   end
 

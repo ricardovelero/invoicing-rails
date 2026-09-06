@@ -15,9 +15,10 @@ class InvoiceSeries < ApplicationRecord
                      format: { with: /\A[A-Za-z0-9]+\z/, message: ->(*_args) { I18n.t('prefijo_formato') } },
                      uniqueness: { scope: :user_id }
 
-  # Returns the active sequence for this series, creating one lazily if none exists.
-  def active_sequence
-    invoice_sequences.find_by(active: true) || create_active_sequence
+  # The series' one counter, created on first use. A series never gets a second
+  # one: the unique index refuses it, so numbering cannot restart.
+  def sequence
+    invoice_sequences.first || create_sequence
   end
 
   # Display label for the series (prefix + optional name)
@@ -30,12 +31,12 @@ class InvoiceSeries < ApplicationRecord
   # requires_new so the losing side of a race can recover: Issue calls this
   # inside its own transaction, and without a savepoint the unique violation
   # aborts that transaction before the rescue can query for the winner's row.
-  def create_active_sequence
+  def create_sequence
     transaction(requires_new: true) do
-      invoice_sequences.create!(active: true, last_number: 0)
+      invoice_sequences.create!(last_number: 0)
     end
   rescue ActiveRecord::RecordNotUnique
-    invoice_sequences.find_by!(active: true)
+    invoice_sequences.first!
   end
 
   def normalize_prefix

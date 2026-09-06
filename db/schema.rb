@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_07_29_161000) do
+ActiveRecord::Schema[7.2].define(version: 2026_09_06_160000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -36,11 +36,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_29_161000) do
   create_table "invoice_sequences", force: :cascade do |t|
     t.bigint "invoice_series_id", null: false
     t.integer "last_number", default: 0, null: false
-    t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["invoice_series_id"], name: "index_invoice_sequences_on_invoice_series_id"
-    t.index ["invoice_series_id"], name: "index_invoice_sequences_one_active_per_series", unique: true, where: "active"
+    t.index ["invoice_series_id"], name: "index_invoice_sequences_on_invoice_series_id", unique: true
   end
 
   create_table "invoice_series", force: :cascade do |t|
@@ -72,6 +70,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_07_29_161000) do
     t.index ["series_id", "number"], name: "index_invoices_on_series_id_and_number", unique: true
     t.index ["series_id"], name: "index_invoices_on_series_id"
     t.index ["user_id"], name: "index_invoices_on_user_id"
+    t.check_constraint "status::text = 'borrador'::text OR date IS NOT NULL AND due_date IS NOT NULL", name: "issued_invoices_are_dated"
     t.check_constraint "status::text = 'borrador'::text OR series_id IS NOT NULL AND number IS NOT NULL", name: "issued_invoices_are_numbered"
   end
 
