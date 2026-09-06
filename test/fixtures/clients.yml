@@ -19,10 +19,10 @@ two:
     last_name: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
     nif: 123435610828C
     street: <%= Faker::Lorem.sentence(word_count: 20) %>
-    city: <%= Faker::Lorem.sentence(word_count: 10) %>
-    region: <%= Faker::Lorem.sentence(word_count: 10) %>
+    city: Sant Feliu de Llobregat de la Vall del Riu Congost Nord
+    region: Comunidad Autonoma de Castilla-La Mancha y Extremadura
     postal_code: MyString
-    country: <%= Faker::Lorem.sentence(word_count: 10) %>
+    country: Republica Democratica Federal de las Islas Adyacentes
     email: MyString
     telephone: MyString
     active: false

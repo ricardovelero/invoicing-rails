@@ -21,10 +21,10 @@ two:
     gov_id: 123435610828C
     street_address_1: <%= Faker::Lorem.sentence(word_count: 20) %>
     street_address_2: <%= Faker::Lorem.sentence(word_count: 20) %>
-    city: <%= Faker::Lorem.sentence(word_count: 10) %>
-    region: <%= Faker::Lorem.sentence(word_count: 10) %>
+    city: Sant Feliu de Llobregat de la Vall del Riu Congost Nord
+    region: Comunidad Autonoma de Castilla-La Mancha y Extremadura
     postal_code: 123435610828C
-    country: <%= Faker::Lorem.sentence(word_count: 10) %>
+    country: Republica Democratica Federal de las Islas Adyacentes
     email: 123435610828C@example.com
     phone: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
     company_name: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
