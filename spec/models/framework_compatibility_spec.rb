@@ -45,4 +45,28 @@ RSpec.describe 'Framework compatibility', type: :model do # rubocop:disable Metr
   ensure
     ActionMailer::Base.deliveries.clear
   end
+
+  it 'preserves case-insensitive and Unicode country-name lookups without deprecations' do
+    original_locale = Carmen.i18n_backend.locale
+
+    %i[es en].each do |locale|
+      Carmen.i18n_backend.locale = locale
+
+      %w[ES CI].each do |code|
+        name = Country.alpha_2_coded(code).name
+        [name, name.upcase.unicode_normalize(:nfd), name.dup.force_encoding(Encoding::ASCII_8BIT)].each do |variant|
+          expect(Client.new(country: variant).country_code).to eq(code)
+        end
+      end
+
+      expect(Client.new(country: 'ES').country_code).to eq('ES')
+      expect(Client.new(country: nil).country_code).to eq('ES')
+      expect(Client.new(country: 'unknown country').country_code).to be_nil
+    end
+
+    Carmen.i18n_backend.locale = :en
+    expect(Country.named('ＳＰＡＩＮ')&.alpha_2_code).to eq('ES')
+  ensure
+    Carmen.i18n_backend.locale = original_locale
+  end
 end
