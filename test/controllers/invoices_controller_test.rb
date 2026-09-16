@@ -321,10 +321,11 @@ class InvoicesControllerTest < ActionDispatch::IntegrationTest
     sequence = invoice_sequences(:default_a_active)
     sequence.update_column(:last_number, invoices(:one).number - 1)
 
-    post issue_invoice_url(@draft)
+    error = assert_raises ActiveRecord::RecordNotUnique do
+      post issue_invoice_url(@draft)
+    end
 
-    assert_response :internal_server_error
-    assert_nil flash[:alert]
+    assert_match 'index_invoices_on_series_id_and_number', error.message
     assert_equal 'borrador', @draft.reload.status
     assert_equal invoices(:one).number - 1, sequence.reload.last_number
   end

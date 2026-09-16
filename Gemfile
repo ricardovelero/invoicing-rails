@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '~> 3.3'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.2.1'
+gem 'rails', '8.0.5.1'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
@@ -27,7 +27,7 @@ gem 'turbo-rails'
 gem 'stimulus-rails'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem 'jbuilder'
+gem 'jbuilder', '>= 2.13'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
@@ -55,6 +55,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri]
   gem 'faker'
   gem 'minitest', '~> 5.0'
+  gem 'rspec-rails', '~> 8.0'
 end
 
 group :development do
@@ -73,7 +74,7 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem 'capybara'
+  gem 'capybara', '>= 3.40'
   gem 'selenium-webdriver'
   # gem 'webdrivers'
 end
