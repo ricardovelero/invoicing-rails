@@ -12,6 +12,7 @@ Primary technologies:
 - Tailwind CSS
 - Import Maps
 - Minitest
+- RSpec
 - Capybara
 
 ---
@@ -211,17 +212,22 @@ bin/rails console
 
 ## Testing
 
-bin/rails test
+`bin/ci` runs the same checks as the GitHub Actions pull-request workflow:
+test database preparation, Zeitwerk, RSpec, Minitest, and headless Chrome system tests.
+It resets the test database and refuses to run with a non-test `RAILS_ENV`.
+PostgreSQL and Chrome must be available locally. Use `DATABASE_URL` to override
+the test connection when needed; never point it at development or production data.
 
-bin/rails test:system
+Individual suites:
 
-bin/ci
+- `bundle exec rspec`
+- `bin/rails test`
+- `bin/rails test:system`
 
 ## Quality
 
-bin/rubocop
-
-bin/brakeman
+`bundle exec rubocop` (there is no `bin/rubocop` wrapper).
+Brakeman is not installed in this project; there is no `bin/brakeman` command.
 
 ## Database
 

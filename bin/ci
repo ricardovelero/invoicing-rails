@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+if [[ "${RAILS_ENV:-test}" != "test" ]]; then
+  echo "bin/ci must run in the test environment" >&2
+  exit 1
+fi
+
+export RAILS_ENV=test
+
+echo "== Preparing the test database =="
+# Eager loading needs the schema to exist before loading the onboarding controller.
+CI= bin/rails db:test:prepare
+
+echo "== Checking autoloading =="
+bin/rails zeitwerk:check
+
+echo "== Running RSpec =="
+bundle exec rspec
+
+echo "== Running Minitest =="
+bin/rails test
+
+echo "== Running browser tests =="
+bin/rails test:system
