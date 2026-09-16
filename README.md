@@ -13,7 +13,7 @@ You need to setup database credentials to use local environmental variables or s
 ## Testing
 
 Run `bin/ci` with PostgreSQL and Chrome available. It resets the test database,
-checks autoloading, and runs RSpec, Minitest, and browser tests. The same command
+checks autoloading, builds Tailwind CSS, and runs RSpec, Minitest, and browser tests. The same command
 runs on pull requests in GitHub Actions. A custom `DATABASE_URL` must point only
 to a disposable test database.
 

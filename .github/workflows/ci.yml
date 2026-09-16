@@ -18,7 +18,9 @@ jobs:
 
     env:
       RAILS_ENV: test
-      DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/invoicing_test
+      DATABASE_URL: postgres://postgres@127.0.0.1:5432/invoicing_test
+      # Disposable test-only authentication value, not a production secret.
+      PGPASSWORD: ${{ github.run_id }}-${{ github.run_attempt }}
       SECRET_KEY_BASE_DUMMY: "1"
 
     services:
@@ -26,10 +28,10 @@ jobs:
         image: postgres:16
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: ${{ github.run_id }}-${{ github.run_attempt }}
           POSTGRES_DB: invoicing_test
         ports:
-          - 5432:5432
+          - 127.0.0.1:5432:5432
         options: >-
           --health-cmd "pg_isready -U postgres -d invoicing_test"
           --health-interval 10s

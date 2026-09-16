@@ -213,7 +213,8 @@ bin/rails console
 ## Testing
 
 `bin/ci` runs the same checks as the GitHub Actions pull-request workflow:
-test database preparation, Zeitwerk, RSpec, Minitest, and headless Chrome system tests.
+test database preparation, Zeitwerk, Tailwind CSS compilation, RSpec, Minitest,
+and headless Chrome system tests.
 It resets the test database and refuses to run with a non-test `RAILS_ENV`.
 PostgreSQL and Chrome must be available locally. Use `DATABASE_URL` to override
 the test connection when needed; never point it at development or production data.

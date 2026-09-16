@@ -17,6 +17,9 @@ CI= bin/rails db:test:prepare
 echo "== Checking autoloading =="
 bin/rails zeitwerk:check
 
+echo "== Building Tailwind CSS =="
+bin/rails tailwindcss:build
+
 echo "== Running RSpec =="
 bundle exec rspec
 
