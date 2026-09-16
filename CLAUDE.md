@@ -6,7 +6,7 @@ The application follows standard Rails conventions wherever possible. New featur
 
 Primary technologies:
 
-- Ruby on Rails 7
+- Ruby on Rails 8.0.5.1
 - PostgreSQL
 - Hotwire (Turbo + Stimulus)
 - Tailwind CSS
