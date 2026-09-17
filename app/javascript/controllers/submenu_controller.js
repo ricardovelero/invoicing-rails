@@ -12,6 +12,11 @@ export default class extends Controller {
 
   connect() {
     this.openValue = sessionStorage.getItem(this.keyValue) === "true";
+    // Stimulus fires openValueChanged for the value's default while connecting,
+    // before this read. Flag that we've restored from storage so the callback
+    // only persists genuine changes and never clobbers the saved state on the
+    // next navigation.
+    this.restored = true;
     this.sync();
   }
 
@@ -32,6 +37,7 @@ export default class extends Controller {
   }
 
   openValueChanged() {
+    if (!this.restored) return;
     sessionStorage.setItem(this.keyValue, this.openValue);
     this.sync();
   }

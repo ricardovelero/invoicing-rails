@@ -14,6 +14,12 @@ export default class extends Controller {
   connect() {
     this.openValue = sessionStorage.getItem("sidebar-open") === "true";
     this.expandedValue = localStorage.getItem("sidebar-expanded") === "true";
+    // Stimulus fires the *ValueChanged callbacks for their defaults while
+    // connecting, before these reads. Flag that we've restored from storage so
+    // the callbacks only persist genuine changes (including expandedValue
+    // written by submenu controllers through the outlet) and never clobber the
+    // saved state on the next navigation.
+    this.restored = true;
     this.sync();
     this.syncExpanded();
   }
@@ -37,6 +43,7 @@ export default class extends Controller {
   }
 
   openValueChanged() {
+    if (!this.restored) return;
     sessionStorage.setItem("sidebar-open", this.openValue);
     this.sync();
   }
@@ -62,6 +69,7 @@ export default class extends Controller {
   }
 
   expandedValueChanged() {
+    if (!this.restored) return;
     localStorage.setItem("sidebar-expanded", this.expandedValue);
     this.syncExpanded();
   }
