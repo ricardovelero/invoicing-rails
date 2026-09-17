@@ -1,13 +1,19 @@
 import { Dropdown } from "tailwindcss-stimulus-components";
 
-// Extends the shared Dropdown component from tailwindcss-stimulus-components.
+// Thin subclass of the library Dropdown controller.
 //
-// The vendored v3.0.4 `hide(event)` only closes the menu when the click lands
-// outside the controller element, so it can't be used for Escape-to-close while
-// focus is still inside the menu. `close()` dismisses unconditionally and is
-// wired to `keydown.esc@window` and to in-menu item clicks.
+// As of v6 the component closes on outside-click and on Escape natively via
+// hide() (closeOnEscape/closeOnClickOutside values) and exposes close(), so the
+// previous Escape workaround is no longer needed. The only reason left to
+// extend it is the user-menu chevron rotation, which the library gives no
+// state hook for.
 export default class extends Dropdown {
-  close() {
-    this.openValue = false;
+  static targets = ["chevron"];
+
+  openValueChanged() {
+    super.openValueChanged();
+    if (this.hasChevronTarget) {
+      this.chevronTarget.classList.toggle("rotate-180", this.openValue);
+    }
   }
 }
