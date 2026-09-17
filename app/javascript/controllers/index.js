@@ -10,6 +10,9 @@ application.register("charts", ChartsController)
 import ClientselectController from "./clientselect_controller"
 application.register("clientselect", ClientselectController)
 
+import DropdownController from "./dropdown_controller"
+application.register("dropdown", DropdownController)
+
 import FilterController from "./filter_controller"
 application.register("filter", FilterController)
 
