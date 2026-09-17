@@ -11,7 +11,9 @@ import ClientselectController from "./clientselect_controller"
 application.register("clientselect", ClientselectController)
 
 import DropdownController from "./dropdown_controller"
+import SidebarController from "./sidebar_controller"
 application.register("dropdown", DropdownController)
+application.register("sidebar", SidebarController)
 
 import FilterController from "./filter_controller"
 application.register("filter", FilterController)
