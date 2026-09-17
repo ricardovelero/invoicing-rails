@@ -4,15 +4,18 @@ import { Controller } from "@hotwired/stimulus";
 // on <body>. It is registered on <body> so the navbar hamburger and the sidebar
 // drawer/backdrop (rendered from separate partials) share one controller scope.
 //
-// Currently owns the mobile drawer (`open`, persisted in sessionStorage). The
-// desktop `sidebar-expanded` rail is still handled by Alpine until Phase 4b.
+// Owns the mobile drawer (`open`, persisted in sessionStorage) and the desktop
+// collapsed/expanded rail (`expanded`, persisted in localStorage, driving the
+// `sidebar-expanded` <body> class that the lg:sidebar-expanded:* variants use).
 export default class extends Controller {
   static targets = ["backdrop", "drawer", "toggle"];
-  static values = { open: Boolean };
+  static values = { open: Boolean, expanded: Boolean };
 
   connect() {
     this.openValue = sessionStorage.getItem("sidebar-open") === "true";
+    this.expandedValue = localStorage.getItem("sidebar-expanded") === "true";
     this.sync();
+    this.syncExpanded();
   }
 
   // Mobile hamburger / drawer close button. stopPropagation keeps this click
@@ -50,5 +53,20 @@ export default class extends Controller {
       this.backdropTarget.classList.toggle("pointer-events-none", !open);
     }
     this.toggleTargets.forEach((el) => el.setAttribute("aria-expanded", String(open)));
+  }
+
+  // Desktop rail expand/collapse. Submenu controllers read/write `expandedValue`
+  // through a Stimulus outlet to reproduce "click a collapsed menu -> expand".
+  toggleExpanded() {
+    this.expandedValue = !this.expandedValue;
+  }
+
+  expandedValueChanged() {
+    localStorage.setItem("sidebar-expanded", this.expandedValue);
+    this.syncExpanded();
+  }
+
+  syncExpanded() {
+    this.element.classList.toggle("sidebar-expanded", this.expandedValue);
   }
 }

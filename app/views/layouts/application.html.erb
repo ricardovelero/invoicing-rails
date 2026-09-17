@@ -7,10 +7,7 @@
   <body 
     class="font-inter antialiased bg-slate-100 text-slate-600"
     data-controller="sidebar"
-    data-action="click@window->sidebar#hide keydown.esc@window->sidebar#close"
-    :class="{ 'sidebar-expanded': sidebarExpanded }"
-    x-data="{ sidebarExpanded: localStorage.getItem('sidebar-expanded') == 'true' }"
-    x-init="$watch('sidebarExpanded', value => localStorage.setItem('sidebar-expanded', value))">
+    data-action="click@window->sidebar#hide keydown.esc@window->sidebar#close">
     <script>
       if (localStorage.getItem('sidebar-expanded') == 'true') {
           document.querySelector('body').classList.add('sidebar-expanded');
