@@ -73,7 +73,10 @@
                         <% end %>
                     </li>
                     <!-- Invoices -->
-                    <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" x-data="{ open: false }">
+                    <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                        x-data="{ open: sessionStorage.getItem('sidebar-submenu-invoices') == 'true' }"
+                        x-init="$watch('open', value => sessionStorage.setItem('sidebar-submenu-invoices', value))"
+                        @click.outside="open = false">
                         <a class="sidebar_link" href="" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
@@ -113,7 +116,10 @@
                         </div>
                     </li>
                     <!-- Clients -->
-                    <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" x-data="{ open: false }">
+                    <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                        x-data="{ open: sessionStorage.getItem('sidebar-submenu-clients') == 'true' }"
+                        x-init="$watch('open', value => sessionStorage.setItem('sidebar-submenu-clients', value))"
+                        @click.outside="open = false">
                         <a class="sidebar_link" href="" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
@@ -147,7 +153,10 @@
                         </div>
                     </li>
                     <!-- Items -->
-                    <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" x-data="{ open: false }">
+                    <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                        x-data="{ open: sessionStorage.getItem('sidebar-submenu-items') == 'true' }"
+                        x-init="$watch('open', value => sessionStorage.setItem('sidebar-submenu-items', value))"
+                        @click.outside="open = false">
                         <a class="sidebar_link" href="" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
@@ -182,7 +191,10 @@
                         </div>
                     </li>
                     <!-- Settings -->
-                    <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" x-data="{ open: false }">
+                    <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0"
+                        x-data="{ open: sessionStorage.getItem('sidebar-submenu-settings') == 'true' }"
+                        x-init="$watch('open', value => sessionStorage.setItem('sidebar-submenu-settings', value))"
+                        @click.outside="open = false">
                         <a class="sidebar_link" href="" @click.prevent="sidebarExpanded ? open = !open : sidebarExpanded = true">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
