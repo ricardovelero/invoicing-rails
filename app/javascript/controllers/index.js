@@ -49,3 +49,6 @@ application.register("removeitem", RemoveitemController)
 
 import SelectController from "./select_controller"
 application.register("select", SelectController)
+
+import SelectAllController from "./select_all_controller"
+application.register("select-all", SelectAllController)

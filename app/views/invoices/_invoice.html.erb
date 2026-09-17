@@ -4,7 +4,7 @@
                             <div class="flex items-center">
                                 <label class="inline-flex">
                                     <span class="sr-only"><%= t("seleccionar") %></span>
-                                    <input class="table-item form-checkbox" type="checkbox" @click="uncheckParent" />
+                                    <input class="table-item form-checkbox" type="checkbox" data-select-all-target="item" data-action="change->select-all#uncheckParent" />
                                 </label>
                             </div>
                         </td>
