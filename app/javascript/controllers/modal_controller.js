@@ -18,7 +18,13 @@ export default class extends Controller {
     this.modalTarget.classList.remove("opacity-0", "pointer-events-none");
   }
 
+  // Bound to a window-scoped Escape (keydown.esc@window) so the dialog closes
+  // even while focus is still on the trigger that opened it and the loaded form
+  // has not been interacted with yet. Guard on the open state so that global
+  // listener is a no-op - and does not swallow the key press - when no modal is
+  // showing.
   close(event) {
+    if (this.modalTarget.classList.contains("pointer-events-none")) return;
     event.stopPropagation();
     this.modalTarget.classList.add("opacity-0", "pointer-events-none");
   }
