@@ -1,8 +1,9 @@
 import { Application } from "@hotwired/stimulus";
-import { Tabs, Toggle } from "tailwindcss-stimulus-components";
+import { Alert, Tabs, Toggle } from "tailwindcss-stimulus-components";
 
 const application = Application.start();
 
+application.register("alert", Alert);
 application.register("tabs", Tabs);
 application.register("toggle", Toggle);
 

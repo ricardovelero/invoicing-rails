@@ -10,6 +10,13 @@ application.register("charts", ChartsController)
 import ClientselectController from "./clientselect_controller"
 application.register("clientselect", ClientselectController)
 
+import DropdownController from "./dropdown_controller"
+import SidebarController from "./sidebar_controller"
+import SubmenuController from "./submenu_controller"
+application.register("dropdown", DropdownController)
+application.register("sidebar", SidebarController)
+application.register("submenu", SubmenuController)
+
 import FilterController from "./filter_controller"
 application.register("filter", FilterController)
 
@@ -42,3 +49,6 @@ application.register("removeitem", RemoveitemController)
 
 import SelectController from "./select_controller"
 application.register("select", SelectController)
+
+import SelectAllController from "./select_all_controller"
+application.register("select-all", SelectAllController)
