@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "tailwindcss-stimulus-components": "^3.0.4"
+    "tailwindcss-stimulus-components": "^6.1.4"
   },
   "packageManager": "pnpm@10.30.3"
 }
