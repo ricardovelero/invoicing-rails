@@ -1,10 +1,9 @@
 <div class="modal opacity-0 pointer-events-none z-50" tabindex="-1" 
       data-controller="modal" 
-      data-action="turbo:frame-load->modal#open turbo:submit-end->modal#close keydown.esc->modal#close"
+      data-action="turbo:frame-load->modal#open turbo:submit-end->modal#close keydown.esc->modal#close click->modal#closeOnClickOutside"
   data-modal-target="modal"
-  x-data="{ invokeStimulusClose: function() { dispatchEvent(new CustomEvent('invokeStimulusClose')); } }"
   >
-  <div class="modal-content" x-on:click.away="invokeStimulusClose()" x-ref="modal">
+  <div class="modal-content" data-modal-target="content">
     <%= turbo_frame_tag "modal" %>
   </div>
 </div>
