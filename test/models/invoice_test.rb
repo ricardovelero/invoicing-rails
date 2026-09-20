@@ -294,6 +294,19 @@ class InvoiceTest < ActiveSupport::TestCase
     assert line_item.persisted?
   end
 
+  test 'pdf_line_items reflects the frozen line item, not a later edit to the item' do
+    invoice = invoices(:one)
+    line_item = invoice.line_items.first
+    original_name = line_item.item_name
+    original_price = line_item.price
+
+    line_item.item.update!(item_name: 'Renamed after issuing', price: 1, iva: 4)
+
+    row = invoice.pdf_line_items.find { |r| r[0] == original_name }
+    assert row, 'expected the pdf line items to still list the original item name'
+    assert_equal ActionController::Base.helpers.number_to_currency(original_price), row[2]
+  end
+
   test 'database rejects an issued invoice with no number' do
     invoice = invoices(:one)
 

@@ -210,8 +210,8 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
     the_line_items << ['<b>' + I18n.t('item') + '</b>', '<b>' + I18n.t('cantidad') + '</b>', '<b>' + I18n.t('importe') + '</b>',
                        '<b>' + I18n.t('iva') + '</b>', '<b>' + I18n.t('monto') + '</b>']
     line_items.map do |l|
-      line = [l.item.item_name, l.quantity, ActionController::Base.helpers.number_to_currency(l.item.price),
-              l.item.iva, ActionController::Base.helpers.number_to_currency((l.item.price * l.quantity * (1 + l.item.iva / 100)))]
+      line = [l.item_name, l.quantity, ActionController::Base.helpers.number_to_currency(l.price),
+              l.iva, ActionController::Base.helpers.number_to_currency(l.total_price)]
       the_line_items << line
     end
     the_line_items << [nil, nil, nil, I18n.t('subtotal'), ActionController::Base.helpers.number_to_currency(subtotal)]
