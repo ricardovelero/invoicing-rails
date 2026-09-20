@@ -10,62 +10,62 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_09_20_160909) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_20_160909) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
   enable_extension "unaccent"
 
   create_table "clients", force: :cascade do |t|
+    t.boolean "active", default: true
+    t.string "city"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.string "email"
     t.string "first_name"
     t.string "last_name"
     t.string "nif"
-    t.string "street"
-    t.string "city"
-    t.string "region"
     t.string "postal_code"
-    t.string "country"
-    t.string "email"
+    t.string "region"
+    t.string "street"
     t.string "telephone"
-    t.boolean "active", default: true
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
   create_table "invoice_sequences", force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.bigint "invoice_series_id", null: false
     t.integer "last_number", default: 0, null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["invoice_series_id"], name: "index_invoice_sequences_on_invoice_series_id", unique: true
   end
 
   create_table "invoice_series", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "prefix", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "name"
+    t.string "prefix", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["user_id", "prefix"], name: "index_invoice_series_on_user_id_and_prefix", unique: true
     t.index ["user_id"], name: "index_invoice_series_on_user_id"
   end
 
   create_table "invoices", force: :cascade do |t|
+    t.bigint "client_id"
+    t.datetime "created_at", null: false
     t.datetime "date"
     t.datetime "due_date"
-    t.decimal "subtotal", default: "0.0"
-    t.decimal "iva", default: "0.0"
     t.decimal "irpf", default: "0.0"
-    t.decimal "total", default: "0.0"
+    t.decimal "iva", default: "0.0"
     t.text "notes"
-    t.datetime "created_at", null: false
+    t.integer "number"
+    t.bigint "series_id"
+    t.string "status"
+    t.decimal "subtotal", default: "0.0"
+    t.decimal "total", default: "0.0"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.bigint "client_id"
-    t.string "status"
-    t.bigint "series_id"
-    t.integer "number"
     t.index ["client_id"], name: "index_invoices_on_client_id"
     t.index ["series_id", "number"], name: "index_invoices_on_series_id_and_number", unique: true
     t.index ["series_id"], name: "index_invoices_on_series_id"
@@ -75,70 +75,70 @@ ActiveRecord::Schema[7.2].define(version: 2026_09_20_160909) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.string "item_name"
-    t.text "description"
-    t.decimal "price", precision: 8, scale: 2
-    t.decimal "iva"
     t.datetime "created_at", null: false
+    t.text "description"
+    t.string "item_name"
+    t.decimal "iva"
+    t.decimal "price", precision: 8, scale: 2
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "line_items", force: :cascade do |t|
-    t.bigint "item_id", null: false
-    t.bigint "invoice_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.float "quantity", null: false
-    t.decimal "price", precision: 8, scale: 2, null: false
-    t.decimal "iva", null: false
-    t.decimal "total", null: false
+    t.bigint "invoice_id", null: false
+    t.bigint "item_id", null: false
     t.string "item_name", null: false
+    t.decimal "iva", null: false
+    t.decimal "price", precision: 8, scale: 2, null: false
+    t.float "quantity", null: false
+    t.decimal "total", null: false
+    t.datetime "updated_at", null: false
     t.index ["invoice_id"], name: "index_line_items_on_invoice_id"
     t.index ["item_id"], name: "index_line_items_on_item_id"
   end
 
   create_table "user_profiles", force: :cascade do |t|
+    t.string "city"
+    t.string "company_name"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.string "first_name"
     t.string "gov_id"
+    t.boolean "is_freelance"
+    t.string "last_name"
+    t.string "locale"
+    t.string "phone"
+    t.string "postal_code"
+    t.string "region"
     t.string "street_address_1"
     t.string "street_address_2"
-    t.string "city"
-    t.string "region"
-    t.string "postal_code"
-    t.string "country"
-    t.string "phone"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_freelance"
-    t.string "company_name"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "locale"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_user_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
+    t.datetime "confirmation_sent_at"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-    t.integer "failed_attempts", default: 0, null: false
-    t.string "unlock_token"
-    t.datetime "locked_at"
     t.datetime "created_at", null: false
+    t.datetime "current_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.integer "failed_attempts", default: 0, null: false
+    t.datetime "last_sign_in_at"
+    t.string "last_sign_in_ip"
+    t.datetime "locked_at"
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
+    t.integer "sign_in_count", default: 0, null: false
+    t.string "unconfirmed_email"
+    t.string "unlock_token"
     t.datetime "updated_at", null: false
     t.bigint "user_profile_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
