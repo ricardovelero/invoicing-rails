@@ -3,7 +3,7 @@
 # Invoice Line Item model
 class LineItem < ApplicationRecord
   belongs_to :invoice
-  belongs_to :item, optional: true
+  belongs_to :item
 
   validates :quantity, presence: true
   validate :invoice_not_issued
