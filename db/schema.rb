@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_09_06_160000) do
+ActiveRecord::Schema[7.2].define(version: 2026_09_20_160909) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -94,6 +94,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_09_06_160000) do
     t.decimal "price", precision: 8, scale: 2, null: false
     t.decimal "iva", null: false
     t.decimal "total", null: false
+    t.string "item_name", null: false
     t.index ["invoice_id"], name: "index_line_items_on_invoice_id"
     t.index ["item_id"], name: "index_line_items_on_item_id"
   end
