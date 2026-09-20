@@ -43,6 +43,10 @@ class InvoiceSeriesController < ApplicationController
     if @series.update(series_params)
       redirect_to invoice_series_index_path, notice: I18n.t('serie_actualizada')
     else
+      # The field is about to re-render readonly, but readonly fields are
+      # still submitted -- left at the rejected attempted value, every retry
+      # (even a name-only one) would resubmit and fail the same way forever.
+      @series.prefix = @series.prefix_was if @series.prefix_locked?
       render :edit, status: :unprocessable_entity
     end
   end

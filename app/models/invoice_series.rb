@@ -34,6 +34,14 @@ class InvoiceSeries < ApplicationRecord
     name.present? ? "#{prefix} — #{name}" : prefix
   end
 
+  # True once any invoice on this series holds a Number -- draft or issued --
+  # past which #prefix is frozen (see #prefix_immutable_once_issued). Shared
+  # with the edit form and controller so the UI and the enforced rule can't
+  # drift apart the way they did when the view checked status instead.
+  def prefix_locked?
+    invoices.where.not(number: nil).exists?
+  end
+
   private
 
   # requires_new so the losing side of a race can recover: Issue calls this
@@ -62,7 +70,7 @@ class InvoiceSeries < ApplicationRecord
   # (or fully absent) result instead of a half-finished one.
   def prefix_immutable_once_issued
     sequence.lock!
-    return unless invoices.where.not(number: nil).exists?
+    return unless prefix_locked?
 
     errors.add(:prefix, I18n.t('prefijo_bloqueado'))
     throw :abort

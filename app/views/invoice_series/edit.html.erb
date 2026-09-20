@@ -15,7 +15,7 @@
         </div>
       <% end %>
 
-      <% prefix_locked = @series.invoices.issued.exists? %>
+      <% prefix_locked = @series.prefix_locked? %>
       <div class="my-5">
         <%= f.label :prefix, t("prefijo"), class: "input-label" %>
         <div class="relative mt-1 rounded-md shadow-sm">
