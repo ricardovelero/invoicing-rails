@@ -6,7 +6,8 @@ The application follows standard Rails conventions wherever possible. New featur
 
 Primary technologies:
 
-- Ruby on Rails 8.0.5.1
+- Ruby on Rails 8.1.3.1
+- Ruby 3.3
 - PostgreSQL
 - Hotwire (Turbo + Stimulus)
 - Tailwind CSS
@@ -23,9 +24,9 @@ Always prefer consistency over cleverness.
 
 When solving a task:
 
-- Make the smallest change that fully solves the problem.
-- Extend existing patterns before creating new ones.
 - Follow Rails conventions first.
+- Extend existing patterns before creating new ones.
+- Make the smallest change that fully solves the problem.
 - Avoid introducing unnecessary abstractions.
 - Avoid speculative improvements.
 - Do not add new gems unless explicitly requested.
@@ -135,6 +136,8 @@ Business logic belongs on the server.
 # Forms and Icons
 
 The app uses Simple Forms.
+Use simple forms for new forms.
+Use SVG icons that follow the same design as already we have in the app.
 
 ---
 
