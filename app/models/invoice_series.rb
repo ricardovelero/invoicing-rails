@@ -14,7 +14,14 @@ class InvoiceSeries < ApplicationRecord
   validates :prefix, presence: true,
                      format: { with: /\A[A-Za-z0-9]+\z/, message: ->(*_args) { I18n.t('prefijo_formato') } },
                      uniqueness: { scope: :user_id }
-  validate :prefix_immutable_once_issued
+
+  # before_update, not validate: validations run before update opens its
+  # transaction, so a lock taken there is released before the UPDATE ever
+  # runs and cannot serialize against a concurrent Invoice#assign_number!,
+  # which locks this same sequence row via InvoiceSequence#reserve_next!.
+  # before_update runs inside update's own transaction, so the lock is held
+  # until commit and the two operations block each other instead of racing.
+  before_update :prefix_immutable_once_issued, if: :prefix_changed?
 
   # The series' one counter, created on first use. A series never gets a second
   # one: the unique index refuses it, so numbering cannot restart.
@@ -25,6 +32,14 @@ class InvoiceSeries < ApplicationRecord
   # Display label for the series (prefix + optional name)
   def display_name
     name.present? ? "#{prefix} — #{name}" : prefix
+  end
+
+  # True once any invoice on this series holds a Number -- draft or issued --
+  # past which #prefix is frozen (see #prefix_immutable_once_issued). Shared
+  # with the edit form and controller so the UI and the enforced rule can't
+  # drift apart the way they did when the view checked status instead.
+  def prefix_locked?
+    invoices.where.not(number: nil).exists?
   end
 
   private
@@ -44,12 +59,20 @@ class InvoiceSeries < ApplicationRecord
     self.prefix = prefix.to_s.upcase if prefix.present?
   end
 
-  # display_number reads prefix live off the series, so changing it after the
-  # series has issued invoices would silently rewrite their historical numbers.
+  # display_number reads prefix live off the series, so changing it after any
+  # invoice holds a Number would silently rewrite its displayed identity --
+  # gated on number, not status, same as Invoice#immutable_once_issued: a
+  # draft can hold a Number too (Invoice#assign_number! is public and never
+  # itself flips status), and its display_number is just as live.
+  # Locks the sequence row first -- the same row a concurrent first Issue
+  # locks -- so the two cannot interleave: whichever gets here first makes
+  # the other wait, and the loser's re-check below sees a fully committed
+  # (or fully absent) result instead of a half-finished one.
   def prefix_immutable_once_issued
-    return unless persisted? && prefix_changed?
-    return unless invoices.issued.exists?
+    sequence.lock!
+    return unless prefix_locked?
 
     errors.add(:prefix, I18n.t('prefijo_bloqueado'))
+    throw :abort
   end
 end

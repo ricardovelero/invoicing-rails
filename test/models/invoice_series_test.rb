@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class InvoiceSeriesTest < ActiveSupport::TestCase
@@ -100,23 +102,36 @@ class InvoiceSeriesTest < ActiveSupport::TestCase
 
   test 'prefix cannot change once the series has issued invoices' do
     series = invoice_series(:default_a)
-    series.prefix = 'Z'
 
-    assert_not series.valid?
+    assert_not series.update(prefix: 'Z')
     assert series.errors[:prefix].any?
+    assert_equal 'A', series.reload.prefix
   end
 
   test 'name can still change once the series has issued invoices' do
     series = invoice_series(:default_a)
-    series.name = 'Ordinary invoices'
 
-    assert series.valid?
+    assert series.update(name: 'Ordinary invoices')
+  end
+
+  test 'prefix cannot change once the series has a numbered draft invoice' do
+    # assign_number! is public and never itself flips status: a draft can
+    # hold a Number (and thus a live display_number) without being "issued".
+    series = InvoiceSeries.create!(user: users(:first), prefix: 'D')
+    invoice = Invoice.create!(user: users(:first), client: clients(:one), date: Date.today,
+                              due_date: Date.today + 30, status: 'borrador',
+                              subtotal: 100, iva: 21, total: 121)
+    Invoice.transaction { invoice.assign_number!(series) }
+    assert_equal 'borrador', invoice.reload.status
+
+    assert_not series.update(prefix: 'E')
+    assert series.errors[:prefix].any?
+    assert_equal 'D', series.reload.prefix
   end
 
   test 'prefix can change on a series with no issued invoices' do
     series = InvoiceSeries.create!(user: users(:first), prefix: 'B')
-    series.prefix = 'C'
 
-    assert series.valid?
+    assert series.update(prefix: 'C')
   end
 end

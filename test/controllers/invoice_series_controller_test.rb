@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
@@ -8,6 +10,13 @@ class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
   test 'should get index' do
     get invoice_series_index_url
     assert_response :success
+  end
+
+  test 'index edit link is accessibly labeled as editing a series' do
+    get invoice_series_index_url
+    assert_select "a[href^=?]", edit_invoice_series_path(invoice_series(:default_a)) do
+      assert_select '.sr-only', text: I18n.t('editar_serie')
+    end
   end
 
   test 'should get new' do
@@ -98,6 +107,26 @@ class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to invoice_series_index_url(locale: I18n.locale)
     assert_equal 'C', series.reload.prefix
+  end
+
+  test 'retains the persisted prefix, not the rejected attempt, when a rename is rejected' do
+    # Simulate the race: the edit page was opened while the series was still
+    # unused, but an invoice got numbered on it before the rename submitted.
+    series = InvoiceSeries.create!(user: users(:first), prefix: 'B')
+    invoice = Invoice.create!(user: users(:first), client: clients(:one), date: Date.today,
+                              due_date: Date.today + 30, status: 'borrador',
+                              subtotal: 100, iva: 21, total: 121)
+    Invoice.transaction { invoice.assign_number!(series) }
+
+    patch invoice_series_url(series), params: { invoice_series: { prefix: 'Z' } }
+
+    assert_response :unprocessable_entity
+    assert_equal 'B', series.reload.prefix
+    # The re-rendered field must show the real, persisted prefix: it is about
+    # to go readonly, and a readonly field still submits its value -- left at
+    # the rejected 'Z', every retry (even a name-only one) would resubmit and
+    # fail the same way forever.
+    assert_select "input[name='invoice_series[prefix]'][value=?][readonly]", 'B'
   end
 
   test "user cannot edit another user's series" do
