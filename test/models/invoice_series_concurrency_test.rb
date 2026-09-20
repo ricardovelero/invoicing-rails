@@ -48,8 +48,15 @@ class InvoiceSeriesConcurrencyTest < ActiveSupport::TestCase
     assert @renamer.alive?, 'rename should still be blocked, not finished'
 
     @release_issuer << true
-    safe_join(@issuer)
-    safe_join(@renamer)
+    # Plain, non-swallowing joins: if either thread raised (a broken
+    # implementation, an unexpected DB error), that must fail this test, not
+    # disappear -- swallowing here would leave rename_succeeded at its
+    # initial nil, and assert_not below would pass on a thread that never
+    # actually ran to completion. safe_join's swallowing belongs in teardown
+    # only, where it must never mask the real failure or hang on a still-held
+    # lock.
+    @issuer.join(5)
+    @renamer.join(5)
 
     assert result[:issued_invoice].persisted?
     assert_not result[:rename_succeeded], 'rename should be rejected: the series now has an issued invoice'
