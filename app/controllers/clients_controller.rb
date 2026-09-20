@@ -37,13 +37,7 @@ class ClientsController < ApplicationController
   end
 
   def destroy
-    if @client.destroy
-      redirect_to clients_url, notice: I18n.t('client_destroyed')
-    else
-      redirect_to clients_url,
-                  alert: @client.errors.full_messages.to_sentence,
-                  status: :see_other
-    end
+    respond_to { |format| handle_destroy_response(format) }
   end
 
   private
@@ -91,6 +85,20 @@ class ClientsController < ApplicationController
       format.turbo_stream { flash.now[:success] = I18n.t('client_updated') }
     else
       format.html { render :edit, status: :unprocessable_entity }
+      format.json { render json: @client.errors, status: :unprocessable_entity }
+    end
+  end
+
+  def handle_destroy_response(format) # rubocop:disable Metrics/MethodLength
+    if @client.destroy
+      format.html { redirect_to clients_url, notice: I18n.t('client_destroyed') }
+      format.json { head :no_content }
+    else
+      format.html do
+        redirect_to clients_url,
+                    alert: @client.errors.full_messages.to_sentence,
+                    status: :see_other
+      end
       format.json { render json: @client.errors, status: :unprocessable_entity }
     end
   end

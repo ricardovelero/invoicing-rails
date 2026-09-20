@@ -89,4 +89,25 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to clients_url(locale: I18n.locale)
     assert_not_empty flash[:alert]
   end
+
+  test 'should destroy client without invoices as json' do
+    client = clients(:client_without_invoices)
+
+    assert_difference('Client.count', -1) do
+      delete client_url(client, format: :json)
+    end
+
+    assert_response :no_content
+  end
+
+  test 'should not destroy client with invoices as json' do
+    client = clients(:client_with_invoices)
+
+    assert_no_difference('Client.count') do
+      delete client_url(client, format: :json)
+    end
+
+    assert_response :unprocessable_entity
+    assert_not_empty response.parsed_body
+  end
 end
