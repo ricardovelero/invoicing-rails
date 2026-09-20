@@ -2,7 +2,7 @@
 
 # Invoice model including search with association
 class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
-  belongs_to :client, optional: true
+  belongs_to :client
   belongs_to :user
   belongs_to :series, class_name: 'InvoiceSeries', optional: true
 
