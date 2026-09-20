@@ -62,4 +62,21 @@ class ClientTest < ActiveSupport::TestCase
     assert client.invalid?
     assert_equal [I18n.translate('errors.messages.taken')], client.errors[:nif]
   end
+
+  test 'client nif uniqueness ignores case and surrounding whitespace' do
+    client =
+      Client.new(
+        first_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        nif: " #{clients(:one).nif.downcase} ",
+        street: Faker::Address.street_name,
+        city: Faker::Address.city,
+        region: 'Madrid',
+        postal_code: Faker::Address.zip,
+        country: 'ES',
+        user_id: clients(:one).user_id
+      )
+    assert client.invalid?
+    assert_equal [I18n.translate('errors.messages.taken')], client.errors[:nif]
+  end
 end
