@@ -12,6 +12,13 @@ class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'index edit link is accessibly labeled as editing a series' do
+    get invoice_series_index_url
+    assert_select "a[href^=?]", edit_invoice_series_path(invoice_series(:default_a)) do
+      assert_select '.sr-only', text: I18n.t('editar_serie')
+    end
+  end
+
   test 'should get new' do
     get new_invoice_series_url
     assert_response :success
