@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
+# Invoice Line Item model
 class LineItem < ApplicationRecord
   belongs_to :invoice
-  belongs_to :item
+  belongs_to :item, optional: true
 
   validates :quantity, presence: true
   validate :invoice_not_issued
