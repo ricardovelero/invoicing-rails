@@ -16,3 +16,7 @@ en:
   selector_serie: Series
   seleccionar_serie: Select a series
   prefijo_formato: must contain only letters and numbers
+  editar_serie: Edit series
+  guardar_cambios: Save changes
+  serie_actualizada: Series updated successfully.
+  prefijo_bloqueado: Cannot be changed, invoices have already been issued on this series.

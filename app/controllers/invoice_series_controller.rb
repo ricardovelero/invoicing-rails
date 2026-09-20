@@ -3,6 +3,7 @@
 # CRUD for user-owned invoice series.
 class InvoiceSeriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_series, only: %i[edit update]
 
   # GET /invoice_series
   def index
@@ -34,7 +35,23 @@ class InvoiceSeriesController < ApplicationController
     end
   end
 
+  # GET /invoice_series/1/edit
+  def edit; end
+
+  # PATCH/PUT /invoice_series/1
+  def update
+    if @series.update(series_params)
+      redirect_to invoice_series_index_path, notice: I18n.t('serie_actualizada')
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
+
+  def set_series
+    @series = current_user.invoice_series.find(params[:id])
+  end
 
   def series_params
     params.require(:invoice_series).permit(:prefix, :name)

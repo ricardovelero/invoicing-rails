@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
   resources :after_register
-  resources :invoice_series, only: %i[index new create]
+  resources :invoice_series, only: %i[index new create edit update]
 
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
