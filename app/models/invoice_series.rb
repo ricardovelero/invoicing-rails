@@ -51,15 +51,18 @@ class InvoiceSeries < ApplicationRecord
     self.prefix = prefix.to_s.upcase if prefix.present?
   end
 
-  # display_number reads prefix live off the series, so changing it after the
-  # series has issued invoices would silently rewrite their historical numbers.
+  # display_number reads prefix live off the series, so changing it after any
+  # invoice holds a Number would silently rewrite its displayed identity --
+  # gated on number, not status, same as Invoice#immutable_once_issued: a
+  # draft can hold a Number too (Invoice#assign_number! is public and never
+  # itself flips status), and its display_number is just as live.
   # Locks the sequence row first -- the same row a concurrent first Issue
   # locks -- so the two cannot interleave: whichever gets here first makes
   # the other wait, and the loser's re-check below sees a fully committed
   # (or fully absent) result instead of a half-finished one.
   def prefix_immutable_once_issued
     sequence.lock!
-    return unless invoices.issued.exists?
+    return unless invoices.where.not(number: nil).exists?
 
     errors.add(:prefix, I18n.t('prefijo_bloqueado'))
     throw :abort
