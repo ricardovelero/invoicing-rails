@@ -70,4 +70,40 @@ class InvoiceSeriesControllerTest < ActionDispatch::IntegrationTest
     # The page should show the empty state for user second (no series)
     assert_match I18n.t('no_hay_series'), response.body
   end
+
+  test 'should get edit' do
+    get edit_invoice_series_url(invoice_series(:default_a))
+    assert_response :success
+  end
+
+  test 'should update name on a series with issued invoices' do
+    series = invoice_series(:default_a)
+    patch invoice_series_url(series), params: { invoice_series: { name: 'Facturas ordinarias' } }
+
+    assert_redirected_to invoice_series_index_url(locale: I18n.locale)
+    assert_equal 'Facturas ordinarias', series.reload.name
+  end
+
+  test 'rejects prefix change once the series has issued invoices' do
+    series = invoice_series(:default_a)
+    patch invoice_series_url(series), params: { invoice_series: { prefix: 'Z' } }
+
+    assert_response :unprocessable_entity
+    assert_equal 'A', series.reload.prefix
+  end
+
+  test 'allows prefix change on a series with no issued invoices' do
+    series = InvoiceSeries.create!(user: users(:first), prefix: 'B')
+    patch invoice_series_url(series), params: { invoice_series: { prefix: 'C' } }
+
+    assert_redirected_to invoice_series_index_url(locale: I18n.locale)
+    assert_equal 'C', series.reload.prefix
+  end
+
+  test "user cannot edit another user's series" do
+    sign_in users(:second)
+    assert_raises(ActiveRecord::RecordNotFound) do
+      get edit_invoice_series_url(invoice_series(:default_a))
+    end
+  end
 end

@@ -16,3 +16,7 @@ es:
   selector_serie: Serie
   seleccionar_serie: Selecciona una serie
   prefijo_formato: solo debe contener letras y números
+  editar_serie: Editar serie
+  guardar_cambios: Guardar cambios
+  serie_actualizada: Serie actualizada correctamente.
+  prefijo_bloqueado: No se puede modificar, ya existen facturas emitidas con esta serie.

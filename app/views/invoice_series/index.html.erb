@@ -49,6 +49,7 @@
                 <div class="text-slate-800"><%= @invoice_counts[s.id] || 0 %></div>
               </td>
               <td class="px-4 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                <%= link_to t("editar"), edit_invoice_series_path(s), class: "text-blue-600 hover:text-blue-800" %>
               </td>
             </tr>
           <% end %>

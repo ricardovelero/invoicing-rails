@@ -14,6 +14,7 @@ class InvoiceSeries < ApplicationRecord
   validates :prefix, presence: true,
                      format: { with: /\A[A-Za-z0-9]+\z/, message: ->(*_args) { I18n.t('prefijo_formato') } },
                      uniqueness: { scope: :user_id }
+  validate :prefix_immutable_once_issued
 
   # The series' one counter, created on first use. A series never gets a second
   # one: the unique index refuses it, so numbering cannot restart.
@@ -41,5 +42,14 @@ class InvoiceSeries < ApplicationRecord
 
   def normalize_prefix
     self.prefix = prefix.to_s.upcase if prefix.present?
+  end
+
+  # display_number reads prefix live off the series, so changing it after the
+  # series has issued invoices would silently rewrite their historical numbers.
+  def prefix_immutable_once_issued
+    return unless persisted? && prefix_changed?
+    return unless invoices.issued.exists?
+
+    errors.add(:prefix, I18n.t('prefijo_bloqueado'))
   end
 end
