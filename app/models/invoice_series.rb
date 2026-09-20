@@ -14,7 +14,14 @@ class InvoiceSeries < ApplicationRecord
   validates :prefix, presence: true,
                      format: { with: /\A[A-Za-z0-9]+\z/, message: ->(*_args) { I18n.t('prefijo_formato') } },
                      uniqueness: { scope: :user_id }
-  validate :prefix_immutable_once_issued
+
+  # before_update, not validate: validations run before update opens its
+  # transaction, so a lock taken there is released before the UPDATE ever
+  # runs and cannot serialize against a concurrent Invoice#assign_number!,
+  # which locks this same sequence row via InvoiceSequence#reserve_next!.
+  # before_update runs inside update's own transaction, so the lock is held
+  # until commit and the two operations block each other instead of racing.
+  before_update :prefix_immutable_once_issued, if: :prefix_changed?
 
   # The series' one counter, created on first use. A series never gets a second
   # one: the unique index refuses it, so numbering cannot restart.
@@ -46,10 +53,15 @@ class InvoiceSeries < ApplicationRecord
 
   # display_number reads prefix live off the series, so changing it after the
   # series has issued invoices would silently rewrite their historical numbers.
+  # Locks the sequence row first -- the same row a concurrent first Issue
+  # locks -- so the two cannot interleave: whichever gets here first makes
+  # the other wait, and the loser's re-check below sees a fully committed
+  # (or fully absent) result instead of a half-finished one.
   def prefix_immutable_once_issued
-    return unless persisted? && prefix_changed?
+    sequence.lock!
     return unless invoices.issued.exists?
 
     errors.add(:prefix, I18n.t('prefijo_bloqueado'))
+    throw :abort
   end
 end

@@ -100,23 +100,21 @@ class InvoiceSeriesTest < ActiveSupport::TestCase
 
   test 'prefix cannot change once the series has issued invoices' do
     series = invoice_series(:default_a)
-    series.prefix = 'Z'
 
-    assert_not series.valid?
+    assert_not series.update(prefix: 'Z')
     assert series.errors[:prefix].any?
+    assert_equal 'A', series.reload.prefix
   end
 
   test 'name can still change once the series has issued invoices' do
     series = invoice_series(:default_a)
-    series.name = 'Ordinary invoices'
 
-    assert series.valid?
+    assert series.update(name: 'Ordinary invoices')
   end
 
   test 'prefix can change on a series with no issued invoices' do
     series = InvoiceSeries.create!(user: users(:first), prefix: 'B')
-    series.prefix = 'C'
 
-    assert series.valid?
+    assert series.update(prefix: 'C')
   end
 end
