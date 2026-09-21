@@ -8,6 +8,10 @@ module.exports = {
     "./app/views/**/*.{erb,haml,html,slim}",
     "./vendor/javascript/tailwindcss-stimulus-components.js",
   ],
+  // Toggle dark mode by adding/removing the `dark` class on <html>.
+  // The class is applied pre-paint by the inline script in shared/_head and
+  // toggled at runtime by the `theme` Stimulus controller.
+  darkMode: "class",
   theme: {
     extend: {
       boxShadow: {
