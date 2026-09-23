@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang=<%= I18n.locale %> class="h-full bg-gray-100">
+<html lang=<%= I18n.locale %> class="h-full bg-background">
   <head>
     <%= render 'shared/head' %>
   </head>
 
-    <body class="font-inter antialiased bg-slate-100 text-slate-600">
+    <body class="font-inter antialiased bg-background text-muted-foreground">
         <div class="flash">
         <%= render "shared/flash", position: "top-10 left-[14%]" %>
         </div>
 
-        <main class="bg-white">
+        <main class="bg-card text-card-foreground">
 
             <div class="relative flex">
 
@@ -43,7 +43,7 @@
                                     </svg>
                                 </a>
                                 <div class="text-sm">
-                                    <%= t("already_registered?") %> <%= link_to t("login"), new_session_path(@user), class: "font-medium text-indigo-500 hover:text-indigo-600" %>
+                                    <%= t("already_registered?") %> <%= link_to t("login"), new_session_path(@user), class: "font-medium text-primary hover:text-primary-hover" %>
                                 </div>
                             </div>
                         </div>

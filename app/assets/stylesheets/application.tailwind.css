@@ -220,7 +220,7 @@
 
   /* Misc */
   .alert {
-    @apply text-white text-sm text-center font-medium px-4 py-3;
+    @apply text-primary-foreground text-sm text-center font-medium px-4 py-3;
   }
   .notice {
     @apply py-2 px-3 bg-success-subtle mb-5 text-success font-medium rounded-lg inline-block;

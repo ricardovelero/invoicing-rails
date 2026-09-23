@@ -24,15 +24,15 @@ module ApplicationHelper # rubocop:disable Style/Documentation
   def flash_class(level) # rubocop:disable Metrics/MethodLength
     case level.to_sym
     when :notice
-      'bg-indigo-100 border-indigo-200 text-indigo-500'
+      'bg-primary/10 border-primary/20 text-primary'
     when :success
-      'bg-emerald-100 border-emerald-200 text-emerald-600'
+      'bg-success/10 border-success/20 text-success'
     when :alert
-      'bg-amber-100 border-amber-200 text-amber-600'
+      'bg-warning/10 border-warning/20 text-warning'
     when :error
-      'bg-rose-100 border border-rose-200 text-rose-600'
+      'bg-destructive/10 border-destructive/20 text-destructive'
     else
-      'bg-indigo-100 border-indigo-200 text-indigo-500'
+      'bg-primary/10 border-primary/20 text-primary'
     end
   end
 
