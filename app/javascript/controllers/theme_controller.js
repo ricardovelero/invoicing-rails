@@ -18,6 +18,7 @@ export default class extends Controller {
     document.documentElement.classList.toggle("dark", dark)
     this.persist(dark)
     this.sync()
+    document.dispatchEvent(new CustomEvent("theme:changed", { detail: { dark } }))
   }
 
   isDark() {

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang=<%= I18n.locale %> class="h-full bg-gray-100">
+<html lang=<%= I18n.locale %> class="h-full bg-background">
   <head>
     <%= render 'shared/head' %>
   </head>
 
   <body 
-    class="font-inter antialiased bg-slate-100 text-slate-600"
+    class="font-inter antialiased bg-background text-muted-foreground"
     data-controller="sidebar"
     data-action="click@window->sidebar#hide keydown.esc@window->sidebar#close">
     <script>

@@ -46,7 +46,7 @@
 
     <!-- Content -->
     <div class="relative">
-        <h1 class="text-2xl md:text-3xl text-slate-800 font-bold mb-1"><%= greet %>, <%= current_user.user_profile.full_name.titleize %> 👋</h1>
+        <h1 class="text-2xl md:text-3xl text-foreground font-bold mb-1"><%= greet %>, <%= current_user.user_profile.full_name.titleize %> 👋</h1>
     </div>
 
 </div>
@@ -54,12 +54,12 @@
 <!-- Cards -->
 <div class="grid grid-cols-12 gap-6">
     <!-- Line chart (Invoices Over Time) -->
-    <div class="flex flex-col col-span-full sm:col-span-6 bg-white shadow-lg rounded-sm border border-slate-200">
+    <div class="flex flex-col col-span-full sm:col-span-6 bg-card shadow-lg rounded-sm border border-border">
         <%= turbo_frame_tag "invoices_chart", src: chart_path(chart_type: "Charts::InvoicesChart"), loading: "lazy" %>
     </div>
 
     <!-- Stacked bar chart (Invoices VS Payments) -->
-    <div class="flex flex-col col-span-full sm:col-span-6 bg-white shadow-lg rounded-sm border border-slate-200">
+    <div class="flex flex-col col-span-full sm:col-span-6 bg-card shadow-lg rounded-sm border border-border">
         <%= turbo_frame_tag "paid_vs_unpaid_chart", src: chart_path(chart_type: "Charts::PaidVsUnpaidChart"), loading: "lazy" %>
     </div>
 </div>
