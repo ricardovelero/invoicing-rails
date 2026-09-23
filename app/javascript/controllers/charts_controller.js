@@ -11,9 +11,16 @@ export default class extends Controller {
   }
 
   connect() {
+    const chartOptions = this.chartOptions
+    const themeOptions = this.themeOptions
+
     this.chart = new ApexCharts(this.chartTarget, {
-      ...this.chartOptions,
-      ...this.themeOptions
+      ...chartOptions,
+      ...themeOptions,
+      chart: {
+        ...chartOptions.chart,
+        ...themeOptions.chart
+      }
     })
     this.chart.render()
   }
