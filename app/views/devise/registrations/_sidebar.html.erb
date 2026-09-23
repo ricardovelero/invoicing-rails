@@ -1,31 +1,31 @@
       <!-- Sidebar -->
-      <div class="flex flex-nowrap overflow-x-scroll no-scrollbar md:block md:overflow-auto px-3 py-6 border-b md:border-b-0 md:border-r border-slate-200 min-w-60 md:space-y-3">
+      <div class="flex flex-nowrap overflow-x-scroll no-scrollbar md:block md:overflow-auto px-3 py-6 border-b md:border-b-0 md:border-r border-border min-w-60 md:space-y-3">
           <!-- Group 1 -->
           <div>
-              <div class="text-xs font-semibold text-slate-400 uppercase mb-3"><%= t("opciones_ajustes")%></div>
+              <div class="text-xs font-semibold text-muted-foreground uppercase mb-3"><%= t("opciones_ajustes")%></div>
               <ul class="flex flex-nowrap md:block mr-3 md:mr-0">
                   <li class="mr-0.5 md:mr-0 md:mb-0.5" id="account" data-tabs-target="tab" data-action="click->tabs#change">
                       <button type="button" class="flex items-center px-2.5 py-2 rounded whitespace-nowrap">
-                        <%= heroicon "cog", options: { class: "w-5 h-5 shrink-0 text-slate-400 mr-1" } %>
-                        <span class="text-sm font-medium text-slate-600 hover:text-slate-700"><%= t("mi_cuenta")%></span>
+                        <%= heroicon "cog", options: { class: "w-5 h-5 shrink-0 text-muted-foreground mr-1" } %>
+                        <span class="text-sm font-medium text-muted-foreground hover:text-foreground"><%= t("mi_cuenta")%></span>
                       </button>
                   </li>
                   <li class="mr-0.5 md:mr-0 md:mb-0.5" id="personal" data-tabs-target="tab" data-action="click->tabs#change">
                       <button type="button" class="flex items-center px-2.5 py-2 rounded whitespace-nowrap">
-                        <%= heroicon "user-circle", options: { class: "w-5 h-5 shrink-0 text-slate-400 mr-1" } %>
-                        <span class="text-sm font-medium text-slate-600 hover:text-slate-700"><%= t("datos_personales")%></span>
+                        <%= heroicon "user-circle", options: { class: "w-5 h-5 shrink-0 text-muted-foreground mr-1" } %>
+                        <span class="text-sm font-medium text-muted-foreground hover:text-foreground"><%= t("datos_personales")%></span>
                       </button>
                   </li>
                   <li class="mr-0.5 md:mr-0 md:mb-0.5" id="address" data-tabs-target="tab" data-action="click->tabs#change">
                       <button type="button" class="flex items-center px-2.5 py-2 rounded whitespace-nowrap">
-                        <%= heroicon "map-pin", options: { class: "w-5 h-5 shrink-0 text-slate-400 mr-1" } %>
-                        <span class="text-sm font-medium text-slate-600 hover:text-slate-700"><%= t("direccion")%></span>
+                        <%= heroicon "map-pin", options: { class: "w-5 h-5 shrink-0 text-muted-foreground mr-1" } %>
+                        <span class="text-sm font-medium text-muted-foreground hover:text-foreground"><%= t("direccion")%></span>
                       </button>
                   </li>
                   <li class="mr-0.5 md:mr-0 md:mb-0.5" id="preferences" data-tabs-target="tab" data-action="click->tabs#change">
                       <button type="button" class="flex items-center px-2.5 py-2 rounded whitespace-nowrap">
-                        <%= heroicon "adjustments-horizontal", options: { class: "w-5 h-5 shrink-0 text-slate-400 mr-1" } %>
-                        <span class="text-sm font-medium text-slate-600 hover:text-slate-700"><%= t :preferencias %></span>
+                        <%= heroicon "adjustments-horizontal", options: { class: "w-5 h-5 shrink-0 text-muted-foreground mr-1" } %>
+                        <span class="text-sm font-medium text-muted-foreground hover:text-foreground"><%= t :preferencias %></span>
                       </button>
                   </li>
               </ul>

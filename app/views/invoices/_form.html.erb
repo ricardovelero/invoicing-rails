@@ -1,8 +1,8 @@
-<div class="my-8 px-8 py-4 bg-white shadow-lg rounded-sm border border-slate-200" data-controller='toggle'>
+<div class="my-8 px-8 py-4 bg-card shadow-lg rounded-sm border border-border" data-controller='toggle'>
   <%= form_with(model: invoice, class: "contents", html: { data: {controller: "recalculate"} } ) do |f| %>
     <h2 class="text-lg font-bold"><%= t("cabecera_factura") %></h2>
     <% if f.object.errors.any? %>
-      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <div id="error_explanation" class="bg-danger-muted text-danger px-3 py-2 font-medium rounded-lg mt-3">
         <ul>
           <% f.object.errors.each do |error| %>
             <li><%= error.full_message %></li>
@@ -15,11 +15,11 @@
         <%= f.label t("cliente"), class: "input-label"  %>
         <div class="relative rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <%= heroicon "users", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>
+            <%= heroicon "users", options: {class: "w-4 h-4 fill-current text-muted-foreground shrink-0" } %>
           </div>
           <%= f.collection_select :client_id, current_user.clients.order(:first_name), :id, :full_name, {prompt: t("selecciona_cliente")}, {data: {action: "change->clientselect#change"}, class: "form-select w-full pl-10"} %>
         </div>
-        <%= link_to new_client_path(id: f.object), class: "text-indigo-600 hover:underline mt-2", data: { turbo_method: :post } do %>
+        <%= link_to new_client_path(id: f.object), class: "text-primary-hover hover:underline mt-2", data: { turbo_method: :post } do %>
           <%= (heroicon "plus", options: { class: "inline -mt-1"} ) + t("agregar_nuevo_cliente") %>
         <% end %>
       </div>
@@ -27,7 +27,7 @@
         <%= label_tag :invoice_number_display, t("numero_factura"), class: "input-label"  %>
         <div class="relative mt-1 rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <%= heroicon "hashtag", options: {class: "w-4 h-4 fill-current text-slate-400 shrink-0" } %>
+            <%= heroicon "hashtag", options: {class: "w-4 h-4 fill-current text-muted-foreground shrink-0" } %>
           </div>
           <% if invoice.new_record? %>
             <%= text_field_tag :invoice_number_display, t("numero_asignado_al_emitir"), class: "form-input w-full pl-8", disabled: true %>
@@ -59,14 +59,14 @@
         <%= render "item_fields", f: f, line_item: i, turboid: Process.clock_gettime(Process::CLOCK_REALTIME, :millisecond) %>
       <% end %>
     </div>
-    <%= link_to add_item_invoices_path(id: f.object), class: "text-indigo-600 hover:underline",
+    <%= link_to add_item_invoices_path(id: f.object), class: "text-primary-hover hover:underline",
       data: { turbo_method: :post } do %>
       <%= (heroicon "plus", options: { class: "inline -mt-1"} ) + t("agregar_linea_item") %>
     <% end %>
     <hr class="mt-5"/>
     <div class="flex justify-between items-center cursor-pointer" data-action='click->toggle#toggle touch->toggle#toggle'>
       <h2 class="flex text-lg my-5 font-bold"><%= t("mas_opciones") %></h2>
-      <%= link_to "#", class: "text-indigo-600 hover:underline" do %>
+      <%= link_to "#", class: "text-primary-hover hover:underline" do %>
         <%= (heroicon "chevron-up-down", options: { class: "inline"} ) %>
         <%= t("mostrar") %>
       <% end %>
@@ -86,8 +86,8 @@
     </div>
     <hr class="mb-5"/>
     <div class="inline">
-      <%= f.submit t("guardar_borrador"), name: 'save_draft', class: "rounded-lg py-3 px-5 bg-slate-500 text-white inline-block font-medium cursor-pointer" %>
-      <%= f.submit t("guardar_factura"), name: 'save_and_issue', class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer ml-2" %>
+      <%= f.submit t("guardar_borrador"), name: 'save_draft', class: "rounded-lg py-3 px-5 bg-muted-foreground text-primary-foreground inline-block font-medium cursor-pointer" %>
+      <%= f.submit t("guardar_factura"), name: 'save_and_issue', class: "rounded-lg py-3 px-5 bg-primary-hover text-primary-foreground inline-block font-medium cursor-pointer ml-2" %>
     </div>
   <% end %>
 </div>

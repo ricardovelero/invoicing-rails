@@ -1,9 +1,9 @@
 <%= turbo_stream.replace target="client_details" do %>
     <div class="col-span-2 mb-10">
-        <div id="client_details" class="p-2 border form-input bg-slate-50" data-clientselect-target="select">
+        <div id="client_details" class="p-2 border form-input bg-muted" data-clientselect-target="select">
             <div class="flex justify-between items-center">
                 <h3 class="input-label underline" for="client_details"><%= t("detalle_cliente") %></h3>
-                  <%= link_to edit_client_path(@client), data: { turbo_frame: "modal" }, class: "text-indigo-600 hover:underline" do %>
+                  <%= link_to edit_client_path(@client), data: { turbo_frame: "modal" }, class: "text-primary-hover hover:underline" do %>
                   <span class="sr-only"><%= t("editar") %></span>
                   <%= (heroicon "pencil-square", options: { class: "inline"} ) %>
                 <% end %>

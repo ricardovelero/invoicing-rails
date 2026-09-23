@@ -6,7 +6,7 @@
         </a>
       </div>
       <div class="flex lg:hidden">
-        <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+        <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-muted-foreground">
           <span class="sr-only">Open main menu</span>
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -14,17 +14,17 @@
         </button>
       </div>
       <div class="hidden lg:flex lg:gap-x-6">
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Product</a>
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Features</a>
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Marketplace</a>
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Company</a>
+        <a href="#" class="text-sm font-semibold leading-6 text-foreground">Product</a>
+        <a href="#" class="text-sm font-semibold leading-6 text-foreground">Features</a>
+        <a href="#" class="text-sm font-semibold leading-6 text-foreground">Marketplace</a>
+        <a href="#" class="text-sm font-semibold leading-6 text-foreground">Company</a>
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center space-x-2">
         <% if current_user %>
-            <%= link_to t('dashboard'), dashboard_path, class: "text-sm font-semibold leading-6 text-gray-900" %>
-            <%= button_to t('signout'), destroy_user_session_path, method: :delete, class: "text-sm font-semibold leading-6 text-gray-900" %>
+            <%= link_to t('dashboard'), dashboard_path, class: "text-sm font-semibold leading-6 text-foreground" %>
+            <%= button_to t('signout'), destroy_user_session_path, method: :delete, class: "text-sm font-semibold leading-6 text-foreground" %>
         <% else %>
-            <%= link_to t("signin"), new_user_session_path, class: "text-sm font-semibold leading-6 text-gray-900" %>
+            <%= link_to t("signin"), new_user_session_path, class: "text-sm font-semibold leading-6 text-foreground" %>
         <% end %>
       </div>
     </nav>
