@@ -45,6 +45,15 @@ module.exports = {
         warning: "hsl(var(--warning) / <alpha-value>)",
         "warning-muted": "hsl(var(--warning-muted) / <alpha-value>)",
         "warning-foreground": "hsl(var(--warning-foreground) / <alpha-value>)",
+        sidebar: "hsl(var(--sidebar) / <alpha-value>)",
+        "sidebar-foreground": "hsl(var(--sidebar-foreground) / <alpha-value>)",
+        "sidebar-hover": "hsl(var(--sidebar-hover) / <alpha-value>)",
+        "sidebar-muted": "hsl(var(--sidebar-muted) / <alpha-value>)",
+        "sidebar-muted-hover": "hsl(var(--sidebar-muted-hover) / <alpha-value>)",
+        "sidebar-icon": "hsl(var(--sidebar-icon) / <alpha-value>)",
+        "sidebar-icon-mid": "hsl(var(--sidebar-icon-mid) / <alpha-value>)",
+        "sidebar-icon-deep": "hsl(var(--sidebar-icon-deep) / <alpha-value>)",
+        "sidebar-icon-active-soft": "hsl(var(--sidebar-icon-active-soft) / <alpha-value>)",
       },
       boxShadow: {
         DEFAULT:

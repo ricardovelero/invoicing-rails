@@ -34,6 +34,15 @@
     --warning: 37.7 92.1% 50.2%;
     --warning-muted: 210 40% 96.1%;
     --warning-foreground: 222.2 47.4% 17.1%;
+    --sidebar: 0 0% 100%;
+    --sidebar-foreground: 217.2 32.6% 17.5%;
+    --sidebar-hover: 222.2 47.4% 11.2%;
+    --sidebar-muted: 215.4 16.3% 46.9%;
+    --sidebar-muted-hover: 215.3 25% 26.7%;
+    --sidebar-icon: 215 20.2% 65.1%;
+    --sidebar-icon-mid: 215 20.2% 65.1%;
+    --sidebar-icon-deep: 215 20.2% 65.1%;
+    --sidebar-icon-active-soft: 234.5 89.5% 73.9%;
   }
 
   .dark {
@@ -67,6 +76,15 @@
     --warning: 37.7 92.1% 50.2%;
     --warning-muted: 37.7 92.1% 24%;
     --warning-foreground: 222.2 47.4% 11.2%;
+    --sidebar: 217.2 32.6% 17.5%;
+    --sidebar-foreground: 214.3 31.8% 91.4%;
+    --sidebar-hover: 0 0% 100%;
+    --sidebar-muted: 215 20.2% 65.1%;
+    --sidebar-muted-hover: 214.3 31.8% 91.4%;
+    --sidebar-icon: 215 20.2% 65.1%;
+    --sidebar-icon-mid: 215.3 19.3% 34.5%;
+    --sidebar-icon-deep: 215.3 25% 26.7%;
+    --sidebar-icon-active-soft: 229.7 93.5% 81.8%;
   }
 }
 
@@ -144,10 +162,10 @@
 
   /* Sidebar */
   .sidebar_link {
-    @apply block text-slate-200 hover:text-white truncate transition duration-150;
+    @apply block text-sidebar-foreground hover:text-sidebar-hover truncate transition duration-150;
   }
   .sidebar_link_scondary {
-    @apply block text-slate-400 hover:text-slate-200 transition duration-150 truncate;
+    @apply block text-sidebar-muted hover:text-sidebar-muted-hover transition duration-150 truncate;
   }
   .link_text {
     @apply text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200;
