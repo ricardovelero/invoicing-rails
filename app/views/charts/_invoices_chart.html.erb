@@ -1,5 +1,6 @@
 <div
   data-controller="invoices-chart"
+  data-action="theme:changed@document->invoices-chart#applyTheme"
   data-invoices-chart-labels-value="<%= labels %>"
   data-invoices-chart-series-value="<%= series %>"
   id="invoices-chart-container" data-turbo-cache="false"

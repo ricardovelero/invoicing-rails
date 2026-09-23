@@ -10,26 +10,25 @@ export default class extends Controller {
     series: Array
   }
 
-  initialize() {
-    this.themeChanged = this.applyTheme.bind(this)
+  connect() {
     this.chart = new ApexCharts(this.chartTarget, {
       ...this.chartOptions,
       ...this.themeOptions
-    });
-    this.chart.render();
-  }
-
-  connect() {
-    document.addEventListener("theme:changed", this.themeChanged)
+    })
+    this.chart.render()
   }
 
   disconnect() {
-    document.removeEventListener("theme:changed", this.themeChanged)
-    this.chart.destroy();
+    this.teardown()
   }
 
   applyTheme() {
-    this.chart.updateOptions(this.themeOptions)
+    this.chart?.updateOptions(this.themeOptions)
+  }
+
+  teardown() {
+    this.chart?.destroy()
+    this.chart = null
   }
 
   get themeOptions() {
@@ -39,6 +38,9 @@ export default class extends Controller {
       chart: {
         background: "transparent",
         foreColor: this.color("--muted-foreground")
+      },
+      theme: {
+        mode: dark ? "dark" : "light"
       },
       grid: {
         borderColor: this.color("--border")
