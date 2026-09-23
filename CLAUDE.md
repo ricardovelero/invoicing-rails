@@ -76,81 +76,31 @@ Do not create abstractions simply because code "feels long."
 
 # Service Objects
 
-Service Objects are appropriate when they encapsulate a business workflow involving multiple models or external systems.
-
-Do not create services for:
-
-- simple CRUD
-- one-line wrappers
-- moving model code elsewhere
-
-Always check whether similar services already exist.
+Service Objects are important. See `docs/agents/service-objects.md` when to decide to use them.
 
 ---
 
 # Active Record
 
-Prefer:
-
-- scopes
-- associations
-- eager loading
-- query interface
-
-Avoid raw SQL unless there is a measurable reason.
-
-Prefer enforcing integrity in the database whenever possible through:
-
-- foreign keys
-- constraints
-- indexes
-
-Never modify old migrations.
-
-Create new migrations instead.
+See `docs/agents/active-record.md` for decisions on Rails active record.
 
 ---
 
 # Frontend
 
-Hotwire is the default frontend architecture.
-
-The UI is built with Tailwind CSS.
-
-Responsibilities are divided as follows:
-
-- Turbo handles server-rendered navigation and partial page updates.
-- Stimulus provides application-specific client-side behaviour.
-
-Prefer:
-
-- Turbo Frames
-- Turbo Streams
-- Context-preserving modals only for short, interruptible actions: confirmations, quick creation of related records, or inline additions that keep the user in the current workflow. Avoid modal-first CRUD.
-- Full create/edit flows should use dedicated pages or Turbo Frames unless staying in context is essential.
-
-Business logic belongs on the server.
+See `docs/agents/frontend.md` for frontend specs.
 
 ---
 
 # Forms and Icons
 
-The app uses Simple Forms.
-Use simple forms for new forms.
-Use SVG icons that follow the same design as already we have in the app.
+See `docs/agents/forms-and-icons.md` for forms and icons specs.
 
 ---
 
 # Views
 
-Prefer:
-
-- partials
-- helpers
-
-Avoid duplicated HTML.
-
-Follow existing Tailwind conventions already present in the project.
+See `docs/agents/views.md` for frontend specs.
 
 ---
 
