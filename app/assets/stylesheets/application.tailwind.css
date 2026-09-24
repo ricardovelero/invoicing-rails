@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    color-scheme: dark;
     --background: 210 40% 96.1%;
     --foreground: 217.2 32.6% 17.5%;
     --card: 0 0% 100%;
@@ -25,10 +26,12 @@
     --danger-hover: 0 96.3% 89.4%;
     --destructive: 349.7 89.2% 60.2%;
     --destructive-muted: 355.6 100% 94.7%;
+    --destructive-muted-foreground: 349.7 89.2% 45%;
     --destructive-hover: 351.3 95.7% 90.8%;
     --destructive-foreground: 0 0% 100%;
     --success: 142.1 70.6% 45.3%;
     --success-muted: 138.5 76.5% 92.2%;
+    --success-muted-foreground: 142.1 70.6% 30%;
     --success-subtle: 138.5 76.5% 96.7%;
     --success-foreground: 0 0% 100%;
     --warning: 37.7 92.1% 50.2%;
@@ -46,6 +49,7 @@
   }
 
   .dark {
+    color-scheme: dark;
     --background: 222.2 47.4% 11.2%;
     --foreground: 210 40% 96.1%;
     --card: 222.2 47.4% 17.1%;
@@ -67,10 +71,12 @@
     --danger-hover: 0 84.2% 60.2%;
     --destructive: 349.7 89.2% 60.2%;
     --destructive-muted: 346.8 77.2% 30%;
+    --destructive-muted-foreground: 349.7 89.2% 80%;
     --destructive-hover: 346.8 77.2% 40%;
     --destructive-foreground: 0 0% 100%;
     --success: 142.1 70.6% 45.3%;
     --success-muted: 142.1 70.6% 22%;
+    --success-muted-foreground: 142.1 70.6% 65%;
     --success-subtle: 142.1 70.6% 18%;
     --success-foreground: 222.2 47.4% 11.2%;
     --warning: 37.7 92.1% 50.2%;
@@ -164,7 +170,7 @@
   .sidebar_link {
     @apply block text-sidebar-foreground hover:text-sidebar-hover truncate transition duration-150;
   }
-  .sidebar_link_scondary {
+  .sidebar_link_secondary {
     @apply block text-sidebar-muted hover:text-sidebar-muted-hover transition duration-150 truncate;
   }
   .link_text {
@@ -172,10 +178,10 @@
   }
 
   /* Forms */
-  input[type="search"]::-webkit-search-decoration,
-  input[type="search"]::-webkit-search-cancel-button,
-  input[type="search"]::-webkit-search-results-button,
-  input[type="search"]::-webkit-search-results-decoration {
+  input[type='search']::-webkit-search-decoration,
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-results-button,
+  input[type='search']::-webkit-search-results-decoration {
     -webkit-appearance: none;
   }
 
@@ -271,7 +277,7 @@
     @apply block text-sm font-medium mb-1;
   }
   .required::after {
-    content: " *";
+    content: ' *';
     @apply text-destructive;
   }
   .gravatar {
@@ -298,19 +304,19 @@
     transition: all 0.15s ease-out;
   }
 
-  .form-switch input[type="checkbox"]:checked + label {
+  .form-switch input[type='checkbox']:checked + label {
     @apply bg-primary;
   }
 
-  .form-switch input[type="checkbox"]:checked + label > span:first-child {
+  .form-switch input[type='checkbox']:checked + label > span:first-child {
     left: 22px;
   }
 
-  .form-switch input[type="checkbox"]:disabled + label {
+  .form-switch input[type='checkbox']:disabled + label {
     @apply cursor-not-allowed bg-muted border border-border;
   }
 
-  .form-switch input[type="checkbox"]:disabled + label > span:first-child {
+  .form-switch input[type='checkbox']:disabled + label > span:first-child {
     @apply bg-muted-foreground;
   }
 
@@ -342,18 +348,18 @@
     @apply font-normal text-muted-foreground block mb-2;
   }
 
-  .session .form-group input[type="text"],
-  .session .form-group input[type="email"],
-  .session .form-group input[type="password"] {
+  .session .form-group input[type='text'],
+  .session .form-group input[type='email'],
+  .session .form-group input[type='password'] {
     @apply block appearance-none w-full bg-card text-foreground;
     @apply border border-input;
     @apply rounded shadow;
     @apply px-2 py-2;
   }
 
-  .session .form-group input[type="text"]:hover,
-  .session .form-group input[type="email"]:hover,
-  .session .form-group input[type="password"]:hover {
+  .session .form-group input[type='text']:hover,
+  .session .form-group input[type='email']:hover,
+  .session .form-group input[type='password']:hover {
     @apply border-muted-foreground;
   }
 
@@ -390,19 +396,13 @@
 /* Invoice view */
 .past-due,
 .not-paid {
-  @apply inline-flex font-medium bg-destructive-muted text-destructive rounded-full text-center px-2.5 py-0.5;
+  @apply inline-flex font-medium bg-destructive-muted text-destructive-muted-foreground rounded-full text-center px-2.5 py-0.5;
 }
 .on-time {
-  @apply inline-flex font-medium bg-warning-muted text-muted-foreground rounded-full text-center px-2.5 py-1;
+  @apply inline-flex font-medium bg-warning-muted text-warning-foreground rounded-full text-center px-2.5 py-0.5;
 }
 .paid {
-  @apply inline-flex font-medium bg-success-muted text-success rounded-full text-center px-2.5 py-0.5;
-}
-.filter-buttons-active {
-  @apply inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-transparent shadow-sm bg-primary text-primary-foreground duration-150 ease-in-out;
-}
-.filter-buttons-inactive {
-  @apply inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-border hover:border-muted-foreground shadow-sm bg-card text-muted-foreground duration-150 ease-in-out;
+  @apply inline-flex font-medium bg-success-muted text-success-muted-foreground rounded-full text-center px-2.5 py-0.5;
 }
 .back-button {
   @apply text-sm font-medium text-primary hover:text-primary-hover;

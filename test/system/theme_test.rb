@@ -54,7 +54,7 @@ class ThemeTest < ApplicationSystemTestCase
     assert_selector 'html:not(.dark)'
     assert_sidebar_color 'rgb(255, 255, 255)', 'backgroundColor'
     assert_equal 'rgb(30, 41, 59)', sidebar_color('color', '.sidebar_link')
-    assert_equal 'rgb(100, 116, 139)', sidebar_color('color', '.sidebar_link_scondary')
+    assert_equal 'rgb(100, 116, 139)', sidebar_color('color', '.sidebar_link_secondary')
     active_icon = '[data-submenu-key-value="sidebar-submenu-items"] [data-active-class="text-sidebar-icon-active-soft"]'
     light_icon_color = sidebar_color('color', active_icon)
 
@@ -63,7 +63,7 @@ class ThemeTest < ApplicationSystemTestCase
     assert_selector 'html.dark'
     assert_sidebar_color 'rgb(30, 41, 59)', 'backgroundColor'
     assert_equal 'rgb(226, 232, 240)', sidebar_color('color', '.sidebar_link')
-    assert_equal 'rgb(148, 163, 184)', sidebar_color('color', '.sidebar_link_scondary')
+    assert_equal 'rgb(148, 163, 184)', sidebar_color('color', '.sidebar_link_secondary')
     refute_equal light_icon_color, sidebar_color('color', active_icon)
 
     click_button 'Modo oscuro'
