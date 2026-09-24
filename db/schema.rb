@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_20_160909) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_20_203554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "unaccent"
@@ -151,6 +151,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_20_160909) do
   add_foreign_key "clients", "users"
   add_foreign_key "invoice_sequences", "invoice_series"
   add_foreign_key "invoice_series", "users"
+  add_foreign_key "invoices", "clients"
   add_foreign_key "invoices", "invoice_series", column: "series_id"
   add_foreign_key "invoices", "users"
   add_foreign_key "items", "users"

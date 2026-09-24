@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class ClientsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -6,18 +6,18 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:first)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get clients_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_client_url
     assert_response :success
   end
 
-  test "should create client" do
-    assert_difference("Client.count") do
+  test 'should create client' do
+    assert_difference('Client.count') do
       post clients_url,
            params: {
              client: {
@@ -39,17 +39,17 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to clients_url(locale: I18n.locale)
   end
 
-  test "should show client" do
+  test 'should show client' do
     get client_url(@client)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_client_url(@client)
     assert_response :success
   end
 
-  test "should update client" do
+  test 'should update client' do
     patch client_url(@client),
           params: {
             client: {
@@ -69,9 +69,45 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to clients_url(locale: I18n.locale)
   end
 
-  test "should destroy client" do
-    assert_difference("Client.count", -1) { delete client_url(@client) }
+  test 'should destroy client without invoices' do
+    client = clients(:client_without_invoices)
+
+    assert_difference('Client.count', -1) do
+      delete client_url(client)
+    end
 
     assert_redirected_to clients_url(locale: I18n.locale)
+  end
+
+  test 'should not destroy client with invoices' do
+    client = clients(:client_with_invoices)
+
+    assert_no_difference('Client.count') do
+      delete client_url(client)
+    end
+
+    assert_redirected_to clients_url(locale: I18n.locale)
+    assert_not_empty flash[:alert]
+  end
+
+  test 'should destroy client without invoices as json' do
+    client = clients(:client_without_invoices)
+
+    assert_difference('Client.count', -1) do
+      delete client_url(client, format: :json)
+    end
+
+    assert_response :no_content
+  end
+
+  test 'should not destroy client with invoices as json' do
+    client = clients(:client_with_invoices)
+
+    assert_no_difference('Client.count') do
+      delete client_url(client, format: :json)
+    end
+
+    assert_response :unprocessable_entity
+    assert_not_empty response.parsed_body
   end
 end

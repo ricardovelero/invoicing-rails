@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Invoice Line Item model
 class LineItem < ApplicationRecord
   belongs_to :invoice
   belongs_to :item

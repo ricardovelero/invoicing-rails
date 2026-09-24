@@ -7,7 +7,7 @@ class Invoice < ApplicationRecord # rubocop:disable Metrics/ClassLength
   belongs_to :series, class_name: 'InvoiceSeries', optional: true
 
   has_many :line_items, dependent: :destroy
-  has_many :items, through: :line_items
+
   accepts_nested_attributes_for :line_items, allow_destroy: true
 
   # Raised when Issue is asked of an invoice that is not a draft. Typed so the

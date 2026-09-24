@@ -38,7 +38,7 @@ three:
     irpf: 0.0
     total: 0.0
     user: first
-    client: one
+    client: client_with_invoices
     series: default_a
     number: 102
 

@@ -15,15 +15,43 @@ one:
     user: first
 
 two:
-    first_name: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
-    last_name: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
-    nif: 123435610828C
-    street: <%= Faker::Lorem.sentence(word_count: 20) %>
-    city: Sant Feliu de Llobregat de la Vall del Riu Congost Nord
-    region: Comunidad Autonoma de Castilla-La Mancha y Extremadura
-    postal_code: MyString
-    country: Republica Democratica Federal de las Islas Adyacentes
-    email: MyString
-    telephone: MyString
-    active: false
-    user: first
+  first_name: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
+  last_name: Ricardo Antonio Benjamin Rodriguez Lago Vinces Delgado
+  nif: 123435610828C
+  street: <%= Faker::Lorem.sentence(word_count: 20) %>
+  city: Sant Feliu de Llobregat de la Vall del Riu Congost Nord
+  region: Comunidad Autonoma de Castilla-La Mancha y Extremadura
+  postal_code: MyString
+  country: Republica Democratica Federal de las Islas Adyacentes
+  email: MyString
+  telephone: MyString
+  active: false
+  user: first
+
+client_with_invoices:
+  first_name: Maria
+  last_name: Garcia
+  nif: 12345678Z
+  street: Calle Mayor 10
+  city: Madrid
+  region: Madrid
+  postal_code: "28001"
+  country: Spain
+  email: maria@example.com
+  telephone: "600123456"
+  active: true
+  user: first
+
+client_without_invoices:
+  first_name: Carlos
+  last_name: Lopez
+  nif: 87654321X
+  street: Avenida del Mar 25
+  city: Malaga
+  region: Andalucia
+  postal_code: "29001"
+  country: Spain
+  email: carlos@example.com
+  telephone: "600654321"
+  active: true
+  user: first
