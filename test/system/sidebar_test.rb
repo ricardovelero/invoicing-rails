@@ -107,4 +107,42 @@ class SidebarTest < ApplicationSystemTestCase
     click_button 'Abrir Menú'
     assert_no_selector '#sidebar a', text: 'Listado Ítems'
   end
+
+  test 'drawer and rail remain usable when browser storage is blocked' do
+    page.execute_script <<~JS
+      window.sidebarStorageGetItem = Storage.prototype.getItem;
+      window.sidebarStorageSetItem = Storage.prototype.setItem;
+      Storage.prototype.getItem = function() { throw new DOMException('Storage blocked', 'SecurityError'); };
+      Storage.prototype.setItem = function() { throw new DOMException('Storage blocked', 'SecurityError'); };
+      const sidebar = window.Stimulus.getControllerForElementAndIdentifier(document.body, 'sidebar');
+      sidebar.restored = false;
+      sidebar.connect();
+      document.querySelectorAll('[data-controller="submenu"]').forEach((element) => {
+        const submenu = window.Stimulus.getControllerForElementAndIdentifier(element, 'submenu');
+        submenu.restored = false;
+        submenu.connect();
+      });
+    JS
+
+    assert_no_selector 'body.sidebar-expanded'
+    click_button 'Expand / collapse sidebar'
+    assert_selector 'body.sidebar-expanded'
+    within '#sidebar' do
+      click_link 'Ítems', exact: true
+      assert_link 'Listado Ítems'
+    end
+
+    page.current_window.resize_to(390, 844)
+    click_button 'Abrir Menú'
+    assert_selector 'button[aria-controls="sidebar"][aria-expanded="true"]'
+  ensure
+    page.execute_script <<~JS
+      if (window.sidebarStorageGetItem) {
+        Storage.prototype.getItem = window.sidebarStorageGetItem;
+        Storage.prototype.setItem = window.sidebarStorageSetItem;
+        delete window.sidebarStorageGetItem;
+        delete window.sidebarStorageSetItem;
+      }
+    JS
+  end
 end

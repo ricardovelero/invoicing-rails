@@ -1,7 +1,7 @@
 <div class="mx-auto md:w-2/3 w-full flex">
   <div class="mx-auto">
     <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+      <p class="py-2 px-3 bg-success-muted mb-5 text-success font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
 
     <div id="<%= dom_id @invoice %>">
@@ -13,7 +13,7 @@
       <p class="my-5">
         <strong class="block font-medium mb-1"><%= t("numero_factura") %>:</strong>
         <% if @invoice.draft? %>
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"><%= t("Borrador") %></span>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-muted text-warning-foreground"><%= t("Borrador") %></span>
         <% else %>
           <%= @invoice.display_number %>
         <% end %>
@@ -41,12 +41,12 @@
     </div>
 
     <% if @invoice.draft? %>
-      <%= button_to t("emitir"), issue_invoice_path(@invoice), method: :post, data: { turbo_confirm: t("confirmar_emision") }, class: "mt-2 rounded-lg py-3 px-5 bg-green-600 text-white inline-block font-medium" %>
-      <%= link_to t("editar"), edit_invoice_path(@invoice), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <%= button_to t("emitir"), issue_invoice_path(@invoice), method: :post, data: { turbo_confirm: t("confirmar_emision") }, class: "mt-2 rounded-lg py-3 px-5 bg-success text-primary-foreground inline-block font-medium" %>
+      <%= link_to t("editar"), edit_invoice_path(@invoice), class: "mt-2 rounded-lg py-3 px-5 bg-muted inline-block font-medium" %>
       <div class="inline-block ml-2">
-        <%= button_to t("eliminar"), invoice_path(@invoice), method: :delete, data: { turbo_confirm: t("estas_seguro") }, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+        <%= button_to t("eliminar"), invoice_path(@invoice), method: :delete, data: { turbo_confirm: t("estas_seguro") }, class: "mt-2 rounded-lg py-3 px-5 bg-muted font-medium" %>
       </div>
     <% end %>
-    <%= link_to t("volver"), invoices_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to t("volver"), invoices_path, class: "ml-2 rounded-lg py-3 px-5 bg-muted inline-block font-medium" %>
   </div>
 </div>

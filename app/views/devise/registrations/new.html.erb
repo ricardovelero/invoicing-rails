@@ -26,13 +26,13 @@
               <span class="text-sm ml-2"><%= t("email_me_news") %></span>
           </label>
       </div>
-      <%= f.submit t("register"), class: "btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3 whitespace-nowrap" %>
+      <%= f.submit t("register"), class: "btn bg-primary hover:bg-primary-hover text-primary-foreground ml-3 whitespace-nowrap" %>
     </div>
   <% end %>
   <!-- Footer -->
-  <div class="pt-5 mt-6 border-t border-slate-200">
+  <div class="pt-5 mt-6 border-t border-border">
     <div class="text-sm">
       <%= t("already_registered?") %>
-      <%= link_to t("signin"), new_user_session_path, class: "font-medium text-indigo-500 hover:text-indigo-600" %>
+      <%= link_to t("signin"), new_user_session_path, class: "font-medium text-primary hover:text-primary-hover" %>
     </div>
   </div>

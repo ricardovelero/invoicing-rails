@@ -2,7 +2,7 @@
 
         <!-- Panel body -->
         <div class="p-6 space-y-6">
-            <h2 class="text-2xl text-slate-800 font-bold mb-5"><%= t("mi_cuenta")%></h2>
+            <h2 class="text-2xl text-foreground font-bold mb-5"><%= t("mi_cuenta")%></h2>
 
             <!-- Picture -->
             <section>
@@ -10,7 +10,7 @@
                     <div class="mr-4">
                       <%= gravatar_for current_user %>
                     </div>
-                    <button class="btn-sm bg-indigo-500 hover:bg-indigo-600 text-white"><%= t("cambiar")%></button>
+                    <button class="btn-sm bg-primary hover:bg-primary-hover text-primary-foreground"><%= t("cambiar")%></button>
                 </div>
             </section>
 
@@ -21,24 +21,24 @@
 
                 <!-- Email -->
                 <section>
-                    <h3 class="text-xl leading-snug text-slate-800 font-bold mb-1"><%= t("email")%></h3>
+                    <h3 class="text-xl leading-snug text-foreground font-bold mb-1"><%= t("email")%></h3>
                     <div class="text-sm"><%= t("texto_cambio_correo")%></div>
                     <div class="flex flex-wrap mt-5">
                         <div class="mr-2">
                           <%= f.label :email, class: "sr-only" %>
                           <%= f.email_field :email, class: "form-input w-64", autocomplete: "email" %>
                         </div>
-                        <%= f.submit t("cambiar"), class: "btn border-slate-200 hover:border-slate-300 shadow-sm text-indigo-500" %>
+                        <%= f.submit t("cambiar"), class: "btn border-border hover:border-ring shadow-sm text-primary" %>
                     </div>
                     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                      <div class="mt-4 font-semibold text-sm text-red-500"><%= t("email_waiting_confirmation")%>: <%= resource.unconfirmed_email %></div>
+                      <div class="mt-4 font-semibold text-sm text-danger"><%= t("email_waiting_confirmation")%>: <%= resource.unconfirmed_email %></div>
                       <%= link_to t('resend_confirmation_text'), user_confirmation_path(user: {email: resource.unconfirmed_email}), data: { 'turbo-method' => :post }, class: "link" %>
                     <% end %>
                 </section>
 
                 <!-- Password -->
                 <section class="mt-10">
-                    <h3 class="text-xl leading-snug text-slate-800 font-bold mb-1"><%= t("contraseña")%></h3>
+                    <h3 class="text-xl leading-snug text-foreground font-bold mb-1"><%= t("contraseña")%></h3>
                     <div class="text-sm"><%= t("texto_cambio_contraseña") %></div>
                     <div class="sm:flex sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-5">
                         <div class="sm:w-1/3">
@@ -64,14 +64,14 @@
                   <%= upf.hidden_field :gov_id, name: "user_profile[gov_id]", id: "user_profile_gov_id" %>
                 <% end %>
               </div>
-              <div class="flex flex-col px-6 py-5 border-t border-slate-200 mt-10">
+              <div class="flex flex-col px-6 py-5 border-t border-border mt-10">
                   <div class="flex self-end">
-                    <%= f.submit t("guardar_cambios"), class: "btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3" %>
+                    <%= f.submit t("guardar_cambios"), class: "btn bg-primary hover:bg-primary-hover text-primary-foreground ml-3" %>
                   </div>
               </div>
             <% end %>
             <div class="mt-10">
-              <p class="text-sm text-red-500 ml-1"><i><%= t("zona_peligro")%></i></p>
+              <p class="text-sm text-danger ml-1"><i><%= t("zona_peligro")%></i></p>
               <%= button_to t("borrar_cuenta"), registration_path(resource_name),
               form: { data: { turbo_confirm: t("estas_seguro") } }, method: :delete,
               class: "btn-danger text-xs" %>

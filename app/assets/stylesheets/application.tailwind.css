@@ -2,6 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    color-scheme: dark;
+    --background: 210 40% 96.1%;
+    --foreground: 217.2 32.6% 17.5%;
+    --card: 0 0% 100%;
+    --card-foreground: 217.2 32.6% 17.5%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 238.7 83.5% 66.7%;
+    --primary: 238.7 83.5% 66.7%;
+    --primary-hover: 243.4 75.4% 58.6%;
+    --primary-active: 244.5 57.9% 50.6%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 216.9 19.1% 26.7%;
+    --danger: 0 84.2% 60.2%;
+    --danger-foreground: 0 74.2% 42.2%;
+    --danger-muted: 0 93.3% 94.1%;
+    --danger-hover: 0 96.3% 89.4%;
+    --destructive: 349.7 89.2% 60.2%;
+    --destructive-muted: 355.6 100% 94.7%;
+    --destructive-muted-foreground: 349.7 89.2% 45%;
+    --destructive-hover: 351.3 95.7% 90.8%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142.1 70.6% 45.3%;
+    --success-muted: 138.5 76.5% 92.2%;
+    --success-muted-foreground: 142.1 70.6% 30%;
+    --success-subtle: 138.5 76.5% 96.7%;
+    --success-foreground: 0 0% 100%;
+    --warning: 37.7 92.1% 50.2%;
+    --warning-muted: 210 40% 96.1%;
+    --warning-foreground: 222.2 47.4% 17.1%;
+    --sidebar: 0 0% 100%;
+    --sidebar-foreground: 217.2 32.6% 17.5%;
+    --sidebar-hover: 222.2 47.4% 11.2%;
+    --sidebar-muted: 215.4 16.3% 46.9%;
+    --sidebar-muted-hover: 215.3 25% 26.7%;
+    --sidebar-icon: 215 20.2% 65.1%;
+    --sidebar-icon-mid: 215.3 19.3% 46.5%;
+    --sidebar-icon-deep: 215.3 25% 26.7%;
+    --sidebar-icon-active-soft: 234.5 89.5% 73.9%;
+  }
+
+  .dark {
+    color-scheme: dark;
+    --background: 222.2 47.4% 11.2%;
+    --foreground: 210 40% 96.1%;
+    --card: 222.2 47.4% 17.1%;
+    --card-foreground: 210 40% 96.1%;
+    --muted: 215.3 25% 26.7%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --border: 215.3 25% 26.7%;
+    --input: 215.3 25% 26.7%;
+    --ring: 238.7 83.5% 66.7%;
+    --primary: 238.7 83.5% 66.7%;
+    --primary-hover: 238.7 83.5% 66.7%;
+    --primary-active: 234.5 89.5% 73.9%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 222.2 47.4% 17.1%;
+    --secondary-foreground: 210 40% 96.1%;
+    --danger: 0 90.6% 70.8%;
+    --danger-foreground: 0 93.5% 81.8%;
+    --danger-muted: 0 72.2% 32%;
+    --danger-hover: 0 84.2% 60.2%;
+    --destructive: 349.7 89.2% 60.2%;
+    --destructive-muted: 346.8 77.2% 30%;
+    --destructive-muted-foreground: 349.7 89.2% 80%;
+    --destructive-hover: 346.8 77.2% 40%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142.1 70.6% 45.3%;
+    --success-muted: 142.1 70.6% 22%;
+    --success-muted-foreground: 142.1 70.6% 65%;
+    --success-subtle: 142.1 70.6% 18%;
+    --success-foreground: 222.2 47.4% 11.2%;
+    --warning: 37.7 92.1% 50.2%;
+    --warning-muted: 37.7 92.1% 24%;
+    --warning-foreground: 48 96.5% 76.7%;
+    --sidebar: 217.2 32.6% 17.5%;
+    --sidebar-foreground: 214.3 31.8% 91.4%;
+    --sidebar-hover: 0 0% 100%;
+    --sidebar-muted: 215 20.2% 65.1%;
+    --sidebar-muted-hover: 214.3 31.8% 91.4%;
+    --sidebar-icon: 215 20.2% 65.1%;
+    --sidebar-icon-mid: 215.3 19.3% 34.5%;
+    --sidebar-icon-deep: 215.3 25% 26.7%;
+    --sidebar-icon-active-soft: 229.7 93.5% 81.8%;
+  }
+}
+
 @layer components {
   /* Typography */
   .h1 {
@@ -50,46 +142,46 @@
     @apply px-2 py-0.5;
   }
   .btn-primary {
-    @apply inline-flex items-center justify-center sm:w-auto py-2 text-sm font-medium border border-transparent px-4 text-white shadow-sm bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 cursor-pointer;
+    @apply inline-flex items-center justify-center sm:w-auto py-2 text-sm font-medium border border-transparent px-4 text-primary-foreground shadow-sm bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 cursor-pointer;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center sm:w-auto py-2 text-sm font-medium border border-transparent px-4 text-gray-700 shadow-sm bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 cursor-pointer;
+    @apply inline-flex items-center justify-center sm:w-auto py-2 text-sm font-medium border border-transparent px-4 text-secondary-foreground shadow-sm bg-card hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 cursor-pointer;
   }
   .btn-danger {
-    @apply px-3 py-2 shadow-sm rounded-md border border-transparent text-red-500 hover:text-red-900 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 cursor-pointer;
+    @apply px-3 py-2 shadow-sm rounded-md border border-transparent text-danger hover:text-danger-foreground bg-danger-muted hover:bg-danger-hover focus:outline-none focus:ring-2 focus:ring-danger focus:ring-offset-2 cursor-pointer;
   }
   .filter-btn {
-    @apply inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out;
+    @apply inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-border hover:border-muted-foreground shadow-sm bg-card text-muted-foreground duration-150 ease-in-out;
   }
   .filter-btn-active {
-    @apply inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-transparent shadow-sm bg-indigo-500 text-white duration-150 ease-in-out;
+    @apply inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-transparent shadow-sm bg-primary text-primary-foreground duration-150 ease-in-out;
   }
 
   /* Links */
   .menu-link {
-    @apply font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3;
+    @apply font-medium text-sm text-primary hover:text-primary-hover flex items-center py-1 px-3;
   }
 
   .link {
-    @apply underline text-sm text-indigo-500 hover:text-indigo-600;
+    @apply underline text-sm text-primary hover:text-primary-hover;
   }
 
   /* Sidebar */
   .sidebar_link {
-    @apply block text-slate-200 hover:text-white truncate transition duration-150;
+    @apply block text-sidebar-foreground hover:text-sidebar-hover truncate transition duration-150;
   }
-  .sidebar_link_scondary {
-    @apply block text-slate-400 hover:text-slate-200 transition duration-150 truncate;
+  .sidebar_link_secondary {
+    @apply block text-sidebar-muted hover:text-sidebar-muted-hover transition duration-150 truncate;
   }
   .link_text {
     @apply text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200;
   }
 
   /* Forms */
-  input[type="search"]::-webkit-search-decoration,
-  input[type="search"]::-webkit-search-cancel-button,
-  input[type="search"]::-webkit-search-results-button,
-  input[type="search"]::-webkit-search-results-decoration {
+  input[type='search']::-webkit-search-decoration,
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-results-button,
+  input[type='search']::-webkit-search-results-decoration {
     -webkit-appearance: none;
   }
 
@@ -99,7 +191,7 @@
   .form-select,
   .form-checkbox,
   .form-radio {
-    @apply text-sm text-slate-800 bg-white border;
+    @apply text-sm text-foreground bg-card border;
   }
 
   .form-input,
@@ -114,12 +206,12 @@
   .form-textarea,
   .form-multiselect,
   .form-select {
-    @apply leading-5 py-2 px-3 border-slate-200 hover:border-slate-300 focus:border-indigo-300 shadow-sm;
+    @apply leading-5 py-2 px-3 border-input hover:border-muted-foreground focus:border-ring shadow-sm;
   }
 
   .form-input,
   .form-textarea {
-    @apply placeholder-slate-400;
+    @apply placeholder-muted-foreground;
   }
 
   .form-select {
@@ -128,7 +220,7 @@
 
   .form-checkbox,
   .form-radio {
-    @apply text-indigo-500 border border-slate-300;
+    @apply text-primary border border-input;
   }
 
   /* Chrome, Safari and Opera */
@@ -147,46 +239,46 @@
   }
 
   .modal-content {
-    @apply bg-white rounded-sm p-8;
+    @apply bg-card text-card-foreground rounded-sm p-8;
   }
 
   /* Misc */
   .alert {
-    @apply text-white text-sm text-center font-medium px-4 py-3;
+    @apply text-primary-foreground text-sm text-center font-medium px-4 py-3;
   }
   .notice {
-    @apply py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block;
+    @apply py-2 px-3 bg-success-subtle mb-5 text-success font-medium rounded-lg inline-block;
   }
   .paragraph {
-    @apply mt-2 text-sm text-gray-700;
+    @apply mt-2 text-sm text-secondary-foreground;
   }
   .title {
-    @apply text-2xl md:text-3xl text-slate-800 font-bold mt-2;
+    @apply text-2xl md:text-3xl text-foreground font-bold mt-2;
   }
   .link {
-    @apply text-indigo-600 hover:text-indigo-900;
+    @apply text-primary-hover hover:text-primary;
   }
   .table-td-highlight {
-    @apply px-4 py-3.5 text-base font-medium text-gray-900;
+    @apply px-4 py-3.5 text-base font-medium text-foreground;
   }
   .table-td {
-    @apply whitespace-nowrap px-3 py-4 text-sm text-gray-500;
+    @apply whitespace-nowrap px-3 py-4 text-sm text-muted-foreground;
   }
   .list-line-even {
-    @apply bg-gray-50;
+    @apply bg-muted;
   }
   .list-line-odd {
-    @apply bg-white;
+    @apply bg-card;
   }
   .input {
-    @apply block appearance-none w-full mb-1 text-base leading-normal sm:text-sm shadow-sm mt-1 bg-white focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md;
+    @apply block appearance-none w-full mb-1 text-base leading-normal sm:text-sm shadow-sm mt-1 bg-card text-foreground focus:ring-primary focus:border-primary border-input rounded-md;
   }
   .input-label {
     @apply block text-sm font-medium mb-1;
   }
   .required::after {
-    content: " *";
-    @apply text-red-500;
+    content: ' *';
+    @apply text-destructive;
   }
   .gravatar {
     @apply w-20 h-20 rounded-full;
@@ -212,20 +304,20 @@
     transition: all 0.15s ease-out;
   }
 
-  .form-switch input[type="checkbox"]:checked + label {
-    @apply bg-indigo-500;
+  .form-switch input[type='checkbox']:checked + label {
+    @apply bg-primary;
   }
 
-  .form-switch input[type="checkbox"]:checked + label > span:first-child {
+  .form-switch input[type='checkbox']:checked + label > span:first-child {
     left: 22px;
   }
 
-  .form-switch input[type="checkbox"]:disabled + label {
-    @apply cursor-not-allowed bg-slate-100 border border-slate-200;
+  .form-switch input[type='checkbox']:disabled + label {
+    @apply cursor-not-allowed bg-muted border border-border;
   }
 
-  .form-switch input[type="checkbox"]:disabled + label > span:first-child {
-    @apply bg-slate-400;
+  .form-switch input[type='checkbox']:disabled + label > span:first-child {
+    @apply bg-muted-foreground;
   }
 
   .form-input:focus,
@@ -248,42 +340,42 @@
   }
 
   .session .form-group {
-    @apply border-2 border-t-8 bg-white rounded-lg shadow-lg;
+    @apply border-2 border-t-8 bg-card border-border rounded-lg shadow-lg;
     @apply p-8 mb-6;
   }
 
   .session .form-group label {
-    @apply font-normal text-gray-600 block mb-2;
+    @apply font-normal text-muted-foreground block mb-2;
   }
 
-  .session .form-group input[type="text"],
-  .session .form-group input[type="email"],
-  .session .form-group input[type="password"] {
-    @apply block appearance-none w-full bg-white;
-    @apply border border-gray-200;
+  .session .form-group input[type='text'],
+  .session .form-group input[type='email'],
+  .session .form-group input[type='password'] {
+    @apply block appearance-none w-full bg-card text-foreground;
+    @apply border border-input;
     @apply rounded shadow;
     @apply px-2 py-2;
   }
 
-  .session .form-group input[type="text"]:hover,
-  .session .form-group input[type="email"]:hover,
-  .session .form-group input[type="password"]:hover {
-    @apply border-gray-300;
+  .session .form-group input[type='text']:hover,
+  .session .form-group input[type='email']:hover,
+  .session .form-group input[type='password']:hover {
+    @apply border-muted-foreground;
   }
 
   .session a {
-    @apply no-underline font-bold text-sm text-indigo-600;
+    @apply no-underline font-bold text-sm text-primary-hover;
   }
 
   .session a:hover {
-    @apply text-indigo-500;
+    @apply text-primary;
   }
 
   .session .cta-btn {
-    @apply select-none bg-indigo-600 text-white font-bold;
+    @apply select-none bg-primary-hover text-primary-foreground font-bold;
     @apply rounded-md shadow-sm border border-transparent;
     @apply py-2 px-4;
-    @apply hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+    @apply hover:bg-primary-active focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
   }
 
   .session .alert {
@@ -291,8 +383,8 @@
   }
 
   .session .error-box {
-    @apply bg-red-100 border-t-4 border-red-500
-      rounded-b text-red-900 px-4 py-3 mb-3 shadow-md;
+    @apply bg-destructive-muted border-t-4 border-destructive
+      rounded-b text-danger-foreground px-4 py-3 mb-3 shadow-md;
   }
 
   .session .error-box ul {
@@ -304,22 +396,16 @@
 /* Invoice view */
 .past-due,
 .not-paid {
-  @apply inline-flex font-medium bg-rose-100 text-rose-500 rounded-full text-center px-2.5 py-0.5;
+  @apply inline-flex font-medium bg-destructive-muted text-destructive-muted-foreground rounded-full text-center px-2.5 py-0.5;
 }
 .on-time {
-  @apply inline-flex font-medium bg-slate-100 text-slate-500 rounded-full text-center px-2.5 py-1;
+  @apply inline-flex font-medium bg-warning-muted text-warning-foreground rounded-full text-center px-2.5 py-0.5;
 }
 .paid {
-  @apply inline-flex font-medium bg-green-100 text-green-500 rounded-full text-center px-2.5 py-0.5;
-}
-.filter-buttons-active {
-  @apply inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-transparent shadow-sm bg-indigo-500 text-white duration-150 ease-in-out;
-}
-.filter-buttons-inactive {
-  @apply inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out;
+  @apply inline-flex font-medium bg-success-muted text-success-muted-foreground rounded-full text-center px-2.5 py-0.5;
 }
 .back-button {
-  @apply text-sm font-medium text-indigo-500 hover:text-indigo-600;
+  @apply text-sm font-medium text-primary hover:text-primary-hover;
 }
 
 /* Pagy */
@@ -336,12 +422,12 @@
 .pagy-nav-js .page.active,
 .pagy-nav-js .page.prev.disabled,
 .pagy-nav-js .page.next.disabled {
-  @apply block rounded px-4 py-2 font-normal border-slate-200 text-indigo-500 bg-white shadow-md;
+  @apply block rounded px-4 py-2 font-normal border-border text-primary bg-card shadow-md;
   &:hover {
-    @apply border-slate-300;
+    @apply border-muted-foreground;
   }
   &:active {
-    @apply bg-white text-indigo-500;
+    @apply bg-card text-primary;
   }
 }
 
@@ -349,45 +435,45 @@
 .pagy-nav .page.next.disabled,
 .pagy-nav-js .page.prev.disabled,
 .pagy-nav-js .page.next.disabled {
-  @apply text-indigo-300 cursor-default;
+  @apply text-primary/60 cursor-default;
   &:hover {
-    @apply text-indigo-500 bg-gray-200;
+    @apply text-primary bg-muted;
   }
   &:active {
-    @apply text-indigo-500 bg-gray-200;
+    @apply text-primary bg-muted;
   }
 }
 
 .pagy-nav .page.active,
 .pagy-nav-js .page.active {
-  @apply text-indigo-300 cursor-default;
+  @apply text-primary/60 cursor-default;
   &:hover {
-    @apply text-indigo-500;
+    @apply text-primary;
   }
   &:active {
-    @apply bg-gray-400 text-white;
+    @apply bg-muted-foreground text-primary-foreground;
   }
 }
 
 .pagy-combo-nav-js {
-  @apply flex max-w-max rounded-full px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
+  @apply flex max-w-max rounded-full px-3 py-1 text-sm text-muted-foreground font-semibold bg-muted shadow-md;
 }
 
 .pagy-combo-nav-js .pagy-combo-input {
-  @apply bg-white px-2 rounded-sm;
+  @apply bg-card px-2 rounded-sm;
 }
 
 .pagy-combo-nav-js .page.prev,
 .pagy-combo-nav-js .page.next {
   &:hover {
-    @apply text-gray-800;
+    @apply text-foreground;
   }
   &:active {
-    @apply text-gray-800;
+    @apply text-foreground;
   }
 }
 
 .pagy-combo-nav-js .page.prev.disabled,
 .pagy-combo-nav-js .page.next.disabled {
-  @apply text-gray-400 cursor-default;
+  @apply text-muted-foreground/70 cursor-default;
 }

@@ -2,16 +2,16 @@
 <div class="px-4 pt-12 pb-8">
     <div class="max-w-md mx-auto w-full">
         <div class="relative">
-            <div class="absolute left-0 top-1/2 -mt-px w-full h-0.5 bg-slate-200" aria-hidden="true"></div>
+            <div class="absolute left-0 top-1/2 -mt-px w-full h-0.5 bg-border" aria-hidden="true"></div>
             <ul class="relative flex justify-between w-full">
                 <li>
-                    <a class="flex items-center justify-center w-6 h-6 rounded-full text-xs font-semibold bg-indigo-100 text-white" href="/after_register/freelance_or_company">1</a>
+                    <a class="flex items-center justify-center w-6 h-6 rounded-full text-xs font-semibold bg-primary/10 text-primary-foreground" href="/after_register/freelance_or_company">1</a>
                 </li>
                 <li>
-                    <a class="flex items-center justify-center w-6 h-6 rounded-full text-xs font-semibold bg-indigo-500 text-white" href="/after_register/set_name">2</a>
+                    <a class="flex items-center justify-center w-6 h-6 rounded-full text-xs font-semibold bg-primary text-primary-foreground" href="/after_register/set_name">2</a>
                 </li>
                 <li>
-                    <a class="flex items-center justify-center w-6 h-6 rounded-full text-xs font-semibold bg-indigo-100 text-white" href="/after_register/set_address">3</a>
+                    <a class="flex items-center justify-center w-6 h-6 rounded-full text-xs font-semibold bg-primary/10 text-primary-foreground" href="/after_register/set_address">3</a>
                 </li>
             </ul>
         </div>
@@ -19,13 +19,13 @@
 </div>
 <div class="max-w-md mx-auto">
   <% if @user_profile.is_freelance %>
-    <h1 class="text-3xl text-slate-800 font-bold mb-6"><%= t("personal_information") %> ✨</h1>
+    <h1 class="text-3xl text-foreground font-bold mb-6"><%= t("personal_information") %> ✨</h1>
   <% else %>
-    <h1 class="text-3xl text-slate-800 font-bold mb-6"><%= t("company_information") %> ✨</h1>
+    <h1 class="text-3xl text-foreground font-bold mb-6"><%= t("company_information") %> ✨</h1>
   <% end %>
   <%= form_for(@user_profile, url: wizard_path, method: 'put' ) do |f| %>
     <% if f.object.errors.any? %>
-      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <div id="error_explanation" class="bg-danger-muted text-danger px-3 py-2 font-medium rounded-lg mt-3">
         <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this invoice from being saved:</h2>
         <ul>
           <% f.object.errors.each do |error| %>
@@ -80,7 +80,7 @@
     </div>
     <div class="flex items-center justify-between">
       <%= render "after_register/links" %>
-      <%= f.button class: 'btn bg-indigo-600 hover:bg-indigo-700 text-white ml-auto cursor-pointer' do %>
+      <%= f.button class: 'btn bg-primary-hover hover:bg-primary-active text-primary-foreground ml-auto cursor-pointer' do %>
           <%= t("next") %> <%= heroicon "arrow-right", variant: :mini %>
       <% end %>
     </div>

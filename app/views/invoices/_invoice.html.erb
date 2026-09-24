@@ -9,19 +9,19 @@
   </td>
   <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
     <% if invoice.draft? %>
-      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"><%= t("Borrador") %></span>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-muted text-warning-foreground"><%= t("Borrador") %></span>
     <% else %>
       <div class="font-medium text-sky-500"><%= invoice.display_number %></div>
     <% end %>
   </td>
   <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-    <div class="font-medium text-rose-500"><%= number_to_currency(invoice.total, locale: :es) %></div>
+    <div class="font-medium text-destructive"><%= number_to_currency(invoice.total, locale: :es) %></div>
   </td>
   <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
     <div class="<%= invoice.status? %>"><%= t invoice.status.titleize %></div>
   </td>
   <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-    <div class="font-medium text-slate-800"><%= invoice.client_full_name %></div>
+    <div class="font-medium text-foreground"><%= invoice.client_full_name %></div>
   </td>
   <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
     <div><%= l(invoice.date, format: :corta) %></div>
@@ -33,19 +33,19 @@
   <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
     <div class="space-x-1 inline-flex">
       <% if invoice.draft? %>
-        <%= button_to issue_invoice_path(invoice), method: :post, form: { data: { turbo_confirm: t("confirmar_emision") } }, class: "pt-1 text-green-500 hover:text-green-600" do %>
+        <%= button_to issue_invoice_path(invoice), method: :post, form: { data: { turbo_confirm: t("confirmar_emision") } }, class: "pt-1 text-success hover:text-success" do %>
           <span class="sr-only"><%= t("emitir") %></span>
           <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 fill-current" viewBox="0 0 32 32">
             <polygon points="7.959 20.513 1.592 12.872 3.128 11.592 8.041 17.487 20.947 3.587 22.413 4.948 7.959 20.513"></polygon>
           </svg>
         <% end %>
-        <%= link_to edit_invoice_path(invoice), data: { turbo_frame: "_top" }, class: "text-slate-400 hover:text-slate-500" do %>
+        <%= link_to edit_invoice_path(invoice), data: { turbo_frame: "_top" }, class: "text-muted-foreground hover:text-muted-foreground" do %>
           <span class="sr-only"><%= t("editar") %></span>
           <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
             <path d="M19.7 8.3c-.4-.4-1-.4-1.4 0l-10 10c-.2.2-.3.4-.3.7v4c0 .6.4 1 1 1h4c.3 0 .5-.1.7-.3l10-10c.4-.4.4-1 0-1.4l-4-4zM12.6 22H10v-2.6l6-6 2.6 2.6-6 6zm7.4-7.4L17.4 12l1.6-1.6 2.6 2.6-1.6 1.6z" />
           </svg>
         <% end %>
-        <%= button_to invoice, method: :delete, form: { data: { turbo_confirm: t("estas_seguro") } }, class: "text-rose-500 hover:text-rose-600" do %>
+        <%= button_to invoice, method: :delete, form: { data: { turbo_confirm: t("estas_seguro") } }, class: "text-destructive hover:text-destructive" do %>
           <span class="sr-only"><%= t("eliminar") %></span>
           <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
             <path d="M13 15h2v6h-2zM17 15h2v6h-2z" />
@@ -53,7 +53,7 @@
           </svg>
         <% end %>
       <% else %>
-        <%= link_to invoice_path(invoice, format: :pdf, locale: I18n.locale), class: "text-slate-400 hover:text-slate-500", target: "_blank" do %>
+        <%= link_to invoice_path(invoice, format: :pdf, locale: I18n.locale), class: "text-muted-foreground hover:text-muted-foreground", target: "_blank" do %>
           <span class="sr-only"><%= t("descargar") %></span>
           <svg class="w-8 h-8 fill-current" viewBox="0 0 32 32">
             <path d="M16 20c.3 0 .5-.1.7-.3l5.7-5.7-1.4-1.4-4 4V8h-2v8.6l-4-4L9.6 14l5.7 5.7c.2.2.4.3.7.3zM9 22h14v2H9z" />

@@ -10,13 +10,60 @@ export default class extends Controller {
     series: Array
   }
 
-  initialize() {
-    this.chart = new ApexCharts(this.chartTarget, this.chartOptions);
-    this.chart.render();
+  connect() {
+    const chartOptions = this.chartOptions
+    const themeOptions = this.themeOptions
+
+    this.chart = new ApexCharts(this.chartTarget, {
+      ...chartOptions,
+      ...themeOptions,
+      chart: {
+        ...chartOptions.chart,
+        ...themeOptions.chart
+      }
+    })
+    this.chart.render()
   }
 
   disconnect() {
-    this.chart.destroy();
+    this.teardown()
+  }
+
+  applyTheme() {
+    this.chart?.updateOptions(this.themeOptions)
+  }
+
+  teardown() {
+    this.chart?.destroy()
+    this.chart = null
+  }
+
+  get themeOptions() {
+    const dark = document.documentElement.classList.contains("dark")
+
+    return {
+      chart: {
+        background: "transparent",
+        foreColor: this.color("--muted-foreground")
+      },
+      theme: {
+        mode: dark ? "dark" : "light"
+      },
+      grid: {
+        borderColor: this.color("--border")
+      },
+      tooltip: {
+        theme: dark ? "dark" : "light"
+      }
+    }
+  }
+
+  color(token) {
+    const value = getComputedStyle(document.documentElement)
+      .getPropertyValue(token)
+      .trim()
+
+    return `hsl(${value})`
   }
 
 }

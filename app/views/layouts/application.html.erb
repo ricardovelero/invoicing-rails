@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html lang=<%= I18n.locale %> class="h-full bg-gray-100">
+<html lang=<%= I18n.locale %> class="h-full bg-background">
   <head>
     <%= render 'shared/head' %>
   </head>
-
   <body 
-    class="font-inter antialiased bg-slate-100 text-slate-600"
+    class="font-inter antialiased bg-background text-muted-foreground"
     data-controller="sidebar"
     data-action="click@window->sidebar#hide keydown.esc@window->sidebar#close">
     <script>
-      if (localStorage.getItem('sidebar-expanded') == 'true') {
-          document.querySelector('body').classList.add('sidebar-expanded');
-      } else {
-          document.querySelector('body').classList.remove('sidebar-expanded');
-      }
+      (function () {
+        let expanded = false;
+        try {
+          expanded = localStorage.getItem("sidebar-expanded") === "true";
+        } catch (e) {
+          // Sin almacenamiento, el sidebar empieza contraído.
+        }
+        document.body.classList.toggle("sidebar-expanded", expanded);
+      })();
     </script>
     <div class="flash" id="flash">
       <%= render "shared/flash", position: "top-10 left-1/2" %>

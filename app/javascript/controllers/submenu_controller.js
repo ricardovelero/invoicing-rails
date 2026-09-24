@@ -11,7 +11,11 @@ export default class extends Controller {
   static values = { open: Boolean, active: Boolean, key: String };
 
   connect() {
-    this.openValue = sessionStorage.getItem(this.keyValue) === "true";
+    try {
+      this.openValue = sessionStorage.getItem(this.keyValue) === "true";
+    } catch {
+      this.openValue = false;
+    }
     // Stimulus fires openValueChanged for the value's default while connecting,
     // before this read. Flag that we've restored from storage so the callback
     // only persists genuine changes and never clobbers the saved state on the
@@ -38,7 +42,11 @@ export default class extends Controller {
 
   openValueChanged() {
     if (!this.restored) return;
-    sessionStorage.setItem(this.keyValue, this.openValue);
+    try {
+      sessionStorage.setItem(this.keyValue, this.openValue);
+    } catch {
+      // The submenu still opens when session storage is unavailable.
+    }
     this.sync();
   }
 

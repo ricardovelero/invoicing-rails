@@ -1,6 +1,6 @@
 <div class="mx-auto w-full">
   <%= link_to sanitize(t("regresar_a_facturas")), invoices_path, class: "back-button" %>
-  <h1 class="text-2xl md:text-3xl text-slate-800 font-bold mt-2"><%= t("editar_factura")%> ✨</h1>
+  <h1 class="text-2xl md:text-3xl text-foreground font-bold mt-2"><%= t("editar_factura")%> ✨</h1>
 
   <%= render "form", invoice: @invoice %>
   

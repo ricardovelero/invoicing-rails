@@ -52,3 +52,6 @@ application.register("select", SelectController)
 
 import SelectAllController from "./select_all_controller"
 application.register("select-all", SelectAllController)
+
+import ThemeController from "./theme_controller"
+application.register("theme", ThemeController)

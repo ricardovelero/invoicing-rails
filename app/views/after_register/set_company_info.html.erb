@@ -1,7 +1,7 @@
 <% content_for(:page_title, "Información de tu Empresa") %>
 <%= form_for(@user, url: wizard_path, method: 'put' ) do |f| %>
   <% if f.object.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+    <div id="error_explanation" class="bg-danger-muted text-danger px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this invoice from being saved:</h2>
       <ul>
         <% f.object.errors.each do |error| %>

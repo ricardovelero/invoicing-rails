@@ -5,7 +5,7 @@
 
     <!-- Left: Title -->
     <div class="mb-4 sm:mb-0">
-        <h1 class="text-2xl md:text-3xl text-slate-800 font-bold"><%= t("items") %> ✨</h1>
+        <h1 class="text-2xl md:text-3xl text-foreground font-bold"><%= t("items") %> ✨</h1>
     </div>
 
     <!-- Right: Actions -->
@@ -15,7 +15,7 @@
         <div class="table-items-action hidden">
             <div class="flex items-center">
                 <div class="hidden xl:block text-sm italic mr-2 whitespace-nowrap"><span class="table-items-count"></span> <%= t("items_selecionados") %></div>
-                <button class="btn bg-white border-slate-200 hover:border-slate-300 text-rose-500 hover:text-rose-600"><%= t("borrar") %></button>
+                <button class="btn bg-card border-border hover:border-border text-destructive hover:text-destructive"><%= t("borrar") %></button>
             </div>
         </div>
         <!-- Sort and Search -->
@@ -24,16 +24,16 @@
                 <%= form_with url: "", method: :get, data: { turbo_frame: "items", turbo_action: "advance" } do |form| %>
                     <!-- Search form -->
                     <label for="action-search" class="sr-only"><%= t("buscar") %></label>
-                    <%= form.search_field :query, value: params[:query], oninput: "this.form.requestSubmit()", class: "form-input pl-9 focus:border-slate-300", placeholder: t("buscar_items") %>
+                    <%= form.search_field :query, value: params[:query], oninput: "this.form.requestSubmit()", class: "form-input pl-9 focus:border-ring", placeholder: t("buscar_items") %>
                     <button class="absolute inset-0 right-auto group" type="submit" aria-label="Search">
-                        <svg class="w-4 h-4 shrink-0 fill-current text-slate-500 group-hover:text-slate-500 ml-3 mr-2" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-4 h-4 shrink-0 fill-current text-muted-foreground group-hover:text-muted-foreground ml-3 mr-2" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" />
                             <path d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z" />
                         </svg>
                     </button>
                     <!-- Sort --> 
                     <label for="action-search" class="sr-only"><%= t("cantidad_por_pagina") %></label>
-                    <%= form.select :count, options_for_select([10, 25, 50, 100], selected: params[:count]), {}, {class: "form-input pr-7 focus:border-slate-300 text-slate-500", onchange: "this.form.requestSubmit()"} %>
+                    <%= form.select :count, options_for_select([10, 25, 50, 100], selected: params[:count]), {}, {class: "form-input pr-7 focus:border-ring text-muted-foreground", onchange: "this.form.requestSubmit()"} %>
                 <% end %>
             </div>
         <% end %>
@@ -50,7 +50,7 @@
 </div>
 <%= turbo_frame_tag "items" do %>
     <!-- Table -->
-    <div class="bg-white shadow-lg rounded-sm border border-slate-200">
+    <div class="bg-card shadow-lg rounded-sm border border-border">
         <div data-controller="select-all">
             <!-- Table -->
             <div class="overflow-x-auto">
@@ -63,7 +63,7 @@
                 <% else %>
                     <table class="table-auto w-full">
                         <!-- Table header -->
-                        <thead class="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200">
+                        <thead class="text-xs font-semibold uppercase text-muted-foreground bg-muted border-t border-b border-border">
                             <tr>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
                                     <div class="flex items-center">
@@ -74,7 +74,7 @@
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "item_name" %>">
+                                    <div class="font-semibold text-left relative <%= "text-primary" if params[:sort] == "item_name" %>">
                                         <%= sort_link_to t("nombre"), :item_name, data: { turbo_action: "advance" } %>
                                         <span class="absolute top-0 left-14">
                                             <%= sort_indicator if params[:sort] == "item_name" %>
@@ -82,25 +82,25 @@
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "description" %>">
+                                    <div class="font-semibold text-left relative <%= "text-primary" if params[:sort] == "description" %>">
                                         <%= sort_link_to t("descripcion"), :description, data: { turbo_action: "advance" } %>
-                                        <span class="absolute top-0 left-15 text-indigo-500">
+                                        <span class="absolute top-0 left-15 text-primary">
                                             <%= sort_indicator if params[:sort] == "description" %>
                                         </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold text-left relative <%= "text-indigo-500" if params[:sort] == "price" %>">
+                                    <div class="font-semibold text-left relative <%= "text-primary" if params[:sort] == "price" %>">
                                         <%= sort_link_to t("precio"), :price, data: { turbo_action: "advance" } %>
-                                        <span class="absolute top-0 left-13 text-indigo-500">
+                                        <span class="absolute top-0 left-13 text-primary">
                                             <%= sort_indicator if params[:sort] == "price" %>
                                         </span>
                                     </div>
                                 </th>
                                 <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                                    <div class="font-semibold relative <%= "text-indigo-500" if params[:sort] == "iva" %>">
+                                    <div class="font-semibold relative <%= "text-primary" if params[:sort] == "iva" %>">
                                         <%= sort_link_to t("iva") , :iva, data: { turbo_action: "advance" } %>
-                                        <span class="absolute top-0 left-5 text-indigo-500">
+                                        <span class="absolute top-0 left-5 text-primary">
                                             <%= sort_indicator if params[:sort] == "iva" %>
                                         </span>
                                     </div>
@@ -125,4 +125,3 @@
         <%= render "shared/pagination", item_name: t('item') %>
     <% end %>
 <% end %>
-
