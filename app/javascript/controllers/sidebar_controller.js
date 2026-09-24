@@ -12,8 +12,8 @@ export default class extends Controller {
   static values = { open: Boolean, expanded: Boolean };
 
   connect() {
-    this.openValue = sessionStorage.getItem("sidebar-open") === "true";
-    this.expandedValue = localStorage.getItem("sidebar-expanded") === "true";
+    this.openValue = this.readStoredState("sessionStorage", "sidebar-open");
+    this.expandedValue = this.readStoredState("localStorage", "sidebar-expanded");
     // Stimulus fires the *ValueChanged callbacks for their defaults while
     // connecting, before these reads. Flag that we've restored from storage so
     // the callbacks only persist genuine changes (including expandedValue
@@ -44,7 +44,7 @@ export default class extends Controller {
 
   openValueChanged() {
     if (!this.restored) return;
-    sessionStorage.setItem("sidebar-open", this.openValue);
+    this.persistState("sessionStorage", "sidebar-open", this.openValue);
     this.sync();
   }
 
@@ -70,11 +70,27 @@ export default class extends Controller {
 
   expandedValueChanged() {
     if (!this.restored) return;
-    localStorage.setItem("sidebar-expanded", this.expandedValue);
+    this.persistState("localStorage", "sidebar-expanded", this.expandedValue);
     this.syncExpanded();
   }
 
   syncExpanded() {
     this.element.classList.toggle("sidebar-expanded", this.expandedValue);
+  }
+
+  readStoredState(storageName, key) {
+    try {
+      return window[storageName].getItem(key) === "true";
+    } catch {
+      return false;
+    }
+  }
+
+  persistState(storageName, key, value) {
+    try {
+      window[storageName].setItem(key, String(value));
+    } catch {
+      // Storage is optional; keep the drawer and rail usable for this page.
+    }
   }
 }

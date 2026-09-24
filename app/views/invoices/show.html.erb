@@ -13,7 +13,7 @@
       <p class="my-5">
         <strong class="block font-medium mb-1"><%= t("numero_factura") %>:</strong>
         <% if @invoice.draft? %>
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-muted text-yellow-800"><%= t("Borrador") %></span>
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-muted text-warning-foreground"><%= t("Borrador") %></span>
         <% else %>
           <%= @invoice.display_number %>
         <% end %>

@@ -9,7 +9,7 @@
   </td>
   <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
     <% if invoice.draft? %>
-      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-muted text-yellow-800"><%= t("Borrador") %></span>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-muted text-warning-foreground"><%= t("Borrador") %></span>
     <% else %>
       <div class="font-medium text-sky-500"><%= invoice.display_number %></div>
     <% end %>
